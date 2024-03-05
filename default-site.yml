@@ -5,6 +5,7 @@ site:
   start_page: modules::index.adoc
 
 content:
+  edit_url: false
   sources:
     - url: ./
       start_path: content
