@@ -1,2 +1,4 @@
 
 * xref:workshop-intro.adoc[Introduction and Walk-through]
+* xref:module-cdc-intro.adoc[Build new functionality with Change Data Capture - Intro]
+
