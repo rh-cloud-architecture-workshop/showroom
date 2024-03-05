@@ -2,3 +2,4 @@
 * xref:workshop-intro.adoc[Introduction and Walk-through]
 * xref:module-cdc-intro.adoc[Build new functionality with Change Data Capture - Intro]
 * xref:module-cdc-instructions.adoc[Build new functionality with Change Data Capture - Instructions]
+* xref:module-apim-intro.adoc[Launch new channels with Contract First Approach - Intro]
