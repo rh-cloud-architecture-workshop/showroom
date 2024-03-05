@@ -38,23 +38,23 @@ To deploy the connector, you are going to use OpenShift Dev Spaces. OpenShift De
 
 * In a browser window, navigate to the browser tab pointing to the Developer perspective of the OpenShift cluster. If you don't have a browser tab open on the console, open a new tab and navigate to {openshift_cluster_console}. If needed login with your username and password ({user_name}/{user_password}).
 
-* On the top menu of the console, click on the image:cdc/openshift-application-menu.png[] icon, and in the drop-down box, select *Red Hat OpenShift Dev Spaces*.
+* On the top menu of the console, click on the image:openshift-application-menu.png[] icon, and in the drop-down box, select *Red Hat OpenShift Dev Spaces*.
 +
-image::cdc/openshift-application-menu-2.png[]
+image::openshift-application-menu-2.png[]
 
 * Login in with your OpenShift credentials ({user_name}/{user_password}). If this is the first time you access Dev Spaces, you have to authorize Dev Spaces to access your account. In the _Authorize Access_ window click on *Allow selected permissions*.
 
 * You are directed to the Dev Spaces overview page, which shows the workspaces you have access to. You should see a single workspace, called *cloud-architecture-workshop*. The workspace needs a couple of seconds to start up.
 +
-image::cdc/devspaces-workspace-starting.png[]
+image::devspaces-workspace-starting.png[]
 
 * Click on the *Open* link of the workspace.
 +
-image::cdc/devspaces-workspace-started-1.png[]
+image::devspaces-workspace-started-1.png[]
 
 * This opens the workspace, which will look pretty familiar if you are used to work with VS Code. Before opening the workspace, a pop-up might appear asking if you trust the contents of the workspace. Click *Yes, I trust the authors* to continue.
 +
-image::cdc/devspaces-trust-contents.png[]
+image::devspaces-trust-contents.png[]
 
 * The workspace contains all the resources you are going to use during the workshop, including the Debezium connector. In the project explorer on the left of the workspace, navigate to the *workshop/module-cdc* folder and open the *debezium-connector.yaml* file.
 +
@@ -83,7 +83,7 @@ globex-db.globex-{user_name}.svc.cluster.local
 +
 which is the internal DNS name of the Globex retail application database.
 
-* You can deploy the connector to the OpenShift cluster directly from Dev Spaces. To do so, click on the image:cdc/devspaces-menu.png[] icon on the top of the left menu, and select *Terminal/New Terminal* from the drop-down menu.
+* You can deploy the connector to the OpenShift cluster directly from Dev Spaces. To do so, click on the image:devspaces-menu.png[] icon on the top of the left menu, and select *Terminal/New Terminal* from the drop-down menu.
 +
 image::cdc/devspaces-menu-new-terminal.png[]
 
@@ -330,7 +330,7 @@ image::cdc/devspaces-workspace-order-connector.png[]
 ** *traits*: the comment lines at the top of the file provide additional configuration settings for the integration. Here we define a property file (*cashback-order-connector.properties*) which contain the properties for the integration, as well as a secret which contains the connection details for the Kafka broker. 
 
 * The connector YAML file can be deployed as such to the OpenShift cluster using the *kamel* CLI. Under the hood the CLI will transform the YAML file into an *Integration* Custom Resource. When deployed to OpenShift, the Camel K operator processes the Integration Custom Resource and transforms the Integration into a running application.
-** Go into the terminal of the Dev Spaces workspace. If you don't have an open terminal, you can open a new one by selecting the image:cdc/devspaces-menu.png[] icon on the top of the left menu, and selecting *Terminal/New Terminal* from the drop-down menu.
+** Go into the terminal of the Dev Spaces workspace. If you don't have an open terminal, you can open a new one by selecting the image:devspaces-menu.png[] icon on the top of the left menu, and selecting *Terminal/New Terminal* from the drop-down menu.
 ** In the terminal, issue the following command:
 +
 [source,bash,role=execute]
@@ -408,7 +408,7 @@ Reading through the code should give you an idea what the code actually does. +
 In a nutshell, messages are consumed from the Kafka topic and marshalled into a JSON object. The payload is introspected using JSONPath to determine the nature of the change event, and set headers on the message accordingly. Finally the payload for the REST call is built and the REST endpoint called.
 
 * The deployment of the integration is very similar to what you did for the order integration.
-** Go into the terminal of the Dev Spaces workspace. If you don't have an open terminal, you can open a new one by selecting the image:cdc/devspaces-menu.png[] icon on the top of the left menu, and selecting *Terminal/New Terminal* from the drop-down menu.
+** Go into the terminal of the Dev Spaces workspace. If you don't have an open terminal, you can open a new one by selecting the image:devspaces-menu.png[] icon on the top of the left menu, and selecting *Terminal/New Terminal* from the drop-down menu.
 ** In the terminal, issue the following command:
 +
 [source,bash,role=execute]
