@@ -1,7 +1,7 @@
 ---
 site:
-  title: Showroom Template Demo
-  url: https://redhat-scholars.github.io/course-template
+  title: Cloud Architectures Workshop
+  url: https://github.com/rh-cloud-architecture-workshop/showroom
   start_page: modules::index.adoc
 
 content:
