@@ -210,7 +210,7 @@ image::cdc/kafdrop-debezium-topic-orders-2.png[]
 ** Select the *Topology* view in the Developer perspective. If needed, switch to the *globex-{user_name}* namespace by selecting the namespace from the namespace selection drop-down menu in the top left.
 +
 image::cdc/openshift-console-developer-select-namespace.png[]
-** In the Topology view, click on the image:cdc/openshift-console-open-url.png[] symbol next to the *order-simulator* deployment.
+** In the Topology view, click on the image:openshift-console-open-url.png[] symbol next to the *order-simulator* deployment.
 +
 image::cdc/openshift-console-open-url-4.png[]
 ** This opens a Swagger UI page showing the REST API of the simulator. +
