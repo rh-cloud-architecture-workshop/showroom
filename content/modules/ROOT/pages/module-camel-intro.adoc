@@ -1,0 +1,146 @@
+= Building a multi-channel support service for Globex customers - Intro
+
+:icons: font 
+
+++++
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z54F1ZPC4H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z54F1ZPC4H');
+</script>
+<style>
+  .btn-group, .d-sm-block {
+    display: none !important;
+  }
+  .col-sm-9 {
+    max-width: 100% !important;
+  }      
+</style>
+++++
+
+In this module you will participate to complete the implementation of a multi-channel support service for Globex customers that will enable clients to chat in real time with a team of agents.
+
+== Business and Technical Context
+
+As an added initiative to the digital transformation, Globex wants to implement a new, all digital, support service where customers can get instant help from a team of support agents. The goal is to build a pluggable event-driven architecture that allows multiple communication channels and services to integrate with ease to the platform.
+
+// image::camel/intro-arch-1.jpg[align="center", width=100%]
+
+++++
+<p align="center">
+	<img src="./_images/camel/intro-arch-1.png" style="width:80%;border-style: none;">
+</p>
+++++
+
+You will be involved in the new hub's first implementation iteration (by completing all the module exercises). You will integrate two distinct customer facing platforms (left in the diagram, Rocket.Chat and Globex), with the agent's channel (right in the diagram, Matrix).
+
+Rocket.Chat and Matrix are open-source implementations of direct messaging platforms. While not as popular or ubiquitous as Slack or Discord, they can be installed on an OpenShift cluster and do not require registration, making them more suitable for a lab environment.
+
+Customers (left) can choose to contact Globex via its Web portal or via a channel in Rocket.Chat, available on-line (using a browser). At the other end of the line, the team of agents (right) providing support services for Globex will use Matrix as their communication platform.
+
+{empty} +
+
+== Module exercises
+
+As per the picture below, this module is divided in 3 main activities:
+
+++++
+<p align="center">
+	<img src="./_images/camel/intro-lab-overview.png" style="width:80%;border-style: none;">
+</p>
+++++
+
+. The first one integrates Rocket.Chat with Matrix. +
+Because the traffic (flow of messages) is bidirectional, you'll need to
+
+- Send messages from customers (in Rocket.Chat) to agents (in Matrix)
+- Send messages from agents (in Matrix) to customers (in Rocket.Chat)
+
+. The second activity, that showcases the platform's open architecture, plugs in the Globex portal (Chat functionality), thus automatically enabling the Globex <-> Matrix message flow. 
+
+. The third activity collects the conversation history (transcript), persists it in storage (S3 buckets) and shares access with customers as a file download.
+
+{empty} +
+
+
+== Full architecture overview
+
+The complete architecture diagram below illustrates all the technologies at play providing a pluggable and scalable platform.
+
+++++
+<p align="center">
+	<img src="./_images/camel/full-architecture.png" style="width:80%;border-style: none;">
+</p>
+++++
+
+The diagram above is divided in 2 blocks:
+
+- A shared namespace providing pre-built and pre-deployed elements.
+- A user namespace (your workspace in OpenShift), where you will work to complete all the Camel integrations (3 as described previously).
+
+The diagram also shows how the architecture was conceived to easily plugin new systems (represented with the question mark *?*). One such example (fictional) is the SpringBoot application (green hexagon in the diagram). You will indeed work to integrate the Globex portal to the platform.
+
+{empty} +
+
+== Technical Capabilities
+
+The key capabilities you will use in this module are:
+
+ - Camel K, the integration tool to create all the processing flows.
+ - AMQ Broker, the messaging broker enabling event-based interactions.
+ - AMQ Streams (Kafka), to store and replay customer/agent interactions.
+ - DataGrid (Cache), to keep the context of interactions alive.
+ - S3 storage, to store conversations.
++
+[NOTE]
+====
+S3 in this workshop is served using Minio for simplicity. Full featured on-premise storage capabilities are provided by OpenShift Data Foundation.
+====
+
+{empty} +
+
+=== What is Red Hat build of Apache Camel K?
+
+NOTE: Camel K will be your master weapon in this learning module. It'll serve you to link sources and targets and process data exchanges.
+
+Camel K is a subproject of Apache Camel, known as the swiss-army knife of integration. Apache Camel is the most popular open source community project aimed at solving all things integration.
+
+Camel K simplifies working with Kubernetes environments so you can get your integrations up and running in a container quickly.
+
+{empty} +
+
+=== What is Red Hat AMQ Broker?
+
+NOTE: AMQ Broker will be your core message broker. It enables event-driven interactions between all your Camel integrations. 
+
+AMQ Broker is a pure-Java multiprotocol message broker. It's built on an efficient, asynchronous core with a fast native journal for message persistence and the option of shared-nothing state replication for high availability.
+
+{empty} +
+
+=== What is Red Hat AMQ Data Grid?
+
+NOTE: Data Grid will be your core context caching capability, to keep the keys to chat-rooms, while conversations (between customers and agents) are alive. 
+
+Data Grid is an in-memory, distributed, NoSQL datastore solution. Your applications can access, process, and analyze data at in-memory speed to deliver a superior user experience.
+
+{empty} +
+
+=== What is Red Hat AMQ Streams?
+
+NOTE: AMQ Streams (Kafka) will be your core event stream platform where customer/agents sessions (the streams) will be stored (for later replays).
+
+AMQ Streams is an event streaming platform that aggregates events over time (streams). This allows applications to replay the streams for various purposes, for example, data analysis or to discover patterns, among others. 
+
+{empty} +
+
+=== What is Red Hat OpenShift Data Foundation?
+
+NOTE: You will use S3 storage in this learning module as your core capability, for regulatory archival requirements, to keep record of Globex's support activities. 
+
+OpenShift Data Foundation is a data management solution that provides higher level data services and persistent storage for Red Hat OpenShift. It provides File, Block and Object Storage, with builtin Data Protection and Disaster Recovery.
+
+Applications can function and interact with data in a simplified, consistent and scalable manner.
