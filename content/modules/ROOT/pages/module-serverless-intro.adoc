@@ -1,0 +1,72 @@
+= Event driven applications with Serverless Knative Eventing - Introduction
+
+++++
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y0GQBF9YFH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y0GQBF9YFH');
+</script>
+<style>
+  .btn-group, .d-sm-block {
+    display: none !important;
+  }
+  .col-sm-9 {
+    max-width: 100% !important;
+  }      
+</style>
+++++
+
+In this module you learn how to leverage AMQ Streams (based on Apache Kafka) and OpenShift Serverless (Knative Eventing) to build an event driven application, without having to deal with the underlying messaging infrastructure.
+
+== Business context
+
+In today's fast-paced digital landscape, businesses collect vast amounts of data through customer interactions, product sales, SEO clicks, and more. However, the true value of this data lies in the ability to drive business intelligence from the data gathered. In this module, you will see how an event-driven architecture can leverage the capabilities of an AI/ML engine to unlock the true potential of data and transform it into valuable business intelligence.
+
+Globex, the fictitious retail company, wants to extend their eCommerce website to allow customers to leave their product reviews. Globex would like to
+
+* Moderate the language comments to ensure foul language is appropriately filtered out
+* Build a Sentiment Analysis system to understand the sentiment behind each of the product reviews
+
+== Technical considerations
+
+Globex decides to adopt an Event Driven Architecture using Apache Kafka as the data streaming platform for product reviews and OpenShift Serverless Eventing. The Product Reviews submitted by a customer are pushed to a Kafka topic, which is then consumed by both a Review Moderation Service (moderate for foul/abusive language) and Sentiment Analysis Service (scores the sentiment as positive or negative).
+
+The data flows in and out of different systems through the OpenShift Serverless Eventing architecture which uses brokers, sources and triggers to build a scalable, fully decoupled system.
+
+Once a review is moderated and marked as suitable, this is persisted in the Globex Product Review DB (PostgreSql) to be then shown on the Products page. As a first step, the Sentiment Analysis score can be viewed in the Kafka messages and at a later time will be used to build a Dashboard (Grafana) to view how well a particular category of products is performing over different time periods.
+
+image::serverless/serverless-story.png[width=80%]
+
+Here is an overview of some of the critical components which are brought together to build this system.
+
+
+=== What is Red Hat AMQ Streams on OpenShift?
+
+AMQ Streams (Kafka) will be your core event stream platform where the review comments are stored and propagated to other systems and services to moderate and analyse them.
+
+
+=== What is Red Hat OpenShift Serverless?
+
+OpenShift Serverless, based on the upstream Knative project, helps with event-driven computing amongst other usecases. The Eventing functionality provides the capability to build Event-Driven applications that can connect to and from a number of systems. In this solution, all the services emit Cloud Events with specific `ce-type` and `ce-source`. These events are then fed into the Knative Broker. The associated triggers will invoke the right knative service to respond to the right event. Building all this is super easy using CRDs.
+
+==== What are CloudEvents?
+
+With Knative Eventing, all the systems talk to each other using the https://cloudevents.io/[Cloud Events^] which is a specification for describing event data in a common way. Cloud Events makes it easy for various actors (services, systems etc) to interact with each other in a standard way. 
+
+==== What are Knative Eventing components?
+
+The OpenShift Serverless Eventing component provides the capability for consuming and producing events that can trigger applications through Kantive sinks, brokers and sources. You will learn about all of this in the next step of this module.
+
+
+=== A graphical representation of the architecture:
+
+image::serverless/serverless-architecture-diagram.png[]
+
+== Implementation
+
+In the next chapter, you will be guided through the implementation and deployment of the solution. Since this solution involves way more than what can be achieved during a workshop, a number of components are already in place. And you will focus on a few key activities which will give you a good understanding of building an event-driven application.
+

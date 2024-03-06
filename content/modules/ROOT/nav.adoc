@@ -4,3 +4,4 @@
 * xref:module-cdc-instructions.adoc[Build new functionality with Change Data Capture - Instructions]
 * xref:module-apim-intro.adoc[Launch new channels with Contract First Approach - Intro]
 * xref:module-apim-instructions.adoc[Launch new channels with Contract First Approach - Instructions]
+* xref:module-serverless-intro.adoc[Event driven applications with Serverless Knative Eventing - Intro]
