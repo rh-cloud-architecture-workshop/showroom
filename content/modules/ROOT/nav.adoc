@@ -5,3 +5,4 @@
 * xref:module-apim-intro.adoc[Launch new channels with Contract First Approach - Intro]
 * xref:module-apim-instructions.adoc[Launch new channels with Contract First Approach - Instructions]
 * xref:module-serverless-intro.adoc[Event driven applications with Serverless Knative Eventing - Intro]
+* xref:module-serverless-instructions.adoc[Event driven applications with Serverless Knative Eventing - Instructions]
