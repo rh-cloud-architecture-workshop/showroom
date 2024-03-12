@@ -13,12 +13,12 @@
   gtag('config', 'G-Z54F1ZPC4H');
 </script>
 <style>
-  .btn-group, .d-sm-block {
+  .nav-container, .pagination, .toolbar {
     display: none !important;
   }
-  .col-sm-9 {
-    max-width: 100% !important;
-  }      
+  .doc {    
+    max-width: 70rem !important;
+  }
 </style>
 ++++
 

@@ -17,12 +17,12 @@
   gtag('config', 'G-51D1EZEH8B');
 </script>
 <style>
-  .btn-group, .page-meta, .d-sm-block {
+  .nav-container, .pagination, .toolbar {
     display: none !important;
   }
-  .col-sm-9 {
-    max-width: 100% !important;
-  }      
+  .doc {    
+    max-width: 70rem !important;
+  }
 </style>
 ++++
 
