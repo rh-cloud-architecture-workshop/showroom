@@ -4,6 +4,14 @@
 <br>
 <h4><i>Discover the art of the possible.</i></h4>
 <br>
+<style>
+  .nav-container, .pagination, .toolbar {
+    display: none !important;
+  }
+  .doc {
+    max-width: 70rem !important;
+  }
+</style>
 ++++
 
 The Cloud Architectures Workshop showcases the art of the possible with Red Hat OpenShift and Red Hat Application Services.
