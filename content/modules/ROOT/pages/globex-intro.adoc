@@ -10,6 +10,14 @@
 
   gtag('config', 'G-P3W2D715DJ');
 </script>
+<style>
+  .nav-container, .pagination, .toolbar {
+    display: none !important;
+  }
+  .doc {    
+    max-width: 70rem !important;
+  }
+</style>
 ++++
 :icons: font
 
