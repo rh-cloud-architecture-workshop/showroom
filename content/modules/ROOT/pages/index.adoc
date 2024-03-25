@@ -1,7 +1,6 @@
 = {lab_name}
 
 ++++
-<br>
 <h4><i>Discover the art of the possible.</i></h4>
 <br>
 <style>
@@ -16,18 +15,21 @@
 
 The Cloud Architectures Workshop showcases the art of the possible with Red Hat OpenShift and Red Hat Application Services.
 
-This workshop consists of a number different modules, each highlighting a particular use case, development principle or technology. The modules have a common overarching story, revolving around the e-commerce site of a fictitious retail company called Globex. 
+This workshop consists of a number different modules, each highlighting a particular use case, development principle or technology. The modules have a common overarching story, revolving around the e-commerce site of a fictitious retail company called Globex. Globex has undergone significant modernization and they are keen to build on their application modernization efforts to rapidly build new functionalities. 
 
-Globex has undergone significant modernization and they are keen to build on their application modernization efforts to rapidly build new functionalities. The workshop helps you navigate through each of these functionalities through a number of modules focusing on one particular use case.
-
-The modules are independent from each other and can be taken in any combination or order. Each module consists of an introduction and an instructions section. 
+The workshop helps you navigate through each of these functionalities through a number of modules focusing on one particular use case. The modules are independent from each other and can be taken in any combination or order. Each module consists of an *introduction* and an *instructions* section:
 
 * The *introduction* details the business problem we are trying to solve, possible solutions, a technical overview of the proposed solution and other background information. 
 * The *instructions* provide details step-by-step details to guide you through the workshop.
 
 
-Modules are provisioned on demand by you by using the *Workshop Deployer*.
+== Get started
+Modules are provisioned on demand by you by using the *Workshop Deployer*. +
 
-You can access the *Workshop Deployer* by  https://workshop-deployer.{openshift_subdomain}[clicking here]
+Your access details to the lab:
 
-Go ahead! Choose your adventure!
+* Access *Workshop Deployer* by  https://workshop-deployer.{openshift_subdomain}[clicking here]
+* Username: *{user_name}*
+* Password: *{user_password}*
+
+Before diving into a particular module, we recommend that you go through the workshop introduction module, to explore the technical and functional environment for this workshop. *Go ahead! Choose your adventure!*
