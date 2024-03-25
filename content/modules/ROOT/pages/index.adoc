@@ -37,8 +37,8 @@ Your assigned user details:
 <div class="card">
   <div class="card-header">
 ++++
-** Username: *%user_name%*
-** Password: *%user_password%*
+** Username: *{user_name}*
+** Password: *{user_password}*
 ++++
   </div>
 </div>
