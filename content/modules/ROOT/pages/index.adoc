@@ -24,14 +24,15 @@ The workshop helps you navigate through each of these functionalities through a 
 
 
 == Get started
-Modules are provisioned on demand by you by using the *Workshop Deployer*. You can access the *Workshop Deployer* by  https://workshop-deployer.{openshift_subdomain}[clicking here]
+Modules are provisioned on demand by you by using the *Workshop Deployer*. +
 
-Your assigned user details:
+Lab access details:
 
 ++++
 <div class="card">
   <div class="card-header">
 ++++
+** Access *Workshop Deployer* by  https://workshop-deployer.{openshift_subdomain}[clicking here]
 ** Username: *{user_name}*
 ** Password: *{user_password}*
 ++++
@@ -39,7 +40,6 @@ Your assigned user details:
 </div>
 <br>
 ++++
-
 Before diving into a particular module, we recommend that you go through the workshop introduction module, to explore the technical and functional environment for this workshop.
 
 Go ahead! Choose your adventure!
