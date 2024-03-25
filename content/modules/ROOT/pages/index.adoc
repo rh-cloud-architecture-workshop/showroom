@@ -26,8 +26,25 @@ The modules are independent from each other and can be taken in any combination 
 * The *instructions* provide details step-by-step details to guide you through the workshop.
 
 
+== Get started
 Modules are provisioned on demand by you by using the *Workshop Deployer*.
 
 You can access the *Workshop Deployer* by  https://workshop-deployer.{openshift_subdomain}[clicking here]
+
+Your assigned user details:
+
+++++
+<div class="card">
+  <div class="card-header">
+++++
+** Username: *%user_name%*
+** Password: *%user_password%*
+++++
+  </div>
+</div>
+<br>
+++++
+
+Before diving into a particular module, we recommend that you go through the workshop introduction module, to explore the technical and functional environment for this workshop.
 
 Go ahead! Choose your adventure!
