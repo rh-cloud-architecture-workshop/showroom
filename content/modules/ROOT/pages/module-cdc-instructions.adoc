@@ -76,7 +76,7 @@ image::cdc/devspaces-workspace-debezium-connector.png[]
 +
 with
 +
-[source,textinfo,role=execute]
+[source,textinfo,role=execute,subs="attributes"]
 ----
 globex-db.globex-{user_name}.svc.cluster.local
 ----
@@ -93,12 +93,13 @@ image::cdc/devspaces-menu-terminal.png[]
 
 * The OpenShift Dev Spaces environment has access to a plethora of command line tools, including *oc*, the OpenShift  command line interface. Through OpenShift Dev Spaces you are automatically logged in into the OpenShift cluster. You can verify this with the command *oc whoami*.
 +
-[source,bash,role=execute]
+[source,bash,role=execute,subs="attributes"]
 ----
 oc whoami
 ----
 +
 .Output
+[source,textinfo,subs="attributes"]
 ----
 {user_name}
 ----
@@ -107,7 +108,7 @@ oc whoami
 ====
 If the the output of the `oc whoami` command does not correspond to your username ({user_name}), you need to logout and login again with the correct username.
 
-[source,bash,role=execute]
+[source,bash,role=execute,subs="attributes"]
 ----
 oc logout
 oc login -u {user_name} -p {user_password} {openshift_api_internal}
@@ -116,7 +117,7 @@ oc login -u {user_name} -p {user_password} {openshift_api_internal}
 
 * Deploy the Debezium connector by copying the following command to the terminal:
 +
-[source,bash,role=execute]
+[source,bash,role=execute,subs="attributes"]
 ----
 oc apply -f workshop/module-cdc/debezium-connector.yaml -n globex-cdc-{user_name}
 ----
@@ -333,12 +334,13 @@ image::cdc/devspaces-workspace-order-connector.png[]
 ** Go into the terminal of the Dev Spaces workspace. If you don't have an open terminal, you can open a new one by selecting the image:devspaces-menu.png[] icon on the top of the left menu, and selecting *Terminal/New Terminal* from the drop-down menu.
 ** In the terminal, issue the following command:
 +
-[source,bash,role=execute]
+[source,bash,role=execute,subs="attributes"]
 ----
 kamel run -n globex-cdc-{user_name} workshop/module-cdc/order-connector/cashback-order-connector.yaml --trait container.limit-memory=250Mi
 ----
 +
 .Output
+[source,textinfo,subs="attributes"]
 ----
 Modeline options have been loaded from source files
 Full command: kamel run -n globex--{user_name} workshop/module-cdc/order-connector/cashback-order-connector.yaml --trait container.limit-memory=250Mi --property=file:workshop/module-cdc/order-connector/cashback-order-connector.properties --dependency=camel:http --config=secret:kafka-client-secret 
@@ -349,12 +351,13 @@ Integration "cashback-order-connector" created
 One way to check that the integration is actually being built is by checking its status with the `oc` command line tool. +
 In the terminal in Dev Spaces, you can issue the following command:
 +
-[source,bash,role=execute]
+[source,bash,role=execute,subs="attributes"]
 ----
 oc get integration -n globex-cdc-{user_name}
 ----
 +
 .Output
+[source,textinfo,subs="attributes"]
 ----
 NAME                       PHASE          KIT                        REPLICAS
 cashback-order-connector   Building Kit   kit-cglu6cgm540hobmmt1r0
@@ -362,12 +365,13 @@ cashback-order-connector   Building Kit   kit-cglu6cgm540hobmmt1r0
 
 ** After a while (this can take a couple of minutes), the build is finished, and the integration moves to `running` state:
 +
-[source,bash,role=execute]
+[source,bash,role=execute,subs="attributes"]
 ----
 oc get integration -n globex-cdc-{user_name}
 ----
 +
 .Output
+[source,textinfo,subs="attributes"]
 ----
 NAME                       PHASE     KIT                        REPLICAS
 cashback-order-connector   Running   kit-cglu6cgm540hobmmt1r0   1
@@ -411,12 +415,13 @@ In a nutshell, messages are consumed from the Kafka topic and marshalled into a 
 ** Go into the terminal of the Dev Spaces workspace. If you don't have an open terminal, you can open a new one by selecting the image:devspaces-menu.png[] icon on the top of the left menu, and selecting *Terminal/New Terminal* from the drop-down menu.
 ** In the terminal, issue the following command:
 +
-[source,bash,role=execute]
+[source,bash,role=execute,subs="attributes"]
 ----
 kamel run -n globex-cdc-{user_name} workshop/module-cdc/customer-connector/cashback-customer-connector.groovy --trait container.limit-memory=512Mi
 ----
 +
 .Output
+[source,textinfo,subs="attributes"]
 ----
 Modeline options have been loaded from source files
 Full command: kamel run -n globex-cdc-{user_name} workshop/module-cdc/customer-connector/cashback-customer-connector.groovy --trait container.limit-memory=512Mi --dependency=camel:http --property=file:workshop/module-cdc/customer-connector/cashback-customer-connector.properties --config=secret:kafka-client-secret 
@@ -425,12 +430,13 @@ Integration "cashback-customer-connector" created
 ----
 ** Follow the build process with the following command:
 +
-[source,bash,role=execute]
+[source,bash,role=execute,subs="attributes"]
 ----
 oc get integration -n globex-cdc-{user_name}
 ----
 +
 .Output
+[source,textinfo,subs="attributes"]
 ----
 NAME                          PHASE          KIT                        REPLICAS
 cashback-customer-connector   Building Kit   kit-cgluf9om540hobmmt1rg   
