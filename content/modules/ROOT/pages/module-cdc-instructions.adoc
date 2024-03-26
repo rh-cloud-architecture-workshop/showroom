@@ -106,7 +106,7 @@ oc whoami
 +
 [IMPORTANT]
 ====
-If the the output of the `oc whoami` command does not correspond to your username ({user_name}), you need to logout and login again with the correct username.
+If the output of the `oc whoami` command does not correspond to your username ({user_name}), you need to logout and login again with the correct username.
 
 [source,bash,role=execute,subs="attributes"]
 ----
