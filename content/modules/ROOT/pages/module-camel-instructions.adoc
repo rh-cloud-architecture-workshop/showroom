@@ -162,7 +162,7 @@ oc whoami
 ====
 If the the output of the `oc whoami` command does not correspond to your username ({user_name}), you need to logout and login again with the correct username.
 
-[source,bash,role=execute]
+[source,bash,role=execute, subs="attributes"]
 ----
 oc logout
 oc login -u {user_name} -p {user_password} {openshift_api_internal}
@@ -173,12 +173,13 @@ oc login -u {user_name} -p {user_password} {openshift_api_internal}
 * You will be working in the `globex-camel-{user_name}` namespace. So run this following command to start using that particular project
 
 +
-[source,bash,role=execute]
+[source,bash,role=execute, subs="attributes"]
 ----
 oc project globex-camel-{user_name}
 ----
 +
 .Output
+[source,textinfo,subs="attributes"]
 ----
 Now using project "globex-camel-{user_name}" on server "{openshift_api_internal}".
 ----
@@ -1830,7 +1831,7 @@ Start your implementation:
 
 . Run in your Dev Spaces terminal the snippet below to set the working directory for this task:
 +
-[source,bash,role=execute,subs=attributes]
+[source,bash,role=execute,subs="attributes"]
 ----
 cd {camelfolder}/transcript/
 ----
@@ -1841,7 +1842,7 @@ NOTE: The working folder contains a `code` folder to support you on this exercis
 
 . In your terminal, use the `kamel` (Camel K client) command below to create a new Camel source file where to define your Camel routes for the caching logic:
 +
-[source,bash,role=execute,subs=]
+[source,bash,role=execute,subs="attributes"]
 ----
 kamel init transcript.xml
 ----

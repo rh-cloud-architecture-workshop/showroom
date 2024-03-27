@@ -102,6 +102,7 @@ oc whoami
 ----
 +
 .Output
+[source,textinfo,subs="attributes"]
 ----
 {user_name}
 ----
@@ -124,12 +125,13 @@ flow-collector version         not-found
 
 * Install the Red Hat Service Interconnect resources in the *globex-skupper-{user_name}* namespace:
 +
-[source,bash,role=execute]
+[source,bash,role=execute, subs="attributes"]
 ----
 skupper init -n globex-skupper-{user_name} --enable-console --enable-flow-collector --console-auth unsecured
 ----
 +
 .Output
+[source,textinfo,subs="attributes"]
 ----
 Waiting for status...
 Skupper is now installed in namespace 'globex-skupper-{user_name}'.  Use 'skupper status' to get more information.
@@ -149,7 +151,7 @@ The steps to install Service Interconnect on the isolated namespace are very sim
 
 * From the OpenShift terminal window that you still have open from the previous step, install the Red Hat Service Interconnect resources (without the console this time) in the *globex-skupper-db-{user_name}* namespace.
 +
-[source,bash,role=execute]
+[source,bash,role=execute,subs="attributes"]
 ----
 skupper -n globex-skupper-db-{user_name} init
 ----
@@ -163,12 +165,13 @@ Skupper is now installed in namespace 'globex-skupper-db-{user_name}'.  Use 'sku
 
 * To see the status of the skupper network:
 +
-[source,bash,role=execute]
+[source,bash,role=execute,subs="attributes"]
 ----
 skupper -n globex-skupper-db-{user_name} status
 ----
 +
 .Output
+[source,textinfo,subs="attributes"]
 ----
 Skupper is enabled for namespace "globex-skupper-db-{user_name}". It is not connected to any other sites. It has no exposed services.
 ----
@@ -180,24 +183,26 @@ To create a link between the two namespace, you create a token on one of the nam
 * Navigate to the browser tab pointing to the OpenShift Web terminal. +
 Issue the following command:
 +
-[source,bash,role=execute]
+[source,bash,role=execute,subs="attributes"]
 ----
 skupper -n globex-skupper-{user_name} token create /tmp/skupper.token
 ----
 +
 .Output
+[source,textinfo,subs="attributes"]
 ----
 Token written to /tmp/skupper.token
 ----
 
 * If you want to have a look at the token that was created:
 +
-[source,bash,role=execute]
+[source,bash,role=execute,subs="attributes"]
 ----
 cat /tmp/skupper.token 
 ----
 +
 .Output
+[source,textinfo,subs="attributes"]
 ----
 apiVersion: v1
 data:
@@ -221,12 +226,13 @@ This is actually an OpenShift secret which contains a certificate. This certific
 
 * On the same terminal, create a link using the token:
 +
-[source,bash,role=execute]
+[source,bash,role=execute,subs="attributes"]
 ----
 skupper -n globex-skupper-db-{user_name} link create /tmp/skupper.token
 ----
 +
 .Output
+[source,textinfo,subs="attributes"]
 ----
 Site configured to link to https://claims-globex-skupper-{user_name}.{openshift_subdomain}:443/9698eead-1a96-11ee-9dad-0a580a83003b (name=link1)
 Check the status of the link using 'skupper link status'.
@@ -234,12 +240,13 @@ Check the status of the link using 'skupper link status'.
 
 * To check the status of the link:
 +
-[source,bash,role=execute]
+[source,bash,role=execute,subs="attributes"]
 ----
 skupper -n globex-skupper-db-{user_name} link status
 ----
 +
 .Output
+[source,textinfo,subs="attributes"]
 ----
 Links created from this site:
 
@@ -253,12 +260,13 @@ Current links from other sites that are connected:
 
 * Finally, you need to expose the database service over the link. This will allow the Globex application to connect to the database as if it was a local service, while in reality the service is a proxy for the real service running in the isolated namespace. +
 +
-[source,bash,role=execute]
+[source,bash,role=execute,subs="attributes"]
 ----
 skupper -n globex-skupper-db-{user_name} expose deployment/globex-db --port 5432
 ----
 +
 .Output
+[source,textinfo,subs="attributes"]
 ----
 deployment globex-db exposed as globex-db
 ----
@@ -269,12 +277,13 @@ There a couple of ways to verify this:
 
 * In the OpenShift terminal, use `oc` to get the services deployed in the `globex-skupper-{user_name}` namespace: 
 +
-[source,bash,role=execute]
+[source,bash,role=execute,subs="attributes"]
 ----
 oc get service -n globex-skupper-{user_name}
 ----
 +
 .Output
+[source,textinfo,subs="attributes"]
 ----
 NAME                                TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
 globex-db                           ClusterIP   172.30.187.88    <none>        5432/TCP                     114s
