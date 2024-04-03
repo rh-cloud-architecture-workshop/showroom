@@ -67,14 +67,9 @@ image::serverless/serverless-namespace-initial-toplogy.png[]
 
 === Red Hat AMQ Streams setup overview 
 
-* Red Hat Streams based on Apache Kafka has been setup for you already. The Kafka broker is installed in the globex-mw-{user_name} namespace.In the same namespace, AMQ streams console, a web UI for viewing Kafka topics and browsing consumer groups, is also installed. +
-* Click to navigate to https://streams-console-globex-mw-{user-name}.{openshift_subdomain}[AMQ streams console]. 
-** This redirects you to the AMQ streams console login page. 
-** For the purpose of this workshop, choose *Sign in with Anonymous Session* to access the console if you are not already signed in.
-* Navigate to the navigate to *Kafka Clusters -> kafka -> Topics*. Notice that there are 3 topics which are relevant to this module (you can filter with the word *reviews*). 
-+
-image::serverless/amqstreams-console-3topics.png[]
-* Here is what each of these topics are meant for:
+* Red Hat Streams based on Apache Kafka has been setup for you already. The Kafka broker is installed in the globex-mw-{user_name} namespace. In the same namespace, Kafdrop, a tool to introspect a Kafka broker is also installed.
+* Click {kafdrop_url}[Kafdrop^, window="others"] to navigate to the Kafdrop home page.
+* Notice that there are 3 topics which are relevant to this module. Here is what each of these topics are meant for:
 +
 [cols="25%,75%",]
 |===
