@@ -1,4 +1,5 @@
 = Introduction to the Workshop
+:imagesdir: ../assets/images
 
 ++++
 <!-- Google tag (gtag.js) -->
@@ -10,8 +11,19 @@
 
   gtag('config', 'G-P3W2D715DJ');
 </script>
-<link rel="stylesheet" href="../assets/css/site.css">
 
+<style>
+.underline {
+  cursor: pointer;
+}
+
+.nav-container, .pagination, .toolbar {
+  display: none !important;
+}
+.doc {    
+  max-width: 70rem !important;
+}
+</style>
 ++++
 :icons: font
 
@@ -149,17 +161,17 @@ image::intro/globex-home-page.png[]
 
 * Every _like_ action generates a user activity event that is captured by the _activity tracking_ service and sent to a Kafka topic. +
 The Kafka broker is installed in the *globex-mw-{user_name}* namespace. In the same namespace, AMQ streams console, a web UI for viewing Kafka topics and browsing consumer groups, is also installed. +
-Click to navigate to https://streams-console-globex-mw-{user-name}.{openshift_subdomain}[AMQ streams console]. This redirects you to the AMQ streams console login page. For the purpose of this workshop, choose *Sign in with Anonymous Session* to access the console
+Click to navigate to https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console]. This redirects you to the AMQ streams console login page. For the purpose of this workshop, choose *Sign in with Anonymous Session* to access the console
 +
 image::intro/amqstreams-console-login.png[]
 * You will be presented with the Home page of the console. You can see that a kafka broker has already been setup for you.
 +
 image::intro/amqstreams-console-home.png[]
 
-* From the left-hand menu, navigate to *Kafka Clusters -> kafka -> Cluster overview*. You are provided with details about the Kafka cluster that has been setup for you with details including the number of brokers, the topics and also cluster metrics.
+* From the left-hand menu, navigate to *Kafka clusters -> kafka -> Cluster overview*. You can view details about the Kafka cluster that has been setup for you including the number of brokers, the topics and also cluster metrics.
 +
 image::intro/amqstreams-cluster-overview.png[]
-* Now choose the *Topics* menu on the left-hand side to see the list of topics. 
+* Choose the *Topics* menu on the left-hand side to see the list of topics. 
 +
 image::intro/amqstreams-cluster-topics.png[]
 
@@ -167,7 +179,7 @@ image::intro/amqstreams-cluster-topics.png[]
 +
 image::intro/amqstreams-globex-tracking.png[]
 
-* Click on any of the messages listed to see the contents of the message. In this case, the body of each message consists of a JSON structure of a user activity event from the Globex web application.
+* Click on any of the messages listed to see its contents. In this case, the body of each message consists of a JSON structure of a user activity event from the Globex web application.
 +
 image::intro/amqstreams-expand-message.png[]
 
