@@ -103,7 +103,7 @@ While the Globex web application used in this workshop is a demo app and as such
 
 In this section of the workshop, you will explore the Globex web application, both from a deployment as well as a functional point of view.
 
-* On your workstation, navigate to {openshift_cluster_console}[openshift_cluster_console, window="_console"]. Login with your username and password ({user_name}/{user_password}).
+* On your workstation, navigate to {openshift_cluster_console}[OpenShift Cluster Console, window="_console"]. Login with your username and password ({user_name}/{user_password}).
 * You will be redirected to the *Developer* perspective of the console. A welcome popup might appear, which you can dismiss for now (click *Skip Tour*). Also, a popup window might appear with details about the perspective switcher. Feel free to close the popup window (or click *Next* if you want to know more).
 Finally, you should be redirected to a view which lists the different OpenShift _projects_ (also known as _namespaces_) you have access to.
 +
@@ -149,7 +149,7 @@ The Globex web-app deployment consists of:
 +
 image::intro/openshift-console-open-url-2.png[]
 +
-This opens a new browser tab pointing to the home page of the Globex Web application. Alternatively, open a new browser tab and navigate to {globex_web_url}.
+This opens a new browser tab pointing to the home page of the Globex Web application. Alternatively, open a new browser tab and navigate to {globex_web_url}[{globex_web_url}, window="_globex"].
 
 * The featured product list of the Globex web application home page is empty. This is expected as no user activity events have been generated yet.
 +
@@ -161,7 +161,7 @@ image::intro/globex-home-page.png[]
 
 * Every _like_ action generates a user activity event that is captured by the _activity tracking_ service and sent to a Kafka topic. +
 The Kafka broker is installed in the *globex-mw-{user_name}* namespace. In the same namespace, AMQ streams console, a web UI for viewing Kafka topics and browsing consumer groups, is also installed. +
-Click to navigate to https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console]. This redirects you to the AMQ streams console login page. For the purpose of this workshop, choose *Sign in with Anonymous Session* to access the console
+Click to navigate to https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams]. This redirects you to the AMQ streams console login page. For the purpose of this workshop, choose *Sign in with Anonymous Session* to access the console
 +
 image::intro/amqstreams-console-login.png[]
 * You will be presented with the Home page of the console. You can see that a kafka broker has already been setup for you.
