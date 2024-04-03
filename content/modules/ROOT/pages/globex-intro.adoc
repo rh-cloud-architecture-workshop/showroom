@@ -10,14 +10,8 @@
 
   gtag('config', 'G-P3W2D715DJ');
 </script>
-<style>
-  .nav-container, .pagination, .toolbar {
-    display: none !important;
-  }
-  .doc {    
-    max-width: 70rem !important;
-  }
-</style>
+<link rel="stylesheet" href="../assets/css/sites.css">
+
 ++++
 :icons: font
 
@@ -52,12 +46,12 @@ image::intro/globex-deployment-2.png[]
 
 * OpenShift cluster: all the activities for this workshop will be done on a shared OpenShift cluster. +
 The connection details for the OpenShift cluster:
-** OpenShift Console: {openshift_cluster_console}
+** {openshift_cluster_console}[OpenShift Console, window="_console"]
 ** Username: *{user_name}*
 ** Password: *{user_password}*
 
 
-* Depending on the workshop modules you will be guided through, there are helper components such as *Kafdrop*, an integrated development environment (IDE) called *OpenShift Dev Spaces*, based on Eclipse Che and some more.
+* Depending on the workshop modules you will be guided through, there are helper components such as *AMQ streams console*, an integrated development environment (IDE) called *OpenShift Dev Spaces*, based on Eclipse Che and some more.
 All of these (including the IDE) are hosted on OpenShift, so the login to your OpenShift Console is the central entrypoint for your Developer Experience. +
 These additional components will be introduced in the following chapters and workshop modules, where applicable.
 
@@ -68,11 +62,11 @@ If you are interested to know more about this setup, click on the link below, or
 [%collapsible]
 ====
 
-As mentioned before, we use as hub and spoke model to manage the workshop assets. A cluster-wide ArgoCD instance manages a number of namespace scoped ArgoCD instances (1 per workshop user). These namespace scoped ArgoCD instances manage the workshop assets for a user.
+As mentioned before, we use a hub and spoke model to manage the workshop assets. A cluster-wide ArgoCD instance manages a number of namespace scoped ArgoCD instances (1 per workshop user). These namespace scoped ArgoCD instances manage the workshop assets for a user.
 
 You can log into your namespace scoped ArgoCD instance and have a look at the assets managed by the instance: 
 
-* Open a browser tab and navigate to https://globex-gitops-{user_name}-server-globex-gitops-{user_name}.{openshift_subdomain}. Expect to see the landing page of ArgoCD.
+* Navigate to https://globex-gitops-{user_name}-server-globex-gitops-{user_name}.{openshift_subdomain}[ArgoCD, window="_argo"]. Expect to see the landing page of ArgoCD.
 * Click on the *Log in via OpenShift* link, and log in with your OpenShift credentials ({user_name}/{user_password}).
 +
 image::intro/argocd-landing-page.png[]
@@ -97,7 +91,7 @@ While the Globex web application used in this workshop is a demo app and as such
 
 In this section of the workshop, you will explore the Globex web application, both from a deployment as well as a functional point of view.
 
-* On your workstation, open a browser window and navigate to the console of your OpenShift cluster at {openshift_cluster_console}. Login with your username and password ({user_name}/{user_password}).
+* On your workstation, navigate to {openshift_cluster_console}[openshift_cluster_console, window="_console"]. Login with your username and password ({user_name}/{user_password}).
 * You will be redirected to the *Developer* perspective of the console. A welcome popup might appear, which you can dismiss for now (click *Skip Tour*). Also, a popup window might appear with details about the perspective switcher. Feel free to close the popup window (or click *Next* if you want to know more).
 Finally, you should be redirected to a view which lists the different OpenShift _projects_ (also known as _namespaces_) you have access to.
 +
@@ -154,31 +148,33 @@ image::intro/globex-home-page.png[]
 * To generate user activity events, click on the image:intro/globex-product-like.png[] symbol next to a product. You can repeat this for a couple of products.
 
 * Every _like_ action generates a user activity event that is captured by the _activity tracking_ service and sent to a Kafka topic. +
-The Kafka broker is installed in the *globex-mw-{user_name}* namespace. In the same namespace, Kafdrop, a web UI for viewing Kafka topics and browsing consumer groups, is also installed. +
-Open a new browser tab, and navigate to {kafdrop_url}. This redirects you to the Kafdrop home page.
+The Kafka broker is installed in the *globex-mw-{user_name}* namespace. In the same namespace, AMQ streams console, a web UI for viewing Kafka topics and browsing consumer groups, is also installed. +
+Click to navigate to https://streams-console-globex-mw-{user-name}.{openshift_subdomain}[AMQ streams console]. This redirects you to the AMQ streams console login page. For the purpose of this workshop, choose *Sign in with Anonymous Session* to access the console
 +
-image::intro/kafdrop.png[]
+image::intro/amqstreams-console-login.png[]
+* You will be presented with the Home page of the console. You can see that a kafka broker has already been setup for you.
++
+image::intro/amqstreams-console-home.png[]
 
-* Scroll down to see the list of topics. One of those topics is called *globex.tracking*, which is the topic that contains the user activity events. Click on the topic name to see the details of the topic. If you liked some products on the web site, the topic should contain some messages.
+* From the left-hand menu, navigate to *Kafka Clusters -> kafka -> Cluster overview*. You are provided with details about the Kafka cluster that has been setup for you with details including the number of brokers, the topics and also cluster metrics.
 +
-image::intro/kafdrop-globex-tracking.png[]
+image::intro/amqstreams-cluster-overview.png[]
+* Now choose the *Topics* menu on the left-hand side to see the list of topics. 
++
+image::intro/amqstreams-cluster-topics.png[]
 
-* Click on the link representing the only partition of the topic to see the contents of the partition.
+* One of those topics is called *globex.tracking*, which is the topic that contains the user activity events. Click on the topic name to see the details of the topic. If you liked some products on the web site, the topic should contain some messages.
 +
-image::intro/kafdrop-globex-tracking-partition.png[]
-+
-This opens a view to the individual messages in the topic. In this case, the body of each message consists of a JSON structure of a user activity event from the Globex web application.
-+
-Note: Messages are listed in a collapsed format. Clicking on the small chevron to the left of the message expands the message content.
-+
-image::intro/kafdrop-expand-message.png[]
-+
-image::intro/kafdrop-globex-tracking-message.png[]
+image::intro/amqstreams-globex-tracking.png[]
 
-* If you go back to the list of topics in the Kafdrop UI (using the browser back button or clicking on the Kafdrop header) image:intro/kafdrop-header-back.png[] , you will notice a number of topics starting with *globex.recommendation*. Those are the topics created by the _recommendation engine_ application, which calculates a list of the most popular products based on the user activity stream. +
+* Click on any of the messages listed to see the contents of the message. In this case, the body of each message consists of a JSON structure of a user activity event from the Globex web application.
++
+image::intro/amqstreams-expand-message.png[]
+
+* If you go back to the list of topics in the AMQ streams console (click *Topics*  on left-hand side) , you will notice a number of topics starting with *globex.recommendation*. Those are the topics created by the _recommendation engine_ application, which calculates a list of the most popular products based on the user activity stream. +
 The *globex.recommendation-product-score-aggregated-changelog* topic contains messages containing the list of most popular products, where the latest message has the current list.
 +
-image::intro/kafdrop-globex-tracking-recommendation.png[]
+image::intro/amqstreams-globex-tracking-recommendation.png[]
 
 * In your browser window, go to the tab pointing to the Globex web application. Navigate to the home page. You should see some items in the list of featured products, corresponding to the list of products you liked.
 +
