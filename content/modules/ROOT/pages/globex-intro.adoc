@@ -58,7 +58,7 @@ image::intro/globex-deployment-2.png[]
 
 * OpenShift cluster: all the activities for this workshop will be done on a shared OpenShift cluster. +
 The connection details for the OpenShift cluster:
-** {openshift_cluster_console}[OpenShift Console, window="_console"]
+** OpenShift Console: {openshift_cluster_console}[{openshift_cluster_console}, window="_console"]
 ** Username: *{user_name}*
 ** Password: *{user_password}*
 
