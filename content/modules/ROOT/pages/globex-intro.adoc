@@ -215,4 +215,4 @@ Go the browser tab with the Globex we UI, refresh the home page, and notice how 
 
 Please close all but this *Instructions browser tab* to avoid proliferation of tabs which can make working on other modules difficult. 
 
-Proceed to the https://workshop-deployer.{openshift_subdomain}[Workshop Deployer] to choose your next module.
+Proceed to the https://workshop-deployer.{openshift_subdomain}[Workshop Deployer, window="workshopdeployer"] to choose your next module.

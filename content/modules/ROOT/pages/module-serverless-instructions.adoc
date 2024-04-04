@@ -1,4 +1,5 @@
 = Event driven applications with Serverless Knative Eventing - Instructions
+:imagesdir: ../assets/images
 
 ++++
 <!-- Google tag (gtag.js) -->
@@ -12,6 +13,9 @@
 </script>
 
 <style>
+  .underline {
+  cursor: pointer;
+  }
   .nav-container, .pagination, .toolbar {
     display: none !important;
   }
@@ -40,7 +44,7 @@ Here is an outline of the activities you will achieve as part of this module.
 
 The initial topology will look like this of the `globex-serverless-{user_name}` namespace on which you will be working on looks like this.
 
-* In a browser window, navigate to the OpenShift console at {openshift_cluster_console}. If needed, login with your username and password ({user_name}/{user_password}). +
+* In a browser window, navigate to the {openshift_cluster_console}[OpenShift console, window="console"]. If needed, login with your username and password *({user_name}/{user_password})*. +
 If this is the first time you open the console, you will be directed to the Developer Perspective of the console, which shows you the different namespaces you have access to.
 +
 image::serverless/serverless-openshift-landing.png[]
@@ -67,9 +71,14 @@ image::serverless/serverless-namespace-initial-toplogy.png[]
 
 === Red Hat AMQ Streams setup overview 
 
-* Red Hat Streams based on Apache Kafka has been setup for you already. The Kafka broker is installed in the globex-mw-{user_name} namespace. In the same namespace, Kafdrop, a tool to introspect a Kafka broker is also installed.
-* Click {kafdrop_url}[Kafdrop^, window="others"] to navigate to the Kafdrop home page.
-* Notice that there are 3 topics which are relevant to this module. Here is what each of these topics are meant for:
+* Red Hat Streams based on Apache Kafka has been setup for you already. The Kafka broker is installed in the globex-mw-{user_name} namespace.In the same namespace, AMQ streams console, a web UI for viewing Kafka topics and browsing consumer groups, is also installed. +
+* Click to navigate to https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. 
+** This redirects you to the AMQ streams console login page. 
+** For the purpose of this workshop, choose *Sign in with Anonymous Session* to access the console if you are not already signed in.
+* Navigate to the navigate to *Kafka Clusters -> kafka -> Topics*. Notice that there are 3 topics which are relevant to this module (you can filter with the word *reviews*). 
++
+image::serverless/amqstreams-console-3topics.png[]
+* Here is what each of these topics are meant for:
 +
 [cols="25%,75%",]
 |===
@@ -89,7 +98,7 @@ The services which will need to be Kafka Clients and Producers, now need to only
 .[.underline]#*[Click to know] What is CloudEvents?*#
 [%collapsible]
 ====
-https://cloudevents.io[CloudEvents^] is a specification for describing event data in a common way. An event includes context and data about an occurrence. Each occurrence is uniquely identified by the data of the event. Each occurrence is uniquely identified by the data of the event. The headers within a CloudEvents event helps Knative Eventing to route the events to the right destination.
+https://cloudevents.io[CloudEvents, window="others"] is a specification for describing event data in a common way. An event includes context and data about an occurrence. Each occurrence is uniquely identified by the data of the event. Each occurrence is uniquely identified by the data of the event. The headers within a CloudEvents event helps Knative Eventing to route the events to the right destination.
 ====
 
 
@@ -163,7 +172,7 @@ In this section we will connect the Knative Services (refer to previous section)
 .[.underline]#*[Click to know]  What is Knative Sink and SinkBinding ?*#
 [%collapsible]
 ====
-* A https://docs.openshift.com/serverless/1.30/eventing/event-sinks/serverless-kafka-developer-sink.html[Kafka Sink for Apache Kafka^] helps in persisting the incoming Kafka message (CloudEvent) to a configurable Apache Kafka topic. Event producers (such as apps, devices) can send CloudEvents over HTTP to the Kafka Sinks there by reducing the complexity of new protocols and message formats for app developers. The Kafka Sinks then send the CloudEvents they receive to the configured Apache Kafka topic. 
+* A https://docs.openshift.com/serverless/1.30/eventing/event-sinks/serverless-kafka-developer-sink.html[Kafka Sink for Apache Kafka, window="others"] helps in persisting the incoming Kafka message (CloudEvent) to a configurable Apache Kafka topic. Event producers (such as apps, devices) can send CloudEvents over HTTP to the Kafka Sinks there by reducing the complexity of new protocols and message formats for app developers. The Kafka Sinks then send the CloudEvents they receive to the configured Apache Kafka topic. 
 * https://docs.openshift.com/serverless/1.30/eventing/event-sources/serverless-custom-event-sources.html[SinkBinding^] supports decoupling the source (service which produces events) from the actual sink. The SinkBinding object injects environment variables (such as sink URL) into the services there by decoupling the source from the sink.
 ====
 
@@ -474,25 +483,16 @@ image::serverless/reviews-knative-services.png[]
 
 === Under the hood: Step through Review moderation flow
 
-* Click {kafdrop_url}[Kafdrop^, window="others"] to navigate to the Kafdrop home page. Enter *reviews* in the Name filter as shown below. You can see 3 topics here.
-+
-.[.underline]#*Click to see a visual*# 
-[%collapsible]
-====
-
-image::serverless/globex-review-topics.png[]
-====
-
+* Navigate to https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"].  Filter for the term *reviews* to view 3 related topics.
 * Click on the `globex.reviews` topic to see an Overview of the topic page
 +
-image::serverless/globex-reviews-topic-overview.png[]
-* Click on the Partition [0] as shown above to view a listing of the reviews you submitted.
+image::serverless/amqstreams-globex-reviews-topic-overview.png[]
+* Click on any of the message to view the complete message payload
 +
-image::serverless/globex-reviews-topic-list.png[]
-* Click on (>) shown against a message (as shown in screenshot) to view the complete message
+image::serverless/amqstreams-globex-reviews-topic-detail.png[]
+* Click on the headers tab and take note of the headers of the message. This is what each of them mean:
 +
-image::serverless/globex-reviews-topic-detail.png[]
-* Note the headers of the message. This is what each of them mean:
+image::serverless/amqstreams-globex-reviews-headers.png[]
 ** *ce_id: 1* -  This is a unique id for each message. 
 ** *ce_source: submit-review* and *ce_type: submit-review-event* - These are the primary values which are used by the Knative triggers to route the message to the right Knative service.
 * Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Topology View^, window="console"], to view the corresponding mapping in the Knative Broker and Triggers
@@ -503,14 +503,16 @@ image::serverless/globex-reviews-topic-detail.png[]
 +
 image::serverless/moderate-reviews-trigger.png[]
 * Once the reviews are sent to the `aiml-moderate-reviews` (Python) service, it uses the https://huggingface.co/Hate-speech-CNERG/english-abusive-MuRIL[Hate-speech-CNERG/english-abusive-MuRIL AI/ML model^, window="others"] to identify if the product review is abusive or not.
-** A score of `-1` is assigned if the review is acceptable or `0` if the comment is abusive. Here is a sample message of how a moderated review looks like
-+
-image::serverless/moderate-review-score.png[]
-** This service then POSTs the review with the score to the `moderated-reviews-sink` (with the help of the ServiceBinding which binds the sink to the services). This sink is configured to write to the `reviews.moderated` topic
+** A score of `-1` is assigned if the review is acceptable or `0` if the comment is abusive. 
+** This service then POSTs the review with the score to the `moderated-reviews-sink` (with the help of the ServiceBinding which binds the sink to the services). 
 +
 image::serverless/moderated-reviews-sink.png[]
 
-* The message sent to `moderated-reviews-sink` topic is now sent to the `persist-reviews` Quarkus service through the `persist-reviews-trigger` trigger. This service then persists the review in a Postgresql DB if the score less than `0` (that is, the review is acceptable)
+** This sink is configured to write to the `reviews.moderated` topic. Here is a sample message of how a moderated review (kafka message) looks like in the AMQ streams console.
++
+image::serverless/amqstreams-moderate-review-score.png[]
+
+* Next, the message is sent to the `persist-reviews` Quarkus service through the `persist-reviews-trigger` trigger. This service persists the review in a Postgresql DB if the score less than `0` (that is, the review is acceptable)
 ** Note that the trigger's filter's source and type matches the ce_type and ce_source headers of the message from the `reviews.moderated` topic shown in the screenshot above.
 +
 image::serverless/persist-reviews-trigger.png[]
@@ -524,9 +526,9 @@ image::serverless/review-sentiment-flow.png[]
 +
 image::serverless/sentiment-reviews-trigger.png[width=80%]
 * The `aiml-sentiment-reviews` which is invoked, then uses the https://huggingface.co/nlptown/bert-base-multilingual-uncased-sentiment[nlptown/bert-base-multilingual-uncased-sentiment, window="others"] to identify a score (from -1 to 4) depending on the tone of the review.
-* The review is then sent to the {kafdrop_url}/topic/reviews.sentiment[Kafdrop:reviews.sentiment topic^, window="others"]. Click on the link Partition `0` to view the sentiment score.
+* The review is then sent to the `reviews.sentiment` topic. Access this topic in the https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. Click on any of the kafka messages to view the sentiment score.
 +
-image::serverless/sentiment-score.png[]
+image::serverless/amqstreams-sentiment-score.png[]
 ** As a next step, this sentiment score can be used to build a dashboard to visualise the sentiment of various categories of products. 
 +
 .[.underline]#*Click to see a sample visual*# 
@@ -541,4 +543,4 @@ Congratulations! With this you have completed the Event Driven Applications work
 
 Please close all but the Workshop Deployer browser tab to avoid proliferation of browser tabs which can make working on other modules difficult. 
 
-Proceed to the https://workshop-deployer.{openshift_subdomain}[Workshop Deployer] to choose your next module.
+Proceed to the https://workshop-deployer.{openshift_subdomain}[Workshop Deployer, window="workshopdeployer"] to choose your next module.

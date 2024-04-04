@@ -28,7 +28,7 @@ Modules are provisioned on demand by you by using the *Workshop Deployer*. +
 
 Your access details to the lab:
 
-* Access *Workshop Deployer* by  https://workshop-deployer.{openshift_subdomain}[clicking here^]
+* Access *Workshop Deployer* by  https://workshop-deployer.{openshift_subdomain}[clicking here^, window="workshopdeployer"]
 * Username: *{user_name}*
 * Password: *{user_password}*
 
