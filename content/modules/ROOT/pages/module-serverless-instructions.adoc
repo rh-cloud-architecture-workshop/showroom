@@ -42,8 +42,6 @@ Here is an outline of the activities you will achieve as part of this module.
 
 == Deployment overview and introduction
 
-The initial topology will look like this of the `globex-serverless-{user_name}` namespace on which you will be working on looks like this.
-
 * In a browser window, navigate to the {openshift_cluster_console}[OpenShift console, window="console"]. If needed, login with your username and password *({user_name}/{user_password})*. +
 If this is the first time you open the console, you will be directed to the Developer Perspective of the console, which shows you the different namespaces you have access to.
 +
@@ -480,6 +478,10 @@ In a few seconds two of them (except `persist-reviews`) will go back to a white 
 image::serverless/reviews-knative-services.png[]
 
 * Now, go ahead and leave review comments of as many products as you like. If you are feeling adventurous you can try a few inappropriate comments too to see how they are being moderated ;)
+** Any inappropriate commment is replaced with a note from Globex and displayed on the websiite as shown below
++
+image::serverless/inapprop-review.png[]
+
 
 === Under the hood: Step through Review moderation flow
 
