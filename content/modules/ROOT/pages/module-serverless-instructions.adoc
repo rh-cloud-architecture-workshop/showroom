@@ -500,7 +500,7 @@ image::serverless/amqstreams-globex-reviews-headers.png[]
 * Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Topology View^, window="console"], to view the corresponding mapping in the Knative Broker and Triggers
 ** Click on the blue link (highlighted in blue below) pointing to `aiml-moderate-reviews` service. This link represents the `moderate-reviews-trigger`. 
 ** The right-hand panel shows the trigger's *source* = _submit-review_ and *type*	= _submit-review-event_. 
-** You will note that this matches the CloudEvents headers in the Kafka message that you viewed in Kafdrop message browser. 
+** You will note that this matches the CloudEvents headers in the Kafka message that you viewed in AMQ Streams Console browser. 
 ** This is how the Knative Triggers match the messages to the right endpoint.
 +
 image::serverless/moderate-reviews-trigger.png[]

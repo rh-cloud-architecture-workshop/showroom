@@ -1,3 +1,5 @@
+:imagesdir: ../assets/images
+
 = Launch new channels with Contract First Approach - Instructions
 
 // :toclevels: 2
@@ -23,6 +25,10 @@
   .doc {    
     max-width: 70rem !important;
   }
+
+  .underline {
+    cursor: pointer;
+  }
 </style>
 ++++
 
@@ -34,8 +40,29 @@ Here is an outline of the activities you will achieve as part of this module.
 image::apim/apim-overview-flowchart.png[]
 
 
-== Setup OpenShift Dev Spaces 
-You are going to use *OpenShift Dev Spaces* for a number of activities. OpenShift Dev Spaces uses Kubernetes and containers to provide a consistent, secure, and zero-configuration development environment, accessible from a browser window.
+== Your lab environment
+
+=== Ensure lab readiness
+
+[IMPORTANT]
+=====
+Before your proceed it is critical that your lab environment is completely ready before executing the lab instructions.
+=====
+
+
+* Access the *Workshop Deployer* browser tab and check if the *Launch new channels using Contract-First approach* has turned green. This indicates that the module has been fully deployed and is ready to use. 
+
+.API Module on Workshop Deplpoyer
+image::apim/apim-workshop-deployer.png[width=70%]
+
+
+=== Setup OpenShift Dev Spaces 
+You will use *OpenShift Dev Spaces* for a number of activities. OpenShift Dev Spaces uses Kubernetes and containers to provide a consistent, secure, and zero-configuration development environment, accessible from a browser window.
+
+[NOTE]
+=====
+If you already have OpenShift Dev Spaces browser tab accessible, you can directly
+=====
 
 === Section Goals
 * Access OpenShift Dev Spaces as *{user_name}*
@@ -327,16 +354,16 @@ image::apim/sr-spec-setting.png[]
 .Service Registry: *Globex Mobile API Gateway* artifact has been uploaded
 image::apim/sr-uploaded.png[]
 
-* You can share this OpenAPI schema with others via this OpenAPI Schema's endpoint : {service_registry_url}/apis/registry/v2/groups/globex/artifacts/mobileapi
+* You can share this OpenAPI schema with others via this OpenAPI Schema's endpoint : link:https://service-registry-apim-user2.apps.cluster-6dpq4.6dpq4.sandbox1663.opentlc.com/apis/registry/v2/groups/globex/artifacts/mobileapi[window="service_registry_url"]
 * You can now close the Service Registry's browser tab.
 * This schema can be used for generating Quarkus code for both Clients and Server-side using maven plugins. (Note that the https://github.com/rh-cloud-architecture-workshop/globex-mobile[Globex Mobile App^, window="code-samples"] is NodeJS + Angular in this module)
 
 
 === Section Outcome
-
-* Added Security Scheme to Mobile OpenAPI with API Desginers
-* Imported the Mobile OpenAPI into Service Registry to govern the API spec.
-* A shareable link is available to the Mobile OpenAPI specification to be used by other teams and systems.
+[%interactive]
+* [ ] Added Security Scheme to Mobile OpenAPI with API Desginers
+* [ ] Imported the Mobile OpenAPI into Service Registry to govern the API spec.
+* [ ] A shareable link is available to the Mobile OpenAPI specification to be used by other teams and systems.
 
 === Cleanup
 Please close the API Designer and Service Registry browser tabs to avoid too many browser tabs
@@ -529,12 +556,16 @@ image::apim/mobile-gateway-product.png[]
 
 ** *<client-credentials>* : Value of Client Credentials of the *client-manager* client you created in Keycloak in the previous step.
 +
-[NOTE]
+.[.underline]#*Click to know how to access Client ID _client-manager_*#
+[%collapsible]
 ====
+
 If you don't have this value, click on Red Hat  {sso_tenant_console}/#/globex-{user_name}/clients[Keycloak Clients List^, window="sso"]. Login if needed with *({user_name}/{user_password})*. Click on the Client ID *client-manager*. You can copy the credentials from the *Credentials tab*
-====
-+
+
 image::apim/client-manager-credentials.png[]
+====
+
+
 ** *<issuer-endpoint>* : Value as below
 +
 [source,bash,role=execute, subs="attributes"]
@@ -542,15 +573,17 @@ image::apim/client-manager-credentials.png[]
 sso.{openshift_subdomain}/realms/globex-{user_name}
 ----
 +
-[NOTE]
+.[.underline]#*Click to know how to access the _issuer-endpoint_*#
+[%collapsible]
 ====
+
 This URL is from Keycloak's *Issuer endpoint* from https://sso.{openshift_subdomain}/realms/globex-{user_name}/.well-known/openid-configuration[OpenID configurations endpoint^]. 
 
 .Keycloak Issuer URL
 
 image::apim/sso-issuer-endpoint.png[] 
-
 ====
+
 * The *mobile-gateway-product.yaml* file should looks like this now +
 +
 .mobile-gateway-product.yaml updated with the correct values
@@ -621,7 +654,7 @@ developeraccount.capabilities.3scale.net/mobile-developeraccount created
 ==== Verify creation of developer account
 
 * In a browser window, navigate to the browser tab pointing to the Developer perspective of the OpenShift cluster. If you don't have a browser tab open on the console, click on {openshift_cluster_console}[OpenShift Console^, window="console"] to launch the console. If needed login with your username and password ({user_name}/{user_password}).
-* From *Administrator* view, within in the globex-apim-{user_name} namespace, navigate to *Operators > Installed Operators*. Choose *Red Hat Integration - 3scale*. 
+* From *Administrator* view, within in the *globex-apim-{user_name}* namespace, navigate to *Operators > Installed Operators*. Choose *Red Hat Integration - 3scale*. 
 * Click on *Developer Account* tab and choose *Current namespace only* options. 
 * You will see the DeveloperAccount with Status `Condition: Waiting`
 +
@@ -884,7 +917,7 @@ The Mobile Application can be access via this QR Code as well as via browser
 * Scan the following QR Code with your mobile phone
 +
 .Scan to view Mobile App
-image::https://chart.googleapis.com/chart?chs=300x300&amp;cht=qr&amp;chl=https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}[Globex Mobile,200,300]
+image::https://cdn.make.cm/make/s/rhqrpng?&data[rounded]=false&data[value]=https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}[Globex Mobile,200,300]
  
 * Alternatively, launch https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}[Globex Mobile^] and login using `asilva/openshift`
 * The login process may take a few seconds. Please wait for a bit :)

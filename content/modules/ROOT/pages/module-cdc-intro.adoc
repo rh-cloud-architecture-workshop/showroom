@@ -1,4 +1,5 @@
 = Build new functionality with Change Data Capture - Introduction
+:imagesdir: ../assets/images
 
 ++++
 <!-- Google tag (gtag.js) -->

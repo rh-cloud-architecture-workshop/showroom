@@ -1,4 +1,5 @@
 = Event driven applications with Serverless Knative Eventing - Introduction
+:imagesdir: ../assets/images
 
 ++++
 <!-- Google tag (gtag.js) -->

@@ -1,3 +1,4 @@
+:imagesdir: ../assets/images
 = Building a secure service network with Red Hat Service Interconnect - Instructions
 
 ++++

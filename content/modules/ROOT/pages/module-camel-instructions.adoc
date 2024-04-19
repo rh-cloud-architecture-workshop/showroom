@@ -1,4 +1,5 @@
 = Building a multi-channel support service for Globex customers - Instructions
+:imagesdir: ../assets/images
 
 ++++
 <!-- Google tag (gtag.js) -->

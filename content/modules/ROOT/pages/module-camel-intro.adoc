@@ -1,5 +1,5 @@
 = Building a multi-channel support service for Globex customers - Intro
-
+:imagesdir: ../assets/images
 :icons: font 
 
 ++++

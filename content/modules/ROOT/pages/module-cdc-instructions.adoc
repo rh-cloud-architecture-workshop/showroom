@@ -1,4 +1,5 @@
 = Build new functionality with Change Data Capture - Instructions
+:imagesdir: ../assets/images
 
 :icons: font
 ++++
@@ -21,6 +22,20 @@
   }
 </style>
 ++++
+
+== Your lab environment
+
+[IMPORTANT]
+=====
+Before your proceed it is critical that your lab environment is completely ready before executing the lab instructions.
+=====
+
+
+* Access the *Workshop Deployer* browser tab and check if the *Build new functionality with Change Data Capture* has turned green. This indicates that the module has been fully deployed and is ready to use. 
+
+.CDC Module on Workshop Deplpoyer
+image::cdc/cdc-workshop-deployer.png[width=70%]
+
 
 == Deployment Overview
 
