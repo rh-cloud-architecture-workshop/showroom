@@ -52,8 +52,8 @@ Before your proceed it is critical that your lab environment is completely ready
 
 * Access the *Workshop Deployer* browser tab and check if the *Launch new channels using Contract-First approach* has turned green. This indicates that the module has been fully deployed and is ready to use. 
 
-.API Module on Workshop Deplpoyer
-image::apim/apim-workshop-deployer.png[width=70%]
+.Module Readiness on Workshop Deployer
+image::apim/apim-workshop-deployer.png[width=50%]
 
 
 === Setup OpenShift Dev Spaces 

@@ -27,6 +27,20 @@
 In this lab, you will use two OpenShift namespaces. In one namespace the Globex application is deployed. The other namespace is isolated from the rest of the cluster through a network policy (only egress allowed, no ingress) and that is where the Globex retail database is deployed. In the lab, you will create a service network between these two clusters, so that the Globex application can connect and use the database in the isolated namespace. *Note that the database is not exposed to the outside world. It cannot be reached from other namespaces in the OpenShift cluster*
 
 
+== Prepare your Development environment
+=== Ensure lab readiness
+
+[IMPORTANT]
+=====
+Before your proceed it is critical that your lab environment is completely ready before executing the lab instructions.
+=====
+
+* Access the *Workshop Deployer* browser tab and check if the *Launch new channels using Contract-First approach* has turned green. This indicates that the module has been fully deployed and is ready to use. 
+
+.Module Readiness on Workshop Deployer
+image::skupper/skupper-workshop-deployer.png[width=50%]
+
+
 == Deployment overview: Globex application namespace
 
 * In a browser window, navigate to the OpenShift console at {openshift_cluster_console}. If needed, login with your username and password ({user_name}/{user_password}). +

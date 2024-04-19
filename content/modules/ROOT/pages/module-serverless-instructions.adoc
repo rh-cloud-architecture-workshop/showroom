@@ -40,6 +40,20 @@ Here is an outline of the activities you will achieve as part of this module.
 * Build an event mesh with OpenShift Serverless Eventing components
 * Try out the solution end-to-end to see how data flows through the various systems and services
 
+== Prepare your Development environment
+=== Ensure lab readiness
+
+[IMPORTANT]
+=====
+Before your proceed it is critical that your lab environment is completely ready before executing the lab instructions.
+=====
+
+* Access the *Workshop Deployer* browser tab and check if the *Launch new channels using Contract-First approach* has turned green. This indicates that the module has been fully deployed and is ready to use. 
+
+.Module Readiness on Workshop Deployer
+image::serverless/serverless-workshop-deployer.png[width=50%]
+
+
 == Deployment overview and introduction
 
 * In a browser window, navigate to the {openshift_cluster_console}[OpenShift console, window="console"]. If needed, login with your username and password *({user_name}/{user_password})*. +
