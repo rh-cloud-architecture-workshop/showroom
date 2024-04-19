@@ -917,12 +917,9 @@ The Mobile Application can be access via this QR Code as well as via browser
 * Scan the following QR Code with your mobile phone
 +
 
-image::https://cdn.make.cm/make/s/rhqrpng?data[value]3Dhttps%3A%2F%2Fglobex-mobile-globex-apim-{user_name}.{openshift_subdomain} [Globex Mobile,200,300]
+image::https://cdn.make.cm/make/s/rhqrpng?data[value]3Dhttps%3A%2F%2Fglobex-mobile-globex-apim-{user_name}.{openshift_subdomain}[200,300]
 
 
-+
-
-image::https://cdn.make.cm/make/s/rhqrpng?data%5Bvalue%5D%3Dhttps%3A%2F%2Fglobex-mobile-globex-apim-{user_name}.{openshift_subdomain}[Globex Mobile,200,300]
 
  
 * Alternatively, launch https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}[Globex Mobile^] and login using `asilva/openshift`
