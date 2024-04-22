@@ -1,5 +1,6 @@
 = Build new functionality with Change Data Capture - Instructions
 :imagesdir: ../assets/images
+:sectnums:
 
 :icons: font
 ++++
@@ -51,7 +52,7 @@ Let's start with deploying the Debezium Connector. With AMQ Streams, a Kafka Con
 
 To deploy the connector, you are going to use OpenShift Dev Spaces. OpenShift Dev Spaces uses Kubernetes and containers to provide a consistent, secure, and zero-configuration development environment, accessible from a browser window.
 
-* In a browser window, navigate to the browser tab pointing to the Developer perspective of the OpenShift cluster. If you don't have a browser tab open on the console, open a new tab and navigate to {openshift_cluster_console}. If needed login with your username and password ({user_name}/{user_password}).
+* In a browser window, navigate to the browser tab pointing to the Developer perspective of the OpenShift cluster. If you don't have a browser tab open on the console, navigate to {openshift_cluster_console}[OpenShift Console^, window="console"] to launch the console. If needed login with your username and password ({user_name}/{user_password}).
 
 * On the top menu of the console, click on the image:openshift-application-menu.png[] icon, and in the drop-down box, select *Red Hat OpenShift Dev Spaces*.
 +

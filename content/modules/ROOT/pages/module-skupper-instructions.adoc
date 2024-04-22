@@ -23,6 +23,8 @@
 ++++
 
 :icons: font 
+:sectnums:
+
 
 In this lab, you will use two OpenShift namespaces. In one namespace the Globex application is deployed. The other namespace is isolated from the rest of the cluster through a network policy (only egress allowed, no ingress) and that is where the Globex retail database is deployed. In the lab, you will create a service network between these two clusters, so that the Globex application can connect and use the database in the isolated namespace. *Note that the database is not exposed to the outside world. It cannot be reached from other namespaces in the OpenShift cluster*
 
@@ -43,7 +45,7 @@ image::skupper/skupper-workshop-deployer.png[width=40%]
 
 == Deployment overview: Globex application namespace
 
-* In a browser window, navigate to the OpenShift console at {openshift_cluster_console}. If needed, login with your username and password ({user_name}/{user_password}). +
+* In a browser tab navigate to {openshift_cluster_console}[OpenShift console, window="console"]. If needed, login with your username and password ({user_name}/{user_password}). +
 If this is the first time you open the console, you will be directed to the Developer Perspective of the console, which shows you the different namespaces you have access to. 
 +
 image::skupper/openshift-console-namespaces.png[]
@@ -156,7 +158,7 @@ Skupper is now installed in namespace 'globex-skupper-{user_name}'.  Use 'skuppe
 +
 image::skupper/openshift-console-topology-skupper-2.png[]
 
-* Service Interconnect also comes with its own console, which you can access by opening a new browser tab and navigating to {skupper_console_aws}. At the moment there is not a lot to see as we have only installed one side of the service network.
+* Service Interconnect also comes with its own console, which you can access by opening a new browser tab and navigating to {skupper_console_aws}[Service Interconnect, window="skupper"]. At the moment there is not a lot to see as we have only installed one side of the service network.
 +
 image::skupper/skupper-console.png[]
 

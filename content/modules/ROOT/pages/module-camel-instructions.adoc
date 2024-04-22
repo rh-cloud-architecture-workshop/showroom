@@ -165,17 +165,20 @@ image::devspace-auth-access.png[width=70%]
 
 * The OpenShift Dev Spaces environment has access to a plethora of command line tools, including *oc*, the OpenShift  command line interface. Through OpenShift Dev Spaces you are automatically logged in into the OpenShift cluster. You can verify this with the command *oc whoami*.
 +
-[source,bash,role=execute,subs="attributes"]
+
+[source,bash,role=execute, subs="attributes"]
 ----
 oc whoami
 ----
 +
+
 .Output
-[source,textinfo,subs="attributes"]
+[source, subs="attributes"]
 ----
 {user_name}
 ----
 +
+
 [IMPORTANT]
 ====
 If the the output of the `oc whoami` command does not correspond to your username ({user_name}), you need to logout and login again with the correct username.

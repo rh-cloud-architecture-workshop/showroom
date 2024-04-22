@@ -24,11 +24,14 @@
 
 :icons: font 
 
+:sectnums:
+
+
 In this module you discover how to build a service network to connect disparate services across different environments using Red Hat Service Interconnect.
 
 == Business and Technical Context
 
-As mentioned in the xref:./workshop-intro.adoc[introduction module] of the workshop, Globex went through a first modernization phase for their retail web application, moving from a legacy monolith to a containerized application. The Globex retail application runs on OpenShift in the public cloud.
+As mentioned in the xref:./globex-intro.html[introduction module] of the workshop, Globex went through a first modernization phase for their retail web application, moving from a legacy monolith to a containerized application. The Globex retail application runs on OpenShift in the public cloud.
 However, for a number of technical and regulatory reasons, the database of the Globex retail application is still running on-premise in one of Globex's data centers.
 
 The challenge for Globex is now to enable the retail application to connect to the database. For obvious reasons, Globex doesn't want to expose the database over the public internet, so a private, secure link needs to be setup between the OpenShift instance on the public cloud and the Globex data center. 
