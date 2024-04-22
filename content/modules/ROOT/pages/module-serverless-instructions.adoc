@@ -441,7 +441,7 @@ spec:
 ====
 image::serverless/triggers-created.png[width=60%]
 ====
-* Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Topology View^, window="console"], to view the new triggers you created
+* Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Topology View, window="console"], to view the new triggers you created
 +
 .[.underline]#*Click to see a visual*# 
 [%collapsible]
@@ -455,7 +455,7 @@ image::serverless/broker-service-filters.png[]
 
 
 == Test the Review Moderation and Sentiment Analysis
-* You have now completed the setup of all the components needed. Navigate to  {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Topology View^, window="console"] to view the final topology.
+* You have now completed the setup of all the components needed. Navigate to  {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Topology View, window="console"] to view the final topology.
 
 image::serverless/serverless-namespace-final-toplogy.png[]
 
@@ -511,7 +511,7 @@ image::serverless/amqstreams-globex-reviews-topic-detail.png[]
 image::serverless/amqstreams-globex-reviews-headers.png[]
 ** *ce_id: 1* -  This is a unique id for each message. 
 ** *ce_source: submit-review* and *ce_type: submit-review-event* - These are the primary values which are used by the Knative triggers to route the message to the right Knative service.
-* Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Topology View^, window="console"], to view the corresponding mapping in the Knative Broker and Triggers
+* Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Topology View, window="console"], to view the corresponding mapping in the Knative Broker and Triggers
 ** Click on the blue link (highlighted in blue below) pointing to `aiml-moderate-reviews` service. This link represents the `moderate-reviews-trigger`. 
 ** The right-hand panel shows the trigger's *source* = _submit-review_ and *type*	= _submit-review-event_. 
 ** You will note that this matches the CloudEvents headers in the Kafka message that you viewed in AMQ Streams Console browser. 

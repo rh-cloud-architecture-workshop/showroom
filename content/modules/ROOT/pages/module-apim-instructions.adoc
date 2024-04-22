@@ -69,7 +69,7 @@ If you already have OpenShift Dev Spaces browser tab accessible, you can directl
 * Ensure you are logged in to OpenShift as *{user_name}* 
 
 === Instructions
-* In a browser window, navigate to the browser tab pointing to the Developer perspective of the OpenShift cluster. If you don't have a browser tab open on the console, click on {openshift_cluster_console}[OpenShift Console^, window="console"] to launch the console. If needed login with your username and password ({user_name}/{user_password}).
+* In a browser window, navigate to the browser tab pointing to the Developer perspective of the OpenShift cluster. If you don't have a browser tab open on the console, click on {openshift_cluster_console}[OpenShift Console, window="console"] to launch the console. If needed login with your username and password ({user_name}/{user_password}).
 
 * On the top menu of the console, click on the image:openshift-application-menu.png[] icon, and in the drop-down box, select *Red Hat OpenShift Dev Spaces*.
 +
@@ -508,7 +508,7 @@ privateBaseURL: "http://globex-mobile-gateway.globex-apim-{user_name}.svc.cluste
 [%collapsible]
 ====
 
-* Navigate to the `globex-apim-{user_name}` namespace on the OpenShift console by clicking here {openshift_cluster_console}/topology/ns/globex-apim-{user_name}[APIM module on OpenShift^] and login with ({user_name}/{user_password}).
+* Navigate to the `globex-apim-{user_name}` namespace on the OpenShift console by clicking here {openshift_cluster_console}/topology/ns/globex-apim-{user_name}[APIM module on OpenShift, window="console"] and login with ({user_name}/{user_password}).
 * In the *Find by name* filter enter the value `mobile-gateway`. The `globex-mobile-gateway` deployment is highlighted. Clicking on this deployment opens the context menu for this deployment
 +
 .Locate globex-mobile-gateway deployment
@@ -653,7 +653,7 @@ developeraccount.capabilities.3scale.net/mobile-developeraccount created
 
 ==== Verify creation of developer account
 
-* In a browser window, navigate to the browser tab pointing to the Developer perspective of the OpenShift cluster. If you don't have a browser tab open on the console, click on {openshift_cluster_console}[OpenShift Console^, window="console"] to launch the console. If needed login with your username and password ({user_name}/{user_password}).
+* In a browser window, navigate to the browser tab pointing to the Developer perspective of the OpenShift cluster. If you don't have a browser tab open on the console, click on {openshift_cluster_console}[OpenShift Console, window="console"] to launch the console. If needed login with your username and password ({user_name}/{user_password}).
 * From *Administrator* view, within in the *globex-apim-{user_name}* namespace, navigate to *Operators > Installed Operators*. Choose *Red Hat Integration - 3scale*. 
 * Click on *Developer Account* tab and choose *Current namespace only* options. 
 * You will see the DeveloperAccount with Status `Condition: Waiting`
@@ -732,7 +732,7 @@ You can also view these objects on OpenShift console as follows
 .[.underline]#*[Click to View] View on 3scale Operator page in OpenShift console*#
 [%collapsible]
 ====
-* You can now see that the Backend, Product, ActiveDoc and Users from the 3scale OpenShift operators on {openshift_cluster_console}/k8s/ns/globex-apim-{user_name}/clusterserviceversions[Installed Operators^, window="console"]
+* You can now see that the Backend, Product, ActiveDoc and Users from the 3scale OpenShift operators on {openshift_cluster_console}/k8s/ns/globex-apim-{user_name}/clusterserviceversions[Installed Operators, window="console"]
 ** Navigate to *Red Hat Integration - 3scale -> All Instances* and click on *Current namespace only*. You will see that the Product and Backend have been created.
 +
 .View Product, Backend, ActiveDoc and Users 

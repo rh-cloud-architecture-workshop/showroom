@@ -52,7 +52,7 @@ Let's start with deploying the Debezium Connector. With AMQ Streams, a Kafka Con
 
 To deploy the connector, you are going to use OpenShift Dev Spaces. OpenShift Dev Spaces uses Kubernetes and containers to provide a consistent, secure, and zero-configuration development environment, accessible from a browser window.
 
-* In a browser window, navigate to the browser tab pointing to the Developer perspective of the OpenShift cluster. If you don't have a browser tab open on the console, navigate to {openshift_cluster_console}[OpenShift Console^, window="console"] to launch the console. If needed login with your username and password ({user_name}/{user_password}).
+* In a browser window, navigate to the browser tab pointing to the Developer perspective of the OpenShift cluster. If you don't have a browser tab open on the console, navigate to {openshift_cluster_console}[OpenShift Console, window="console"] to launch the console. If needed login with your username and password ({user_name}/{user_password}).
 
 * On the top menu of the console, click on the image:openshift-application-menu.png[] icon, and in the drop-down box, select *Red Hat OpenShift Dev Spaces*.
 +
@@ -223,7 +223,7 @@ Go back to the Kafdrop homepage by clicking on the *Kafdrop* link on the top of 
 image::cdc/kafdrop-debezium-topic-orders-2.png[]
 
 * If you want to simulate a larger number of orders, you can use the _Order simulator_ application deployed in the _globex-{user_name}_ namespace on OpenShift.
-** In the browser window, open the tab pointing to the OpenShift console. If you don't have a tab open to the console, open a new tab and navigate to {openshift_cluster_console}. If needed login with your username and password ({user_name}/{user_password}).
+** In the browser window, open the tab pointing to the OpenShift console. If you don't have a tab open to the console, open a new tab and navigate to {openshift_cluster_console}[OpenShift console, window="console"]. If needed login with your username and password ({user_name}/{user_password}).
 ** Select the *Topology* view in the Developer perspective. If needed, switch to the *globex-{user_name}* namespace by selecting the namespace from the namespace selection drop-down menu in the top left.
 +
 image::cdc/openshift-console-developer-select-namespace.png[]
@@ -489,7 +489,7 @@ With the Debezium connector and the two Camel K integrations deployed, you have 
 
 The cashback service has a rudimentary UI that allows to verify the generated cashbacks.
 
-* In the browser window, open the tab pointing to the OpenShift console. If you don’t have a tab open to the console, open a new tab and navigate to {openshift_cluster_console}. If needed login with your username and password ({user_name}/{user_password}). Select the *Topology* view in the Developer perspective and make sure you are on the *globex-cdc-{user_name}* namespace.
+* In the browser window, open the tab pointing to the OpenShift console. If you don’t have a tab open to the console, open a new tab and navigate to {openshift_cluster_console}[OpenShift console, window="console"]. If needed login with your username and password ({user_name}/{user_password}). Select the *Topology* view in the Developer perspective and make sure you are on the *globex-cdc-{user_name}* namespace.
 
 * In the Topology view, locate the Cashback service deployment, and click on the *Open URL* symbol next to it.
 +

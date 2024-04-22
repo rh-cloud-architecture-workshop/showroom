@@ -98,7 +98,7 @@ Building a Service network between the two namespaces of the OpenShift cluster t
 
 The easiest way to install Red Hat Service Interconnect in a namespace on OpenShift is through the `skupper` CLI (_Skupper_ is the name of the open-source upstream project of Red Hat Service Interconnect). In this lab, the `skupper` cli is available through the OpenShift Command Line terminal, so that you don't have to install it locally on your workstation.
 
-* Open the browser window pointing to the OpenShift Console at {openshift_cluster_console}. Click on the image:skupper/openshift-command-line-terminal-icon.png[] icon on the top menu to open a terminal window. +
+* Open the browser window pointing to the OpenShift Console at {openshift_cluster_console}[OpenShift console, window="console"]. Click on the image:skupper/openshift-command-line-terminal-icon.png[] icon on the top menu to open a terminal window. +
 Make sure to select the correct namespace from the drop-down box (*globex-skupper-{user_name}*)
 +
 image::skupper/openshift-command-line-terminal.png[]
