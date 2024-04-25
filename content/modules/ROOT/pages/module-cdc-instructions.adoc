@@ -145,21 +145,25 @@ kafkaconnector.kafka.strimzi.io/globex created
 
 * After a few seconds, the Debezium connector will start monitoring the PostgreSQL database for changes in the *customer*, *orders* and *line_item* tables, and will produce a change event to the corresponding Kafka topic for each change detected.
 
-* One way to verify that the connector is working as expected is to check the Kafka topics that receive the change events. 
-If you still have a browser tab pointing to Kafdrop, open the tab. If not, open a new browser tab and navigate to {kafdrop_url}. +
-At the bottom of the topic list in the Kafdrop overview page, you will see the three topics that will receive the change events.
+* One way to verify that the connector is working as expected is to check the Kafka topics that receive the change events.  +
+If you still have a browser tab pointing to AMQ Streams Console, open the tab. If not, open a new browser tab and navigate to https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. 
+** This redirects you to the *AMQ streams console* login page. 
+** For the purpose of this workshop, choose *Sign in with Anonymous Session* to access the console if you are not already signed in.
+* Navigate to *Kafka Clusters -> kafka -> Topics*. 
 +
-image::cdc/kafdrop-debezium-topics.png[]
+Filter by *Name* `globex.updates`. You will see the three topics that will receive the change events.
++
+image::cdc/amqconsole-debezium-topics.png[]
 
-* The Globex application database contains records for a couple of hundred customers in the *customer* table, so we can expect a change event for each of these records. In the Kafdrop UI, click on the *globex.updates.public.customer* topic. This opens a view with details on the topic. Notice that the size of the topic is _200_, which corresponds to the number of records in the *customer* table.
+* The Globex application database contains records for a couple of hundred customers in the *customer* table, so we can expect a change event for each of these records. In the AMQ Streams Console's topics page, click on the *globex.updates.public.customer* topic. This opens a view with details on the topic. Notice that the size of the topic is _200_, which corresponds to the number of records in the *customer* table.
++
+image::cdc/amqconsole-debezium-topic-customers.png[]
 +
 image::cdc/kafdrop-debezium-topic-customers.png[]
 
-* Click on the link representing the only partition of the topic to see the contents of the partition.
+* This opens a view to the individual messages in the topic. You can expand every message to inspect its content. In this case, the body of each message consists of a Debezium change event in JSON format.
 +
-image::cdc/kafdrop-debezium-topic-customers-partition.png[]
-+
-This opens a view to the individual messages in the topic. You can expand every message to inspect its content. In this case, the body of each message consists of a Debezium change event in JSON format.
+image::cdc/amqconsoles-debezium-topic-customers-1.png[]
 +
 image::cdc/kafdrop-debezium-topic-customers-1.png[]
 
@@ -168,7 +172,7 @@ image::cdc/kafdrop-debezium-topic-customers-1.png[]
 ** *after*: the state of the record after the transaction. This is a JSON representation of the current state of the record in the database (every column in the table becomes a JSON field).
 ** *op*: The operation that leads to the change event. Possible values are '*c*' for _create_, '*u*' for _update_, '*d*' for _delete_ and '*r*' for _read_. As the records in the *customer* already existed when the Debezium connector was deployed, the operation is '*r*'.
 
-* The Globex application database does not contain any order information at the moment, so the *globex.updates.public.orders* and *globex.updates.public.line_item* topics are empty. You can verify this through the Kafdrop UI. +
+* The Globex application database does not contain any order information at the moment, so the *globex.updates.public.orders* and *globex.updates.public.line_item* topics are empty. You can verify this through the AMQ streams console. +
 In the next section of the workshop, you will create some orders, and verify that the corresponding change events are picked up by Debezium.  
 
 == Create an Order in the Globex Retail Application
@@ -209,21 +213,25 @@ image::cdc/globex-checkout-3.png[]
 image::cdc/globex-order-placed.png[]
 
 * At this point, an order has been added in the Globex application database. The records added to the *orders* and *line_item* tables have been detected by Debezium and produced as change events to Kafka topics. +
-We can easily check this with Kafdrop.
+We can easily check this with AMQ streams console.
 
-* Open the browser tab pointing to the Kafdrop UI. If you did close the tab, open a new tab and navigate to {kafdrop_url}. +
+* Open the browser tab pointing to the AMQ streams console UI. If you did close the tab, navigate to navigate to https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. +
 Open the *globex.updates.public.orders* topic, and verify that the topic contains 1 message.
++
+image::cdc/amq-console-debezium-topic-orders.png[]
 +
 image::cdc/kafdrop-debezium-topic-orders.png[]
 +
 Drill down into the partition and expand the contents of the message. You should see a change event structure very similar to the ones for customers. Notice however that the operation is '*c*', for _create_. This is expected as the change event corresponds to a new record in the *order* table.
 +
-Go back to the Kafdrop homepage by clicking on the *Kafdrop* link on the top of the page, and this time open the *globex.updates.public.line_item* topic. You should see one message per item in the order you created previously.
+Go back to the AMQ Streams Console homepage by clicking on the https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"] page, and this time open the *globex.updates.public.line_item* topic. You should see one message per item in the order you created previously.
++
+image::cdc/amqconsole-debezium-topic-orders-2.png[]
 +
 image::cdc/kafdrop-debezium-topic-orders-2.png[]
 
 * If you want to simulate a larger number of orders, you can use the _Order simulator_ application deployed in the _globex-{user_name}_ namespace on OpenShift.
-** In the browser window, open the tab pointing to the OpenShift console. If you don't have a tab open to the console, open a new tab and navigate to {openshift_cluster_console}[OpenShift console, window="console"]. If needed login with your username and password ({user_name}/{user_password}).
+** In the browser window, open the tab pointing to the OpenShift console. If you don't have a tab open to the console, click navigate to {openshift_cluster_console}[OpenShift console, window="console"]. If needed login with your username and password ({user_name}/{user_password}).
 ** Select the *Topology* view in the Developer perspective. If needed, switch to the *globex-{user_name}* namespace by selecting the namespace from the namespace selection drop-down menu in the top left.
 +
 image::cdc/openshift-console-developer-select-namespace.png[]
@@ -235,7 +243,7 @@ Click on the *POST* link, and then on the *Try it out* link on the right. From t
 +
 image::cdc/order-simulator-random-customer.png[]
 ** Click *Execute* to execute the REST call to the simulator.
-** Check in Kafdrop that new messages are produced to the *globex.updates.public.orders* and *globex.updates.public.line_item* topics.
+** Check in https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"] that new messages are produced to the *globex.updates.public.orders* and *globex.updates.public.line_item* topics.
 
 == Streaming processing of events with Kafka Streams
 
@@ -310,15 +318,19 @@ In case you want to see how this looks like in code, click on the link below:
 ----
 ====
 
-You can see the result of the streaming processing by inspecting the contents of  the *globex.order-aggregated* topic in Kafdrop.
+You can see the result of the streaming processing by inspecting the contents of  the *globex.order-aggregated* topic in https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"].
 
-* Open the browser tab pointing to the Kafdrop UI. If you did close the tab, open a new tab and navigate to {kafdrop_url}. 
+* Open the browser tab pointing to the AMQ Streams console. If you did close the tab, navigate to https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. 
 
 * Open the *globex.order-aggregated* topic, and verify that the topic contains several messages (the exact number depends on how many orders were created in the previous paragraph).
++
+image::cdc/amqconsole-order-aggregated-topic.png[]
 +
 image::cdc/kafdrop-order-aggregated-topic.png[]
 
 * Drill down into the partition and expand the contents of a message. You should see a JSON structure which contains the order ID, the customer ID, the order creation date and the total value of the order.
++
+image::cdc/amqconsole-order-aggregated-topic-2.png[]
 +
 image::cdc/kafdrop-order-aggregated-topic-2.png[]
 
@@ -489,7 +501,7 @@ With the Debezium connector and the two Camel K integrations deployed, you have 
 
 The cashback service has a rudimentary UI that allows to verify the generated cashbacks.
 
-* In the browser window, open the tab pointing to the OpenShift console. If you don’t have a tab open to the console, open a new tab and navigate to {openshift_cluster_console}[OpenShift console, window="console"]. If needed login with your username and password ({user_name}/{user_password}). Select the *Topology* view in the Developer perspective and make sure you are on the *globex-cdc-{user_name}* namespace.
+* In the browser window, open the tab pointing to the OpenShift console. If you don’t have a tab open to the console, click to navigate to {openshift_cluster_console}[OpenShift console, window="console"]. If needed login with your username and password ({user_name}/{user_password}). Select the *Topology* view in the Developer perspective and make sure you are on the *globex-cdc-{user_name}* namespace.
 
 * In the Topology view, locate the Cashback service deployment, and click on the *Open URL* symbol next to it.
 +
@@ -506,8 +518,8 @@ image::cdc/cashback-service-ui-2.png[]
 
 * At this point, you can demonstrate the end-to-end flow starting from creating an order in the Globex web application.
 ** Create an order in the Globex application.
-** Verify in Kafdrop that the order and line items are picked up by the Debezium connector.
-** Still in Kafdrop, verify that an aggregated order event is created by the Kafka Streams application.
+** Verify in AMQ Streams console that the order and line items are picked up by the Debezium connector.
+** Still in AMQ Streams console, verify that an aggregated order event is created by the Kafka Streams application.
 ** In the logs of the Camel K order connector, check that the aggregated order is sent to the Cashback service.
 ** In the Cashback service UI, locate the customer you created the order for, and check that it appears in the Cashback list.  
 
