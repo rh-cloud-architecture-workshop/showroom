@@ -1,4 +1,5 @@
 = Event driven applications with Serverless Knative Eventing - Introduction
+:imagesdir: ../assets/images
 
 ++++
 <!-- Google tag (gtag.js) -->
@@ -70,3 +71,4 @@ image::serverless/serverless-architecture-diagram.png[]
 
 In the next chapter, you will be guided through the implementation and deployment of the solution. Since this solution involves way more than what can be achieved during a workshop, a number of components are already in place. And you will focus on a few key activities which will give you a good understanding of building an event-driven application.
 
+Proceed to the xref:./module-serverless-instructions.adoc[instructions] for this module.

@@ -1,5 +1,5 @@
 = Building a multi-channel support service for Globex customers - Intro
-
+:imagesdir: ../assets/images
 :icons: font 
 
 ++++
@@ -144,3 +144,10 @@ NOTE: You will use S3 storage in this learning module as your core capability, f
 OpenShift Data Foundation is a data management solution that provides higher level data services and persistent storage for Red Hat OpenShift. It provides File, Block and Object Storage, with builtin Data Protection and Disaster Recovery.
 
 Applications can function and interact with data in a simplified, consistent and scalable manner.
+
+
+== Multi-channel Support Service Implementation
+
+In the next chapter, you will be guided through the implementation and deployment of the Multi-channel Support Service service. Of course this entails way more than can be achieved during a workshop, so instead most components are already in place, and you will focus on a couple of key activities to deploy and run the solution.
+
+Proceed to the xref:./module-camel-instructions.adoc[instructions] for this module.

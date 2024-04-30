@@ -1,4 +1,5 @@
 = Building a multi-channel support service for Globex customers - Instructions
+:imagesdir: ../assets/images
 
 ++++
 <!-- Google tag (gtag.js) -->
@@ -17,6 +18,9 @@
   }
   .doc {    
     max-width: 70rem !important;
+  }
+  .underline {
+    cursor: pointer;
   }
 </style>
 ++++
@@ -64,7 +68,21 @@ You'll notice the architecture above contains 4 Camel applications.
 
 {empty} +
 
+
 == Prepare your Development environment
+=== Ensure lab readiness
+
+[IMPORTANT]
+=====
+Before your proceed it is critical that your lab environment is completely ready before executing the lab instructions.
+=====
+
+* Access the *Workshop Deployer* browser tab and check if the *Launch new channels using Contract-First approach* has turned green. This indicates that the module has been fully deployed and is ready to use. 
+
+.Module Readiness on Workshop Deployer
+image::camel/camel-workshop-deployer.png[width=40%]
+
+=== Setup OpenShift Dev Spaces 
 
 [TIP]
 ====
@@ -82,7 +100,7 @@ To implement the integrations you are going to use OpenShift Dev Spaces. Dev Spa
 
 OpenShift Dev Spaces uses Kubernetes and containers to provide a consistent, secure, and zero-configuration development environment, accessible from a browser window.
 
-* In a browser window, navigate to the browser tab pointing to the Developer perspective of the OpenShift cluster. If you don't have a browser tab open on the console, navigate to {openshift_cluster_console}[OpenShift Console^, window=_console]. If needed login with your username and password ({user_name}/{user_password}).
+* In a browser window, navigate to the browser tab pointing to the Developer perspective of the OpenShift cluster. If you don't have a browser tab open on the console, navigate to {openshift_cluster_console}[OpenShift Console, window=_console]. If needed login with your username and password ({user_name}/{user_password}).
 
 * On the top menu of the console, click on the image:openshift-application-menu.png[] icon, and in the drop-down box, select *Red Hat OpenShift Dev Spaces*.
 +
@@ -148,16 +166,19 @@ image::devspace-auth-access.png[width=70%]
 * The OpenShift Dev Spaces environment has access to a plethora of command line tools, including *oc*, the OpenShift  command line interface. Through OpenShift Dev Spaces you are automatically logged in into the OpenShift cluster. You can verify this with the command *oc whoami*.
 +
 
-[source,bash,role=execute]
+[source,bash,role=execute, subs="attributes"]
 ----
 oc whoami
 ----
 +
+
 .Output
+[source, subs="attributes"]
 ----
 {user_name}
 ----
 +
+
 [IMPORTANT]
 ====
 If the the output of the `oc whoami` command does not correspond to your username ({user_name}), you need to logout and login again with the correct username.
@@ -789,7 +810,7 @@ Note: This script executes prewritten code which has the same logic that you hav
 +
 {empty} +
 
-. Observe your Topology view in OpenShift. You can open the console by clicking link:{topologyviewurl}[*this _Topology_ view link*, window="_blank"].
+. Observe your Topology view in OpenShift. You can open the console by clicking link:{topologyviewurl}[*this _Topology_ view link*, window="console"].
 +
 You'll notice that running your code in DEV mode triggers _Camel K_'s operator to deploy a new pod in your user namespace.
 +
@@ -858,7 +879,7 @@ Note: You will not be able to view the message sent from Matrix's Element chat i
 {empty} +
 
 IMPORTANT: When you're done, press `Ctrl`+`C` to stop the _Camel K_ `dev` instance running in the Dev Spaces's terminal. +
-When you do so, you'll notice the Matrix pod shutdowns and is no longer visible from your link:{topologyviewurl}[*_Topology_ view*, window="_blank"].
+When you do so, you'll notice the Matrix pod shutdowns and is no longer visible from your link:{topologyviewurl}[*_Topology_ view*, window="console"].
 
 {empty} +
 
@@ -1176,6 +1197,7 @@ NOTE: You can ignore any warning message stating "Unable to verify existence of 
 kamel log matrix
 ----
 
++
 [WARNING]
 ====
 If you encounter errors or unexpected results, you might have missed a step following the instructions or done some other human error. +
@@ -1222,7 +1244,7 @@ You should see the agent's message sent from Matrix appear in the Rocket.Chat ch
 
 Well done, you've completed the full integration, both ways, between Rocket.Chat and Matrix.
 
-In contrast with running in DEV mode, the `deploy.sh` command made the _Camel K_ operator to fully deploy your code in an OpenShift pod named _matrix_, which you can see running from the link:{topologyviewurl}[*_Topology_ view*, window="_blank"].
+In contrast with running in DEV mode, the `deploy.sh` command made the _Camel K_ operator to fully deploy your code in an OpenShift pod named _matrix_, which you can see running from the link:{topologyviewurl}[*_Topology_ view*, window="console"].
 
 You can also use the `kamel` client from your terminal to obtain information about your deployed Camel K instances:
 
@@ -1600,6 +1622,7 @@ Integration "globex-support" created
 kamel log globex-support
 ----
 
++
 [WARNING]
 ====
 If you encounter errors or unexpected results, you might have missed a step following the instructions or done some other human error. +
@@ -1620,7 +1643,7 @@ NOTE: The Globex Web application has been pre-deployed in your user namespace so
 +
 You can open the Globex Web application following link:{globexweburl}[*this direct link*, window="_blank"].
 +
-Or, by finding it in your link:{topologyviewurl}[*_Topology_ view*, window="_blank"].
+Or, by finding it in your link:{topologyviewurl}[*_Topology_ view*, window="console"].
 +
 ++++
 <img src="./_images/camel/globex-open-portal.jpg" style="width:40%;border-style: none;">
@@ -1699,7 +1722,7 @@ You should see the agent's message sent from Matrix appear in your chat session 
 
 Well done, you have successfully integrated the Globex Web application into the _Multichannel Platform_.
 
-The `deploy.sh` command made the _Camel K_ operator fully deploy your code in an OpenShift pod named _globex-support_, which you can see running from the link:{topologyviewurl}[*_Topology_ view*, window="_blank"].
+The `deploy.sh` command made the _Camel K_ operator fully deploy your code in an OpenShift pod named _globex-support_, which you can see running from the link:{topologyviewurl}[*_Topology_ view*, window="console"].
 
 You can also use the `kamel` client from your terminal to obtain information about your deployed Camel K instances:
 
@@ -2171,7 +2194,7 @@ NOTE: Leaving the room should kick-off the transcript process.
 
 Well done, you have successfully created a Camel application to store and share transcripts for support sessions, compliant with government regulations, attached to the _Multichannel Platform_.
 
-The `deploy.sh` command made the _Camel K_ operator run your code in an OpenShift pod named _transcript_, which you can see in your environment, if you open your link:{topologyviewurl}[*_Topology_ view*, window="_blank"].
+The `deploy.sh` command made the _Camel K_ operator run your code in an OpenShift pod named _transcript_, which you can see in your environment, if you open your link:{topologyviewurl}[*_Topology_ view*, window="console"].
 
 You can also use the `kamel` client from your terminal to obtain information about all of your deployed Camel K instances:
 

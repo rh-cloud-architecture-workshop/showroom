@@ -1,4 +1,5 @@
 = Build new functionality with Change Data Capture - Introduction
+:imagesdir: ../assets/images
 
 ++++
 <!-- Google tag (gtag.js) -->
@@ -25,7 +26,7 @@ In this module you discover how you can leverage Change Data Capture to build ou
 
 == Business context
 
-As mentioned in the xref:./workshop-intro.adoc[introduction module] of the workshop, Globex went through a first modernization phase for their retail web application, moving from a legacy monolith to a containerized application.
+As mentioned in the xref:./globex-intro.adoc[introduction module] of the workshop, Globex went through a first modernization phase for their retail web application, moving from a legacy monolith to a containerized application.
 Now the business would like to introduce new functionality: they want to introduce a cashback program, rewarding users buying products through the web site. For every purchase, the user would get a small percentage of the total order value as a cashback that they can use on follow-up orders. 
 
 == Technical considerations

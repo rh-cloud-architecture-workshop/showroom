@@ -208,11 +208,11 @@ If you want, you change the number of user activities that will be generated (th
 +
 image::intro/swagger-ui-activity-tracking-simulator-2.png[]
 
-* In your browser window, navigate to the tab with the Kafdrop UI, and notice how messages are produced in the *globex.tracking* topic. After a couple of seconds you should also see new messages in the *globex.recommendation-product-score-aggregated-changelog* topic, reflecting the newly calculated list of featured products. +
+* In your browser window, navigate to the tab with the *AMQ streams console*, and notice how messages are produced in the *globex.tracking* topic. After a couple of seconds you should also see new messages in the *globex.recommendation-product-score-aggregated-changelog* topic, reflecting the newly calculated list of featured products. +
 Go the browser tab with the Globex we UI, refresh the home page, and notice how the list of featured products has changed, as it is being continuously recalculated.
 
 * This concludes the walkthrough of the Globex web application for now. The application provides more features, which you will discover while going through some of the modules of this workshop.
 
-Please close all but this *Instructions browser tab* to avoid proliferation of tabs which can make working on other modules difficult. 
+Please close all but this Workshop Deployer tab to avoid proliferation of tabs which can make working on other modules difficult. 
 
 Proceed to the https://workshop-deployer.{openshift_subdomain}[Workshop Deployer, window="workshopdeployer"] to choose your next module.

@@ -1,3 +1,4 @@
+:imagesdir: ../assets/images
 = Building a secure service network with Red Hat Service Interconnect - Intro
 
 ++++
@@ -23,14 +24,20 @@
 
 :icons: font 
 
+:sectnums:
+
+
 In this module you discover how to build a service network to connect disparate services across different environments using Red Hat Service Interconnect.
 
 == Business and Technical Context
 
-As mentioned in the xref:./workshop-intro.adoc[introduction module] of the workshop, Globex went through a first modernization phase for their retail web application, moving from a legacy monolith to a containerized application. The Globex retail application runs on OpenShift in the public cloud.
+As mentioned in the xref:./globex-intro.adoc[introduction module] of the workshop, Globex went through a first modernization phase for their retail web application, moving from a legacy monolith to a containerized application. The Globex retail application runs on OpenShift in the public cloud.
 However, for a number of technical and regulatory reasons, the database of the Globex retail application is still running on-premise in one of Globex's data centers.
+
 The challenge for Globex is now to enable the retail application to connect to the database. For obvious reasons, Globex doesn't want to expose the database over the public internet, so a private, secure link needs to be setup between the OpenShift instance on the public cloud and the Globex data center. 
-This can be accomplished with a VPN between the public cloud and the Globex data center. However a VPN can be hard to set up, and requires deep networking expertise. Developers also need to request the network admins and go through a time taking approval process for the VPNs to be setup. Red Hat Service Interconnect on the other hand creates a dedicated layer 7 service network and is a lot easier to set up. It allows application developers to establish secure interconnection with other services and applications in different environments without relying on network specialists. With Service Interconnect developers can now create secure virtual application networks without the cumbersome overhead, complexity and delays of traditional connectivity solutions.
+This can be accomplished with a VPN between the public cloud and the Globex data center. However a VPN can be hard to set up, and requires deep networking expertise. Developers also need to request the network admins and go through a time taking approval process for the VPNs to be setup. 
+
+Red Hat Service Interconnect on the other hand creates a dedicated layer 7 service network and is a lot easier to set up. It allows application developers to establish secure interconnection with other services and applications in different environments without relying on network specialists. With Service Interconnect developers can now create secure virtual application networks without the cumbersome overhead, complexity and delays of traditional connectivity solutions.
 
 == What is Red Hat Service Interconnect?
 
