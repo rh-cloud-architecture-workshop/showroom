@@ -354,7 +354,7 @@ image::apim/sr-spec-setting.png[]
 .Service Registry: *Globex Mobile API Gateway* artifact has been uploaded
 image::apim/sr-uploaded.png[]
 
-* You can share this OpenAPI schema with others via this OpenAPI Schema's endpoint : link:https://service-registry-apim-user2.apps.cluster-6dpq4.6dpq4.sandbox1663.opentlc.com/apis/registry/v2/groups/globex/artifacts/mobileapi[window="service_registry_url"]
+* You can share this OpenAPI schema with others via this OpenAPI Schema's endpoint : link:{service_registry_url}/apis/registry/v2/groups/globex/artifacts/mobileapi[window="service_registry_url"]
 * You can now close the Service Registry's browser tab.
 * This schema can be used for generating Quarkus code for both Clients and Server-side using maven plugins. (Note that the https://github.com/rh-cloud-architecture-workshop/globex-mobile[Globex Mobile App^, window="code-samples"] is NodeJS + Angular in this module)
 
