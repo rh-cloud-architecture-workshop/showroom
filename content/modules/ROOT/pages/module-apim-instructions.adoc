@@ -59,11 +59,6 @@ image::apim/apim-workshop-deployer.png[width=40%]
 === Setup OpenShift Dev Spaces 
 You will use *OpenShift Dev Spaces* for a number of activities. OpenShift Dev Spaces uses Kubernetes and containers to provide a consistent, secure, and zero-configuration development environment, accessible from a browser window.
 
-[NOTE]
-=====
-If you already have OpenShift Dev Spaces browser tab accessible, you can directly
-=====
-
 === Section Goals
 * Access OpenShift Dev Spaces as *{user_name}*
 * Ensure you are logged in to OpenShift as *{user_name}* 
@@ -381,7 +376,7 @@ In this section you will manage and secure the Mobile Gateway API endpoints so t
 
 === Section Goals 
 
-* setup Keycloak to provide single sign-on (SSO) capabilities for users signing into Mobile App 
+* setup Red Hat build of Keycloak to provide single sign-on (SSO) capabilities for users signing into Mobile App 
 * setup Keycloak to secure Mobile Gateway API endpoints using OpenID Connect
 * manage Mobile Gateway APIs with Red Hat 3scale API Management
 * access Red Hat 3scale API Management's Developer Portal as a Mobile Developer to sign up for access of API
