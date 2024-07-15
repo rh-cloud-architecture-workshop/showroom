@@ -183,7 +183,7 @@ In the next section of the workshop, you will create some orders, and verify tha
 +
 image::cdc/globex-login.png[]
 
-* The Globex web application uses OpenId Connect powered by Red Hat Single Sign-On (SSO) to authenticate users. After clicking the *Login* link you are redirected to the login page of the SSO server, where you need to enter your credentials. +
+* The Globex web application uses OpenId Connect powered by Red Hat build of Keycloak to authenticate users. After clicking the *Login* link you are redirected to the login page of the SSO server, where you need to enter your credentials. +
 The SSO server is set up with a number of users corresponding to customers in the Globex application. Login with one of the following users: *asilva*, *mmiller*, *asanders*, *cjones* or *pwong*. The password for all the users is *{globex_user_password}*.
 +
 image::cdc/globex-login-sso.png[]
