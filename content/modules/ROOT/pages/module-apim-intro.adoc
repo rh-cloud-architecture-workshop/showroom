@@ -70,7 +70,7 @@ To make this a reality a number of components were brought together to create th
 
 === Red Hat SSO
 
-Globex uses Red Hat SSO to provide Single Sign-On (SSO) capabilities to users, web apps and APIs. In this case, OpenID Connect is used to authenticate a user (Globex Web and Mobile users) and also allow secured access to Globex's APIs.
+Globex uses Red Hat build of Keycloak to provide Single Sign-On (SSO) capabilities to users, web apps and APIs. In this case, OpenID Connect is used to authenticate a user (Globex Web and Mobile users) and also allow secured access to Globex's APIs.
 
 .[.underline]#*[Click to know] What is OpenID Connect?*#
 [%collapsible]

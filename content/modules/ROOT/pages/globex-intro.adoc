@@ -34,7 +34,7 @@ Let's first introduce Globex, our fictitious company.
 Globex is a fictitious company, active in different domains, including retail. The company recently started a digital transformation and cloud adoption journey to modernize its IT landscape. 
 As part of this initiative, the development teams adopted new ways of working, and started the modernization of the legacy multi-tier monolithic retail e-commerce web application.
 As part of this modernization, the retail application was redeveloped using a modular approach on top of Quarkus, a modern cloud-ready Java runtime and a separate UI layer built using a state-of-the-art web development framework.
-The security of the application was improved with the introduction of OpenID Connect and Red Hat Single Sign-On (SSO).
+The security of the application was improved with the introduction of OpenID Connect and Red Hat build of Keycloak.
 The application was containerized and re-hosted on OpenShift.
 As part of the modernization effort, the development and operation teams adopted DevOps and GitOps principles for rapid and continuous deployment.
 
