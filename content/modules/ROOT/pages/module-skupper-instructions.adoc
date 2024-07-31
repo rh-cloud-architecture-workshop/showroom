@@ -133,11 +133,11 @@ skupper version
 +
 .Output
 ----
-client version                 1.5.2
+client version                 1.5.3-rh-5
 transport version              not-found
 controller version             not-found
 config-sync version            not-found
-flow-collector version         not-found
+flow-collector version         not-found'
 ----
 
 * Install the Red Hat Service Interconnect resources in the *globex-skupper-{user_name}* namespace:
@@ -151,7 +151,7 @@ skupper init -n globex-skupper-{user_name} --enable-console --enable-flow-collec
 [source,textinfo,subs="attributes"]
 ----
 Waiting for status...
-Skupper is now installed in namespace 'globex-skupper-{user_name}'.  Use 'skupper status' to get more information.
+Skupper is now installed in namespace "globex-skupper-{user_name}".  Use 'skupper status' to get more information.
 ----
 
 * This installs 3 new components in the namespace: *skupper-service-controller*, *skupper-router* and *skupper-prometheus*, as you can see in the Topology view:
@@ -176,7 +176,7 @@ skupper -n globex-skupper-db-{user_name} init
 .Output
 ----
 Waiting for status...
-Skupper is now installed in namespace 'globex-skupper-db-{user_name}'.  Use 'skupper status' to get more information.
+Skupper is now installed in namespace "globex-skupper-db-{user_name}".  Use 'skupper status' to get more information.
 ----
 
 
