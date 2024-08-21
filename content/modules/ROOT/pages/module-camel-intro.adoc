@@ -121,7 +121,7 @@ AMQ Broker is a pure-Java multiprotocol message broker. It's built on an efficie
 
 {empty} +
 
-=== What is Red Hat AMQ Data Grid?
+=== What is Red Hat Data Grid?
 
 NOTE: Data Grid will be your core context caching capability, to keep the keys to chat-rooms, while conversations (between customers and agents) are alive. 
 
