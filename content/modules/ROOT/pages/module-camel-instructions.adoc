@@ -250,7 +250,7 @@ Because event-driven architectures are a-synchronous (no waiting to do), they op
 
 In our use case, we need to propagate Rocket.Chat messages to Matrix, and vice-versa. However, we're dealing here with private interactions between customers and agents, and we need to maintain separate conversations in parallel and prevent interferences between users. In contrast, when a single channel is used for all participants, all messages depart and land in static channels.
 
-Caching allows us to keep the context of a one-to-one conversation between the customer and the agent. The context data will include information about the private chanel in Rocket.Chat and the private channel in Matrix.
+Caching allows us to keep the context of a one-to-one conversation between the customer and the agent. The context data will include information about the private channel in Rocket.Chat and the private channel in Matrix.
 
 {empty} +
 
