@@ -309,7 +309,7 @@ metadata:
 ==== Create Knative source
 * Click on the *(+)* icon found on top of the OpenShift Console to access the *Import YAML* wizard.
 * Copy the following YAML to create a Knative KafkaSource. +
-Note that this KafkaSource reads from the specific four (4) topics that are defined in the YAML below, and refers to the `globex-broker` you created in the previous step.
+Note that this KafkaSource reads from the specific three (3) topics that are defined in the YAML below, and refers to the `globex-broker` you created in the previous step.
 +
 [source,bash,role=execute,subs="attributes"]
 ----
