@@ -110,7 +110,7 @@ The services which will need to be Kafka Clients and Producers, now need to only
 .[.underline]#*[Click to know] What is CloudEvents?*#
 [%collapsible]
 ====
-https://cloudevents.io[CloudEvents, window="others"] is a specification for describing event data in a common way. An event includes context and data about an occurrence. Each occurrence is uniquely identified by the data of the event. Each occurrence is uniquely identified by the data of the event. The headers within a CloudEvents event helps Knative Eventing to route the events to the right destination.
+https://cloudevents.io[CloudEvents, window="others"] is a specification for describing event data in a common way. An event includes context and data about an occurrence. Each occurrence is uniquely identified by its data. The headers within a CloudEvents event helps Knative Eventing to route the events to the right destination.
 ====
 
 
