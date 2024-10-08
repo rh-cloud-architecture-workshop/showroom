@@ -842,10 +842,11 @@ https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}
 image::apim/apim_mobile_sso_weborigin.png[]
 
 === Section Outcome
-* 3scale Backend, Product, ActiveDocs and Users were created
-* Developer Portal was setup for public access without Access Code
-* Created an Application as a Mobile Developer
-* Patched Keycloak Web Origin so that the calls from Globex Mobile App will not cause errors
+[%interactive]
+* [ ] 3scale Backend, Product, ActiveDocs and Users were created
+* [ ] Developer Portal was setup for public access without Access Code
+* [ ] Created an Application as a Mobile Developer
+* [ ] Patched Keycloak Web Origin so that the calls from Globex Mobile App will not cause errors
 
 == Test Mobile Application 
 
@@ -1068,19 +1069,8 @@ activedoc.capabilities.3scale.net/partner-gateway-activedoc created
 
 
 === Setup Partner users
-* Create this Active Doc by running the following command in the Dev Spaces Terminal
-+
-[source,bash,role=execute,subs="attributes"]
-----
-oc apply -f /projects/workshop-devspaces/workshop/module-apim/partners/users/partner-dev-setup.yaml -n globex-apim-{user_name}
-----
-+
-.Output
-----
-secret/partner.secret created
-developeraccount.capabilities.3scale.net/partner-developeraccount created
-developeruser.capabilities.3scale.net/admin.partner created
-developeruser.capabilities.3scale.net/user.partner created
+
+The Partner app developers will also need access to the Developer Portal to signup for the APIs exposed to them. For the purpose of this workshop let us use the inbuilt developer user `John`.
 ----
 
 === Configurations on 3scale admin console
@@ -1100,11 +1090,7 @@ image::apim/partner-promote-apicast.png[]
 
 === Signup for an application as a Partner
 * Navigate to the Developer Portal {globex_developer_portal}[Globex Developer Portal^, window="devportal"]
-* If you are already signed in, clicking on the Exit option on top-right of the page.
-+
-.Logout if already signed in
-image::apim/logout.png[width=80%]
-* Click on *SIGN IN* on top right of the page and login using username and password as *(user.partner/openshift)*
+* If you are not already signed in, login using username and password as *(john/123456)*
 * Navigate to Applications Listing by choosing the *APPLICATIONS* menu on the top of the page.
 
 +
