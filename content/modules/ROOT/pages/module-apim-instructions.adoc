@@ -1071,7 +1071,7 @@ activedoc.capabilities.3scale.net/partner-gateway-activedoc created
 === Setup Partner users
 
 The Partner app developers will also need access to the Developer Portal to signup for the APIs exposed to them. For the purpose of this workshop let us use the inbuilt developer user `John`.
-----
+
 
 === Configurations on 3scale admin console
 
