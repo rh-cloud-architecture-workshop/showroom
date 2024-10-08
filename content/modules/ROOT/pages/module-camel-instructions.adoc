@@ -852,7 +852,7 @@ Leave the browser window open.
 As per the picture below, [1] select the globex-support-{user_name} channel in your Rocket.Chat window, [2] type in a test message, and [3], click the 'Send' button (or press Enter).
 +
 ++++
-<img src="./_images/camel/slack-dev-test.jpg" style="width:80%;border-style: none;">
+<img src="./_images/camel/rocketchat-dev-test.png" style="width:80%;border-style: none;">
 ++++
 
 . On Element...

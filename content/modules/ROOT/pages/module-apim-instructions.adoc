@@ -1214,7 +1214,7 @@ image::apim/partner_web_portal.png[]
 ** It is notable that the partner users are not managed using Keycloak. 
 * After logging in, the entire product list is shown in a paginated format.
 ** Allow a few seconds for the catalogue to load +
-[NOTE] If the page doesn't load immediately, it could be that the Gateway isn't ready yet. Refresh after a short period of time.
+[NOTE] If the catalog list on the page doesn't load immediately, it could be that the Gateway isn't ready yet. Refresh the page after a short period of time.
 * Reload this page by hitting the Browser Refresh a few times which will help us to generate some analytics.
 +
 .User logged in and can view paginated products
