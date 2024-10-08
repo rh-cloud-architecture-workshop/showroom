@@ -280,14 +280,14 @@ image::serverless/sink-sinkb-created.png[]
 
 === Create Knative Broker and Triggers
 
-The next step is to setup the Knative components that can invoke the HTTP endpoint of the services (`aiml-moderate-reviews`, `aiml-sentiment-reviews` & `persist-reviews`) whenever a new event occurs due to a product review being submitted. This is performed by using the components Knative Source, Broker and Triggers. +
+The next step is to set up the Knative components that can invoke the HTTP endpoint of the services (`aiml-moderate-reviews`, `aiml-sentiment-reviews` & `persist-reviews`) whenever a new event occurs due to a product review being submitted. This is performed by using the components Knative Source, Broker and Triggers. +
 
 .[.underline]#*[Click to know]  What is Knative Source, Broker and Triggers?*#
 [%collapsible]
 [INFO]
 ====
-* KafkaSource reads messages in existing Apache Kafka topics, and sends those messages (CloudEvents format) a Knative Broker for Kafka.
-* Brokers provide a discoverable endpoint for incoming event, and use Triggers for event delivery. 
+* KafkaSource reads messages in existing Apache Kafka topics, and sends those messages (CloudEvents format) to a Knative Broker for Kafka.
+* Brokers provide a discoverable endpoint for incoming events, and use Triggers for event delivery. 
 * A Trigger subscribes to events from a specific broker, filters them based on CloudEvents headers, and delivers them to a Knative service's HTTP endpoint.
 ====
 
