@@ -628,58 +628,9 @@ activedoc.capabilities.3scale.net/mobile-gateway-activedoc created
 === Setup Mobile users
 The Mobile developers of Globex will need access to the Developer Portal to signup for the APIs exposed to them. Typically they would access the developer portal and signup for an account which may as needed go through an approval process
 
-For the purpose of this workshop let us run a few commands to setup these users as defined in the file *mobile-dev-setup.yaml*.
+For the purpose of this workshop let us use the inbuilt developer user to simulate Globex mobile application developers.
 
-==== Create Developer Account
-* In the *Dev Spaces Terminal* run the following command to create a new developer account.
-+
-[source,bash,role=execute,subs="attributes"]
-----
-oc apply -f /projects/workshop-devspaces/workshop/module-apim/mobile/users/mobile-dev-setup.yaml -n globex-apim-{user_name}
-----
-
-* You will see the output as 
-+
-.Output of developer users creation
-----
-secret/mobileuser.secret created
-developeraccount.capabilities.3scale.net/mobile-developeraccount created
-----
-
-==== Verify creation of developer account
-
-* In a browser window, navigate to the browser tab pointing to the Developer perspective of the OpenShift cluster. If you don't have a browser tab open on the console, click on {openshift_cluster_console}[OpenShift Console, window="console"] to launch the console. If needed login with your username and password ({user_name}/{user_password}).
-* From *Administrator* view, within in the *globex-apim-{user_name}* namespace, navigate to *Operators > Installed Operators*. Choose *Red Hat Integration - 3scale*. 
-* Click on *Developer Account* tab and choose *Current namespace only* options. 
-* You will see the DeveloperAccount with Status `Condition: Waiting`
-+
-image::apim/mobile-dev-account.png[]
-
-==== Create Users
-
-* In the *Dev Spaces Terminal* run the following command to create users for the developer account you just created.
-+
-[source,bash,role=execute,subs="attributes"]
-----
-oc apply -f /projects/workshop-devspaces/workshop/module-apim/mobile/users/mobile-users-setup.yaml -n globex-apim-{user_name}
-----
-
-* You will see the output as 
-+
-.Output of developer account creation
-----
-developeruser.capabilities.3scale.net/admin.mobile created
-developeruser.capabilities.3scale.net/dev.mobile created
-----
-
-==== Developer account status
-In the OpenShift console, you will notice that the Status of DeveloperAccount is now updated to  `Condition: Ready`
-
-image::apim/mobile-dev-account-ready.png[]
-
-Note: In case of an error, please notify the workshop instructor.
-
-=== View the newly created Backend, Product, ActiveDoc and Users
+=== View the newly created Backend, Product and ActiveDoc
 ==== View on 3scale admin console
 
 * Navigate to the {3scale_tenant}[3scale admin portal^, window="3scale"] and login using your username and password ({user_name}/{user_password}).
@@ -760,7 +711,7 @@ image::apim/apim_feature_visibility.png[]
 
 
 === Sign up as a Mobile Developer
-In this section you will login as a Mobile Developer (as the user you created in the previous section), and signup for API access
+In this section you will login as a Mobile Developer (with the built-in user as described earlier), and signup for API access
 
 * Launch the Globex Developer Portal by clicking on {globex_developer_portal}[Developer Portal^, window="devportal"]
 +
@@ -769,8 +720,8 @@ image::apim/3scale_dev_portal.png[]
 
 * Click on the *SIGN IN* link found on top-right. 
 * Sign in as one of the user you created in the previous section with
-** username: `dev.mobile`
-** password: `openshift`
+** username: `john`
+** password: `123456`
 +
 .Developer Portal
 image::apim/3scale_dev_portal_signin.png[width=70%]
