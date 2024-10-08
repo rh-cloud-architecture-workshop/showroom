@@ -626,9 +626,7 @@ activedoc.capabilities.3scale.net/mobile-gateway-activedoc created
 ----
 
 === Setup Mobile users
-The Mobile developers of Globex will need access to the Developer Portal to signup for the APIs exposed to them. Typically they would access the developer portal and signup for an account which may as needed go through an approval process
-
-For the purpose of this workshop let us use the inbuilt developer user to simulate Globex mobile application developers.
+The Globex mobile application developers will need access to the Developer Portal to signup for the APIs exposed to them. Typically they would access the developer portal and signup for an account which may as needed go through an approval process. For the purpose of this workshop let us use the inbuilt developer user.
 
 === View the newly created Backend, Product and ActiveDoc
 ==== View on 3scale admin console
