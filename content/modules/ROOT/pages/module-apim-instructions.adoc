@@ -859,7 +859,7 @@ As part of this workshop, you will use a mobile-friendly Angular App and not a m
 
 The Mobile Application can be access via this QR Code as well as via browser
 
-* Scan the following QR Code with your mobile phone
+* Scan the following QR Code with your mobile phone and login  using `asilva/openshift`
 +
 
 image::https://cdn.make.cm/make/s/rhqrpng?data%5Bvalue%5D=https%3A%2F%2Fglobex-mobile-globex-apim-{user_name}.{openshift_subdomain}[200,300]
