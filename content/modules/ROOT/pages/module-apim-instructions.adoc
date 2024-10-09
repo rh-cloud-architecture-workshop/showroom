@@ -626,60 +626,9 @@ activedoc.capabilities.3scale.net/mobile-gateway-activedoc created
 ----
 
 === Setup Mobile users
-The Mobile developers of Globex will need access to the Developer Portal to signup for the APIs exposed to them. Typically they would access the developer portal and signup for an account which may as needed go through an approval process
+The Globex mobile application developers will need access to the Developer Portal to signup for the APIs exposed to them. Typically they would access the developer portal and signup for an account which may as needed go through an approval process. For the purpose of this workshop we will use the inbuilt developer user `John`.
 
-For the purpose of this workshop let us run a few commands to setup these users as defined in the file *mobile-dev-setup.yaml*.
-
-==== Create Developer Account
-* In the *Dev Spaces Terminal* run the following command to create a new developer account.
-+
-[source,bash,role=execute,subs="attributes"]
-----
-oc apply -f /projects/workshop-devspaces/workshop/module-apim/mobile/users/mobile-dev-setup.yaml -n globex-apim-{user_name}
-----
-
-* You will see the output as 
-+
-.Output of developer users creation
-----
-secret/mobileuser.secret created
-developeraccount.capabilities.3scale.net/mobile-developeraccount created
-----
-
-==== Verify creation of developer account
-
-* In a browser window, navigate to the browser tab pointing to the Developer perspective of the OpenShift cluster. If you don't have a browser tab open on the console, click on {openshift_cluster_console}[OpenShift Console, window="console"] to launch the console. If needed login with your username and password ({user_name}/{user_password}).
-* From *Administrator* view, within in the *globex-apim-{user_name}* namespace, navigate to *Operators > Installed Operators*. Choose *Red Hat Integration - 3scale*. 
-* Click on *Developer Account* tab and choose *Current namespace only* options. 
-* You will see the DeveloperAccount with Status `Condition: Waiting`
-+
-image::apim/mobile-dev-account.png[]
-
-==== Create Users
-
-* In the *Dev Spaces Terminal* run the following command to create users for the developer account you just created.
-+
-[source,bash,role=execute,subs="attributes"]
-----
-oc apply -f /projects/workshop-devspaces/workshop/module-apim/mobile/users/mobile-users-setup.yaml -n globex-apim-{user_name}
-----
-
-* You will see the output as 
-+
-.Output of developer account creation
-----
-developeruser.capabilities.3scale.net/admin.mobile created
-developeruser.capabilities.3scale.net/dev.mobile created
-----
-
-==== Developer account status
-In the OpenShift console, you will notice that the Status of DeveloperAccount is now updated to  `Condition: Ready`
-
-image::apim/mobile-dev-account-ready.png[]
-
-Note: In case of an error, please notify the workshop instructor.
-
-=== View the newly created Backend, Product, ActiveDoc and Users
+=== View the newly created Backend, Product and ActiveDoc
 ==== View on 3scale admin console
 
 * Navigate to the {3scale_tenant}[3scale admin portal^, window="3scale"] and login using your username and password ({user_name}/{user_password}).
@@ -760,7 +709,7 @@ image::apim/apim_feature_visibility.png[]
 
 
 === Sign up as a Mobile Developer
-In this section you will login as a Mobile Developer (as the user you created in the previous section), and signup for API access
+In this section you will login as a Mobile Developer (with the built-in user as described earlier), and signup for API access
 
 * Launch the Globex Developer Portal by clicking on {globex_developer_portal}[Developer Portal^, window="devportal"]
 +
@@ -769,8 +718,8 @@ image::apim/3scale_dev_portal.png[]
 
 * Click on the *SIGN IN* link found on top-right. 
 * Sign in as one of the user you created in the previous section with
-** username: `dev.mobile`
-** password: `openshift`
+** username: `john`
+** password: `123456`
 +
 .Developer Portal
 image::apim/3scale_dev_portal_signin.png[width=70%]
@@ -893,10 +842,11 @@ https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}
 image::apim/apim_mobile_sso_weborigin.png[]
 
 === Section Outcome
-* 3scale Backend, Product, ActiveDocs and Users were created
-* Developer Portal was setup for public access without Access Code
-* Created an Application as a Mobile Developer
-* Patched Keycloak Web Origin so that the calls from Globex Mobile App will not cause errors
+[%interactive]
+* [ ] 3scale Backend, Product, ActiveDocs and Users were created
+* [ ] Developer Portal was setup for public access without Access Code
+* [ ] Created an Application as a Mobile Developer
+* [ ] Patched Keycloak Web Origin so that the calls from Globex Mobile App will not cause errors
 
 == Test Mobile Application 
 
@@ -909,7 +859,7 @@ As part of this workshop, you will use a mobile-friendly Angular App and not a m
 
 The Mobile Application can be access via this QR Code as well as via browser
 
-* Scan the following QR Code with your mobile phone
+* Scan the following QR Code with your mobile phone and login  using `asilva/openshift`
 +
 
 image::https://cdn.make.cm/make/s/rhqrpng?data%5Bvalue%5D=https%3A%2F%2Fglobex-mobile-globex-apim-{user_name}.{openshift_subdomain}[200,300]
@@ -1119,20 +1069,9 @@ activedoc.capabilities.3scale.net/partner-gateway-activedoc created
 
 
 === Setup Partner users
-* Create this Active Doc by running the following command in the Dev Spaces Terminal
-+
-[source,bash,role=execute,subs="attributes"]
-----
-oc apply -f /projects/workshop-devspaces/workshop/module-apim/partners/users/partner-dev-setup.yaml -n globex-apim-{user_name}
-----
-+
-.Output
-----
-secret/partner.secret created
-developeraccount.capabilities.3scale.net/partner-developeraccount created
-developeruser.capabilities.3scale.net/admin.partner created
-developeruser.capabilities.3scale.net/user.partner created
-----
+
+The Partner app developers will also need access to the Developer Portal to signup for the APIs exposed to them. For the purpose of this workshop we will use the inbuilt developer user `John`.
+
 
 === Configurations on 3scale admin console
 
@@ -1151,11 +1090,7 @@ image::apim/partner-promote-apicast.png[]
 
 === Signup for an application as a Partner
 * Navigate to the Developer Portal {globex_developer_portal}[Globex Developer Portal^, window="devportal"]
-* If you are already signed in, clicking on the Exit option on top-right of the page.
-+
-.Logout if already signed in
-image::apim/logout.png[width=80%]
-* Click on *SIGN IN* on top right of the page and login using username and password as *(user.partner/openshift)*
+* If you are not already signed in, login using username and password as *(john/123456)*
 * Navigate to Applications Listing by choosing the *APPLICATIONS* menu on the top of the page.
 
 +
@@ -1278,7 +1213,8 @@ image::apim/partner_web_portal.png[]
 * Login using username/password as *(partner/openshift)*. 
 ** It is notable that the partner users are not managed using Keycloak. 
 * After logging in, the entire product list is shown in a paginated format.
-** Allow a few seconds for the catalogue to load
+** Allow a few seconds for the catalogue to load +
+[NOTE] If the catalog list on the page doesn't load immediately, it could be that the Gateway isn't ready yet. Refresh the page after a short period of time.
 * Reload this page by hitting the Browser Refresh a few times which will help us to generate some analytics.
 +
 .User logged in and can view paginated products
