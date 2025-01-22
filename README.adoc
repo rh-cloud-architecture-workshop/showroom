@@ -1,15 +1,29 @@
 = Cloud Native Architectures Workshop
-In this hands-on workshop participants will learn how to leverage OpenShift and Application Services to design, develop and deploy modern cloud-native applications, based on real life use cases.
 
-The workshop uses a pick-your-adventure style. Participants can choose which modules they want to go through, depending on interest. Each module is independent from the others. Participants deploy and undeploy the module assets on demand.
+A hands-on workshop where participants will learn how to leverage Red Hat OpenShift and Application Services to design, develop and deploy modern cloud-native applications, based on real life use cases.
 
-== The different modules cover the following topics:
+== The Modules:
 
-* Modernization: use Change Data Capture to build new functionality #Debezium #AMQStreams #CamelK #Quarkus
-* API Management: use a Contract First API development to create new channels in a secure way #3scale #RHSSO #Apicurio
-* Integration: build a multichannel support service integrating several instant messaging solutions. #Camel #AMQStreams #Quarkus #DataGrid #AMQBroker
-* Application Connectivity: connect disparate services over cloud and data center boundaries. #ServiceInterconnect
-* Serverless Event Driven Architecture: build an event driven application, without having to deal with the underlying messaging infrastructure. #OpenShiftServerless #AMQStreams #Quarkus
+NOTE: The content below are github pages rendering of the workshop's content text based, and do not have a backing application or workshop running. 
+
+* *Introduction to Cloud Native Architectures workshop*: An intro to the workshop setup using GitOps, ArgoCD and  building an event streaming app
+** https://rh-cloud-architecture-workshop.github.io/showroom/modules/globex-intro.html[View Workshop Intro^] 
+
+* *Launch new channels using Contract-First approach*: Learn how a contract-first API approach provides the right framework to launch new channels securely
+** https://rh-cloud-architecture-workshop.github.io/showroom/modules/module-apim-intro.html[View Module Intro ^] | https://rh-cloud-architecture-workshop.github.io/showroom/modules/module-apim-instructions.html[View Module Instructions^]
+
+* *Build new functionality with Change Data Capture*: Build new functionality with change data capture without touching existing code
+** https://rh-cloud-architecture-workshop.github.io/showroom/modules/module-cdc-intro.html[View Module Intro ^] | https://rh-cloud-architecture-workshop.github.io/showroom/modules/module-cdc-instructions.html[View Module Instructions^]
+
+* *Build a multi-channel support service for Globex customers*:  Build a pluggable and extensible system by integrating different systems through well-established integration patterns 
+** https://rh-cloud-architecture-workshop.github.io/showroom/modules/module-camel-intro.html[View Module Intro ^] | https://rh-cloud-architecture-workshop.github.io/showroom/modules/module-camel-instructions.html[View Module Instructions^]
+
+* *Building a secure service network with Red Hat Service Interconnect*: Build a service network to connect disparate services across cloud and datacenter boundaries
+** https://rh-cloud-architecture-workshop.github.io/showroom/modules/module-skupper-intro.html[View Module Intro ^] | https://rh-cloud-architecture-workshop.github.io/showroom/modules/module-skupper-instructions.html[View Module Instructions^]
+
+* *Event driven intelligent applications with Serverless Knative Eventing*: Use serverless technology to build an intelligent event-driven application
+** https://rh-cloud-architecture-workshop.github.io/showroom/modules/module-serverless-intro.html[View Module Intro ^] | https://rh-cloud-architecture-workshop.github.io/showroom/modules/module-serverless-instructions.html[View Module Instructions^]
+
 
 == Key Takeaways:
 
