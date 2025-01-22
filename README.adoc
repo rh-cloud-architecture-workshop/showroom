@@ -1,58 +1,18 @@
-=== Getting Started
+= Cloud Native Architectures Workshop
+In this hands-on workshop participants will learn how to leverage OpenShift and Application Services to design, develop and deploy modern cloud-native applications, based on real life use cases.
 
-. Create a git repo from this template
-. Clone the repo and `cd` into it
-. Run ./utilities/lab-serve
-. Open http://localhost:8080 in your browser
-. Run ./utilities/lab-build to build your html
+The workshop uses a pick-your-adventure style. Participants can choose which modules they want to go through, depending on interest. Each module is independent from the others. Participants deploy and undeploy the module assets on demand.
 
-Your lab should now update and on day 1 will look more or less like this:
+== The different modules cover the following topics:
 
-image::.images/lab-image.png[Lab Image]
+* Modernization: use Change Data Capture to build new functionality #Debezium #AMQStreams #CamelK #Quarkus
+* API Management: use a Contract First API development to create new channels in a secure way #3scale #RHSSO #Apicurio
+* Integration: build a multichannel support service integrating several instant messaging solutions. #Camel #AMQStreams #Quarkus #DataGrid #AMQBroker
+* Application Connectivity: connect disparate services over cloud and data center boundaries. #ServiceInterconnect
+* Serverless Event Driven Architecture: build an event driven application, without having to deal with the underlying messaging infrastructure. #OpenShiftServerless #AMQStreams #Quarkus
 
-Now you are ready to go!  You can start editing the files in the `content/modules/ROOT/pages/` directory.
+== Key Takeaways:
 
-**Today** you have to run `./utilites/build` to rebuild your html but *very shortly* we will be adding live updating.
-I.E. on every save the lab will re-build in real time.
-In addition, many modern editors such as Visual Studio Code offer live Asciidoc Preview extensions.
-
-=== Understanding the Basic Template Directory Structure
-
-[source,sh]
-----
-./content/modules/ROOT/
-├── assets
-│   └── images                       # Images used in your content 
-│       └── example-image.png
-├── examples                         # You can add downloadable assets here 
-│   └── example-bash-script.sh       # e.g. an example bash script
-├── nav.adoc                         # Navigation for your lab
-├── pages                            # Your content goes here
-│   ├── index.adoc                   # First page of your lab, e.g. overview etc 
-│   ├── module-02.adoc
-│   └── module-03.adoc               # Sample lab has 3 modules including index.adoc
-└── partials                         # You can add partials here, reusable content inserted inline into your modules
-    └── example_partial.adoc
-----
-
-=== Development Cycle
-
-. Edit your content in `content/modules/ROOT/pages/`
-. Run `./utilities/build` to build your html
-. Use `git` to branch and commit your work
-. Push your work to your repo
-.. You should use `git tags` or `git branches` in production
-.. However development items default to the head of `main`
-
-=== Configuring your Lab 
-
-Project Zero Lab repos have 3 *yaml* files that control the build and deployment of your lab.
-However _typically_ you will only need to only make very few edits 
-
-[source,sh]
-----
-├── content
-│   └── antora.yml                  # You can add "inline vars" here to render within your content
-├── zero-touch-config.yml            # 
-└── zero-touch-site.yml
-----
+* Learn how to build and deploy modern cloud-native applications.
+* Get introduced to various architectural patterns, technologies and tools.
+* Learn how you can use this repeatable workshop to gain customer/partner developer mindshare.
