@@ -1046,7 +1046,7 @@ product.capabilities.3scale.net/globex-partner-gateway-product created
 === Create Active Doc for Partner Gateway
 * In Dev Spaces, navigate to the folder *workshop/module-apim/partners/activedoc*, open the file *create-partner-activedoc.yaml*
 +
-image::apim/mobile-activedoc-yaml.png[width=70%]
+image::apim/partner-activedoc-yaml.png[width=70%]
 * Replace the `<replace-me>` placeholder with the Service Registry OpenAPI endpoint for Partner API show below
 +
 [source,bash,role=execute,subs="attributes"]
