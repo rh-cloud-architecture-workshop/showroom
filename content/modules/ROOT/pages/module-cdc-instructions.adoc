@@ -220,7 +220,7 @@ From the Topics page, open the *globex.updates.public.orders* topic, and verify 
 +
 image::cdc/amq-console-debezium-topic-orders.png[]
 +
-Wxpand the contents of the message. You should see a change event structure very similar to the ones for customers. Notice however that the operation is '*c*', for _create_. This is expected as the change event corresponds to a new record in the *order* table.
+Expand the contents of the message. You should see a change event structure very similar to the ones for customers. Notice however that the operation is '*c*', for _create_. This is expected as the change event corresponds to a new record in the *order* table.
 +
 image::cdc/amq-console-debezium-topic-order-details.png[]
 +
