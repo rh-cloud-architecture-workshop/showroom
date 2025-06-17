@@ -84,7 +84,7 @@ image::serverless/serverless-namespace-initial-toplogy.png[]
 === Red Hat AMQ Streams setup overview 
 
 * Red Hat Streams based on Apache Kafka has been setup for you already. The Kafka broker is installed in the globex-mw-{user_name} namespace.In the same namespace, AMQ streams console, a web UI for viewing Kafka topics and browsing consumer groups, is also installed. +
-* Click to navigate to https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. 
+* Click to navigate to https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. 
 ** This redirects you to the AMQ streams console login page. 
 ** For the purpose of this workshop, choose *Sign in with Anonymous Session* to access the console if you are not already signed in.
 * Navigate to the navigate to *Kafka Clusters -> kafka -> Topics*. Notice that there are 3 topics which are relevant to this module (you can filter with the word *reviews*). 
@@ -499,7 +499,7 @@ image::serverless/inapprop-review.png[]
 
 === Under the hood: Step through Review moderation flow
 
-* Navigate to https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"].  Filter for the term *reviews* to view 3 related topics.
+* Navigate to https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"].  Filter for the term *reviews* to view 3 related topics.
 * Click on the `globex.reviews` topic to see an Overview of the topic page
 +
 image::serverless/amqstreams-globex-reviews-topic-overview.png[]
@@ -542,7 +542,7 @@ image::serverless/review-sentiment-flow.png[]
 +
 image::serverless/sentiment-reviews-trigger.png[width=80%]
 * The `aiml-sentiment-reviews` which is invoked, then uses the https://huggingface.co/nlptown/bert-base-multilingual-uncased-sentiment[nlptown/bert-base-multilingual-uncased-sentiment, window="others"] to identify a score (from -1 to 4) depending on the tone of the review.
-* The review is then sent to the `reviews.sentiment` topic. Access this topic in the https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. Click on any of the kafka messages to view the sentiment score.
+* The review is then sent to the `reviews.sentiment` topic. Access this topic in the https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. Click on any of the kafka messages to view the sentiment score.
 +
 image::serverless/amqstreams-sentiment-score.png[]
 ** As a next step, this sentiment score can be used to build a dashboard to visualise the sentiment of various categories of products. 

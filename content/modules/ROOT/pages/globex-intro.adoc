@@ -161,7 +161,7 @@ image::intro/globex-home-page.png[]
 
 * Every _like_ action generates a user activity event that is captured by the _activity tracking_ service and sent to a Kafka topic. +
 The Kafka broker is installed in the *globex-mw-{user_name}* namespace. In the same namespace, AMQ streams console, a web UI for viewing Kafka topics and browsing consumer groups, is also installed. +
-Click to navigate to https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. This redirects you to the AMQ streams console login page. For the purpose of this workshop, choose *Sign in with Anonymous Session* to access the console
+Click to navigate to https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. This redirects you to the AMQ streams console login page. For the purpose of this workshop, choose *Sign in with Anonymous Session* to access the console
 +
 image::intro/amqstreams-console-login.png[]
 * You will be presented with the Home page of the console. You can see that a kafka broker has already been setup for you.
