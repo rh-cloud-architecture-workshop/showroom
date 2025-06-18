@@ -321,7 +321,7 @@ image::apim/api-download-as-yaml.png[]
 
 === Manage the Mobile OpenAPI with Service Registry
 
-* Launch *Service Registry* by accessing {service_registry_url}[Service Registry^, window="service_registry_url"]
+* Launch *Service Registry* by accessing {service_registry_ui_url}[Service Registry^, window="service_registry_url"]
 +
 .Service Registry: Landing Page
 image::apim/service-registry-landing.png[]
@@ -349,7 +349,7 @@ image::apim/sr-spec-setting.png[]
 .Service Registry: *Globex Mobile API Gateway* artifact has been uploaded
 image::apim/sr-uploaded.png[]
 
-* You can share this OpenAPI schema with others via this OpenAPI Schema's endpoint : link:{service_registry_url}/apis/registry/v2/groups/globex/artifacts/mobileapi[window="service_registry_url"]
+* You can share this OpenAPI schema with others via this OpenAPI Schema's endpoint : link:{service_registry_app_url}/apis/registry/v2/groups/globex/artifacts/mobileapi[window="service_registry_url"]
 * You can now close the Service Registry's browser tab.
 * This schema can be used for generating Quarkus code for both Clients and Server-side using maven plugins. (Note that the https://github.com/rh-cloud-architecture-workshop/globex-mobile[Globex Mobile App^, window="code-samples"] is NodeJS + Angular in this module)
 
@@ -606,7 +606,7 @@ image::apim/mobile-activedoc-yaml.png[width=70%]
 +
 [source,bash,role=execute,subs="attributes"]
 ----
-{service_registry_url}/apis/registry/v2/groups/globex/artifacts/mobileapi
+{service_registry_app_url}/apis/registry/v2/groups/globex/artifacts/mobileapi
 ----
 +
 .ActiveDoc updated with OpenAPI Service Registry endpoint 
@@ -950,7 +950,7 @@ image::apim/partner-sec-scheme-updated.png[]
 +
 [source,bash,role=execute, subs="attributes"]
 ----
-curl -X POST -H "Content-type: application/json; artifactType=OPENAPI" -H "X-Registry-ArtifactId: partnerapi" -d @/projects/workshop-devspaces/workshop/module-apim/partners/activedoc/partner-activedoc-draft.json {service_registry_url}/apis/registry/v2/groups/globex/artifacts
+curl -X POST -H "Content-type: application/json; artifactType=OPENAPI" -H "X-Registry-ArtifactId: partnerapi" -d @/projects/workshop-devspaces/workshop/module-apim/partners/activedoc/partner-activedoc-draft.json {service_registry_app_url}/apis/registry/v2/groups/globex/artifacts
 ----
 * The following JSON is returned back by Service Registry confirming creation
 +
@@ -958,7 +958,7 @@ curl -X POST -H "Content-type: application/json; artifactType=OPENAPI" -H "X-Reg
 ----
 {"name":"Globex Partners API Gateway","description":"Globex APIs made accessible to global partners to view Globex's catalog and products","createdBy":"","createdOn":"2023-05-05T22:51:01+0000","modifiedBy":"","modifiedOn":"2023-05-05T22:51:01+0000","id":"partnerapi","version":"1","type":"OPENAPI","globalId":2,"state":"ENABLED","groupId":"globex","contentId":2,"references":[]}workshop-devspaces (main)
 ----
-* You can view the newly created OpenAPI specification {service_registry_url}/ui/artifacts/globex/partnerapi/versions/latest[here^, window="serviceregistry"]
+* You can view the newly created OpenAPI specification {service_registry_ui_url}/ui/artifacts/globex/partnerapi/versions/latest[here^, window="serviceregistry"]
 ** You can close the Service Registry browser tab.
 
 === Create Backend, Products, ActiveDoc and Users for Partner Gateway
@@ -1051,7 +1051,7 @@ image::apim/partner-activedoc-yaml.png[width=70%]
 +
 [source,bash,role=execute,subs="attributes"]
 ----
-{service_registry_url}/apis/registry/v2/groups/globex/artifacts/partnerapi
+{service_registry_app_url}/apis/registry/v2/groups/globex/artifacts/partnerapi
 ----
 
 
