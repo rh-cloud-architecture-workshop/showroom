@@ -13,7 +13,7 @@
 </style>
 ++++
 
-The Cloud Architectures Workshop showcases the art of the possible with Red Hat OpenShift and Red Hat Application Services.
+The Cloud Native Architectures Workshop showcases the art of the possible with Red Hat OpenShift and Red Hat Application Services.
 
 This workshop consists of a number different modules, each highlighting a particular use case, development principle or technology. The modules have a common overarching story, revolving around the e-commerce site of a fictitious retail company called Globex. Globex has undergone significant modernization and they are keen to build on their application modernization efforts to rapidly build new functionalities. 
 

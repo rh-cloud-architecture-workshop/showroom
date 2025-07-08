@@ -1,12 +1,12 @@
 name: modules
-title: Cloud Architectures Workshop
+title: Cloud Native Architectures Workshop
 version: ~
 nav:
   - modules/ROOT/nav.adoc
 
 asciidoc:
   attributes:
-    lab_name: "Cloud Architectures Workshop"
+    lab_name: "Cloud Native Architectures Workshop"
     release-version: main
     page-pagination: true
     my_var: "foo - this is an asciidoc attribute from `content/antora.yml`"
