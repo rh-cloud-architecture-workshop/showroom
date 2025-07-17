@@ -146,7 +146,7 @@ kafkaconnector.kafka.strimzi.io/globex created
 * After a few seconds, the Debezium connector will start monitoring the PostgreSQL database for changes in the *customer*, *orders* and *line_item* tables, and will produce a change event to the corresponding Kafka topic for each change detected.
 
 * One way to verify that the connector is working as expected is to check the Kafka topics that receive the change events.  +
-If you still have a browser tab pointing to AMQ Streams Console, open the tab. If not, navigate to https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. 
+If you still have a browser tab pointing to AMQ Streams Console, open the tab. If not, navigate to https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. 
 ** This redirects you to the *AMQ streams console* login page. 
 ** For the purpose of this workshop, choose *Sign in with Anonymous Session* to access the console if you are not already signed in.
 +
@@ -215,7 +215,7 @@ image::cdc/globex-order-placed.png[]
 * At this point, an order has been added in the Globex application database. The records added to the *orders* and *line_item* tables have been detected by Debezium and produced as change events to Kafka topics. +
 We can easily check this with AMQ streams console.
 
-* Open the browser tab pointing to the AMQ streams console UI. If you did close the tab, navigate to https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. +
+* Open the browser tab pointing to the AMQ streams console UI. If you did close the tab, navigate to https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. +
 From the Topics page, open the *globex.updates.public.orders* topic, and verify that the topic contains 1 message.
 +
 image::cdc/amq-console-debezium-topic-orders.png[]
@@ -241,7 +241,7 @@ Click on the *POST* link, and then on the *Try it out* link on the right. From t
 +
 image::cdc/order-simulator-random-customer.png[]
 ** Click *Execute* to execute the REST call to the simulator.
-** Check in https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"] that new messages are produced to the *globex.updates.public.orders* and *globex.updates.public.line_item* topics.
+** Check in https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"] that new messages are produced to the *globex.updates.public.orders* and *globex.updates.public.line_item* topics.
 
 == Streaming processing of events with Kafka Streams
 
@@ -316,9 +316,9 @@ In case you want to see how this looks like in code, click on the link below:
 ----
 ====
 
-You can see the result of the streaming processing by inspecting the contents of  the *globex.order-aggregated* topic in https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"].
+You can see the result of the streaming processing by inspecting the contents of  the *globex.order-aggregated* topic in https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"].
 
-* Open the browser tab pointing to the AMQ Streams console. If you have closed the tab, navigate to https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. 
+* Open the browser tab pointing to the AMQ Streams console. If you have closed the tab, navigate to https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. 
 
 * From the Topics page, open the *globex.order-aggregated* topic, and verify that the topic contains one or more messages (the exact number depends on how many orders were created in the previous paragraph).
 +
