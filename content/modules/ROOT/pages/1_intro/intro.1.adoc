@@ -145,4 +145,17 @@ Go the browser tab with the Globex we UI, refresh the home page, and notice how 
 
 Please close all but this Workshop Deployer tab to avoid proliferation of tabs which can make working on other modules difficult. 
 
+
+
+
+'''
+****
 Proceed to the https://workshop-deployer.{openshift_subdomain}[Workshop Deployer, window="workshopdeployer"] to choose your next module.
+****
+
+++++
+<nav class="pagination" style="display: flex !important;">
+
+  <span class="next"><a href="https://workshop-deployer.{openshift_subdomain}" target="workshopdeployer" class="query-params-link">Walkthrough of the Globex web application</a></span>
+</nav>
+++++

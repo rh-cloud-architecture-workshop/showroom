@@ -62,14 +62,8 @@ The current architecture of the Globex retail web application:
 image::intro/globex-deployment-2.png[]
 
 
-'''
-****
-Proceed to the xref:1_intro/1.1-globex-techenv.adoc[Technical environment details] for this module
-****
-
 ++++
 <nav class="pagination" style="display: flex !important;">
-  <span class="prev"><a href="1_intro/intro.0.html" class="query-params-link">The story behind this workshop</a></span>
-  <span class="next"><a href="1_intro/module-01.1.html" class="query-params-link">Set up Red Hat Service Interconnect on OpenShift</a></span>
+  <span class="next"><a href="1_intro/intro.0.html" class="query-params-link">Technical environment</a></span>
 </nav>
 ++++

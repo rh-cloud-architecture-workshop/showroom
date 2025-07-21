@@ -72,7 +72,12 @@ ArgoCD manifests can take many forms. For this workshop we opted for Helm charts
 
 ====
 
-'''
-****
-Proceed to the xref:./1.2-globex-web-streaming.adoc[Walkthrough of the Globex web application] for this module
-****
+
+
+++++
+<nav class="pagination" style="display: flex !important;">
+  // <span class="prev"><a href="module-apim-intro.html" class="query-params-link">Introduction to the Workshop
+</a></span>
+  <span class="next"><a href="1_intro/intro.1.html" class="query-params-link">Walkthrough of the Globex web application</a></span>
+</nav>
+++++
