@@ -1,14 +1,14 @@
 .underline {
   cursor: pointer;
 }
-
+/* 
 .nav-container, .pagination, .toolbar {
   display: none !important;
-}
+} */
 .doc {    
   max-width: 70rem !important;
 }
 
-.mandatory-display {
+/* .mandatory-display {
   display: block !important;
-}
+} */
