@@ -17,12 +17,14 @@
   cursor: pointer;
 }
 
-.nav-container, .pagination, .toolbar {
+.nav-container, .pagination, .toolbar .prev {
   display: none !important;
 }
+
 .doc {    
   max-width: 70rem !important;
 }
+
 </style>
 ++++
 :icons: font

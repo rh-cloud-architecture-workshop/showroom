@@ -17,9 +17,10 @@
   cursor: pointer;
 }
 
-.nav-container, .pagination, .toolbar {
+.nav-container, .pagination, .toolbar .next {
   display: none !important;
 }
+
 .doc {    
   max-width: 70rem !important;
 }
