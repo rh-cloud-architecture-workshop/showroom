@@ -64,6 +64,12 @@ image::intro/globex-deployment-2.png[]
 
 '''
 ****
-Proceed to the xref:./intro/1.1-globex-techenv.adoc[Technical environment details] for this module
+Proceed to the xref:1_intro/1.1-globex-techenv.adoc[Technical environment details] for this module
 ****
 
+++++
+<nav class="pagination mandatory-display">
+  <span class="next"><a href="1_intro/intro.0.html" class="query-params-link">The story behind this workshop</a></span>
+  <span class="next"><a href="module-01.1.html" class="query-params-link">Set up Red Hat Service Interconnect on OpenShift</a></span>
+</nav>
+++++

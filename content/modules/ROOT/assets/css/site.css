@@ -8,3 +8,7 @@
 .doc {    
   max-width: 70rem !important;
 }
+
+.mandatory-display {
+  display: block !important;
+}
