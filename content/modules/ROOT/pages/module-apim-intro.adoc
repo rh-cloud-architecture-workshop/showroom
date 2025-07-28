@@ -1,5 +1,6 @@
 = Launch new channels with Contract First Approach - Intro
 :imagesdir: ../assets/images
+include::../assets/css/site.css
 
 ++++
 <!-- Google tag (gtag.js) -->
@@ -11,18 +12,6 @@
 
   gtag('config', 'G-51D1EZEH8B');
 </script>
-<style>
-  .nav-container, .pagination, .toolbar {
-    display: none !important;
-  }
-  .doc {    
-    max-width: 70rem !important;
-  }
-  .underline {
-    cursor: pointer;
-  }
-
-</style>
 ++++
 
 In this module you'll discover how Contract First Approach provides the right framework to accelerate the launching of new channels in a secure way across internal and external teams to build microservices and APIs based systems.

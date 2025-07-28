@@ -1,6 +1,9 @@
 :imagesdir: ../assets/images
 
+
 = Launch new channels with Contract First Approach - Instructions
+
+include::../assets/css/site.css
 
 // :toclevels: 2
 :icons: font 
@@ -18,18 +21,6 @@
 
   gtag('config', 'G-51D1EZEH8B');
 </script>
-<style>
-  .nav-container, .pagination, .toolbar {
-    display: none !important;
-  }
-  .doc {    
-    max-width: 70rem !important;
-  }
-
-  .underline {
-    cursor: pointer;
-  }
-</style>
 ++++
 
 == Objectives

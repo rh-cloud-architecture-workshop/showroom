@@ -12,3 +12,15 @@
 /* .mandatory-display {
   display: block !important;
 } */
+
+.underline {
+  cursor: pointer;
+}
+
+.nav-container, .pagination, .toolbar .next {
+  display: none !important;
+}
+
+.doc {    
+  max-width: 70rem !important;
+}

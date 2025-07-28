@@ -4,12 +4,21 @@
 ** xref:1_intro/intro.1.adoc[page2]
 
 * xref:module-cdc-intro.adoc[Build new functionality with Change Data Capture - Intro]
+
 * xref:module-cdc-instructions.adoc[Build new functionality with Change Data Capture - Instructions]
+
 * xref:module-apim-intro.adoc[Launch new channels with Contract First Approach - Intro]
+
 * xref:module-apim-instructions.adoc[Launch new channels with Contract First Approach - Instructions]
+
 * xref:module-serverless-intro.adoc[Event driven applications with Serverless Knative Eventing - Intro]
+
 * xref:module-serverless-instructions.adoc[Event driven applications with Serverless Knative Eventing - Instructions]
+
 * xref:module-skupper-intro.adoc[Building a secure service network with Red Hat Service Interconnect - Intro]
+
 * xref:module-skupper-instructions.adoc[Building a secure service network with Red Hat Service Interconnect - Instructions]
+
 * xref:module-camel-intro.adoc[Building a multi-channel support service for Globex customers - Intro]
+
 * xref:module-camel-instructions.adoc[Building a multi-channel support service for Globex customers - Instructions]
