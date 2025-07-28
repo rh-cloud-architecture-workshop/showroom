@@ -24,3 +24,8 @@
 .doc {    
   max-width: 70rem !important;
 }
+
+
+.nav-container, .pagination, .toolbar {
+  display: none !important;
+}

@@ -12,6 +12,28 @@ include::../assets/css/site.css
 
   gtag('config', 'G-51D1EZEH8B');
 </script>
+<style>
+  
+  .underline {
+    cursor: pointer;
+  }
+  
+  .doc {    
+    max-width: 70rem !important;
+  }
+
+  
+  
+  .nav-container, .pagination, .toolbar .prev {
+    display: none !important;
+  }
+
+  .nav-container, .pagination, .toolbar {
+    display: none !important;
+  }
+  
+
+</style>
 ++++
 
 In this module you'll discover how Contract First Approach provides the right framework to accelerate the launching of new channels in a secure way across internal and external teams to build microservices and APIs based systems.
