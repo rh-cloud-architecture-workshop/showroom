@@ -1,6 +1,7 @@
 = Launch new channels with Contract First Approach - Intro
 :imagesdir: ../assets/images
-include::../assets/css/site.css
+
+
 
 ++++
 <!-- Google tag (gtag.js) -->
