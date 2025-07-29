@@ -17,11 +17,17 @@
   cursor: pointer;
 }
 
-.nav-container, .pagination, .toolbar {
+.nav-container {
   display: none !important;
 }
+
 .doc {    
   max-width: 70rem !important;
+}
+
+
+.pagination .next {
+  display: none !important;
 }
 </style>
 ++++

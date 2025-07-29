@@ -17,9 +17,10 @@
   cursor: pointer;
 }
 
-.nav-container, .pagination, .toolbar {
+.nav-container {
   display: none !important;
 }
+
 .doc {    
   max-width: 70rem !important;
 }
@@ -73,11 +74,3 @@ ArgoCD manifests can take many forms. For this workshop we opted for Helm charts
 ====
 
 
-
-++++
-<nav class="pagination" style="display: flex !important;">
-  // <span class="prev"><a href="module-apim-intro.html" class="query-params-link">Introduction to the Workshop
-</a></span>
-  <span class="next"><a href="./1_intro/intro.1.html" class="query-params-link">Walkthrough of the Globex web application</a></span>
-</nav>
-++++
