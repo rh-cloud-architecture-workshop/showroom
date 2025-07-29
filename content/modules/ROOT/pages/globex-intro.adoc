@@ -17,6 +17,10 @@
   cursor: pointer;
 }
 
+.nav-container {
+  display: none !important;
+}
+
 .doc {    
   max-width: 70rem !important;
 }
