@@ -38,15 +38,15 @@
 
 
 
-Red Hat build of Keycloak is used in this module to both offer single-sign on to Mobile users, and also for securing the APIs. 
+Red Hat build of Keycloak is used in this module to offer both Single Sign-On (SSO) to Mobile users, and also to secure the APIs. 
 
 [TIP]
 ====
-We will be using OpenID Connect which is an open authentication protocol that works on top of the OAuth 2.0 framework. OIDC offers a discovery mechanism called *OpenID Connect Discovery*, where an OpenID server Red Hat build of  Keycloak (referred to as Keycloak) publishes its metadata at a well-known URL. This URL is typically a collection of various endpoints the server offers, some of which are used in this workshop too.
+We will be using *OpenID Connect (OIDC)* which is an open authentication protocol that works on top of the OAuth 2.0 framework. OIDC offers a discovery mechanism called *OpenID Connect Discovery*, where an OpenID server Red Hat build of  Keycloak (referred to as Keycloak) publishes its metadata at a well-known URL. This URL is typically a collection of various endpoints the server offers, some of which are used in this workshop too.
 ====
 
 . Launch Keycloak by clicking {sso_tenant_console}[Keycloak Console^,window="sso"] and login using username and password ({user_name}/{user_password}).
-
++
 image::apim/apim-rhbk-login-landing.png[]
 
 . Click on *Realm settings* link highlighted in the above screenshot.
@@ -54,21 +54,17 @@ image::apim/apim-rhbk-login-landing.png[]
 +
 .Red Hat build of Keycloak - Logged In
 image::apim/apim-sso-login.png[]
-
++
 [WARNING]
 ====
-
 In case you see an error stating *You don't have access to the requested resource* or *Network response was not OK* or any other access error, you may notice that you are logged in as a user other than *{user_name}*. You will need to *signOut*, close the browser tab, and login again.
 
 . Click on user name found on top right, choose *signOut* option, and close the browser
 . Reopen the {sso_tenant_console}/#/globex-{user_name}/clients[Red Hat Keycloak Clients List^, window="sso"]. 
 . Login as *({user_name}/{user_password})*. 
 
-
 .Keycloak Login error
-
 image::apim/sso-login-error.png[]
-
 ====
 
 . Here is how the *OpenID Provider Configuration* looks like

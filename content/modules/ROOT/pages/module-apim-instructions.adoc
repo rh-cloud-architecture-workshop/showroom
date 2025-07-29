@@ -155,7 +155,7 @@ image::apim/apim-terminal-setup.png[width=70%]
 * Keep this browser tab open because you will refer to draft content, scripts and YAML files for creating objects on OpenShift
 
 === Scratchpad
-As you work through this Contract First APIs module, there are a few variables and URLs that are needed throughout this activity. To make things easier and manageable we've setup a scratchpad within Dev Spaces. You can fill this scratchpad up with information needed as you are guided below so that you can progress through this activity faster.
+As you work through this Contract First APIs module, there are a few variables and URLs that are needed throughout this activity. To make things easier and manageable we've setup a scratchpad within Dev Spaces. You can use this scratchpad up with information needed to help you progress through this activity efficiently.
 
 {empty} +
 

@@ -70,7 +70,7 @@ image::apim/api-new-api.png[]
 image::apim/api-desginer-clear.png[]
 
 . To get the Mobile OpenAPI draft, navigate to the browser tab with *Dev Spaces* that you have earlier opened. 
-** If you don't have a browser tab open to Dev Spaces, click on {devspaces_dashboard}/dashboard/#/ide/devspaces-{user_name}/cloud-architecture-workshop[Dev Spaces IDE^, window="devspaces"]. If needed login with your username and password ({user_name}/{user_password}).
+.. If you don't have a browser tab open to Dev Spaces, click on {devspaces_dashboard}/dashboard/#/ide/devspaces-{user_name}/cloud-architecture-workshop[Dev Spaces IDE^, window="devspaces"]. If needed login with your username and password ({user_name}/{user_password}).
 . In Dev Spaces, navigate to the folder *workshop/module-apim/mobile/activedoc*, and open the file *mobile-activedoc-draft.yaml*
 .. Or type [Ctrl+P] and type the file name as *mobile-activedoc-draft.yaml*
 . Copy the entire contents from this file `(Ctrl+A and Ctrl+C)` 
@@ -150,7 +150,7 @@ image::apim/sr-upload-artifact.png[]
 
 . In the wizard, enter the following details, and click on the *Upload* button. 
 .. Use the exact same values as instructed below to avoid errors in the other sections of this labs.
-
++
 [cols="20%,50%"]
 |====
 | *Group* | `globex`
@@ -159,6 +159,7 @@ image::apim/sr-upload-artifact.png[]
 
 |====
 
++
 .Service Registry: Provide information needed by *Upload Artifact* wizard and *Upload*
 image::apim/sr-spec-setting.png[]
 
@@ -174,9 +175,9 @@ image::apim/sr-uploaded.png[]
 
 == Section Outcome
 [%interactive]
-. [ ] Added Security Scheme to Mobile OpenAPI with API Desginers
-. [ ] Imported the Mobile OpenAPI into Service Registry to govern the API spec.
-. [ ] A shareable link is available to the Mobile OpenAPI specification to be used by other teams and systems.
+* [ ] Added Security Scheme to Mobile OpenAPI with API Desginers
+* [ ] Imported the Mobile OpenAPI into Service Registry to govern the API spec.
+* [ ] A shareable link is available to the Mobile OpenAPI specification to be used by other teams and systems.
 
 == Cleanup
 Please close the API Designer and Service Registry browser tabs to avoid too many browser tabs
