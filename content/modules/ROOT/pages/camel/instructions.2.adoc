@@ -45,7 +45,7 @@
 :elementurl: https://element.{openshift_subdomain}
 
 
-== Plug the Globex Web Chat
+== Plug in the Globex Web Chat
 
 All the work done so far has enabled bi-directional communication between customers and agents between Rocket.Chat and Matrix. Our open architecture approach allows us to easily plug in new communication channels.
 
