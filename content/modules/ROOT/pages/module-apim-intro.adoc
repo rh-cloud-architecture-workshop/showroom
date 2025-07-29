@@ -14,25 +14,22 @@
   gtag('config', 'G-51D1EZEH8B');
 </script>
 <style>
-  
-  .underline {
-    cursor: pointer;
-  }
-  
-  .doc {    
-    max-width: 70rem !important;
-  }
+.underline {
+  cursor: pointer;
+}
 
-  
-  
-  .nav-container, .pagination, .toolbar .prev {
-    display: none !important;
-  }
+.nav-container {
+  display: none !important;
+}
 
-  .nav-container, .pagination, .toolbar {
-    display: none !important;
-  }
-  
+.doc {    
+  max-width: 70rem !important;
+}
+
+.pagination .prev {
+  display: none !important;
+}
+</style>
 
 </style>
 ++++

@@ -4,7 +4,7 @@
 
 ++++
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z54F1ZPC4H"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-51D1EZEH8B"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
