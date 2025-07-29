@@ -1,4 +1,5 @@
-= Plug in the Globex Web Chat
+= Building a multi-channel support service for Globex customers - Instructions
+
 :imagesdir: ../../assets/images
 
 
@@ -48,6 +49,7 @@
 
 :elementurl: https://element.{openshift_subdomain}
 
+= Plug in the Globex Web Chat
 
 All the work done so far has enabled bi-directional communication between customers and agents between Rocket.Chat and Matrix. Our open architecture approach allows us to easily plug in new communication channels.
 

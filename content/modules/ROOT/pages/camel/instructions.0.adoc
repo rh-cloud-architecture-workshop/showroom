@@ -47,7 +47,7 @@
 :elementurl: https://element.{openshift_subdomain}
 
 
-== Enable the Rocket.Chat to Matrix interaction
+= Enable the Rocket.Chat to Matrix interaction
 
 As previously described, the Rocket.Chat integration is already in place and users can already post questions on the _GlobexSupport_ app which are channelled and available in the AMQ Broker.
 
@@ -63,7 +63,7 @@ Events can already travel half the way up to the broker (AMQ), but the second st
 
 {empty} +
 
-=== How Customers interact with Agents
+== How Customers interact with Agents
 
 Customers will choose Rocket.Chat or Globex's chat widget to communicate with agents. They will do so in a private one-to-one manner.
 
@@ -73,7 +73,7 @@ On Matrix, where the agents operate, each new customer request will initiate a n
 
 {empty} +
 
-=== The role of Caching
+== The role of Caching
 
 Typical API interactions are of synchronous nature, a client sends a request and waits for a response. In systems architectures, synchronous exchanges are easier to implement, but are more resource costly. 
 
@@ -89,7 +89,7 @@ Caching allows us to keep the context of a one-to-one conversation between the c
 
 {empty} +
 
-=== Implement the caching logic
+== Implement the caching logic
 
 .*What will I learn?*
 [%collapsible]
@@ -325,7 +325,7 @@ You should see now included in your `routes-cache.yaml` file, the definition of 
 
 {empty} +
 
-=== Implement the Client to Agent flow
+== Implement the Client to Agent flow
 
 The interaction between customers and agents flows in two directions. The instructions that follow will help you to complete the logic that delivers events (messages) from clients to agents. Later, you will work on the reverse (agents to clients) processing direction.
 
@@ -335,7 +335,7 @@ The starting point of this task is to subscribe to the relevant address in the A
 
 {empty} +
 
-==== Create the AMQ listener
+=== Create the AMQ listener
 
 .*What will I learn?*
 [%collapsible]
@@ -411,7 +411,7 @@ The section that follows helps you implement the route `direct:support-request` 
 
 {empty} +
 
-==== Create the main processing route
+=== Create the main processing route
 
 
 The main route will process events originating in Rocket.Chat (and also coming from other sources, later in the lab).
@@ -490,7 +490,7 @@ In the next sections you will
 
 {empty} +
 
-==== Overview of the `get-cache-entry` route
+=== Overview of the `get-cache-entry` route
 
 This route needs to perform a series of actions. Among those, it crucially needs to interact with the Cache system, and invoke some of the Camel routes you've completed earlier (PUT, GET and remove operations).
 
@@ -514,7 +514,7 @@ In the sequence diagram above you'll see that:
 {empty} +
 
 
-==== Implement the route pushing messages to Matrix
+=== Implement the route pushing messages to Matrix
 
 All the pieces are in place -  You have the cache interaction resolved, and you have the logic to create new support rooms in Matrix. The final step is to send the actual customer message to Matrix so that an agent can respond.
 
@@ -605,7 +605,7 @@ The `kafka` component requires no extra parameters because it has been pre-confi
 
 {empty} +
 
-=== Run your code in `dev` mode
+== Run your code in `dev` mode
 
 You have completed the processing flow from customers (in Rocket.Chat) to agents (in Matrix). The returning flow is still pending to implement, but you can already test what you have implemented so far.
 
