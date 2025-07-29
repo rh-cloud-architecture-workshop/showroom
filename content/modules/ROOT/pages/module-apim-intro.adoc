@@ -41,17 +41,15 @@ In this module you'll discover how Contract First Approach provides the right fr
 As mentioned in the introduction module of the workshop, Globex went through a modernization phase for their retail web application, moving from a legacy monolith to a containerized application. With their growing popularity, Globex would like to add new channels to their existing, web-based e-commerce application.
 
 
-They are working towards launching their own *Globex Mobile App* and  partnering with other large retail portals. This requires formalizing the application API definitions and exposing the APIs through a API Management solution for consumption by the Globex Mobile App and by partner's portals.
+They are working towards launching their own *Globex Mobile App* and  partnering with other large retail portals. This requires formalizing the application API definitions and exposing the APIs through an API Management solution for consumption by the Globex Mobile App and by Partner portals.
 
 
 *(a) Mobile App*
 
-* Globex would like to launch a mobile application in addition to the retail web-site. Globex does not have the necessary expertise in mobile development, so development will have to be outsourced.
-* This means that the mobile application will also need secure access to the Globex APIs
+* Globex plans to launch a mobile application alongside their retail website. Since Globex lacks the necessary expertise in mobile development, this work will have to be outsourced.
+* Therefore, the mobile application must have secure access to Globex's APIs
 
 *(b) Partner Portal*
 
-* Retail partner aggregators would like to showcase Globex's product catalogue on their website
-* To allow this access, Globex would like to expose an API
-
-
+* Retail partner aggregators are interested in displaying Globex's product catalog on their websites.
+* To enable this, Globex plans to expose the necessary functionality through an API.

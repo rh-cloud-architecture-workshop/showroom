@@ -107,7 +107,7 @@ backend.capabilities.3scale.net/globex-partner-gateway-backend created
 image::apim/partner-gateway-product.png[width=80%]
 
 . Get the value for *<client-credentials>* placeholder as described below. Or if you have copied this into Scratchpad you can use that instead.
-.. Open the {sso_tenant_console}/#/globex-{user_name}/clients[SSO Clients List^, window="sso"] from Keycloak.
+.. Open the {sso_tenant_console}/#/globex-{user_name}/clients[Keycloak Clients List^, window="sso"] from Keycloak.
 .. Login if needed with *({user_name}/{user_password})*. 
 +
 [WARNING]
@@ -116,7 +116,7 @@ image::apim/partner-gateway-product.png[width=80%]
 In case you see an error stating *You don't have access to the requested resource* or *Network response was not OK* or any other access error, you may notice that you are logged in as a user other than *{user_name}*. You will need to *signOut*, close the browser tab, and login again
 
 . Click on user name found on top right, choose *signOut* option, and close the browser
-. Reopen the {sso_tenant_console}/#/globex-{user_name}/clients[Red Hat SSO Clients List^, window="sso"]. 
+. Reopen the {sso_tenant_console}/#/globex-{user_name}/clients[Red Hat Keycloak Clients List^, window="sso"]. 
 . Login as *({user_name}/{user_password})*. 
 
 
@@ -309,7 +309,7 @@ deployment.apps/globex-partner-web updated
 image::apim/globex-partner-web-filled.png[]
 . To check the Secret that you updated, you can navigate to {openshift_cluster_console}/k8s/ns/globex-apim-{user_name}/secrets/globex-partner-web[globex-partner-web secret^, window="console"]. Scroll down to the *Data* section, and click on *Reveal values*
 +
-.Partner Web Portal Secret with SSO details
+.Partner Web Portal Secret with Keycloak details
 image::apim/partner-web-secret.png[]
 ====
 

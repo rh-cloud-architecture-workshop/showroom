@@ -153,7 +153,10 @@ Go the browser tab with the Globex we UI, refresh the home page, and notice how 
 == Congratulations
 With this you have completed the *Cloud Native Architectures - Introductory module*!
 
+[TIP]
+====
 Please close all but the *Workshop Deployer* browser tab to avoid proliferation of browser tabs which can make working on other modules difficult. 
+====
 
 Proceed to the https://workshop-deployer.{openshift_subdomain}[Workshop Deployer^, window="workshopdeployer"] to choose your next module.
 

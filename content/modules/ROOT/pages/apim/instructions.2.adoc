@@ -45,7 +45,7 @@ In this section you will manage and secure the Mobile Gateway API endpoints so t
 == Section Goals 
 
 . setup Red Hat build of Keycloak to provide single sign-on (SSO) capabilities for users signing into Mobile App 
-. setup Keycloak to secure Mobile Gateway API endpoints using OpenID Connect
+. setup Red build of Keycloak to secure Mobile Gateway API endpoints using OpenID Connect
 . manage Mobile Gateway APIs with Red Hat 3scale API Management
 . access Red Hat 3scale API Management's Developer Portal as a Mobile Developer to sign up for access of API
 
@@ -321,7 +321,7 @@ image::apim/mobile-product-overview.png[]
 . Navigate to *Integration -> Settings* page from the Product overview page. You will notice that the Product has been setup with 
 .. OpenID Connect as Authentication mechanism
 .. *client_manager* client details that you had created in the previous steps.
-.. OIDC Authorization Flow includes *Implicit Flow* because we would be authenticating the users SSO as well access to the backend services
+.. OIDC Authorization Flow includes *Implicit Flow* because we would be authenticating the users single-sign-on as well access to the backend services
 +
 .Mobile Gateway Product: Settings
 image::apim/mobile-product-openid-settings.png[]
@@ -453,7 +453,7 @@ image::apim/mobile-mobgateway-env-patch.png[width=60%]
 | SSO_REDIRECT_LOGOUT_URI | \https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}/home
 |===
 +
-.Update SSO details into mobile-env-patch file
+.Update Keycloak details into mobile-env-patch file
 image::apim/mobile-sso-env-patch.png[]
 . Finally the *mobile-env-patch.sh* file should look like this. Save the file by `Ctrl+S`
 +
