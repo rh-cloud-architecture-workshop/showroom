@@ -17,7 +17,7 @@
   cursor: pointer;
 }
 
-.nav-container, .pagination, .toolbar .next {
+.nav-container {
   display: none !important;
 }
 
