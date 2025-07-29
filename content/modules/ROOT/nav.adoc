@@ -23,7 +23,7 @@
 ** xref:camel/intro.0.adoc[Architecture overview]
 ** xref:camel/intro.1.adoc[Technical Capabilities]
 
-* xref:module-camel-instructions.adoc[Lab Overview]
+* xref:module-camel-instructions.adoc[Lab Overview & Dev environment]
 ** xref:camel/instructions.0.adoc[Enable the Rocket.Chat to Matrix interaction]
 ** xref:camel/instructions.1.adoc[Enable the Matrix to Rocket.Chat interaction]
 ** xref:camel/instructions.2.adoc[Plug in the Globex Web Chat]
