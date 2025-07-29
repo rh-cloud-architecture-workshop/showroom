@@ -53,7 +53,7 @@ In this first implementation activity you need to enable the end-to-end data flo
 
 ++++
 <p align="center">
-	<img src="./_images/camel/overview-lab-1.png" style="width:90%;border-style: none;">
+	<img src="../_images/camel/overview-lab-1.png" style="width:90%;border-style: none;">
 </p>
 ++++
 
@@ -112,7 +112,7 @@ Your Matrix integration, implemented with Camel, requires access to _Red Hat Dat
 
 ++++
 <p align="center">
-	<img src="./_images/camel/cache-role.png" style="width:40%;border-style: none;">
+	<img src="../_images/camel/cache-role.png" style="width:40%;border-style: none;">
 </p>
 ++++
 
@@ -152,7 +152,7 @@ NOTE: Camel supports various DSLs (Domain Specific Language). The main ones are 
 . Delete the example route (full `from` definition) in `routes-cache`
 
 ++++
-<img src="./_images/camel/cache-open-yaml.png" style="width:60%;border-style: none;">
+<img src="../_images/camel/cache-open-yaml.png" style="width:60%;border-style: none;">
 ++++
 --
 +
@@ -366,7 +366,7 @@ NOTE: The new file has a YAML extension. Camel K automatically generates for you
 . Delete the example route (full `from` definition)
 +
 ++++
-<img src="./_images/camel/code-delete-default-yaml.png" style="width:40%;border-style: none;">
+<img src="../_images/camel/code-delete-default-yaml.png" style="width:40%;border-style: none;">
 ++++
 
 . Replace (the deleted route) with the following snippet:
@@ -496,7 +496,7 @@ To speed up with the lab, this Camel route is already provided. Here we're just 
 
 ++++
 <p align="center">
-	<img src="./_images/camel/cache-seq-diagram.png" style="width:40%;border-style: none;">
+	<img src="../_images/camel/cache-seq-diagram.png" style="width:40%;border-style: none;">
 </p>
 ++++
 
@@ -626,7 +626,7 @@ You can ignore any warning stating "Unable to verify existence of operator id [c
 You should see in your terminal a log output similar to:
 +
 ++++
-<img src="./_images/camel/matrix-dev-terminal-output.png" style="width:80%;border-style: none;">
+<img src="../_images/camel/matrix-dev-terminal-output.png" style="width:80%;border-style: none;">
 ++++
 +
 [WARNING]
@@ -653,7 +653,7 @@ NOTE: The Camel K operator automates the process of creating, building, deployin
 You should find, as per the picture below, marked in red, the _matrix_ pod running your _Camel K_ code in DEV mode.
 +
 ++++
-<img src="./_images/camel/topology-matrix-dev.png" style="width:100%;border-style: none;">
+<img src="../_images/camel/topology-matrix-dev.png" style="width:100%;border-style: none;">
 ++++
 +
 NOTE: You'll also see other pre-deployed pods to assist you in this learning module (running DataGrid, Minio (S3), and others).
@@ -685,7 +685,7 @@ Leave the browser window open.
 As per the picture below, [1] select the globex-support-{user_name} channel in your Rocket.Chat window, [2] type in a test message, and [3], click the 'Send' button (or press Enter).
 +
 ++++
-<img src="./_images/camel/rocketchat-dev-test.png" style="width:80%;border-style: none;">
+<img src="../_images/camel/rocketchat-dev-test.png" style="width:80%;border-style: none;">
 ++++
 
 . On Element...
@@ -697,13 +697,13 @@ You should see a new room created named `rocketchat-{user_name}`
 .. You should see a dialog box asking if you want to join the room. Click *Accept*
 +
 ++++
-<img src="./_images/camel/element-dev-test-accept.png" style="width:80%;border-style: none;">
+<img src="../_images/camel/element-dev-test-accept.png" style="width:80%;border-style: none;">
 ++++ 
 
 .. You should see displayed the message sent from Rocket.Chat:
 +
 ++++
-<img src="./_images/camel/element-dev-test-message.png" style="width:80%;border-style: none;">
+<img src="../_images/camel/element-dev-test-message.png" style="width:80%;border-style: none;">
 ++++
 +
 If you see the message in Element as above shown, then you've successfully completed this first exercise. +

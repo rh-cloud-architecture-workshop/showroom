@@ -41,7 +41,7 @@ As an added initiative to the digital transformation, Globex wants to implement 
 
 ++++
 <p align="center">
-	<img src="./_images/camel/intro-arch-1.png" style="width:80%;border-style: none;">
+	<img src="../_images/camel/intro-arch-1.png" style="width:80%;border-style: none;">
 </p>
 ++++
 
@@ -59,7 +59,7 @@ As per the picture below, this module is divided in 3 main activities:
 
 ++++
 <p align="center">
-	<img src="./_images/camel/intro-lab-overview.png" style="width:80%;border-style: none;">
+	<img src="../_images/camel/intro-lab-overview.png" style="width:80%;border-style: none;">
 </p>
 ++++
 

@@ -50,7 +50,7 @@ The last piece in the workshop's architecture is an integration that uses storag
 
 ++++
 <p align="center">
-	<img src="./_images/camel/overview-lab-3.png" style="width:90%;border-style: none;">
+	<img src="../_images/camel/overview-lab-3.png" style="width:90%;border-style: none;">
 </p>
 ++++
 
@@ -62,7 +62,7 @@ The plan is to replay and process data streams from channel conversations and tr
 
 ++++
 <p align="center">
-	<img src="./_images/camel/transcript-kafka-s3.jpg" style="width:60%;border-style: none;">
+	<img src="../_images/camel/transcript-kafka-s3.jpg" style="width:60%;border-style: none;">
 </p>
 ++++
 
@@ -80,7 +80,7 @@ Do not despair, the following sequence diagram should help you to see it all, cr
 
 ++++
 <p align="center">
-	<img src="./_images/camel/transcript-seq-diagram.jpg" style="width:50%;border-style: none;">
+	<img src="../_images/camel/transcript-seq-diagram.jpg" style="width:50%;border-style: none;">
 </p>
 ++++
 
@@ -187,7 +187,7 @@ Select from your project tree:
 . Delete the sample Camel route in `transcript.xml` 
 +
 ++++
-<img src="./_images/camel/code-delete-default-xml.png" style="width:40%;border-style: none;">
+<img src="../_images/camel/code-delete-default-xml.png" style="width:40%;border-style: none;">
 ++++
 +
 {empty} +
@@ -490,7 +490,7 @@ NOTE: Leaving the room should kick-off the transcript process.
 --
 +
 ++++
-<img src="./_images/camel/transcript-test-1.png" style="width:100%;border-style: none;">
+<img src="../_images/camel/transcript-test-1.png" style="width:100%;border-style: none;">
 ++++
 
 
