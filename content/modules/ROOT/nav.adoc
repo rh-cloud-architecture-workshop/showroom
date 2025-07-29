@@ -1,7 +1,7 @@
 
 * xref:globex-intro.adoc[Introduction and Walk-through]
-** xref:1_intro/intro.0.adoc[page1]
-** xref:1_intro/intro.1.adoc[page2]
+** xref:intro/intro.0.adoc[Technical environment]
+** xref:intro/intro.1.adoc[Walkthrough of the Globex web application]
 
 * xref:module-cdc-intro.adoc[Build new functionality with Change Data Capture - Intro]
 

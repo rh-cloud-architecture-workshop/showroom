@@ -64,9 +64,3 @@ The current architecture of the Globex retail web application:
 
 image::intro/globex-deployment-2.png[]
 
-
-++++
-<nav class="pagination" style="display: flex !important;">
-  <span class="next"><a href="1_intro/intro.0.html" class="query-params-link">Technical environment</a></span>
-</nav>
-++++
