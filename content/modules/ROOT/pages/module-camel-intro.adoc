@@ -13,12 +13,22 @@
   gtag('config', 'G-Z54F1ZPC4H');
 </script>
 <style>
-  .nav-container, .pagination, .toolbar {
-    display: none !important;
-  }
-  .doc {    
-    max-width: 70rem !important;
-  }
+.underline {
+  cursor: pointer;
+}
+
+.nav-container {
+  display: none !important;
+}
+
+.doc {    
+  max-width: 70rem !important;
+}
+
+.pagination .prev {
+  display: none !important;
+}
+</style>
 </style>
 ++++
 
