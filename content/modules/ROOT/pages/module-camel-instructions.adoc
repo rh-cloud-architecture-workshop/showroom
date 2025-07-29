@@ -50,7 +50,7 @@ include::../assets/css/site.css
 
 :elementurl: https://element.{openshift_subdomain}
 
-== Quick overview of the lab exercises
+= Quick overview of the lab exercises
 
 {empty} +
 
