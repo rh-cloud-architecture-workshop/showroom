@@ -52,7 +52,7 @@ The animation below illustrates the 3 main integration systems you will deliver 
 
 ++++
 <p align="center">
-	<img src="../_images/camel/lab-tasks-animation.gif" style="width:90%;border-style: none;">
+	<img src="./_images/camel/lab-tasks-animation.gif" style="width:90%;border-style: none;">
 </p>
 ++++
 
@@ -95,7 +95,7 @@ To implement the integrations you are going to use OpenShift Dev Spaces. Dev Spa
 
 ++++
 <p align="center">
-	<img src="../_images/camel/devspaces-workflow.jpg" style="width:90%;border-style: none;">
+	<img src="./_images/camel/devspaces-workflow.jpg" style="width:90%;border-style: none;">
 </p>
 ++++
 
@@ -145,7 +145,7 @@ image::devspace-auth-access.png[width=70%]
 - `workshop/module-camel/lab`
 +
 ++++
-<img src="../_images/camel/devspaces-project-tree.png" style="width:100%;border-style: none;">
+<img src="./_images/camel/devspaces-project-tree.png" style="width:100%;border-style: none;">
 ++++
 +
 {empty} +
@@ -153,13 +153,13 @@ image::devspace-auth-access.png[width=70%]
 * Open the built-in Terminal. Click on the [1] image:devspaces-menu.png[] icon on the top of the left menu, and select [2] *Terminal /* [3] *New Terminal* from the drop-down menu.
 +
 ++++
-<img src="../_images/camel/devspaces-open-terminal.png" style="width:40%;border-style: none;">
+<img src="./_images/camel/devspaces-open-terminal.png" style="width:40%;border-style: none;">
 ++++
 
 * This opens a terminal in the bottom half of the workspace.
 +
 ++++
-<img src="../_images/camel/devspaces-view-terminal.png" style="width:100%;border-style: none;">
+<img src="./_images/camel/devspaces-view-terminal.png" style="width:100%;border-style: none;">
 ++++
 +
 {empty} +
@@ -207,7 +207,7 @@ Now using project "globex-camel-{user_name}" on server "{openshift_api_internal}
 ----
 +
 ++++
-<img src="../_images/camel/devspaces-login-project.png" style="width:60%;border-style: none;">
+<img src="./_images/camel/devspaces-login-project.png" style="width:60%;border-style: none;">
 ++++
 
 {empty} +

@@ -93,7 +93,7 @@ NOTE: The new file has a YAML extension. Camel K automatically generates for you
 . Delete the example route (full `from` definition)
 +
 ++++
-<img src="../_images/camel/code-delete-default-yaml.png" style="width:40%;border-style: none;">
+<img src="./_images/camel/code-delete-default-yaml.png" style="width:40%;border-style: none;">
 ++++
 
 . Replace (the deleted route) with the following snippet:
@@ -397,7 +397,7 @@ You should see the agent's message sent from Matrix appear in the Rocket.Chat ch
 --
 +
 ++++
-<img src="../_images/camel/matrix-deploy-test-end-to-end.png" style="width:100%;border-style: none;">
+<img src="./_images/camel/matrix-deploy-test-end-to-end.png" style="width:100%;border-style: none;">
 ++++
 
 . In Rocket.Chat, as above on the right hand side, you should see a notification informing the session has ended.
@@ -431,7 +431,7 @@ Your next task will be to complete and deploy a Camel K integration that connect
 
 ++++
 <p align="center">
-	<img src="../_images/camel/overview-lab-2.png" style="width:90%;border-style: none;">
+	<img src="./_images/camel/overview-lab-2.png" style="width:90%;border-style: none;">
 </p>
 ++++
 
@@ -461,7 +461,7 @@ The illustration below describes data exchanges via AMQ:
 
 ++++
 <p align="center">
-	<img src="../_images/camel/common-data-model.png" style="width:90%;border-style: none;">
+	<img src="./_images/camel/common-data-model.png" style="width:90%;border-style: none;">
 </p>
 ++++
 
@@ -477,7 +477,7 @@ The flow is relatively simple, all is required is listen for HTTP requests, proc
 
 ++++
 <p align="center">
-	<img src="../_images/camel/globex-request-flow.jpg" style="width:65%;border-style: none;">
+	<img src="./_images/camel/globex-request-flow.jpg" style="width:65%;border-style: none;">
 </p>
 ++++
 
@@ -524,7 +524,7 @@ Select from your project tree:
 . Delete the sample Camel route in `routesglobex`.
 +
 ++++
-<img src="../_images/camel/code-delete-default-java.jpg" style="width:40%;border-style: none;">
+<img src="./_images/camel/code-delete-default-java.jpg" style="width:40%;border-style: none;">
 ++++
 +
 {empty} +
@@ -647,7 +647,7 @@ Again, the flow is very straightforward, it just needs to consume AMQP events fr
 
 ++++
 <p align="center">
-	<img src="../_images/camel/globex-response-flow.jpg" style="width:65%;border-style: none;">
+	<img src="./_images/camel/globex-response-flow.jpg" style="width:65%;border-style: none;">
 </p>
 ++++
 
@@ -808,13 +808,13 @@ You can open the Globex Web application following link:{globexweburl}[*this dire
 Or, by finding it in your link:{topologyviewurl}[*_Topology_ view*, window="console"].
 +
 ++++
-<img src="../_images/camel/globex-open-portal.jpg" style="width:40%;border-style: none;">
+<img src="./_images/camel/globex-open-portal.jpg" style="width:40%;border-style: none;">
 ++++
 
 .. When the web application opens, click `Login` in the upper-right corner of the screen:
 +
 ++++
-<img src="../_images/camel/globex-login.jpg" style="width:100%;border-style: none;">
+<img src="./_images/camel/globex-login.jpg" style="width:100%;border-style: none;">
 ++++
 
 .. Enter the following credentials:
@@ -824,7 +824,7 @@ Or, by finding it in your link:{topologyviewurl}[*_Topology_ view*, window="cons
 --
 +
 ++++
-<img src="../_images/camel/globex-signin.jpg" style="width:40%;border-style: none;">
+<img src="./_images/camel/globex-signin.jpg" style="width:40%;border-style: none;">
 ++++
 +
 {empty} +
@@ -832,7 +832,7 @@ Or, by finding it in your link:{topologyviewurl}[*_Topology_ view*, window="cons
 .. Once in, open a support chat session by clicking one of these two options:
 +
 ++++
-<img src="../_images/camel/globex-open-chat.jpg" style="width:100%;border-style: none;">
+<img src="./_images/camel/globex-open-chat.jpg" style="width:100%;border-style: none;">
 ++++
 
 .. From the chat window:
@@ -843,7 +843,7 @@ Or, by finding it in your link:{topologyviewurl}[*_Topology_ view*, window="cons
 --
 +
 ++++
-<img src="../_images/camel/globex-customer-question.jpg" style="width:100%;border-style: none;">
+<img src="./_images/camel/globex-customer-question.jpg" style="width:100%;border-style: none;">
 ++++
 
 [start=4]
@@ -875,7 +875,7 @@ You should see the agent's message sent from Matrix appear in your chat session 
 --
 +
 ++++
-<img src="../_images/camel/globex-deploy-test-end-to-end.png" style="width:100%;border-style: none;">
+<img src="./_images/camel/globex-deploy-test-end-to-end.png" style="width:100%;border-style: none;">
 ++++
 
 . In Globex, as above on the right hand side, you should see a notification informing the session has ended.
@@ -910,7 +910,7 @@ The last piece in the workshop's architecture is an integration that uses storag
 
 ++++
 <p align="center">
-	<img src="../_images/camel/overview-lab-3.png" style="width:90%;border-style: none;">
+	<img src="./_images/camel/overview-lab-3.png" style="width:90%;border-style: none;">
 </p>
 ++++
 
@@ -922,7 +922,7 @@ The plan is to replay and process data streams from channel conversations and tr
 
 ++++
 <p align="center">
-	<img src="../_images/camel/transcript-kafka-s3.jpg" style="width:60%;border-style: none;">
+	<img src="./_images/camel/transcript-kafka-s3.jpg" style="width:60%;border-style: none;">
 </p>
 ++++
 
@@ -940,7 +940,7 @@ Do not despair, the following sequence diagram should help you to see it all, cr
 
 ++++
 <p align="center">
-	<img src="../_images/camel/transcript-seq-diagram.jpg" style="width:50%;border-style: none;">
+	<img src="./_images/camel/transcript-seq-diagram.jpg" style="width:50%;border-style: none;">
 </p>
 ++++
 
@@ -1047,7 +1047,7 @@ Select from your project tree:
 . Delete the sample Camel route in `transcript.xml` 
 +
 ++++
-<img src="../_images/camel/code-delete-default-xml.png" style="width:40%;border-style: none;">
+<img src="./_images/camel/code-delete-default-xml.png" style="width:40%;border-style: none;">
 ++++
 +
 {empty} +
@@ -1350,7 +1350,7 @@ NOTE: Leaving the room should kick-off the transcript process.
 --
 +
 ++++
-<img src="../_images/camel/transcript-test-1.png" style="width:100%;border-style: none;">
+<img src="./_images/camel/transcript-test-1.png" style="width:100%;border-style: none;">
 ++++
 
 

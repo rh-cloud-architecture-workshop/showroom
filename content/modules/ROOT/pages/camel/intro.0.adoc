@@ -35,7 +35,7 @@ The architecture diagram below illustrates all the technologies at play providin
 
 ++++
 <p align="center">
-	<img src="../_images/camel/full-architecture.png" style="width:80%;border-style: none;">
+	<img src="./_images/camel/full-architecture.png" style="width:80%;border-style: none;">
 </p>
 ++++
 
