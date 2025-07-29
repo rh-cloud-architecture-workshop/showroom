@@ -94,6 +94,7 @@ image::apim/partner-gateway-backend.png[width=80%]
 ----
 oc apply -f /projects/workshop-devspaces/workshop/module-apim/partners/gateway/partner-gateway-backend.yaml -n globex-apim-{user_name}
 ----
++
 .Output
 ----
 backend.capabilities.3scale.net/globex-partner-gateway-backend created
