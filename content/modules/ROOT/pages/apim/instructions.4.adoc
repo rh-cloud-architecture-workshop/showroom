@@ -19,21 +19,17 @@
   gtag('config', 'G-51D1EZEH8B');
 </script>
 <style>
-  .underline {
+    .underline {
     cursor: pointer;
-  }
+    }
 
-  .nav-container {
+    .nav-container {
     display: none !important;
-  }
+    }
 
-  .doc {    
+    .doc {    
     max-width: 70rem !important;
-  }
-
-  .pagination .prev {
-    display: none !important;
-  }
+    }
 </style>
 ++++
 
