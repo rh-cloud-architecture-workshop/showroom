@@ -29,7 +29,6 @@
   display: none !important;
 }
 </style>
-</style>
 ++++
 
 In this module you will participate to complete the implementation of a multi-channel support service for Globex customers that will enable clients to chat in real time with a team of agents.
