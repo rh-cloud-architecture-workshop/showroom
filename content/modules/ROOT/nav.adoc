@@ -19,7 +19,7 @@
 
 * xref:module-skupper-instructions.adoc[Building a secure service network with Red Hat Service Interconnect - Instructions]
 
-* xref:module-camel-intro.adoc[Building a multi-channel support service for Globex customers - Intro]
+* xref:module-camel-intro.adoc[Business and Technical Context]
 ** xref:camel/intro.0.adoc[Architecture overview]
 ** xref:camel/intro.1.adoc[Technical Capabilities]
 
