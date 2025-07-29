@@ -113,4 +113,4 @@ image::apim/apim_deployment.png[]
 
 In the next chapter you will be guided through the implementation and deployment of the Contract First Approach. Of course, this entails way more than can be achieved during a workshop, so most components are already in place. You will focus on a number of key activities to deploy and run the solution.
 
-Proceed to the xref:./module-apim-instructions.adoc[instructions] for this module.
+Proceed to the xref:../module-apim-instructions.adoc[Instructions] for this module.

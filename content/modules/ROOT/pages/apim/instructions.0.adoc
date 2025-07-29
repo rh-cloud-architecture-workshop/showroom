@@ -1,4 +1,4 @@
-:imagesdir: ../assets/images
+:imagesdir: ../../assets/images
 
 
 = Launch new channels with Contract First Approach - Instructions
