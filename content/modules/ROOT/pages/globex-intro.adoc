@@ -25,6 +25,9 @@
   max-width: 70rem !important;
 }
 
+.pagination .prev {
+  display: none !important;
+}
 </style>
 ++++
 
