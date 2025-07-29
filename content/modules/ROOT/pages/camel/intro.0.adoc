@@ -1,4 +1,4 @@
-= Building a multi-channel support service for Globex customers - Intro
+= Architecture overview
 :imagesdir: ../../assets/images
 :icons: font 
 
@@ -29,7 +29,7 @@
 
 ++++
 
-== Architecture overview
+
 
 The architecture diagram below illustrates all the technologies at play providing a pluggable and scalable platform.
 

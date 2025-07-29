@@ -1,4 +1,4 @@
-= Building a multi-channel support service for Globex customers - Intro
+= Technical Capabilities
 :imagesdir: ../../assets/images
 :icons: font 
 
@@ -31,7 +31,7 @@
 </style>
 ++++
 
-== Technical Capabilities
+
 
 The key capabilities you will use in this module are:
 

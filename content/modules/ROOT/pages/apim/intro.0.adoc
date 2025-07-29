@@ -1,4 +1,4 @@
-= Building a multi-channel support service for Globex customers - Intro
+= Technical considerations
 :imagesdir: ../../assets/images
 :icons: font 
 
@@ -31,7 +31,7 @@
 </style>
 ++++
 
-= Technical considerations
+
 
 The new requirements to expand Globex's business by adding additional channels bring its own set of challenges:
 

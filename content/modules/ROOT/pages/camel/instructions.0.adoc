@@ -1,4 +1,4 @@
-= Building a multi-channel support service for Globex customers - Instructions
+= Enable the Rocket.Chat to Matrix interaction
 :imagesdir: ../../assets/images
 
 
@@ -47,7 +47,7 @@
 :elementurl: https://element.{openshift_subdomain}
 
 
-= Enable the Rocket.Chat to Matrix interaction
+
 
 As previously described, the Rocket.Chat integration is already in place and users can already post questions on the _GlobexSupport_ app which are channelled and available in the AMQ Broker.
 
