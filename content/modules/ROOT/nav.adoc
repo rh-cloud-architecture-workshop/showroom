@@ -22,6 +22,5 @@
 * xref:module-camel-intro.adoc[Business and Technical Context]
 ** xref:camel/intro.0.adoc[Architecture overview]
 ** xref:camel/intro.1.adoc[Technical Capabilities]
-** xref:module-camel-instructions[Instructions]
 
 * xref:module-camel-instructions.adoc[Instructions]

@@ -95,4 +95,4 @@ Applications can function and interact with data in a simplified, consistent and
 
 In the next chapter, you will be guided through the implementation and deployment of the Multi-channel Support Service service. Of course this entails way more than can be achieved during a workshop, so instead most components are already in place, and you will focus on a couple of key activities to deploy and run the solution.
 
-Proceed to the xref:./module-camel-instructions.adoc[instructions] for this module.
+Proceed to the xref:../module-camel-instructions.adoc[instructions] for this module.
