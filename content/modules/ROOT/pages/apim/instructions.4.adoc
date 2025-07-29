@@ -40,7 +40,7 @@ Before we start this section, close all the browser tabs except for this *Instru
 
 Since we've gone through the Design and Governance sections of the Mobile API, in this section we will skip the design section. We'll also keep discussions to only essentials :)
 
-= Publish Partner API to Service Registry
+== Publish Partner API to Service Registry
 
 * If you don't have a browser tab open with OpenShift Dev Spaces, click on {devspaces_dashboard}[Dev Spaces IDE^, window="devspaces"], choose your workspace. If needed login with your username and password ({user_name}/{user_password}).
 * In Dev Spaces, navigate to the folder *workshop/module-apim/partner/activedoc*, and open the file *partner-activedoc-draft.json*. 
