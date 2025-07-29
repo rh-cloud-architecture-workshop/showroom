@@ -8,7 +8,7 @@
 * xref:module-cdc-instructions.adoc[Build new functionality with Change Data Capture - Instructions]
 
 * xref:module-apim-intro.adoc[Launch new channels with Contract First Approach - Intro]
-** xref:apim/instructions.0.adoc[Technical Considerations]
+** xref:apim/intro.0.adoc[Technical Considerations]
 
 * xref:module-apim-instructions.adoc[Launch new channels with Contract First Approach - Instructions]
 ** xref:apim/instructions.0.adoc[Red Hat build of Keycloak - An Introduction]
