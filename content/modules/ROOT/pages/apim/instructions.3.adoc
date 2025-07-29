@@ -35,29 +35,28 @@
 
 In the previous section, you signed up for access as a Mobile Developer and gained credentials to access the Globex Mobile Gateway API. In this section you will complete Mobile App configuration and test this out
 
-[NOTE]
-====
+== Access the Mobile App
+
 As part of this workshop, you will use a mobile-friendly Angular App and not a mobile-native app. So no mobile app installation is necessary. This Mobile App is work in progress and at present shows only categories and products within each category.
-====
 
-The Mobile Application can be access via this QR Code as well as via browser
 
-* Scan the following QR Code with your mobile phone and login  using `asilva/openshift`
+. The Mobile Application can be access via this QR Code as well as via browser
+
+. Scan the following QR Code with your mobile phone and login  using `asilva/openshift`
 +
-
 image::https://api.qrserver.com/v1/create-qr-code/?data=https%3A%2F%2Fglobex-mobile-globex-apim-{user_name}.{openshift_subdomain}[200,300]
  
-* Alternatively, launch https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}[Globex Mobile^] and login using `asilva/openshift`
-* The login process may take a few seconds. Please wait for a bit :)
+. Alternatively, launch https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}[Globex Mobile^] and login using `asilva/openshift`
+. The login process may take a few seconds. Please wait for a bit :)
 +
 .User is logged in
 image::apim/apim-mobile-loggedin.png[width=40%]
-* After logging in, click on the *View the categories* button. You will view on a list of Categories available
+. After logging in, click on the *View the categories* button. You will view on a list of Categories available
 +
 .Categories view
 image::apim/mobile-categories.png[width=40%]
-* Click on the 'Clothing' category to view the Product Listing.
-* Try out a few more categories too which will help us to generate some traffic to view in the Analytics section.
+. Click on the 'Clothing' category to view the Product Listing.
+. Try out a few more categories too which will help us to generate some traffic to view in the Analytics section.
 
 
 == Analytics
