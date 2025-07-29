@@ -1,7 +1,7 @@
 :imagesdir: ../../assets/images
 
 
-= Launch new channels with Contract First Approach - Instructions
+= Red Hat build of Keycloak - An Introduction
 
 // :toclevels: 2
 :icons: font 
@@ -36,7 +36,7 @@
 
 ++++
 
-= Red Hat build of Keycloak - An Introduction
+
 
 Red Hat build of Keycloak is used in this module to both offer single-sign on to Mobile users, and also for securing the APIs. 
 

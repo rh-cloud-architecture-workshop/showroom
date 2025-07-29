@@ -1,6 +1,5 @@
 :imagesdir: ../../assets/images
-
-= Launch new channels with Contract First Approach - Instructions
+== Test Mobile Application 
 
 // :toclevels: 2
 :icons: font 
@@ -33,7 +32,6 @@
 </style>
 ++++
 
-== Test Mobile Application 
 
 In the previous section, you signed up for access as a Mobile Developer and gained credentials to access the Globex Mobile Gateway API. In this section you will complete Mobile App configuration and test this out
 

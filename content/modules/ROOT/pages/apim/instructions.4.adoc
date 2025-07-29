@@ -1,6 +1,6 @@
 :imagesdir: ../../assets/images
 
-= Launch new channels with Contract First Approach - Instructions
+= Setup Partner Gateway and Partner Web App (Optional)
 
 // :toclevels: 2
 :icons: font 
@@ -34,7 +34,7 @@
 ++++
 
 
-= Setup Partner Gateway and Partner Web App (Optional)
+
 
 Before we start this section, close all the browser tabs except for this *Instructions tab* and *Dev Spaces* tab. This will help you navigate this section more easily.
 
