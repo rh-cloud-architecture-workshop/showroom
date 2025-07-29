@@ -1,4 +1,4 @@
-= Building a multi-channel support service for Globex customers - Instructions
+= Persist and Share a Session Transcript 
 :imagesdir: ../../assets/images
 
 
@@ -44,7 +44,7 @@
 
 :elementurl: https://element.{openshift_subdomain}
 
-== Persist and Share a Session Transcript 
+
 
 The last piece in the workshop's architecture is an integration that uses storage to persist the conversation of every customer/agent session and shares a transcript. The diagram below illustrates the data flows that it enables.
 
@@ -70,7 +70,7 @@ In the diagram above we see a number of instant messaging platforms interacting 
 
 {empty} +
 
-=== Understand the Transcript Logic
+== Understand the Transcript Logic
 
 You saw, in some parts of the code, the processing logic pushing events to Kafka to keep record of each one of the interactions between the two actors (customers and agents). Also, when the support session closes, there's logic to send a signal (via Kafka) to mark the end of the conversation (end of stream).
 
@@ -102,7 +102,7 @@ Since all of the above happens in real time, that is, when the agent closes the 
 
 {empty} +
 
-=== Implement the Camel routes.
+== Implement the Camel routes.
 
 To speed up the exercise, we've provided some of the Camel routes so that you can concentrate on the main pieces of logic.
 
@@ -133,7 +133,7 @@ In the content that follows you will learn the following concepts:
 {empty} +
 
 
-==== Implement the Main Processor
+=== Implement the Main Processor
 
 In the diagram from the previous section you can see the signal that initiates the processing. Signals are pushed to a dedicated Kafka topic that complies with the following name convention:
 
@@ -303,7 +303,7 @@ The next section will assist you in implementing the route, invoked in step [12]
 
 {empty} +
 
-==== Implement the `store-pdf` route
+=== Implement the `store-pdf` route
 
 This Camel route prepares the payload and invokes the S3 subsystem to store the PDF document in an S3 bucket.
 
@@ -361,7 +361,7 @@ The last of the Camel routes you need to complete implements that task, follow t
 
 {empty} +
 
-==== Implement the `share-transcript` route
+=== Implement the `share-transcript` route
 
 This Camel route prepares the payload and invokes the S3 subsystem to store the PDF document in an S3 bucket.
 
@@ -429,7 +429,7 @@ You're done with the implementation part.
 {empty} +
 
 
-=== Deploy and test your code
+== Deploy and test your code
 
 With the Camel K client `kamel` you can deploy your integrations with one command. Camel K will take care of collecting all your sources, containerizing them and deploying an instance.
 
