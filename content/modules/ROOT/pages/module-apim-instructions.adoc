@@ -907,7 +907,7 @@ The Partner Portal section is quite similar to the Mobile App but for the fact t
 === Cleanup
 You can now close all the tabs except for this Instructions and Dev Spaces browser tabs. Close all files open within Dev Spaces as well.
 
-If you choose to proceed to another module, close all but this *Instructions* browser before starting the next module. Go back to the https://workshop-deployer.{openshift_subdomain}[Workshop Deployer] to choose your next module.
+If you choose to proceed to another module, close all but this *Instructions* browser before starting the next module. Go back to the https://workshop-deployer.{openshift_subdomain}[Workshop Deployer^, window="workshopdeployer"] to choose your next module.
 
 == Setup Partner Gateway and Partner Web App (Optional)
 
@@ -1230,4 +1230,4 @@ With this you have completed the *Launch new channels with Contract-First Approa
 
 Please close all but the Workshop Deployer browser tab to avoid proliferation of browser tabs which can make working on other modules difficult. 
 
-Proceed to the https://workshop-deployer.{openshift_subdomain}[Workshop Deployer] to choose your next module.
+Proceed to the https://workshop-deployer.{openshift_subdomain}[Workshop Deployer^, window="workshopdeployer"] to choose your next module.

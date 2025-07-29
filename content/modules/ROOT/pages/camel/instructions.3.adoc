@@ -534,4 +534,4 @@ Congratulations! With this you have completed the Camel workshop module!
 
 Please close all but the Workshop Deployer browser tab to avoid proliferation of browser tabs which can make working on other modules difficult.
 
-Proceed to the https://workshop-deployer.{openshift_subdomain}[Workshop Deployer] to choose your next module.
+Proceed to the https://workshop-deployer.{openshift_subdomain}[Workshop Deployer^, window="workshopdeployer"] to choose your next module.
