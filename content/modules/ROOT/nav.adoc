@@ -5,7 +5,13 @@
 
 * xref:module-cdc-intro.adoc[Build new functionality with Change Data Capture - Intro]
 
-* xref:module-cdc-instructions.adoc[Build new functionality with Change Data Capture - Instructions]
+* xref:module-cdc-instructions.adoc[Objectives and Lab Environment]
+** xref:cdc/instructions.0.adoc[Deploy the Debezium Connector]
+** xref:cdc/instructions.1.adoc[Create an Order]
+** xref:cdc/instructions.2.adoc[Streaming processing]
+** xref:cdc/instructions.3.adoc[Integrations with Camel K]
+** xref:cdc/instructions.4.adoc[End-to-end Scenario]
+
 
 * xref:module-apim-intro.adoc[Launch new channels with Contract First Approach - Intro]
 ** xref:apim/intro.0.adoc[Technical Considerations]

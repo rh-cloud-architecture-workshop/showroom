@@ -15,11 +15,20 @@
 </script>
 
 <style>
-  .nav-container, .pagination, .toolbar {
+  .underline {
+    cursor: pointer;
+  }
+
+  .nav-container {
     display: none !important;
   }
+
   .doc {    
     max-width: 70rem !important;
+  }
+
+  .pagination .prev {
+    display: none !important;
   }
 </style>
 ++++
