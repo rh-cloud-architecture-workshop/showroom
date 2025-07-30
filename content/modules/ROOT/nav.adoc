@@ -26,17 +26,27 @@
 
 * xref:module-serverless-intro.adoc[Event driven applications with Serverless Knative Eventing - Intro]
 
-* xref:module-serverless-instructions.adoc[Event driven applications with Serverless Knative Eventing - Instructions]
+* xref:module-serverless-instructions.adoc[Objectives and Lab Environment]
+** xref:serverless/instructions.0.adoc[Setup Knative Services]
+** xref:serverless/instructions.1.adoc[Knatve Sink and SinkBinding]
+** xref:serverless/instructions.2.adoc[Knative Sources and Broker]
+** xref:serverless/instructions.3.adoc[Knative Triggers]
+** xref:serverless/instructions.4.adoc[Test the Review Moderation and Sentiment Analysis]
+** xref:serverless/instructions.5.adoc[Solution walkthrough]
 
 * xref:module-skupper-intro.adoc[Building a secure service network with Red Hat Service Interconnect - Intro]
 
-* xref:module-skupper-instructions.adoc[Building a secure service network with Red Hat Service Interconnect - Instructions]
+* xref:module-skupper-instructions.adoc[Objectives and Lab Environment]
+** xref:skupper/instructions.0.adoc[Connect the Services with Red Hat Service Interconnect]
+** xref:skupper/instructions.1.adoc[Install Red Hat Service Interconnect]
+** xref:skupper/instructions.2.adoc[Create a link between the two namespaces]
+** xref:skupper/instructions.3.adoc[Verify the Service Interconnect network]
 
 * xref:module-camel-intro.adoc[Business and Technical Context]
 ** xref:camel/intro.0.adoc[Architecture overview]
 ** xref:camel/intro.1.adoc[Technical Capabilities]
 
-* xref:module-camel-instructions.adoc[Lab Overview & Dev environment]
+* xref:module-camel-instructions.adoc[Objectives and Lab Environment]
 ** xref:camel/instructions.0.adoc[Enable the Rocket.Chat to Matrix interaction]
 ** xref:camel/instructions.1.adoc[Enable the Matrix to Rocket.Chat interaction]
 ** xref:camel/instructions.2.adoc[Plug in the Globex Web Chat]
