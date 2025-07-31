@@ -34,6 +34,12 @@
 </style>
 ++++
 
+== What is Contract First Approach?
+
+Contract-first development is a design approach where the API contract is defined before any actual code is written. The stakeholders, including business users and developers first agree upon the Contract using a definition language such as OpenAPI Specification (OAS) or AsyncAPI. This contract serves as a blueprint for the API, the structure, data formats and expected behavior, authentication methods, and other relevant information.
+
+This approach is particularly beneficial in microservices and API-based systems, as it provides a clear contract that can be used to guide development, testing, and integration. It also facilitates collaboration between teams, as the contract serves as a shared understanding of the API's capabilities and requirements.
+
 In this module you'll discover how Contract First Approach provides the right framework to accelerate the launching of new channels in a secure way across internal and external teams to build microservices and APIs based systems.
 
 == Business context

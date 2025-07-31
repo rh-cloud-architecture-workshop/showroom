@@ -32,11 +32,14 @@
 == Cluster details
 
 . OpenShift cluster: all the activities for this workshop will be done on a shared OpenShift cluster. +
-The connection details for the OpenShift cluster:
++
+.Workshop environment
+image::intro/workshop-env.png[] 
+
+. The connection details for the OpenShift cluster:
 .. OpenShift Console: {openshift_cluster_console}[{openshift_cluster_console}, window="_console"]
 .. Username: *{user_name}*
 .. Password: *{user_password}*
-
 
 . Depending on the workshop modules you will be guided through, there are helper components such as *Streams for Apache Kafka Console*, an integrated development environment (IDE) called *OpenShift Dev Spaces*, based on Eclipse Che and some more.
 All of these (including the IDE) are hosted on OpenShift, so the login to your OpenShift Console is the central entrypoint for your Developer Experience. +
@@ -68,7 +71,8 @@ NOTE: The list of applications managed by the ArgoCD instance depends on which m
 +
 image::intro/argocd-globex-application.png[]
 . The way ArgoCD works is that the desired state of an application is described in a manifest, which is hosted in a version control system. ArgoCD makes sure that the deployed state of the application matches the desired state as described in the manifest. Changes in the manifest (a new commit for example) are picked up by ArgoCD and applied. Hence the name *GitOps*, which itself is an evolution of *Infrastructure as code*. +
-ArgoCD manifests can take many forms. For this workshop we opted for Helm charts. You can find the Helm charts for this workshop link:https://github.com/rh-cloud-architecture-workshop/helm[here].
+
+NOTE: ArgoCD manifests can take many forms. For this workshop we opted for Helm charts. You can find the Helm charts for this workshop link:https://github.com/rh-cloud-architecture-workshop/helm[here^].
 
 ====
 

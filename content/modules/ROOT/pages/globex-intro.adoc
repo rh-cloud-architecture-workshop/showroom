@@ -1,5 +1,5 @@
 = Introduction to the Workshop
-:imagesdir: ../../assets/images
+:imagesdir: ../assets/images
 
 ++++
 <!-- Google tag (gtag.js) -->
