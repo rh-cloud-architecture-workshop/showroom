@@ -33,6 +33,16 @@
 :sectnums:
 // :toc: 
 
+In this section we will connect the Knative Services (refer to previous section) to Kafka using *Knative Sink* and *SinkBinding*. 
+
+.[.underline]#*[Click to know]  What is Knative Sink and SinkBinding ?*#
+[%collapsible]
+====
+. A https://docs.openshift.com/serverless/1.30/eventing/event-sinks/serverless-kafka-developer-sink.html[Kafka Sink for Apache Kafka, window="others"] helps in persisting an incoming CloudEvents over HTTP Kafka message (CloudEvent) to a Kafka topic. Event producers (such as apps, devices) can send to the Kafka Sinks there by reducing the complexity of new protocols and message formats for app developers. The Kafka Sinks then send the CloudEvents they receive to the configured Apache Kafka topic. 
+. https://docs.openshift.com/serverless/1.30/eventing/event-sources/serverless-custom-event-sources.html[SinkBinding^] supports decoupling the source (service which produces events) from the actual sink. The SinkBinding object injects environment variables (such as sink URL) into the services there by decoupling the source from the sink.
+====
+
+
 == Create Sink and SinkBinding
 
 This solution needs a number of Sinks and SinkBinding for the various Kafka topics described in an earlier section. You will create one of them here, while the others have been preconfigured for you.

@@ -1,4 +1,4 @@
-= Setup Knative Services
+= Deploy Knative Services
 :imagesdir: ../../assets/images
 
 ++++
@@ -34,17 +34,14 @@
 // :toc: 
 
 
-== Deploy Knative Services
+== Overview
 
-As a first step, let us ensure all the services are created. A few of the services are predeployed in your OpenShift cluster. These services are built using the Knative Serving framework. +
+As a first step, let us ensure all the services are created. A few of the services are predeployed in your OpenShift cluster. These services are built using the Knative Serving framework.
 
-.[.underline]#*[Click to know] What is Knative Serving?*#
-[%collapsible]
-====
-OpenShift Serverless, with Knative Serving, makes it easy to define and control how serverless workload behaves on the Kubernetes cluster. With just one Kubernetes Custom Resource Definitions (CRDs) all the primary resources (Services, Routes, Configurations, and Revisions) are created and managed. Knative Serving supports rapid deployment of serverless containers, autoscaling, including scaling pods down to zero.
-====
+Knative Services are used to deploy and manage the whole lifecycle of your workload. The Knative Serving component scale the Knative Services based on configuration, metrics and incoming requests.
 
-* There are 3 Knative Services that are used in this solution
+
+There are 3 Knative Services that are used in this solution
 +
 [cols="30%,80%"]
 |===
@@ -54,12 +51,14 @@ OpenShift Serverless, with Knative Serving, makes it easy to define and control 
 | persist-reviews         | Persists all moderated reviews to a Postgresql database. You will deploy this service in the next steps.
 |===
 
-* Navigate to the OpenShift Console's Administrator view, and go to *Serverless > Serving* menu. You will see that two of the above mentioned services have been already deployed (`aiml-moderate-reviews` and `aiml-sentiment-reviews`). +
+== Deploy Knative Services
+
+. Navigate to the OpenShift Console's Administrator view, and go to *Serverless > Serving* menu. You will see that two of the above mentioned services have been already deployed (`aiml-moderate-reviews` and `aiml-sentiment-reviews`). +
 In the next step, you will create the `persist-reviews` Knative service using a Custom Resource Definition (CRD).
 +
 image::serverless/serverless-2knative-services.png[]
 
-* Create `persist-reviews`: Click on the *Create* button highlighted in the screenshot above. Choose *Create > Service* option. Replace all existing content with the following YAML file, and click on *Save*
+. Create `persist-reviews`: Click on the *Create* button highlighted in the screenshot above. Choose *Create > Service* option. Replace all existing content with the following YAML file, and click on *Save*
 +
 image::serverless/create-knative-service.png[]
 
@@ -90,21 +89,12 @@ spec:
             secretName: persist-reviews
 
 ----
-* Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Developer > Topology, window="console", target="console"] view of the `globex-serverless-{user_name}` namespace and you will notice all the three Knative services
+. Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Developer > Topology, window="console", target="console"] view of the `globex-serverless-{user_name}` namespace and you will notice all the three Knative services
 +
 image::serverless/3knative-service.png[]
-* A few interesting points to notes with the newly created `persist-reviews` 
-** This service is shown with a dark blue colour because of the annotation `autoscaling.knative.dev/min-scale: "1"` added in the YAML while creation of this service. This means a minimum of one pod is running all the time, instead of it scaling down to zero (0) like the other two services.
-** With just providing the container image, Knative Serving creates all the other needed Kubernetes resources (Services, Routes, Configurations, and Revisions) - making it easier for developers to create such services quickly.
 
-== Connect Knative Services to Kafka using Knative Eventing
 
-In this section we will connect the Knative Services (refer to previous section) to Kafka using *Knative Sink* and *SinkBinding*. 
+== A note on the newly created `persist-reviews` 
 
-.[.underline]#*[Click to know]  What is Knative Sink and SinkBinding ?*#
-[%collapsible]
-====
-* A https://docs.openshift.com/serverless/1.30/eventing/event-sinks/serverless-kafka-developer-sink.html[Kafka Sink for Apache Kafka, window="others"] helps in persisting the incoming Kafka message (CloudEvent) to a configurable Apache Kafka topic. Event producers (such as apps, devices) can send CloudEvents over HTTP to the Kafka Sinks there by reducing the complexity of new protocols and message formats for app developers. The Kafka Sinks then send the CloudEvents they receive to the configured Apache Kafka topic. 
-* https://docs.openshift.com/serverless/1.30/eventing/event-sources/serverless-custom-event-sources.html[SinkBinding^] supports decoupling the source (service which produces events) from the actual sink. The SinkBinding object injects environment variables (such as sink URL) into the services there by decoupling the source from the sink.
-====
-
+. This service is shown with a dark blue colour because of the annotation `autoscaling.knative.dev/min-scale: "1"` added in the YAML while creation of this service. This means a minimum of one pod is running all the time, instead of it scaling down to zero (0) like the other two services.
+. With just providing the container image, Knative Serving creates all the other needed Kubernetes resources (Services, Routes, Configurations, and Revisions) - making it easier for developers to create such services quickly.

@@ -54,7 +54,7 @@ Here is an outline of the activities you will achieve as part of this module.
 Before your proceed it is critical that your lab environment is completely ready before executing the lab instructions.
 =====
 
-* Access the *Workshop Deployer* browser tab and check if the *Launch new channels using Contract-First approach* has turned green. This indicates that the module has been fully deployed and is ready to use. 
+* Access the *Workshop Deployer* browser tab and check if the *Event driven applications with Serverless Knative Eventing* has turned green. This indicates that the module has been fully deployed and is ready to use. 
 
 .Module Readiness on Workshop Deployer
 image::serverless/serverless-workshop-deployer.png[width=40%]
@@ -62,20 +62,20 @@ image::serverless/serverless-workshop-deployer.png[width=40%]
 
 == Deployment overview and introduction
 
-* In a browser window, navigate to the {openshift_cluster_console}[OpenShift console, window="console"]. If needed, login with your username and password *({user_name}/{user_password})*. +
+. In a browser window, navigate to the {openshift_cluster_console}[OpenShift console, window="console"]. If needed, login with your username and password *({user_name}/{user_password})*. +
 If this is the first time you open the console, you will be directed to the Developer Perspective of the console, which shows you the different namespaces you have access to.
 +
 image::serverless/serverless-openshift-landing.png[]
-** `globex-serverless-{user_name}` namespace contains the components you will be working on in this lab
-** `globex-gitops-{user_name}` namespace contains the ArgoCD elements for GitOps. This is described in detail in the *Introduction* module.
-** `globex-mw-{user_name}` contains Middleware deployments including AMQ Streams (Apache Kafka)
-** `globex-{user_name}` namespace contains other services the application is dependent on. This is described in detail in the *Introduction* module.
+.. `globex-serverless-{user_name}` namespace contains the components you will be working on in this lab
+.. `globex-gitops-{user_name}` namespace contains the ArgoCD elements for GitOps. This is described in detail in the *Introduction* module.
+.. `globex-mw-{user_name}` contains Middleware deployments including AMQ Streams (Apache Kafka)
+.. `globex-{user_name}` namespace contains other services the application is dependent on. This is described in detail in the *Introduction* module.
 
-* Click on the `globex-serverless-{user_name}` namespace link to select the namespace you are going to use in this lab, and select `Topology` from the left menu.
-* The *Topology* view displays the components that have been setup for you already. Note that this screenshot shows the topology after the components have been moved around to be displayed well here.
+. Click on the `globex-serverless-{user_name}` namespace link to select the namespace you are going to use in this lab, and select `Topology` from the left menu.
+. The *Topology* view displays the components that have been setup for you already. Note that this screenshot shows the topology after the components have been moved around to be displayed well here.
 +
 image::serverless/serverless-namespace-initial-toplogy.png[]
-* Let us look at a few of the current components. The rest of the components are discussed in the next sections
+. Let us look at a few of the current components. The rest of the components are discussed in the next sections
 +
 [cols="20%,80%"]
 |===
@@ -87,16 +87,16 @@ image::serverless/serverless-namespace-initial-toplogy.png[]
 |===
 
 
-=== Red Hat AMQ Streams setup overview 
+=== Red Hat streams for Apache Kafka setup overview 
 
-* Red Hat Streams based on Apache Kafka has been setup for you already. The Kafka broker is installed in the globex-mw-{user_name} namespace.In the same namespace, AMQ streams console, a web UI for viewing Kafka topics and browsing consumer groups, is also installed. +
-* Click to navigate to https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. 
-** This redirects you to the AMQ streams console login page. 
-** For the purpose of this workshop, choose *Sign in with Anonymous Session* to access the console if you are not already signed in.
-* Navigate to the navigate to *Kafka Clusters -> kafka -> Topics*. Notice that there are 3 topics which are relevant to this module (you can filter with the word *reviews*). 
+.  Red Hat Streams based on Apache Kafka has been setup for you already. The Kafka broker is installed in the globex-mw-{user_name} namespace.In the same namespace, AMQ streams console, a web UI for viewing Kafka topics and browsing consumer groups, is also installed. +
+. Click to navigate to https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. 
+.. This redirects you to the AMQ streams console login page. 
+.. For the purpose of this workshop, choose *Sign in with Anonymous Session* to access the console if you are not already signed in.
+. Navigate to the navigate to *Kafka Clusters -> kafka -> Topics*. Notice that there are 3 topics which are relevant to this module (you can filter with the word *reviews*). 
 +
 image::serverless/amqstreams-console-3topics.png[]
-* Here is what each of these topics are meant for:
+. Here is what each of these topics are meant for:
 +
 [cols="25%,75%",]
 |===
@@ -105,18 +105,3 @@ image::serverless/amqstreams-console-3topics.png[]
 | reviews.moderated  | Reviews which are moderated are produced to this topic to be further persisted in a database.
 | reviews.sentiment  | Holds the reviews after analysis with a sentiment score.
 |===
-
-=== Introducing OpenShift Serverless for event-driven architecture
-
-When a user submits a *product review* from the Globex website, the destination for the review is Red Hat AMQ Streams (Apache Kafka). Similarly there are a number of other services which are involved in this solution which produce and consume Kafka messages to moderate and analyse these reviews in (close to) real-time. To make it easier to build out such an event-driven architecture we introduce OpenShift Serverless (based on Knative Eventing). 
-
-The services which will need to be Kafka Clients and Producers, now need to only use HTTP. Knative Eventing uses standard HTTP requests to send and receive events between these event producers and sinks. These events must conform to the CloudEvents specifications, which enables creating, parsing, sending, and receiving events in any programming language.
-
-
-.[.underline]#*[Click to know] What is CloudEvents?*#
-[%collapsible]
-====
-https://cloudevents.io[CloudEvents, window="others"] is a specification for describing event data in a common way. An event includes context and data about an occurrence. Each occurrence is uniquely identified by its data. The headers within a CloudEvents event helps Knative Eventing to route the events to the right destination.
-====
-
-
