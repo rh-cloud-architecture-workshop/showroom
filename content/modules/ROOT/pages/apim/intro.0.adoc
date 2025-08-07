@@ -1,0 +1,111 @@
+= Technical considerations
+:imagesdir: ../../assets/images
+:icons: font 
+
+++++
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-51D1EZEH8B"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z54F1ZPC4H');
+</script>
+<style>
+.underline {
+  cursor: pointer;
+}
+
+.nav-container {
+  display: none !important;
+}
+
+.doc {    
+  max-width: 70rem !important;
+}
+
+.pagination .next {
+  display: none !important;
+}
+</style>
+++++
+
+== Why choose Contract First approach?
+
+The new requirements to expand Globex's business by adding additional channels bring its own set of challenges:
+
+* Lack of a standardized API format makes really challenging to gain access to the data needed from Globex
+* Launching a Mobile App is difficult because it would be tightly coupled with the e-commerce retail application's core services
+* Inter-dependencies between various teams during the dev phase can slow down the dev productivity and time to market.
+* Lack of governance and inadvertent changes to the services can lead to adverse effect on the dev teams
+
+Globex decided to adopt a *Contract First approach* before tackling the development of new services with the API contract being formalized using the OpenAPI specifications.  
+
+.A graphical representation of the approach
+image::apim/apim-contract-first-approach.png[width=75%]
+
+With *Contract First*, all the relevant parties, including the Globex core team, internal teams, mobile teams, and 3rd party partner aggregators, are on the same page before writing the first line of code. Once a first version of the OpenAPI spec document is ready and available in a service registry, which acts a the system of truth, mocks are created for the API to enable parallel development streams.
+
+[NOTE] 
+====
+The OpenAPI Specification (OAS) defines a standard, programming language-agnostic interface description for HTTP APIs. 
+====
+
+The team introduced *Red Hat 3scale API management*  to expose, secure and manage the APIs to the core application backend services. 
+
+To make this a reality a number of components were brought together to create the final solution.
+
+== Red Hat build of Keycloak
+
+Globex uses Red Hat build of Keycloak to provide Single Sign-On (SSO) capabilities to users, web apps and APIs. In this case, OpenID Connect is used to authenticate a user (Globex Web and Mobile users) and also allow secured access to Globex's APIs.
+
+[NOTE]
+====
+*What is OpenID Connect?*
+
+OpenID Connect (OIDC) is a simple identity layer on top of the popular OAuth framework (i.e. it verifies the user by obtaining basic profile information and using an authentication server). 
+
+It is built on top of OAuth 2.0 that complements the OAuth 2.0 Authorization framework with an authentication mechanism. When OpenID Connect authentication option is used, the API requests are authenticated using the access tokens in the JSON Web Token (JWT) format (https://tools.ietf.org/html/rfc7519[RFC 7519]).
+====
+
+== API Designer
+
+Red Hat API Designer, based on Apicurio, provides a web based API Designer tool. You will use this to draft a OpenAPI file from your local file system and visually edit it (and then save it back to your disk)!
+
+== Service Registry
+
+Service Registry is a datastore for sharing standard event schemas and API designs across API and event-driven architectures. It acts as the single source of truth for the OpenAPI Specifications. This spec can be used to share and manage the data types and API descriptions at runtime using a REST interface with internal teams and other external developers and partners.
+
+== API Management with 3scale
+
+
+image::apim/apim_deployment.png[width=80%] 
+
+
+Red Hat 3scale API Management platform is used to publish, manage and secure the backend APIs. API Management helps you to define, deploy, consume, or publish your APIs for use by other developers, channels and partners. In this workshop, you will work with OpenID Connect to secure the APIs.
+
+Mobile developers and Partners can sign up to APIs via the 3scale Developer Portal, and also track their usage through analytics. +
+
+== Backend Services
+Not all of Globex's services are made available in the first iteration for access by mobile and partners. The Backend For Frontend (BFF) services are generated based on the OpenAPI Specs.
+
+[NOTE]
+====
+*A note on Code Generation* +
+You can use AI to generate the OpenAPI specification files based on the existing code base.
+
+For this module, the server-side code for the https://github.com/rh-cloud-architecture-workshop/globex-mobile-gateway/blob/main/src/main/java/org/globex/gateway/mobile/rest/MobileCatalogResource.java[Mobile Gateway^, window="code-samples"] has been built using the https://mvnrepository.com/artifact/io.apicurio/apicurio-codegen-quarkus-extension[Apicurio Codegen Quarkus Extension, window="code-samples"]. You can use the https://github.com/quarkiverse/quarkus-openapi-generator[Quarkus extension from Quarkiverse^, window="code-samples"] to generate REST clients based on OpenAPI specification files.
+
+
+====
+
+== Mobile App
+For the first iteration, the Mobile App is built using Angular + NodeJS. This app uses https://github.com/damienbod/angular-auth-oidc-client[angular-auth-oidc-client, window="code-samples"] to enable user single sign-on (SSO).
+
+
+== Implementation
+
+In the next chapter you will be guided through the implementation and deployment of the Contract First Approach module. Of course, this entails way more than can be achieved during a workshop, a number of components, such as the actual REST API Code, are already in place. You will focus on a number of key activities to deploy and run the solution.
+
+Proceed to the xref:../module-apim-instructions.adoc[Instructions] for this module.

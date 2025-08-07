@@ -1,0 +1,122 @@
+= Knative triggers
+:imagesdir: ../../assets/images
+
+++++
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y0GQBF9YFH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y0GQBF9YFH');
+</script>
+
+<style>
+  .underline {
+    cursor: pointer;
+  }
+
+  .nav-container {
+    display: none !important;
+  }
+
+  .doc {    
+    max-width: 70rem !important;
+  }
+</style>
+++++
+
+// :toclevels: 2
+:icons: font 
+:sectanchors:
+:sectnums:
+// :toc: 
+
+
+== Create Knative triggers
+You will now create triggers which will invoke the HTTP endpoint of Knative services depending on the CloudEvents headers. +
+Each CloudEvents created will be tagged with specific values in the headers `ce-type` and `ce-source` which is then used by the Trigger to route them to the correct service HTTP endpoint
+
+* Click on the *(+)* icon found on top of the OpenShift Console to access the *Import YAML* wizard.
+* Copy and paste the following CRD to create the 3 Triggers matching the 3 Knative services
+
++
+[source,bash,role=execute,subs="attributes"]
+----
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: persist-reviews-trigger
+  namespace: globex-serverless-{user_name}
+spec:
+  broker: globex-broker
+  filter:
+    attributes:
+      source: review-moderated
+      type: review-moderated-event
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: persist-reviews
+    uri: /review/submit
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: moderate-reviews-trigger
+  namespace: globex-serverless-{user_name}
+spec:
+  broker: globex-broker
+  filter:
+    attributes:
+      source: submit-review
+      type: submit-review-event
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: aiml-moderate-reviews
+    uri: /analyze
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: sentiment-reviews-trigger
+  namespace: globex-serverless-{user_name}
+spec:
+  broker: globex-broker
+  filter:
+    attributes:
+      source: submit-review
+      type: submit-review-event
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: aiml-sentiment-reviews
+    uri: /analyze
+
+----
+* You will note the triggers have been created successfully
++
+.[.underline]#*Click to see a visual*# 
+[%collapsible]
+====
+image::serverless/triggers-created.png[width=60%]
+====
+* Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Topology View, window="console"], to view the new triggers you created
++
+.[.underline]#*Click to see a visual*# 
+[%collapsible]
+====
+image::serverless/triggers-create-topology.png[]
+====
+* Click on the Broker `globex-broker` to view how the three Knative services subscribe to the KnativeBroker using the Triggers; also note the various filters applied to the triggers. +
+These filters are the ones which help to match the CloudEvents header of each  message to the right service which will act on the message.
+
+image::serverless/broker-service-filters.png[]
+
+

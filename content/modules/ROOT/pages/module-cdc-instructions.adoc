@@ -15,11 +15,20 @@
 </script>
 
 <style>
-  .nav-container, .pagination, .toolbar {
+  .underline {
+    cursor: pointer;
+  }
+
+  .nav-container {
     display: none !important;
   }
+
   .doc {    
     max-width: 70rem !important;
+  }
+
+  .pagination .prev {
+    display: none !important;
   }
 </style>
 ++++
@@ -56,7 +65,7 @@ To deploy the connector, you are going to use OpenShift Dev Spaces. OpenShift De
 
 * On the top menu of the console, click on the image:openshift-application-menu.png[] icon, and in the drop-down box, select *Red Hat OpenShift Dev Spaces*.
 +
-image::openshift-application-menu-2.png[]
+image:: image:openshift-application-menu-2.png[] .png[]
 
 * Login in with your OpenShift credentials ({user_name}/{user_password}). If this is the first time you access Dev Spaces, you have to authorize Dev Spaces to access your account. In the _Authorize Access_ window click on *Allow selected permissions*.
 
@@ -146,7 +155,7 @@ kafkaconnector.kafka.strimzi.io/globex created
 * After a few seconds, the Debezium connector will start monitoring the PostgreSQL database for changes in the *customer*, *orders* and *line_item* tables, and will produce a change event to the corresponding Kafka topic for each change detected.
 
 * One way to verify that the connector is working as expected is to check the Kafka topics that receive the change events.  +
-If you still have a browser tab pointing to AMQ Streams Console, open the tab. If not, navigate to https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. 
+If you still have a browser tab pointing to AMQ Streams Console, open the tab. If not, navigate to https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. 
 ** This redirects you to the *AMQ streams console* login page. 
 ** For the purpose of this workshop, choose *Sign in with Anonymous Session* to access the console if you are not already signed in.
 +
@@ -183,8 +192,8 @@ In the next section of the workshop, you will create some orders, and verify tha
 +
 image::cdc/globex-login.png[]
 
-* The Globex web application uses OpenId Connect powered by Red Hat build of Keycloak to authenticate users. After clicking the *Login* link you are redirected to the login page of the SSO server, where you need to enter your credentials. +
-The SSO server is set up with a number of users corresponding to customers in the Globex application. Login with one of the following users: *asilva*, *mmiller*, *asanders*, *cjones* or *pwong*. The password for all the users is *{globex_user_password}*.
+* The Globex web application uses OpenId Connect powered by Red Hat build of Keycloak to authenticate users. After clicking the *Login* link you are redirected to the login page of the Keycloak server, where you need to enter your credentials. +
+The Keycloak server is set up with a number of users corresponding to customers in the Globex application. Login with one of the following users: *asilva*, *mmiller*, *asanders*, *cjones* or *pwong*. The password for all the users is *{globex_user_password}*.
 +
 image::cdc/globex-login-sso.png[]
 
@@ -215,7 +224,7 @@ image::cdc/globex-order-placed.png[]
 * At this point, an order has been added in the Globex application database. The records added to the *orders* and *line_item* tables have been detected by Debezium and produced as change events to Kafka topics. +
 We can easily check this with AMQ streams console.
 
-* Open the browser tab pointing to the AMQ streams console UI. If you did close the tab, navigate to https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. +
+* Open the browser tab pointing to the AMQ streams console UI. If you did close the tab, navigate to https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. +
 From the Topics page, open the *globex.updates.public.orders* topic, and verify that the topic contains 1 message.
 +
 image::cdc/amq-console-debezium-topic-orders.png[]
@@ -241,7 +250,7 @@ Click on the *POST* link, and then on the *Try it out* link on the right. From t
 +
 image::cdc/order-simulator-random-customer.png[]
 ** Click *Execute* to execute the REST call to the simulator.
-** Check in https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"] that new messages are produced to the *globex.updates.public.orders* and *globex.updates.public.line_item* topics.
+** Check in https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"] that new messages are produced to the *globex.updates.public.orders* and *globex.updates.public.line_item* topics.
 
 == Streaming processing of events with Kafka Streams
 
@@ -316,9 +325,9 @@ In case you want to see how this looks like in code, click on the link below:
 ----
 ====
 
-You can see the result of the streaming processing by inspecting the contents of  the *globex.order-aggregated* topic in https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"].
+You can see the result of the streaming processing by inspecting the contents of  the *globex.order-aggregated* topic in https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"].
 
-* Open the browser tab pointing to the AMQ Streams console. If you have closed the tab, navigate to https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. 
+* Open the browser tab pointing to the AMQ Streams console. If you have closed the tab, navigate to https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. 
 
 * From the Topics page, open the *globex.order-aggregated* topic, and verify that the topic contains one or more messages (the exact number depends on how many orders were created in the previous paragraph).
 +
@@ -521,6 +530,9 @@ image::cdc/cashback-service-ui-2.png[]
 
 Congratulations! With this you have completed the *Change Data Capture* module! You successfully leveraged Change Data Capture to create change event streams, and consume these streams to power new services and functionality. 
 
-Please close all but the Workshop Deployer browser tab to avoid proliferation of browser tabs which can make working on other modules difficult. 
+[TIP]
+====
+Please close all but the *Workshop Deployer* browser tab to avoid proliferation of browser tabs which can make working on other modules difficult. 
+====
 
-Proceed to the https://workshop-deployer.{openshift_subdomain}[Workshop Deployer] to choose your next module.
+Proceed to the https://workshop-deployer.{openshift_subdomain}[Workshop Deployer^, window="workshopdeployer"] to choose your next module.

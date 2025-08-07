@@ -1,0 +1,76 @@
+= Technical environment
+
+:imagesdir: ../../assets/images
+
+++++
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P3W2D715DJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-P3W2D715DJ');
+</script>
+
+<style>
+.underline {
+  cursor: pointer;
+}
+
+.nav-container {
+  display: none !important;
+}
+
+.doc {    
+  max-width: 70rem !important;
+}
+</style>
+++++
+:icons: font
+
+== Cluster details
+
+* All the activities for this workshop will be done on a shared OpenShift cluster.   +
++
+.Workshop environment
+image::intro/workshop-env.png[] 
+
+* Depending on the workshop modules you will be guided through, there are helper components such as *Streams for Apache Kafka Console*, an integrated development environment (IDE) called *OpenShift Dev Spaces*, based on Eclipse Che and some more.
+* All of these (including the IDE) are hosted on OpenShift as shown in Figure 1 above. These additional components will be introduced in the following chapters and workshop modules, where applicable.
+
+* We leverage *OpenShift Gitops* (aka ArgoCD) to manage the deployment of the workshop assets, in a hub and spoke model: a central ArgoCD (show as *hub*) instance which manages common assets and namespace-scoped ArgoCD (shown as *spoke*) instances which manage the per-user assets. 
+
+* In total ArgoCD manages 350 applications per cluster, which represent more than 2500 pods and numerous secrets, configmaps and so on. 
+
+* If you are interested to know more about this setup, click on the link below, or come to talk to the workshop instructors.
+
+.[underline]#Click for details on the OpenShift Gitops setup#
+[%collapsible]
+====
+
+As mentioned before, we use a hub and spoke model to manage the workshop assets. A cluster-wide ArgoCD instance (hub) manages a number of namespace scoped ArgoCD  (spoke) instances (1 per workshop user). These namespace scoped ArgoCD instances manage the workshop assets for a user.
+
+You can log into your namespace scoped ArgoCD instance and have a look at the assets managed by the instance: 
+
+. Navigate to https://globex-gitops-{user_name}-server-globex-gitops-{user_name}.{openshift_subdomain}[ArgoCD, window="_argo"]. Expect to see the landing page of ArgoCD.
+. Click on the *Log in via OpenShift* link, and log in with your OpenShift credentials ({user_name}/{user_password}).
++
+image::intro/argocd-landing-page.png[]
+. If this is the first time you access the ArgoCD console, you have to authorize ArgoCD to access your account. In the _Authorize Access_ window click on *Allow selected permissions*.
+. You are redirected to the application overview page of ArgoCD, which shows you all the applications that this instance of ArgoCD is managing. In ArgoCD language, an application represents a collection of Kubernetes/OpenShift resources that are managed as a whole.
++
+image::intro/argocd-overview.png[]
++
+NOTE: The list of applications managed by the ArgoCD instance depends on which modules you have deployed.
+
+. If you click on one of the application cards, you'll see an overview of all the Kubernetes resources managed as part of the application. This is for example an partial view of the *Globex* application:
++
+image::intro/argocd-globex-application.png[]
+. The way ArgoCD works is that the desired state of an application is described in a manifest, which is hosted in a version control system. ArgoCD makes sure that the deployed state of the application matches the desired state as described in the manifest. Changes in the manifest (a new commit for example) are picked up by ArgoCD and applied. Hence the name *GitOps*, which itself is an evolution of *Infrastructure as code*. +
+
+NOTE: ArgoCD manifests can take many forms. For this workshop we opted for Helm charts. You can find the Helm charts for this workshop link:https://github.com/rh-cloud-architecture-workshop/helm[here^].
+
+====
+
+

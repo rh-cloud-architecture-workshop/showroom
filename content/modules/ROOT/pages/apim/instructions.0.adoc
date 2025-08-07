@@ -1,0 +1,96 @@
+:imagesdir: ../../assets/images
+
+
+= Red Hat build of Keycloak - An Introduction
+
+// :toclevels: 2
+:icons: font 
+:sectanchors:
+:sectnums:
+// :toc: 
+
+++++
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-51D1EZEH8B"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-51D1EZEH8B');
+</script>
+
+<style>
+    .underline {
+    cursor: pointer;
+    }
+
+    .nav-container {
+    display: none !important;
+    }
+
+    .doc {    
+    max-width: 70rem !important;
+    }
+</style>
+
+++++
+
+
+
+Red Hat build of Keycloak is used in this module to offer both Single Sign-On (SSO) to Mobile users, and also to secure the APIs. 
+
+[TIP]
+====
+We will be using *OpenID Connect (OIDC)* which is an open authentication protocol that works on top of the OAuth 2.0 framework. OIDC offers a discovery mechanism called *OpenID Connect Discovery*, where an OpenID server Red Hat build of  Keycloak (referred to as Keycloak) publishes its metadata at a well-known URL. This URL is typically a collection of various endpoints the server offers, some of which are used in this workshop too.
+====
+
+. Launch Keycloak by clicking {sso_tenant_console}[Keycloak Console^,window="sso"] and login using username and password ({user_name}/{user_password}).
++
+image::apim/apim-rhbk-login-landing.png[]
+
+. Click on *Realm settings* link highlighted in the above screenshot.
+. Click on the *OpenID Endpoint Configuration* link to view the *OpenID Provider Configuration* of Keycloak.
++
+.Red Hat build of Keycloak - Logged In
+image::apim/apim-sso-login.png[]
++
+[WARNING]
+====
+In case you see an error stating *You don't have access to the requested resource* or *Network response was not OK* or any other access error, you may notice that you are logged in as a user other than *{user_name}*. You will need to *signOut*, close the browser tab, and login again.
+
+. Click on user name found on top right, choose *signOut* option, and close the browser
+. Reopen the {sso_tenant_console}/#/globex-{user_name}/clients[Red Hat Keycloak Clients List^, window="sso"]. 
+. Login as *({user_name}/{user_password})*. 
+
+.Keycloak Login error
+image::apim/sso-login-error.png[]
+====
+
+. Here is how the *OpenID Provider Configuration* looks like
++
+.Red Hat build of Keycloak - OpenID Endpoint Configuration
+image::apim/well-know-openid-configuration.png[]
+. We are interested specifically in the following endpoints
+
+[cols="50%,50%"]
+|===
+|Endpoint | URL
+
+| *OpenID Endpoint Configuration (well-known config)*: +
+This URL provides a mechanism to discover the End-User's OpenID Provider and obtain information needed to interact with it, including OpenID/OAuth endpoint locations. The following endpoints is fetched from this URL |
+https://sso.{openshift_subdomain}/realms/globex-{user_name}/.well-known/openid-configuration 
+
+| *issuer*: +
+This value is needed when we need to authorize a user through single sign-on |
+
+https://sso.{openshift_subdomain}/realms/globex-{user_name} 
+
+| *token_endpoint* : +
+clients can obtain access tokens from the server using this token endpoint and use these same tokens to access protected resources (APIs in our case) |
+https://sso.{openshift_subdomain}/realms/globex-{user_name}/protocol/openid-connect/token
+
+|===
+
+{empty} +
+

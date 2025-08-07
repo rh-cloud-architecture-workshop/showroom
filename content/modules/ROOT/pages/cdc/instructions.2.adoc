@@ -1,0 +1,117 @@
+= Streaming processing
+:imagesdir: ../../assets/images
+:sectnums:
+
+:icons: font
+++++
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XWCST2G6FE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XWCST2G6FE');
+</script>
+
+
+<style>
+    .underline {
+    cursor: pointer;
+    }
+
+    .nav-container {
+    display: none !important;
+    }
+
+    .doc {    
+    max-width: 70rem !important;
+    }
+</style>
+++++
+
+== Process event streams with Kafka Streams
+
+Debezium produces a stream of data change events in one or more Kafka topics. In some cases the data in these topics need to be transformed, combined or aggregated before they can be consumed by target services.
+
+In our use case for instance, the cashback service is interested in the total value of an order, not necessarily the value of each individual line item. However, The _orders_ table in the Globex retail database does not contain the total value, as you can see in the entity relationship diagram.
+
+image::cdc/globex-db-erd-orders.png[]
+
+So we need to somehow combine the data change events streams from the _orders_ table with the stream of the _line_items_ table to obtain the total value for each order.
+
+This is where stream processing libraries or frameworks come in. Libraries like Kafka Streams or Apache Flink allow to process streams of data consumed from a Kafka cluster in a continuous fashion. The result of the processing is typically stored in topics on the Kafka cluster. Processing capabilities can be stateless or stateful. Stateless processing include data transformations, filtering, mapping and so on. Stateful operations include aggregations and joins.
+
+The processing logic of a Kafka Streams application is defined in a _topology_, which forms a graph of stream processors, where each processor represents a processing step in the processing topology. Kafka Streams comes with a Domain Specific Language (DSL) to define the topology in Java.
+
+If you are familiar with SQL, a topology is quite similar to a set of SQL queries, but then applied on a stream of data rather then on static tables.
+
+The _order-aggregator_ service uses Kafka Streams to calculate the total value of an order out of the data change events of the _orders_ and _line_items_ tables. The topology does the following:
+
+* Consumes from the *globex.updates.public.orders* and *globex.updates.public.line_item* topics.
+* Joins the LineItem events with the Order events by Order ID. This produces a new stream of events which contain both the Order and the LineItem.
+* Groups the joined stream by Order ID
+* Aggregates the joined stream to produce a stream of _AggregatedOrder_ events. The aggregation function adds the value of each individual line item to the total order value.
+* Publishes the aggregated order events in a Kafka topic, in this case the *globex.order-aggregated* topic. 
+
+In case you want to see how this looks like in code, click on the link below:
+
+.[underline]#Click to see the code#
+[%collapsible]
+====
+----
+    public Topology buildTopology() {
+
+        StreamsBuilder builder = new StreamsBuilder();
+
+        final Serde<Long> orderKeySerde = DebeziumSerdes.payloadJson(Long.class);
+        orderKeySerde.configure(Collections.emptyMap(), true);
+        final Serde<Order> orderSerde = DebeziumSerdes.payloadJson(Order.class);
+        orderSerde.configure(Collections.singletonMap(JsonSerdeConfig.FROM_FIELD.name(), "after"), false);
+
+        final Serde<Long> lineItemKeySerde = DebeziumSerdes.payloadJson(Long.class);
+        lineItemKeySerde.configure(Collections.emptyMap(), true);
+        final Serde<LineItem> lineItemSerde = DebeziumSerdes.payloadJson(LineItem.class);
+        lineItemSerde.configure(Collections.singletonMap(JsonSerdeConfig.FROM_FIELD.name(), "after"), false);
+
+        final Serde<OrderAndLineItem> orderAndLineItemSerde = new ObjectMapperSerde<>(OrderAndLineItem.class);
+
+        final Serde<AggregatedOrder> aggregatedOrderSerde = new ObjectMapperSerde<>(AggregatedOrder.class);
+
+
+        // KTable of Order events
+        KTable<Long, Order> orderTable = builder.table(orderChangeEventTopic, Consumed.with(orderKeySerde, orderSerde));
+
+        // KTable of Lineitem events
+        KTable<Long, LineItem> lineItemTable = builder.table(lineItemChangeEventTopic, Consumed.with(lineItemKeySerde, lineItemSerde));
+
+        // Join LineItem events with Order events by foreign key, aggregate Linetem price in Order
+        KTable<Long, AggregatedOrder> aggregatedOrders = lineItemTable
+                .join(orderTable, LineItem::getOrderId, (lineItem, order) -> new OrderAndLineItem(order, lineItem),
+                        Materialized.with(Serdes.Long(), orderAndLineItemSerde))
+                .groupBy((key, value) -> KeyValue.pair(value.getOrder().getOrderId(), value),
+                        Grouped.with(Serdes.Long(), orderAndLineItemSerde))
+                .aggregate(AggregatedOrder::new, (key, value, aggregate) -> aggregate.addLineItem(value),
+                        (key, value, aggregate) -> aggregate.removeLineItem(value),
+                        Materialized.with(Serdes.Long(), aggregatedOrderSerde));
+
+        aggregatedOrders.toStream().to(aggregatedOrderTopic, Produced.with(Serdes.Long(), aggregatedOrderSerde));
+
+        Topology topology = builder.build();
+        LOGGER.debug(topology.describe().toString());
+        return topology;
+----
+====
+
+You can see the result of the streaming processing by inspecting the contents of  the *globex.order-aggregated* topic in https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"].
+
+* Open the browser tab pointing to the AMQ Streams console. If you have closed the tab, navigate to https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. 
+
+* From the Topics page, open the *globex.order-aggregated* topic, and verify that the topic contains one or more messages (the exact number depends on how many orders were created in the previous paragraph).
++
+image::cdc/amqconsole-order-aggregated-topic.png[]
+
+* Expand the contents of a message. You should see a JSON structure which contains the order ID, the customer ID, the order creation date and the total value of the order.
++
+image::cdc/amqconsole-order-aggregated-topic-2.png[]
+

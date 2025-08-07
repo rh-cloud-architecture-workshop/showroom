@@ -1,0 +1,125 @@
+= Knatve Sink and SinkBinding
+:imagesdir: ../../assets/images
+
+++++
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y0GQBF9YFH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y0GQBF9YFH');
+</script>
+
+<style>
+  .underline {
+    cursor: pointer;
+  }
+
+  .nav-container {
+    display: none !important;
+  }
+
+  .doc {    
+    max-width: 70rem !important;
+  }
+</style>
+++++
+
+// :toclevels: 2
+:icons: font 
+:sectanchors:
+:sectnums:
+// :toc: 
+
+== Create Sink and SinkBinding
+
+This solution needs a number of Sinks and SinkBinding for the various Kafka topics described in an earlier section. You will create one of them here, while the others have been preconfigured for you.
+
+Here is a visual of how the reviews flows from the User to Kafka with Knative eventing. 
+
+* The reviews submitted by the user are sent to the `product_reviews` Quarkus service through HTTP POST.
+* The `product_reviews` service sends this review as a CloudEvent to the `reviews-sink` Kafka Sink over _HTTP_.
+* The Quarkus service remains agnostic to the internals of the Kafka streaming platform.
+* The  `reviews-sink` Kafka Sink sends this Cloud Event to the `globex.reviews` Kafka topic.
+
+image::serverless/reviews-keventing-kafka.png[]
+
+Now, go ahead and create the *Sink and SinkBinding*.
+
+* Click on the *(+)* icon found on top of the OpenShift Console to access the *Import YAML* wizard.
+
+image::serverless/console-add-yaml.png[]
+
+* Copy the following CRD into the *Import YAML* form, and click *Create* to create the KafkaSink `reviews-sink` which will send messages to `globex.reviews` Kafka Topic.
+
++
+.[.underline]#*Click to see a visual*# 
+[%collapsible]
+====
+
+image::serverless/create-sink.png[width=60%]
+====
++
+[source,bash,role=execute,subs="attributes"]
+----
+apiVersion: eventing.knative.dev/v1alpha1
+kind: KafkaSink
+metadata:
+  name: reviews-sink
+  namespace: globex-serverless-{user_name}
+spec:
+  bootstrapServers:
+    - kafka-kafka-bootstrap.globex-mw-{user_name}.svc.cluster.local:9092
+  topic: globex.reviews
+  numPartitions: 1
+  contentMode: binary
+  auth:
+     secret:
+       ref:
+         name: kafka-secret
+
+----
+
+* Use the *Import YAML* form to create a *Sink Binding* from the `product-reviews` Quarkus Service to the KafkaSink `reviews-sink` that you created in the previous step.
++
+[source,bash,role=execute,subs="attributes"]
+----
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: product-reviews-to-reviews-sink
+  namespace: globex-serverless-{user_name}
+spec:
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1alpha1
+      kind: KafkaSink
+      name: reviews-sink
+      namespace: globex-serverless-{user_name}
+  subject:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: product-reviews
+    namespace: globex-serverless-{user_name}
+----
+
+* Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Topology View, window="console", target="console"], to view the new Sink and SinkBinding you created
++
+.[.underline]#*Click to see a visual*# 
+[%collapsible]
+====
+image::serverless/sink-sinkb-created.png[]
+====
+
+* Here is the list of all the Kafka Sinks used in this solution.
++
+[cols="25%,75"]
+|===
+|*Sink name* | *Function*
+| reviews-sink            | Send the reviews submitted by user (HTTP POST from `globex-web` app to `product-reviews` Quarkus service) as CloudEvents to `globex.reviews` Kafka topic
+| moderated-reviews-sink  | Sends reviews *moderated* by the `aiml-moderate-reviews` service to topic `reviews.moderated`
+| reviews-sentiment-sink  | Sends sentiment score of reviews by the `aiml-sentiment-reviews` service to topic `reviews.sentiment`
+|===
+
