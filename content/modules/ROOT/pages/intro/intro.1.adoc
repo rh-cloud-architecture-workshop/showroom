@@ -101,7 +101,7 @@ The Kafka broker is installed in the *globex-mw-{user_name}* namespace. In the s
 +
 image::intro/amqstreams-console-login.png[]
 . You will be presented with the Home page of the console. You can see that a Kafka cluster has already been setup for you. +
-You can view details about the Kafka cluster that has been setup for you including the number of brokers, the topics and also cluster metrics.
+You can view details about the Kafka cluster including the number of brokers, the topics and also cluster metrics.
 +
 image::intro/amqstreams-console-home.png[]
 . Choose the *Topics* menu on the left-hand side to see the list of topics.
@@ -145,13 +145,13 @@ image::intro/swagger-ui-activity-tracking-simulator-2.png[]
 Go the browser tab with the Globex we UI, refresh the home page, and notice how the list of featured products has changed, as it is being continuously recalculated.
 
 
-== Wrapup
+== Wrap up
 
 This concludes the walkthrough of the Globex web application for now. The application provides more features, which you will discover while going through some of the modules of this workshop.
 
+[TIP]
+====
 Please close all but the *Workshop Deployer* tab to avoid proliferation of tabs which can make working on other modules difficult. 
+====
 
-[CAPTION]
-====
 Proceed to the https://workshop-deployer.{openshift_subdomain}[Workshop Deployer, window="workshopdeployer"] to choose your next module.
-====

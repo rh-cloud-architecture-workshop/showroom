@@ -93,7 +93,7 @@ The Partner Portal section is quite similar to the Mobile App but for the fact t
 
 {empty} +
 
-== Cleanup
+== Wrap up
 You can now close all the tabs except for this Instructions and Dev Spaces browser tabs. Close all files open within Dev Spaces as well.
 
 If you choose to proceed to another module, close all but this *Instructions* browser before starting the next module. Go back to the https://workshop-deployer.{openshift_subdomain}[Workshop Deployer^, window="workshopdeployer"] to choose your next module.
