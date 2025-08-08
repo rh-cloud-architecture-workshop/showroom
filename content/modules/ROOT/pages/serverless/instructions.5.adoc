@@ -41,7 +41,7 @@
 
 == Under the hood: Step through Review moderation flow
 
-* Navigate to https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"].  Filter for the term *reviews* to view 3 related topics.
+* Navigate to https://streams-console-{user_name}.{openshift_subdomain}[streams for Apache Kafka console, window="_amqstreams"].  Filter for the term *reviews* to view 3 related topics.
 * Click on the `globex.reviews` topic to see an Overview of the topic page
 +
 image::serverless/amqstreams-globex-reviews-topic-overview.png[]
@@ -56,7 +56,7 @@ image::serverless/amqstreams-globex-reviews-headers.png[]
 * Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Topology View, window="console"], to view the corresponding mapping in the Knative Broker and Triggers
 ** Click on the blue link (highlighted in blue below) pointing to `aiml-moderate-reviews` service. This link represents the `moderate-reviews-trigger`. 
 ** The right-hand panel shows the trigger's *source* = _submit-review_ and *type*	= _submit-review-event_. 
-** You will note that this matches the CloudEvents headers in the Kafka message that you viewed in AMQ Streams Console browser. 
+** You will note that this matches the CloudEvents headers in the Kafka message that you viewed in streams for Apache Kafka Console browser. 
 ** This is how the Knative Triggers match the messages to the right endpoint.
 +
 image::serverless/moderate-reviews-trigger.png[]
@@ -66,7 +66,7 @@ image::serverless/moderate-reviews-trigger.png[]
 +
 image::serverless/moderated-reviews-sink.png[]
 
-** This sink is configured to write to the `reviews.moderated` topic. Here is a sample message of how a moderated review (kafka message) looks like in the AMQ streams console.
+** This sink is configured to write to the `reviews.moderated` topic. Here is a sample message of how a moderated review (kafka message) looks like in the streams for Apache Kafka console.
 +
 image::serverless/amqstreams-moderate-review-score.png[]
 
@@ -84,7 +84,7 @@ image::serverless/review-sentiment-flow.png[]
 +
 image::serverless/sentiment-reviews-trigger.png[width=80%]
 * The `aiml-sentiment-reviews` which is invoked, then uses the https://huggingface.co/nlptown/bert-base-multilingual-uncased-sentiment[nlptown/bert-base-multilingual-uncased-sentiment, window="others"] to identify a score (from -1 to 4) depending on the tone of the review.
-* The review is then sent to the `reviews.sentiment` topic. Access this topic in the https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. Click on any of the kafka messages to view the sentiment score.
+* The review is then sent to the `reviews.sentiment` topic. Access this topic in the https://streams-console-{user_name}.{openshift_subdomain}[streams for Apache Kafka console, window="_amqstreams"]. Click on any of the kafka messages to view the sentiment score.
 +
 image::serverless/amqstreams-sentiment-score.png[]
 ** As a next step, this sentiment score can be used to build a dashboard to visualise the sentiment of various categories of products. 

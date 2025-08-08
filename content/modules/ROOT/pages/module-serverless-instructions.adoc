@@ -68,7 +68,7 @@ If this is the first time you open the console, you will be directed to the Deve
 image::serverless/serverless-openshift-landing.png[]
 .. `globex-serverless-{user_name}` namespace contains the components you will be working on in this lab
 .. `globex-gitops-{user_name}` namespace contains the ArgoCD elements for GitOps. This is described in detail in the *Introduction* module.
-.. `globex-mw-{user_name}` contains Middleware deployments including AMQ Streams (Apache Kafka)
+.. `globex-mw-{user_name}` contains Middleware deployments including streams for Apache Kafka
 .. `globex-{user_name}` namespace contains other services the application is dependent on. This is described in detail in the *Introduction* module.
 
 . Click on the `globex-serverless-{user_name}` namespace link to select the namespace you are going to use in this lab, and select `Topology` from the left menu.
@@ -89,9 +89,9 @@ image::serverless/serverless-namespace-initial-toplogy.png[]
 
 === Red Hat streams for Apache Kafka setup overview 
 
-.  Red Hat Streams based on Apache Kafka has been setup for you already. The Kafka broker is installed in the globex-mw-{user_name} namespace.In the same namespace, AMQ streams console, a web UI for viewing Kafka topics and browsing consumer groups, is also installed. +
-. Click to navigate to https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. 
-.. This redirects you to the AMQ streams console login page. 
+.  Red Hat Streams based on Apache Kafka has been setup for you already. The Kafka broker is installed in the globex-mw-{user_name} namespace.In the same namespace, streams for Apache Kafka console, a web UI for viewing Kafka topics and browsing consumer groups, is also installed. +
+. Click to navigate to https://streams-console-{user_name}.{openshift_subdomain}[streams for Apache Kafka console, window="_amqstreams"]. 
+.. This redirects you to the streams for Apache Kafka console login page. 
 .. For the purpose of this workshop, choose *Sign in with Anonymous Session* to access the console if you are not already signed in.
 . Navigate to the navigate to *Kafka Clusters -> kafka -> Topics*. Notice that there are 3 topics which are relevant to this module (you can filter with the word *reviews*). 
 +

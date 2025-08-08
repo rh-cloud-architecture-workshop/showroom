@@ -21,7 +21,7 @@
 </style>
 ++++
 
-In this module you learn how to leverage AMQ Streams (based on Apache Kafka) and OpenShift Serverless (Knative Eventing) to build an event driven application, without having to deal with the underlying messaging infrastructure.
+In this module you learn how to leverage streams for Apache Kafka and OpenShift Serverless (Knative Eventing) to build an event driven application, without having to deal with the underlying messaging infrastructure.
 
 == Business context
 

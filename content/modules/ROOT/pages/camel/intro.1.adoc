@@ -37,7 +37,7 @@ The key capabilities you will use in this module are:
 
  - Camel K, the integration tool to create all the processing flows.
  - AMQ Broker, the messaging broker enabling event-based interactions.
- - AMQ Streams (Kafka), to store and replay customer/agent interactions.
+ - streams for Apache Kafka, to store and replay customer/agent interactions.
  - DataGrid (Cache), to keep the context of interactions alive.
  - S3 storage, to store conversations.
 +
@@ -48,7 +48,7 @@ S3 in this workshop is served using Minio for simplicity. Full featured on-premi
 
 {empty} +
 
-=== What is Red Hat build of Apache Camel K?
+== What is Red Hat build of Apache Camel K?
 
 NOTE: Camel K will be your master weapon in this learning module. It'll serve you to link sources and targets and process data exchanges.
 
@@ -58,7 +58,7 @@ Camel K simplifies working with Kubernetes environments so you can get your inte
 
 {empty} +
 
-=== What is Red Hat AMQ Broker?
+== What is Red Hat AMQ Broker?
 
 NOTE: AMQ Broker will be your core message broker. It enables event-driven interactions between all your Camel integrations. 
 
@@ -66,7 +66,7 @@ AMQ Broker is a pure-Java multiprotocol message broker. It's built on an efficie
 
 {empty} +
 
-=== What is Red Hat Data Grid?
+== What is Red Hat Data Grid?
 
 NOTE: Data Grid will be your core context caching capability, to keep the keys to chat-rooms, while conversations (between customers and agents) are alive. 
 
@@ -74,15 +74,15 @@ Data Grid is an in-memory, distributed, NoSQL datastore solution. Your applicati
 
 {empty} +
 
-=== What is Red Hat AMQ Streams?
+== What is Red Hat streams for Apache Kafka?
 
-NOTE: AMQ Streams (Kafka) will be your core event stream platform where customer/agents sessions (the streams) will be stored (for later replays).
+NOTE: streams for Apache Kafka will be your core event stream platform where customer/agents sessions (the streams) will be stored (for later replays).
 
-AMQ Streams is an event streaming platform that aggregates events over time (streams). This allows applications to replay the streams for various purposes, for example, data analysis or to discover patterns, among others. 
+streams for Apache Kafka is an event streaming platform that aggregates events over time (streams). This allows applications to replay the streams for various purposes, for example, data analysis or to discover patterns, among others. 
 
 {empty} +
 
-=== What is Red Hat OpenShift Data Foundation?
+== What is Red Hat OpenShift Data Foundation?
 
 NOTE: You will use S3 storage in this learning module as your core capability, for regulatory archival requirements, to keep record of Globex's support activities. 
 

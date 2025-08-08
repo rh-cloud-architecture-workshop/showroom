@@ -30,7 +30,7 @@
 </style>
 ++++
 
-Let's start with deploying the Debezium Connector. With AMQ Streams, a Kafka Connect connector can be deployed as a Kubernetes Custom Resource, which is picked up and processed by the AMQ Streams operator.
+Let's start with deploying the Debezium Connector. With streams for Apache Kafka, a Kafka Connect connector can be deployed as a Kubernetes Custom Resource, which is picked up and processed by the streams for Apache Kafka operator.
 
 To deploy the connector, you are going to use OpenShift Dev Spaces. OpenShift Dev Spaces uses Kubernetes and containers to provide a consistent, secure, and zero-configuration development environment, accessible from a browser window.
 
@@ -128,8 +128,8 @@ kafkaconnector.kafka.strimzi.io/globex created
 * After a few seconds, the Debezium connector will start monitoring the PostgreSQL database for changes in the *customer*, *orders* and *line_item* tables, and will produce a change event to the corresponding Kafka topic for each change detected.
 
 * One way to verify that the connector is working as expected is to check the Kafka topics that receive the change events.  +
-If you still have a browser tab pointing to AMQ Streams Console, open the tab. If not, navigate to https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. 
-** This redirects you to the *AMQ streams console* login page. 
+If you still have a browser tab pointing to streams for Apache Kafka Console, open the tab. If not, navigate to https://streams-console-{user_name}.{openshift_subdomain}[streams for Apache Kafka console, window="_amqstreams"]. 
+** This redirects you to the *streams for Apache Kafka console* login page. 
 ** For the purpose of this workshop, choose *Sign in with Anonymous Session* to access the console if you are not already signed in.
 +
 image::cdc/amqconsole-anon-session.png[]
@@ -140,7 +140,7 @@ Filter the topics by *Name*  by the term`globex.updates`. You will see the three
 +
 image::cdc/amqconsole-debezium-topics.png[]
 
-* The Globex application database contains records for a couple of hundred customers in the *customer* table, so we can expect a change event for each of these records. In the AMQ Streams console's topics page, click on the *globex.updates.public.customer* topic. This opens a view with details on the topic. Notice that the Offset of the topmost (latest) message is _199_, which corresponds to the number of records in the *customer* table. +
+* The Globex application database contains records for a couple of hundred customers in the *customer* table, so we can expect a change event for each of these records. In the streams for Apache Kafka console's topics page, click on the *globex.updates.public.customer* topic. This opens a view with details on the topic. Notice that the Offset of the topmost (latest) message is _199_, which corresponds to the number of records in the *customer* table. +
 Note: that Offsets start at _0_. An Offset of _199_ means that there are _200_ messages in the topic.
 +
 image::cdc/amqconsole-debezium-topic-customers.png[]
@@ -154,6 +154,6 @@ image::cdc/amqconsole-debezium-topic-customers-200.png[]
 ** *after*: the state of the record after the transaction. This is a JSON representation of the current state of the record in the database (every column in the table becomes a JSON field).
 ** *op*: The operation that leads to the change event. Possible values are '*c*' for _create_, '*u*' for _update_, '*d*' for _delete_ and '*r*' for _read_. As the records in the *customer* already existed when the Debezium connector was deployed, the operation is '*r*'.
 
-* The Globex application database does not contain any order information at the moment, so the *globex.updates.public.orders* and *globex.updates.public.line_item* topics are empty. You can verify this through the AMQ streams console. +
+* The Globex application database does not contain any order information at the moment, so the *globex.updates.public.orders* and *globex.updates.public.line_item* topics are empty. You can verify this through the streams for Apache Kafka console. +
 In the next section of the workshop, you will create some orders, and verify that the corresponding change events are picked up by Debezium.  
 

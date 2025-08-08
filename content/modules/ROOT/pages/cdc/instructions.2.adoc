@@ -103,9 +103,9 @@ In case you want to see how this looks like in code, click on the link below:
 ----
 ====
 
-You can see the result of the streaming processing by inspecting the contents of  the *globex.order-aggregated* topic in https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"].
+You can see the result of the streaming processing by inspecting the contents of  the *globex.order-aggregated* topic in https://streams-console-{user_name}.{openshift_subdomain}[streams for Apache Kafka console, window="_amqstreams"].
 
-* Open the browser tab pointing to the AMQ Streams console. If you have closed the tab, navigate to https://streams-console-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. 
+* Open the browser tab pointing to the streams for Apache Kafka console. If you have closed the tab, navigate to https://streams-console-{user_name}.{openshift_subdomain}[streams for Apache Kafka console, window="_amqstreams"]. 
 
 * From the Topics page, open the *globex.order-aggregated* topic, and verify that the topic contains one or more messages (the exact number depends on how many orders were created in the previous paragraph).
 +

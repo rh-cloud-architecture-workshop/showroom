@@ -61,8 +61,8 @@ image::cdc/cashback-service-ui-2.png[]
 
 * At this point, you can demonstrate the end-to-end flow starting from creating an order in the Globex web application.
 ** Create an order in the Globex application.
-** Verify in AMQ Streams console that the order and line items are picked up by the Debezium connector.
-** Still in AMQ Streams console, verify that an aggregated order event is created by the Kafka Streams application.
+** Verify in streams for Apache Kafka console that the order and line items are picked up by the Debezium connector.
+** Still in streams for Apache Kafka console, verify that an aggregated order event is created by the Kafka Streams application.
 ** In the logs of the Camel K order connector, check that the aggregated order is sent to the Cashback service.
 ** In the Cashback service UI, locate the customer you created the order for, and check that it appears in the Cashback list.  
 

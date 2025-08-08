@@ -96,8 +96,8 @@ image::intro/globex-home-page.png[]
 * To generate user activity events, click on the image:intro/globex-product-like.png[] symbol next to a product. You can repeat this for a couple of products.
 
 * Every _like_ action generates a user activity event that is captured by the _activity tracking_ service and sent to a Kafka topic. +
-The Kafka broker is installed in the *globex-mw-{user_name}* namespace. In the same namespace, AMQ streams console, a web UI for viewing Kafka topics and browsing consumer groups, is also installed. +
-Click to navigate to https://streams-console-globex-mw-{user_name}.{openshift_subdomain}[AMQ streams console, window="_amqstreams"]. This redirects you to the AMQ streams console login page. For the purpose of this workshop, choose *Sign in with Anonymous Session* to access the console
+The Kafka broker is installed in the *globex-mw-{user_name}* namespace. In the same namespace, streams for Apache Kafka console, a web UI for viewing Kafka topics and browsing consumer groups, is also installed. +
+Click to navigate to https://streams-console-{user_name}.{openshift_subdomain}[streams for Apache Kafka console, window="_amqstreams"]. This redirects you to the streams for Apache Kafka console login page. For the purpose of this workshop, choose *Sign in with Anonymous Session* to access the console
 +
 image::intro/amqstreams-console-login.png[]
 * You will be presented with the Home page of the console. You can see that a kafka broker has already been setup for you.
@@ -119,7 +119,7 @@ image::intro/amqstreams-globex-tracking.png[]
 +
 image::intro/amqstreams-expand-message.png[]
 
-* If you go back to the list of topics in the AMQ streams console (click *Topics*  on left-hand side) , you will notice a number of topics starting with *globex.recommendation*. Those are the topics created by the _recommendation engine_ application, which calculates a list of the most popular products based on the user activity stream. +
+* If you go back to the list of topics in the streams for Apache Kafka console (click *Topics*  on left-hand side) , you will notice a number of topics starting with *globex.recommendation*. Those are the topics created by the _recommendation engine_ application, which calculates a list of the most popular products based on the user activity stream. +
 The *globex.recommendation-product-score-aggregated-changelog* topic contains messages containing the list of most popular products, where the latest message has the current list.
 +
 image::intro/amqstreams-globex-tracking-recommendation.png[]
@@ -144,7 +144,7 @@ If you want, you change the number of user activities that will be generated (th
 +
 image::intro/swagger-ui-activity-tracking-simulator-2.png[]
 
-* In your browser window, navigate to the tab with the *AMQ streams console*, and notice how messages are produced in the *globex.tracking* topic. After a couple of seconds you should also see new messages in the *globex.recommendation-product-score-aggregated-changelog* topic, reflecting the newly calculated list of featured products. +
+* In your browser window, navigate to the tab with the *streams for Apache Kafka console*, and notice how messages are produced in the *globex.tracking* topic. After a couple of seconds you should also see new messages in the *globex.recommendation-product-score-aggregated-changelog* topic, reflecting the newly calculated list of featured products. +
 Go the browser tab with the Globex we UI, refresh the home page, and notice how the list of featured products has changed, as it is being continuously recalculated.
 
 * This concludes the walkthrough of the Globex web application for now. The application provides more features, which you will discover while going through some of the modules of this workshop.
