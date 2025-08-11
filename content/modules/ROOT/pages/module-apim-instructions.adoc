@@ -62,57 +62,52 @@ Before your proceed it is critical that your lab environment is completely ready
 image::apim/apim-workshop-deployer.png[width=40%]
 
 
-=== Setup OpenShift Dev Spaces 
+== Setup OpenShift Dev Spaces 
 You will use *OpenShift Dev Spaces* for a number of activities. OpenShift Dev Spaces uses Kubernetes and containers to provide a consistent, secure, and zero-configuration development environment, accessible from a browser window.
 
-=== Section Goals
-* Access OpenShift Dev Spaces as *{user_name}*
-* Ensure you are logged in to OpenShift as *{user_name}* 
+. In a browser window, navigate to the browser tab pointing to the Developer perspective of the OpenShift cluster. If you don't have a browser tab open on the console, click on {openshift_cluster_console}[OpenShift Console, window="console"] to launch the console. If needed login with your username and password ({user_name}/{user_password}).
 
-=== Instructions
-* In a browser window, navigate to the browser tab pointing to the Developer perspective of the OpenShift cluster. If you don't have a browser tab open on the console, click on {openshift_cluster_console}[OpenShift Console, window="console"] to launch the console. If needed login with your username and password ({user_name}/{user_password}).
-
-* On the top menu of the console, click on the image:openshift-application-menu.png[] icon, and in the drop-down box, select *Red Hat OpenShift Dev Spaces*.
+. On the top menu of the console, click on the image:openshift-application-menu.png[] icon, and in the drop-down box, select *Red Hat OpenShift Dev Spaces*.
 +
 .Access Red Hat Dev Spaces
 image::openshift-application-menu-2.png[]
 
-* Login in with your OpenShift credentials ({user_name}/{user_password}). If this is the first time you access Dev Spaces, you have to authorize Dev Spaces to access your account. In the _Authorize Access_ window click on *Allow selected permissions*. 
+. Login in with your OpenShift credentials ({user_name}/{user_password}). If this is the first time you access Dev Spaces, you have to authorize Dev Spaces to access your account. In the _Authorize Access_ window click on *Allow selected permissions*. 
 +
 .Red Hat Dev Spaces - Allow selected permissions
 image::devspace-auth-access.png[width=70%]
 
-* You are directed to the Dev Spaces overview page, which shows the workspaces you have access to. You should see a single workspace, called *cloud-architecture-workshop*. The workspace needs a couple of seconds to start up.
+. You are directed to the Dev Spaces overview page, which shows the workspaces you have access to. You should see a single workspace, called *cloud-architecture-workshop*. The workspace needs a couple of seconds to start up.
 +
 .Red Hat Dev Spaces - cloud-architecture-workshop
 image::devspaces-workspace-starting.png[]
 
-* Click on the *Open* link of the workspace.
+. Click on the *Open* link of the workspace.
 +
 .Red Hat Dev Spaces - Open cloud-architecture-workshop
 image::devspaces-workspace-started-1.png[]
 
-* This opens the workspace, which will look pretty familiar if you are used to working with VS Code. Before opening the workspace, a pop-up might appear asking if you trust the contents of the workspace. Click *Yes, I trust the authors* to continue.
+. This opens the workspace, which will look pretty familiar if you are used to working with VS Code. Before opening the workspace, a pop-up might appear asking if you trust the contents of the workspace. Click *Yes, I trust the authors* to continue.
 +
 .Red Hat Dev Spaces - Agree to trust the authors
 image::devspaces-trust-contents.png[]
 
-* The workspace contains all the resources you are going to use during the workshop. In the project explorer on the left of the workspace, open the *workshop/module-apim* folder as shown in the screenshot below
+. The workspace contains all the resources you are going to use during the workshop. In the project explorer on the left of the workspace, open the *workshop/module-apim* folder as shown in the screenshot below
 +
 .Red Hat Dev Spaces - API Module
 image::apim/apim-devspaces.png[]
 
-* You can deploy the various resources needed in this workshop to the OpenShift cluster directly from Dev Spaces. To do so, you will need access to the built-in *Terminal*. Click on the image:devspaces-menu.png[] icon on the top of the left menu, and select *Terminal -> New Terminal* from the drop-down menu.
+. You can deploy the various resources needed in this workshop to the OpenShift cluster directly from Dev Spaces. To do so, you will need access to the built-in *Terminal*. Click on the image:devspaces-menu.png[] icon on the top of the left menu, and select *Terminal -> New Terminal* from the drop-down menu.
 +
 .Red Hat Dev Spaces - New terminal
 image::apim/apim-devspaces-menu-new-terminal.png[]
 
-* This opens a terminal in the bottom half of the workspace.
+. This opens a terminal in the bottom half of the workspace.
 +
 .Red Hat Dev Spaces - Open terminal
 image::apim/apim-devspaces-menu-terminal.png[]
 
-* The OpenShift Dev Spaces environment has access to a plethora of command line tools, including *oc*, the OpenShift command line interface. Through OpenShift Dev Spaces you are automatically logged in into the OpenShift cluster. You can verify this with the command *oc whoami*.
+. The OpenShift Dev Spaces environment has access to a plethora of command line tools, including *oc*, the OpenShift command line interface. Through OpenShift Dev Spaces you are automatically logged in into the OpenShift cluster. You can verify this with the command *oc whoami*.
 +
 
 [source,bash,role=execute, subs="attributes"]
@@ -139,7 +134,7 @@ oc login -u {user_name} -p {user_password} {openshift_api_internal}
 
 ====
 
-* You will be working in the `globex-apim-{user_name}` namespace. So run this following command to start using that particular project
+. You will be working in the `globex-apim-{user_name}` namespace. So run this following command to start using that particular project
 
 +
 [source,bash,role=execute, subs="attributes"]
@@ -147,12 +142,11 @@ oc login -u {user_name} -p {user_password} {openshift_api_internal}
 oc project globex-apim-{user_name}
 ----
 
-
 +
 .Red Hat Devspace - Verify that you are using the globex-apim-<username> namespace
 image::apim/apim-terminal-setup.png[width=70%]
 
-* Keep this browser tab open because you will refer to draft content, scripts and YAML files for creating objects on OpenShift
+. Keep this browser tab open because you will refer to draft content, scripts and YAML files for creating objects on OpenShift
 
 === Scratchpad
 As you work through this Contract First APIs module, there are a few variables and URLs that are needed throughout this activity. To make things easier and manageable we've setup a scratchpad within Dev Spaces. You can use this scratchpad up with information needed to help you progress through this activity efficiently.

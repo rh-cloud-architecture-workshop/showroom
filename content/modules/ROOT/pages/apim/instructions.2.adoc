@@ -37,22 +37,22 @@
 
 The Mobile API has now been designed by API Designer, and is governed by Red Hat Service Registry. 
 
-Let us fast forward a bit in time, and the backend developers team has built the Mobile Gateway server-side https://github.com/rh-cloud-architecture-workshop/globex-mobile-gateway[code^, window="code-samples"] built using Quarkus. This service has been pre-deployed under the `module-apim-{user_name}` namespace on OpenShift. 
+Let us fast forward a bit in time, and the backend developers team has built the Mobile Gateway server-side https://github.com/rh-cloud-architecture-workshop/globex-mobile-gateway[code^, window="code-samples"] using Quarkus. This service has been pre-deployed under the `module-apim-{user_name}` namespace on OpenShift. 
 
 
 In this section you will manage and secure the Mobile Gateway API endpoints so that the Mobile App can access them securely. To create these API endpoints, and secure and manage them, we will need to configure them on 3scale API management. 
 
 == Section Goals 
 
-. Setup Red Hat build of Keycloak to provide single sign-on (SSO) capabilities for users signing into Mobile App 
-. Setup Red build of Keycloak to secure Mobile Gateway API endpoints using OpenID Connect
-. Manage Mobile Gateway APIs with Red Hat 3scale API Management
-. Access Red Hat 3scale API Management's Developer Portal as a Mobile Developer to sign up for access of API
+. Configure Red Hat build of Keycloak to provide single sign-on (SSO) capabilities for users signing into Mobile App 
+. Configure Red build of Keycloak to secure Mobile Gateway API endpoints using OpenID Connect
+. Use Red Hat 3scale API Management to manage Mobile Gateway APIs
+. As a Mobile Developer, request API Access through the Developer Portal 
 
 == Red Hat build of Keycloak
-3scale integrates with Keycloak for authenticating the API requests using the OpenID Connect specification. On signing-up, External/Mobile developers  will be provided with client credentials to access to the APIs securely. This client credentials is synced between 3scale and Keycloak server using a component know as *Zync*.
+3scale integrates with Keycloak to authenticate API requests using the OpenID Connect (OIDC) specification.  When external or mobile developers sign up, they are issued client credentials for secure API access. These credentials are synchronized between 3scale and the Keycloak server through a 3scale component called *Zync*
 
-In order to setup OpenID Connect, you will now create a special *client id* meant for *Client Credentials Management*.
+To setup OIDC, create a special *client id* meant for *Client Credentials Management*.
 
 . Click to launch {sso_tenant_console}[Keycloak^, window="sso"] and login using username and password ({user_name}/{user_password}).
 . Click on *Clients* from the left-hand navigation. And, then click on the *Create client* button on the right side as shown below

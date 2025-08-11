@@ -71,8 +71,8 @@ image::apim/sso-login-error.png[]
 +
 .Red Hat build of Keycloak - OpenID Endpoint Configuration
 image::apim/well-know-openid-configuration.png[]
-. We are interested specifically in the following endpoints
-
+. We are interested specifically in the following endpoints which will be used in the course of this module
++
 [cols="50%,50%"]
 |===
 |Endpoint | URL
