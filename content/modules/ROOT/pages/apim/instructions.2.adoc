@@ -380,16 +380,19 @@ image::apim/apim-devportal-mobile-create-new-app-2.png[width=70%]
 +
 .Update REDIRECT URL in the Application creates successfully for Mobile User
 image::apim/apim-devportal-mobile-app-success.png[width=90%]
-. Copy the *Client ID* from this page which will be used to setup Mobile App
+. Keep this window open since you will need the *Client ID* from this page to  setup Mobile App's access to the Mobile Gateway API in the next section..
 
 == Update the Mobile App with access details
 
+Now that you have the Client ID, you can update the Mobile App with the Client ID and other details needed to securely access the Mobile Gateway API that you have set up on 3scale.
 
-. Navigate to https://console-openshift-console.{openshift_subdomain}/k8s/ns/globex-apim-{user_name}/deployments/globex-mobile/environment[globex-mobile deployment, window="console"]
+. Navigate to https://console-openshift-console.{openshift_subdomain}/k8s/ns/globex-apim-{user_name}/deployments/globex-mobile/environment[globex-mobile deployment, window="console"] to view the Environment variables of the deployment on OpenShift console.
 +
 image::apim/apim_globex_mobile_deployment_env.png[]
 . Update the following environment variables in the *Environment* tab as directed below
-.. Update *API_CLIENT_ID*  with the Client ID in the previous step from Keycloak
+.. Update *API_CLIENT_ID*  with the Client ID in the previous step from being displayed in the Developer Portal.
++
+TIP: Access the Applications from  https://3scale-{user_name}.{openshift_subdomain}/admin/applications[Developer Portal^]. Choose the application you created for  `globex-mobile-gateway-product`. You can then access the *Client ID* from this page.
 .. Update *SSO_AUTHORITY* with the below value (which is the Keycloak *OpenID Well-known Configuration* URL)
 +
 [source,bash,role=execute,subs="attributes"]
@@ -430,7 +433,9 @@ image::apim/dev_portal_mobile_doc.png[width=80%]
 .globex-mobile deployment on OpenShift
 image::apim/apim_globex_mobile_deployment.png[]
 
-. Click on the *Save* button to save the changes and the Mobile App deployment will be patched with the new environment variables.
+. Click on the *Save* button at the bottom of the page to save the changes. You will be shown a success message: `Successfully updated the environment variables.`
++
+image:apim/apim_mobile_env_success.png[] 
 
 == Update Keycloak's Web Origin to match Mobile App
 There is one last step that you need to do before trying out the Mobile App. You need to update the *Web Origin*
