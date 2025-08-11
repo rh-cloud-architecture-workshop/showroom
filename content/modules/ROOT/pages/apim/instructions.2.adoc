@@ -128,11 +128,11 @@ To integrate and manage the Mobile Gateway API in 3scale API Management Platform
 
 === Create 3scale Backend for Mobile Gateway service
 
-. Navigate to OpenShift console {openshift_cluster_console}/topology/ns/globex-apim-{user_name}[OpenShift Console^, window="console"] and if needed login with *({user_name}/{user_password})*.
-. Click on *(+)* button and then *Import Yaml* dropdown option on the top right corner of the OpenShift console
+. Navigate to OpenShift console {openshift_cluster_console}[OpenShift Console^, window="console"] and if needed login with *({user_name}/{user_password})*.
+. From the  the top right corner of the OpenShift console, click on the *(+)* button and then *Import Yaml* dropdown option 
 +
 image::apim/import-yaml.png[] 
-. Paste the following YAML content in the *Import YAML* text area, and click on the *Create* button
+. Paste the following YAML content in the *Import YAML* text area
 +
 [source,bash,role=execute,subs="attributes"]
 ----
@@ -140,6 +140,7 @@ apiVersion: capabilities.3scale.net/v1beta1
 kind: Backend
 metadata:
   name: globex-mobile-gateway-backend
+  namespace: globex-apim-{user_name}
 spec:
   name: "Globex Mobile Gateway Backend"
   systemName: "globex-mobile-gateway-backend"
@@ -159,97 +160,110 @@ spec:
 
 ----
 +
-TIP: The *privateBaseURL* in this YAML is the Service endpoint of *Globex Mobile gateway*  servivc running on OpenShift. If interested, click to view the {openshift_cluster_console}/topology/ns/globex-apim-{user_name}/service/globex-mobile-gateway[globex-mobile-gateway service URL^, window="_blank"].
-
+TIP: The *privateBaseURL* in this YAML is the Service endpoint of *Globex Mobile gateway*  servivc running on OpenShift. If interested, click to view the {openshift_cluster_console}/k8s/ns/globex-apim-{user_name}/services/globex-mobile-gateway[globex-mobile-gateway service URL^, window="_blank"]. The URL is diplayed under the Service routing section.
++
+image::apim/import-mobile-backend.png[] 
+. Click on the *Create* button. +
+The Backend will be created, and the details page displays the the *Synced* condition  as `True`. 
++
+image::apim/apim-mobile-backend-created.png[]
 
 
 === Create 3scale Product for MobileGateway API
 
-. In Dev Spaces in the folder *workshop/module-apim/mobile/gateway*, open the file *mobile-gateway-product.yaml*. _[Shortcut: Ctr+P > mobile-gateway-product.yaml]_
-.. This file creates a 3scale Product, and also attaches the Backend we created in the previous step to the Product.
-. Update the following 2 values as directed below.
+. From the OpenShift console, click on the *(+)* button and then *Import Yaml* dropdown option.
+. Paste the following YAML content in the *Import YAML* text area.
 +
-image::apim/mobile-gateway-product.png[] 
-
-.. *<client-credentials>* : Value of Client Credentials of the *client-manager* client you created in Keycloak in the previous step.
+TIP: The issuer endpoint contains the Keycloak *OpenID Well-known Configuration* , and the client credentials of the `client-manager` client that you had created earlier
 +
-.[.underline]#*Click to know how to access Client ID _client-manager_*#
-[%collapsible]
+[source,bash,role=execute,subs="attributes"]
+----
+apiVersion: capabilities.3scale.net/v1beta1
+kind: Product
+metadata:
+  name: globex-mobile-gateway-product
+  namespace: globex-apim-{user_name}
+spec:
+  name: "globex-mobile-gateway-product"
+  systemName: "globex-mobile-gateway-product"
+  providerAccountRef:
+    name: 3scale-tenant-secret
+  deployment:
+    apicastHosted:
+      authentication:
+        oidc:
+          issuerType: "keycloak"
+          issuerEndpoint: "https://client-manager:<REPLACE-WITH-CLIENT-CREDENTIALS>@sso.{openshift_subdomain}/realms/globex-{user-name}"
+          authenticationFlow:
+            standardFlowEnabled: true
+            implicitFlowEnabled: true
+            serviceAccountsEnabled: true
+            directAccessGrantsEnabled: false
+          jwtClaimWithClientID: "azp"
+          jwtClaimWithClientIDType: "plain"
+          credentials: "headers"
+  applicationPlans:
+    basic:
+      name: "Globex Basic Mobile Plan"
+      setupFee: "0"
+      published: true
+    premium:
+      name: "Globex Basic Premium Plan"
+      setupFee: "100"
+      published: true
+  backendUsages:
+    globex-mobile-gateway-backend:
+      path: /
+----
+. Replace the `<REPLACE-WITH-CLIENT-CREDENTIALS>` text in the YAML with the Client Credentials of the *client-manager* client you created in Keycloak in the previous step.
++
+image::apim/create-mobile-product-yaml.png[]
++
+[TIP]
 ====
 
-If you don't have this value, click on Red Hat  {sso_tenant_console}/#/globex-{user_name}/clients[Keycloak Clients List^, window="sso"]. Login if needed with *({user_name}/{user_password})*. Click on the Client ID *client-manager*. You can copy the credentials from the *Credentials tab*
+If you don't have this value, access Red Hat  {sso_tenant_console}/#/globex-{user_name}/clients[Keycloak Clients List^, window="sso"]. Login if needed with *({user_name}/{user_password})*. Click on the Client ID *client-manager*. You can copy the credentials from the *Credentials tab*
 
 image::apim/client-manager-credentials.png[]
 ====
-
++
 [WARNING]
 ====
 Make sure the *<* and *>* of the placeholder are removed when you paste the values. 
 ====
 
-.. *<issuer-endpoint>* : Replace with the below value
-+
-[source,bash,role=execute, subs="attributes"]
-----
-sso.{openshift_subdomain}/realms/globex-{user_name}
-----
-+
-.[.underline]#*Click to know how to access the _issuer-endpoint_*#
-[%collapsible]
-====
+. Click on the *Create* button.
+. The 3scale Product will be created, and the details page displays the the *Synced* condition  as `True`.
 
-This URL is from Keycloak's *Issuer endpoint* from https://sso.{openshift_subdomain}/realms/globex-{user_name}/.well-known/openid-configuration[OpenID configurations endpoint^]. 
-
-.Keycloak Issuer URL
-
-image::apim/sso-issuer-endpoint.png[] 
-====
-
-* The *mobile-gateway-product.yaml* file should looks like this now +
-+
-.mobile-gateway-product.yaml updated with the correct values
-image::apim/mobile-product-gateway-product-issuerendpoint.png[]
-* Execute the following command in the Terminal to create this Product for Mobile Gateway 
-+
-[source,bash,role=execute, subs="attributes"]
-----
-oc apply -f /projects/workshop-devspaces/workshop/module-apim/mobile/gateway/mobile-gateway-product.yaml -n globex-apim-{user_name}
-----
-
-* You will the see the following output confirming creation of 3scale Product for Mobile Gateway: 
-+
-.Output
-----
-product.capabilities.3scale.net/globex-mobile-gateway-product created
-----
 
 === Create Active Doc for Mobile Gateway
 
-. In Dev Spaces, navigate to the folder *workshop/module-apim/mobile/activedoc*, open the file *create-mobile-activedoc.yaml*
-+
-image::apim/mobile-activedoc-yaml.png[width=70%]
-. Replace the `<replace-me>` placeholder with the Service Registry OpenAPI endpoint. This is the same OpenAPI spec that you setup on Service Registry.
+. From the OpenShift console, click on the *(+)* button and then *Import Yaml* dropdown option.
+. Paste the following YAML content in the *Import YAML* text area.
 +
 [source,bash,role=execute,subs="attributes"]
 ----
-{service_registry_app_url}/apis/registry/v2/groups/globex/artifacts/mobileapi
+kind: ActiveDoc
+apiVersion: capabilities.3scale.net/v1beta1
+metadata:
+  name: mobile-gateway-activedoc
+  namespace: globex-apim-{user_name}
+spec:
+  activeDocOpenAPIRef:
+    url: "https://service-registry-app-{user-name}.{openshift_subdomain}/apis/registry/v2/groups/globex/artifacts/mobileapi"
+  published: true
+  name: mobile-gateway-activedoc
+  providerAccountRef:
+    name: 3scale-tenant-secret
+  productSystemName: globex-mobile-gateway-product
 ----
 +
-.ActiveDoc updated with OpenAPI Service Registry endpoint 
+TIP: The `activeDocOpenAPIRef.url` is of the  OpenAPI spec that you setup on Service Registry.
++
+image::apim/create-mobile-activedoc-yaml.png[]
+. Click on the *Create* button. +
+The ActiveDoc will be created, and the details page will diplay the the *Ready* condition  as `True`.
 
-image::apim/mobile-activedoc-create-file.png[]
-
-. Create this Active Doc by running the following command in the Dev Spaces Terminal
-+
-[source,bash,role=execute,subs="attributes"]
-----
-oc apply -f /projects/workshop-devspaces/workshop/module-apim/mobile/activedoc/create-mobile-activedoc.yaml -n globex-apim-{user_name}
-----
-+
-.Output
-----
-activedoc.capabilities.3scale.net/mobile-gateway-activedoc created
-----
 
 == Setup Mobile users
 The Globex mobile application developers will need access to the Developer Portal to signup for the APIs exposed to them. Typically they would access the developer portal and signup for an account which may as needed go through an approval process. For the purpose of this workshop we will use the inbuilt developer user `John`.
