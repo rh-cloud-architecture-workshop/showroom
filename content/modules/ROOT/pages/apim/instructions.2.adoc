@@ -54,7 +54,7 @@ In this section you will manage and secure the Mobile Gateway API endpoints so t
 
 To setup OIDC, create a special *client id* meant for *Client Credentials Management*.
 
-. Click to launch {sso_tenant_console}[Keycloak^, window="sso"] and login using username and password ({user_name}/{user_password}).
+. Click to launch {sso_tenant_console}[Keycloak^, window="sso"] and login as *{user_name}/{user_password}*.
 . Click on *Clients* from the left-hand navigation. And, then click on the *Create client* button on the right side as shown below
 
 +
@@ -128,68 +128,40 @@ To integrate and manage the Mobile Gateway API in 3scale API Management Platform
 
 === Create 3scale Backend for Mobile Gateway service
 
-To create the Backend for Mobile Gateway, you will need the Service URL of Mobile Gateway deployment running on OpenShift.
-
-. Navigate to the {devspaces_dashboard}/dashboard/#[Dev Spaces IDE Tab^, window="devspaces"]. If prompted, login as ({user_name}/{user_password}). 
-. Navigate to the folder *workshop/module-apim/mobile/gateway* and open the *mobile-gateway-backend.yaml* file. _(Shortcut: Ctrl+P > `mobile-gateway-backend.yaml`)_
-. Replace the `<replace-me>` placeholder with the  Globex Mobile gateway Service endpoint provided below: 
+. Navigate to OpenShift console {openshift_cluster_console}/topology/ns/globex-apim-{user_name}[OpenShift Console^, window="console"] and if needed login with *({user_name}/{user_password})*.
+. Click on *(+)* button and then *Import Yaml* dropdown option on the top right corner of the OpenShift console
++
+image::apim/import-yaml.png[] 
+. Paste the following YAML content in the *Import YAML* text area, and click on the *Create* button
 +
 [source,bash,role=execute,subs="attributes"]
 ----
-http://globex-mobile-gateway.globex-apim-{user_name}.svc.cluster.local:8080
-----
-+
-.Update mobile-gateway-backend.yaml with Service endpoint of Globex Mobile gateway
-image::apim/mobile-backend-yaml.png[]
+apiVersion: capabilities.3scale.net/v1beta1
+kind: Backend
+metadata:
+  name: globex-mobile-gateway-backend
+spec:
+  name: "Globex Mobile Gateway Backend"
+  systemName: "globex-mobile-gateway-backend"
+  privateBaseURL: "http://globex-mobile-gateway.globex-apim-{user_name}.svc.cluster.local:8080"
+  providerAccountRef:
+    name: 3scale-tenant-secret
+  metrics:
+    hits:
+      description: Number of API hits
+      friendlyName: Hits
+      unit: "hit"
+  mappingRules:
+    - httpMethod: GET
+      pattern: "/"
+      increment: 1
+      metricMethodRef: hits
 
-. The *privateBaseURL* in the *mobile-gateway-backend.yaml* file should read like this:
-+
-[source,bash,role=execute,subs="attributes"]
-----
-privateBaseURL: "http://globex-mobile-gateway.globex-apim-{user_name}.svc.cluster.local:8080"
 ----
 +
-.[.underline]#*[Click to know] Where did the Service URL come from?*#
-[%collapsible]
-====
+TIP: The *privateBaseURL* in this YAML is the Service endpoint of *Globex Mobile gateway*  servivc running on OpenShift. If interested, click to view the {openshift_cluster_console}/topology/ns/globex-apim-{user_name}/service/globex-mobile-gateway[globex-mobile-gateway service URL^, window="_blank"].
 
-* Navigate to the `globex-apim-{user_name}` namespace on the OpenShift console by clicking here {openshift_cluster_console}/topology/ns/globex-apim-{user_name}[APIM module on OpenShift, window="console"] and login with ({user_name}/{user_password}).
-* In the *Find by name* filter enter the value `mobile-gateway`. The `globex-mobile-gateway` deployment is highlighted. Clicking on this deployment opens the context menu for this deployment
-+
-.Locate globex-mobile-gateway deployment
-image::apim/globex-mobile-gateway-deplpyment.png[]
-* Under *Services* section you can see the name of the services assocated with this deployment. Click on the `globex-mobile-gateway` link and you will be taken to the Services page. 
-* Under *Service routing -> Hostname*, you can find the service's hostname. Make a note of this URL and you will need this to create the Backend on 3scale.
-+
-.Mobile Gateway Service in OpenShift
-image::apim/mobile-gateway-services.png[]
 
-====
-
-. From the Terminal in the Dev Spaces, run the following command `oc whoami` to check if you are still logged in as *{user_name}* and `oc project` to see if you are in the project `globex-apim-{user_name}`
-.. If you are not in `globex-apim-{user_name}`, run `oc project globex-apim-{user_name}` to login to the right namespace
-+
-[source,bash , subs="attributes"]
-.Check logged-in username and project
-----
-$ oc whoami
-{user_name}
-$ oc project
-Using project "globex-apim-{user_name}" on server...
-----
-. Run the following command to create a Mobile Gateway Backend in 3scale.
-+
-[source,bash,role=execute, subs="attributes"]
-----
-oc apply -f /projects/workshop-devspaces/workshop/module-apim/mobile/gateway/mobile-gateway-backend.yaml -n globex-apim-{user_name}
-----
-
-. You should see the output as 
-+
-.Output of Mobile Gateway Backend creation
-----
-backend.capabilities.3scale.net/globex-mobile-gateway-backend created
-----
 
 === Create 3scale Product for MobileGateway API
 
@@ -285,7 +257,7 @@ The Globex mobile application developers will need access to the Developer Porta
 == View the newly created Backend, Product and ActiveDoc
 === View on 3scale admin console
 
-. Navigate to the {3scale_tenant}[3scale admin portal^, window="3scale"] and login using your username and password ({user_name}/{user_password}).
+. Navigate to the {3scale_tenant}[3scale admin portal^, window="3scale"] and login as *{user_name}/{user_password}*.
 +
 .Launch 3scale 
 image::apim/apim-mobile-3scale-login.png[]
