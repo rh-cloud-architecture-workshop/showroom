@@ -174,7 +174,7 @@ image::apim/apim-mobile-backend-created.png[]
 === Create 3scale Product for MobileGateway API
 
 . From the OpenShift console, click on the *(+)* button and then *Import Yaml* dropdown option.
-. Paste the following YAML content in the *Import YAML* text area.
+. Paste the following YAML content in the *Import YAML* text area. Do *NOT* click on the *Create* button yet, since the `issuerEndpoint` value in the YAML needs to be replaced in the next step.
 +
 TIP: The issuer endpoint contains the Keycloak *OpenID Well-known Configuration* , and the client credentials of the `client-manager` client that you had created earlier
 +
@@ -217,7 +217,7 @@ spec:
     globex-mobile-gateway-backend:
       path: /
 ----
-. Replace the `REPLACE_ME_WITH_CLIENT_CREDENTIALS` text in the YAML with the Client Credentials of the *client-manager* client you created in Keycloak in the previous step.
+. Replace the text `REPLACE_ME_WITH_CLIENT_CREDENTIALS` in the YAML you just pasted with the *Client Credentials* of the *client-manager* client you created in Keycloak in the previous step.
 +
 image::apim/create-mobile-product-yaml.png[]
 +
@@ -229,7 +229,7 @@ image::apim/client-manager-credentials.png[]
 ====
 
 
-. Click on the *Create* button. +
+. Click on the *Create* button now. +
 The 3scale Product will be created, and the details page displays the the *Synced* condition  as `True`.
 
 
@@ -247,7 +247,7 @@ metadata:
   namespace: globex-apim-{user_name}
 spec:
   activeDocOpenAPIRef:
-    url: "https://service-registry-app-{user-name}.{openshift_subdomain}/apis/registry/v2/groups/globex/artifacts/mobileapi"
+    url: "https://service-registry-app-{user_name}.{openshift_subdomain}/apis/registry/v2/groups/globex/artifacts/mobileapi"
   published: true
   name: mobile-gateway-activedoc
   providerAccountRef:
@@ -381,58 +381,58 @@ image::apim/apim-devportal-mobile-create-new-app-2.png[width=70%]
 .Update REDIRECT URL in the Application creates successfully for Mobile User
 image::apim/apim-devportal-mobile-app-success.png[width=90%]
 . Copy the *Client ID* from this page which will be used to setup Mobile App
-. In Dev Spaces open the file: *workshop/module-apim/mobile/mobile-env-patch.sh*
-.. Substitute `<replace-me>` found against the `API_CLIENT_ID` variable with the *Client ID* in the previous step
-+
-.Update client_id into mobile-env-patch file
-image::apim/mobile-clientid-env-patch.png[width=70%]
-. Back in the Developer Portal click on *DOCUMENTATION* navigation on the top of the page. 
-. The *Documentation* page displays all the available APIs including the default API as well as *globex-mobile-gateway-product*
-+
-.Developer Portal: Documentation Page
-image::apim/dev_portal_mobile_doc.png[width=80%]
-.. Copy the URL displayed under "Service Endpoint" in *globex-mobile-gateway-product* box
-.. In Dev Spaces navigate back to the open file: *workshop/module-apim/module/mobile-env-patch.sh*
-.. Substitute `<replace-me>` found against the `GLOBEX_MOBILE_GATEWAY` variable with the *Service Endpoint* in the previous step
-+
-.Update GLOBEX_MOBILE_GATEWAY into mobile-env-patch file
-image::apim/mobile-mobgateway-env-patch.png[width=60%]
-. In the same file update the *<replace-me>* tags for the *SSO_AUTHORITY* and *SSO_REDIRECT_LOGOUT_URI* fields with the following variables
-+
-[cols="30%,60%"]
 
-|===
-|Field | Value
+== Update the Mobile App with access details
 
-| SSO_AUTHORITY | \https://sso.{openshift_subdomain}/realms/globex-{user_name}
-| SSO_REDIRECT_LOGOUT_URI | \https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}/home
-|===
+
+. Navigate to https://console-openshift-console.{openshift_subdomain}/k8s/ns/globex-apim-{user_name}/deployments/globex-mobile/environment[globex-mobile deployment, window="console"]
 +
-.Update Keycloak details into mobile-env-patch file
-image::apim/mobile-sso-env-patch.png[]
-. Finally the *mobile-env-patch.sh* file should look like this. Save the file by `Ctrl+S`
-+
-.Fully updated mobile-env-patch file
-image::apim/mobile-full-env-patch.png[]
-. Execute this script in the Terminal by running the following command in Dev spaces' Terminal
+image::apim/apim_globex_mobile_deployment_env.png[]
+. Update the following environment variables in the *Environment* tab as directed below
+.. Update *API_CLIENT_ID*  with the Client ID in the previous step from Keycloak
+.. Update *SSO_AUTHORITY* with the below value (which is the Keycloak *OpenID Well-known Configuration* URL)
 +
 [source,bash,role=execute,subs="attributes"]
 ----
-oc project globex-apim-{user_name}
-sh /projects/workshop-devspaces/workshop/module-apim/mobile/mobile-env-patch.sh
+https://sso.{openshift_subdomain}/realms/globex-{user_name}
+
+----
+
+.. Update *SSO_REDIRECT_LOGOUT_URI* with the below value (which is the Mobile App's home page URL)
++
+[source,bash,role=execute,subs="attributes"]
+----
+https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}/home
+----
+
+
+.. Update *GLOBEX_MOBILE_GATEWAY* with the below value 
++
+[source,bash,role=execute,subs="attributes"]
+----
+https://globex-mobile-gateway-product-3scale-{user_name}-apicast-production.{openshift_subdomain}:443
 ----
 +
-[source,subs="attributes"]
-.Output of running mobile-env-patch.sh script
-----
-deployment.apps/globex-mobile updated
-----
-. The Mobile App Deployment is patched with the necessary variables. You can view this navigating to {openshift_cluster_console}/k8s/ns/globex-apim-{user_name}/deployments/globex-mobile/environment[globex-mobile deployment, window="console"]
+[TIP]
+====
+In real life, the *GLOBEX_MOBILE_GATEWAY*  is accessible from the Developer Portal - but it is provided above for the sake of convenience.
+
+* Access the Developer Portal https://3scale-{user_name}.{openshift_subdomain}/docs[DOCUMENTATION^] which displays all the available APIs including the default API as well as *globex-mobile-gateway-product*
+* The API URL you need displayed under "Service Endpoint" in *globex-mobile-gateway-product* box
+
+.Developer Portal: Documentation Page
+image::apim/dev_portal_mobile_doc.png[width=80%]
+
+====
+
+. The *Environment* tab should look like below after the changes
 +
 .globex-mobile deployment on OpenShift
 image::apim/apim_globex_mobile_deployment.png[]
 
-=== Update Keycloak's Web Origin to match Mobile App
+. Click on the *Save* button to save the changes and the Mobile App deployment will be patched with the new environment variables.
+
+== Update Keycloak's Web Origin to match Mobile App
 There is one last step that you need to do before trying out the Mobile App. You need to update the *Web Origin*
 
 . Navigate to click on {sso_tenant_console}/#/globex-{user_name}/clients[Keycloak Clients List^,window="sso"]. Login if needed with *({user_name}/{user_password})*.
