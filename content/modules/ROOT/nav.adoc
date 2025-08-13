@@ -17,8 +17,8 @@
 ** xref:apim/intro.0.adoc[Technical Considerations]
 
 * xref:module-apim-instructions.adoc[Launch new channels using Contract-First approach]
-** xref:apim/instructions.1.adoc[Design and Govern Mobile OpenAPI Specification]
-** xref:apim/instructions.0.adoc[Red Hat build of Keycloak]
+** xref:apim/instructions.0.adoc[Design and Govern Mobile OpenAPI Specification]
+** xref:apim/instructions.1.adoc[Red Hat build of Keycloak]
 ** xref:apim/instructions.2.adoc[Configure 3scale API Management]
 ** xref:apim/instructions.3.adoc[Test Mobile Application]
 ** xref:apim/instructions.4.adoc[Setup Partner Application (Optional)]
