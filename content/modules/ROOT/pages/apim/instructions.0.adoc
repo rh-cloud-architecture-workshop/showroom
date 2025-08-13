@@ -1,7 +1,7 @@
 :imagesdir: ../../assets/images
 
 
-= Red Hat build of Keycloak - An Introduction
+= Red Hat build of Keycloak
 
 // :toclevels: 2
 :icons: font 
@@ -36,7 +36,13 @@
 
 ++++
 
+== Section Goals 
 
+. Configure Red Hat build of Keycloak to provide single sign-on (SSO) capabilities for users signing into Mobile App 
+. Configure Red build of Keycloak to secure Mobile Gateway API endpoints using OpenID Connect
+
+
+== Introduction
 
 Red Hat build of Keycloak is used in this module to offer both Single Sign-On (SSO) to Mobile users, and also to secure the APIs. 
 
@@ -92,5 +98,67 @@ https://sso.{openshift_subdomain}/realms/globex-{user_name}/protocol/openid-conn
 
 |===
 
-{empty} +
+== Red Hat build of Keycloak
+3scale integrates with Keycloak to authenticate API requests using the OpenID Connect (OIDC) specification.  When external or mobile developers sign up, they are issued client credentials for secure API access. These credentials are synchronized between 3scale and the Keycloak server through a 3scale component called *Zync*
 
+To setup OIDC, create a special *client id* meant for *Client Credentials Management*.
+
+. Click to launch {sso_tenant_console}[Keycloak^, window="sso"] and login as *{user_name}/{user_password}*.
+. Click on *Clients* from the left-hand navigation. And, then click on the *Create client* button on the right side as shown below
+
++
+.Keycloak: Clients listing
+image::apim/client-add.png[]
+
+. In the *Step 1* of the *Create Client* wizard, enter the following details and click on the *Next* button.
++
+[width=60%]
+|====
+| Name | Value
+
+|Client type (dropdown) | `OpenID Connect`
+|Client Id | `client-manager`
+|====
++
+.Keycloak: Create Client wizard - Step 1: General Settings 
+image::apim/client-manager-step1.png[]
+
+. In the *Step 2* of the *Create Client* wizard, choose the following details and click on the *Next* button.
++
+This configuration allows only Services based access using Service Accounts, and will be used by 3scale API Management system in the next steps, when mobile users sign up for access. Service accounts provide a flexible way to control API access without sharing a regular user's credentials.
++
+image::apim/client-manager-step2.png[] 
+
+. In the *Step 3* of the *Create Client* wizard, leave the fields as they are and click on the *Save* button. We will update some of these options later.
++
+image::apim/client-manager-step3.png[]
+
+.  You will be shown the *Settings* tab of `client-manager` client.
++
+.Keycloak: View *client-manager* Settings
+image::apim/new-client-save.png[]
+
+. The next step is to configure this `client-manager` so that 3scale can synchronize with Keycloak, and Keycloak can manage other clients (create, amend and delete) on behalf of 3scale API Management
+.. Click on the *Service Account Roles* tab from the top tab navigation, and click *Assign Role* button
++
+.Setup Service Account Roles for *client-manager* in Service Account Roles tab
+image::apim/sso-service-acc-tab.png[]
+
+.. From the *Assign roles to client-manager* popup, select the *Filter by clients* dropdown, type in `manage-clients` in the *Search by role name* textbox and press the *->* button to search for this manage-clients role.
++
+image::apim/sso-assign-roles.png[width=70%]
+
+. Choose the *manage-clients* option, and click on *Assign* button
++
+.Assign *manage-clients* role
+image::apim/sso-assign-roles-save.png[width=70%]
+
+. The newly assigned role will now be displayed
++
+.New *manage-clients* role is assigned
+image::apim/sso-assign-roles-complete.png[]
+ 
+. You can view the credentials of this client-id from the *Credentials* tab. You will need this when setting up the 3scale products in the next section. You can save this in the Scratchpad of DevSpaces.
++
+.Keycloak: Client Credentials of client-manager
+image::apim/client-manager-credentials.png[]
