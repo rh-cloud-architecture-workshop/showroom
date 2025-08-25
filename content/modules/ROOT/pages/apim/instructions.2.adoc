@@ -151,13 +151,14 @@ spec:
     globex-mobile-gateway-backend:
       path: /
 ----
-. Replace the text `REPLACE_ME_WITH_CLIENT_CREDENTIALS` in the YAML you just pasted with the *Client Credentials* of the *client-manager* client you created in Keycloak in the previous step.
+. Replace the text `REPLACE_ME_WITH_CLIENT_CREDENTIALS` in the YAML you just pasted with the *Client Credentials* of the *client-manager* client you created in Keycloak in the previous section.
 +
 image::apim/create-mobile-product-yaml.png[]
 +
 [TIP]
 ====
-To access this value, navigate to the {sso_tenant_console}/#/globex-{user_name}/clients[Keycloak Clients List^, window="sso"]. Login if needed with *({user_name}/{user_password})*. Click on the Client ID *client-manager*, and copy the credentials from the *Credentials tab*
+*Don't have it handy? No worries.* +
+Navigate to the {sso_tenant_console}/#/globex-{user_name}/clients[Keycloak Clients List^, window="sso"]. Login if needed with *({user_name}/{user_password})*. Click on the Client ID *client-manager*, and copy the credentials from the *Credentials tab*
 
 image::apim/client-manager-credentials.png[]
 ====

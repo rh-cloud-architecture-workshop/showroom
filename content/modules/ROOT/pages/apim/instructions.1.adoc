@@ -98,7 +98,8 @@ https://sso.{openshift_subdomain}/realms/globex-{user_name}/protocol/openid-conn
 
 |===
 
-== Red Hat build of Keycloak
+== Create a special client for Client Credentials Management
+
 3scale integrates with Keycloak to authenticate API requests using the OpenID Connect (OIDC) specification.  When external or mobile developers sign up, they are issued client credentials for secure API access. These credentials are synchronized between 3scale and the Keycloak server through a 3scale component called *Zync*
 
 To setup OIDC, create a special *client id* meant for *Client Credentials Management*.
@@ -138,13 +139,16 @@ image::apim/client-manager-step3.png[]
 .Keycloak: View *client-manager* Settings
 image::apim/new-client-save.png[]
 
-. The next step is to configure this `client-manager` so that 3scale can synchronize with Keycloak, and Keycloak can manage other clients (create, amend and delete) on behalf of 3scale API Management
-.. Click on the *Service Account Roles* tab from the top tab navigation, and click *Assign Role* button
+== Configure the `client-manager` client
+
+The next step is to configure this `client-manager` so that 3scale can synchronize with Keycloak, and Keycloak can manage other clients (create, amend and delete) on behalf of 3scale API Management
+
+. Click on the *Service Account Roles* tab from the top tab navigation of the `client-manager` client, and click *Assign Role* button
 +
 .Setup Service Account Roles for *client-manager* in Service Account Roles tab
 image::apim/sso-service-acc-tab.png[]
 
-.. From the *Assign roles to client-manager* popup, select the *Filter by clients* dropdown, type in `manage-clients` in the *Search by role name* textbox and press the *->* button to search for this manage-clients role.
+. From the *Assign roles to client-manager* popup, select the *Filter by clients* dropdown, type in `manage-clients` in the *Search by role name* textbox and press the *->* button to search for this manage-clients role.
 +
 image::apim/sso-assign-roles.png[width=70%]
 
@@ -158,7 +162,9 @@ image::apim/sso-assign-roles-save.png[width=70%]
 .New *manage-clients* role is assigned
 image::apim/sso-assign-roles-complete.png[]
  
-. You can view the credentials of this client-id from the *Credentials* tab. You will need this when setting up the 3scale products in the next section. You can save this in the Scratchpad of DevSpaces.
+. You can view the credentials of this client-id from the *Credentials* tab. You will need this when setting up the 3scale products in the next section. 
 +
 .Keycloak: Client Credentials of client-manager
 image::apim/client-manager-credentials.png[]
+
+TIP: You can save this in the Scratchpad of DevSpaces for easier access while configuring the API management.
