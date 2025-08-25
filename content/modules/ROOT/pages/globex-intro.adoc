@@ -66,4 +66,3 @@ The stream of user activity events is processed in real-time using a stream proc
 The current architecture of the Globex retail web application:
 
 image::intro/globex-deployment-2.png[width=80%]
-
