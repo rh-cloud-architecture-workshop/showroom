@@ -41,7 +41,7 @@ In this workshop we leverage Camel and Camel K to bridge between the Kafka topic
 
 The first integration we need is pretty simple: we need to consume the aggregated order records from the Kafka *globex.order-aggregated* topic, and call a REST endpoint on the Cashback service. No data transformation is required. A relatively simple integration like this one is ideally suited to be expressed in YAML.
 
-* In a browser window, navigate to the browser tab pointing to the Dev Spaces workspace you opened earlier to inspect and deploy the Debezium connector. If you don't have a browser tab open on the Dev Spaces workspace, refer to the instructions in the <<_deploy_the_debezium_connector>> section.
+* In a browser window, navigate to the browser tab pointing to the Dev Spaces workspace you opened earlier to inspect and deploy the Debezium connector. If you don't have a browser tab open on the Dev Spaces workspace, refer to the instructions in the xref:./cdc/instructions.0.adoc[Deploy the Debezium Connector] section.
 
 * The Camel K connector for the aggregated orders is defined in the *workshop/module-cdc/order-connector/cashback-order-connector.yaml* file.
 +
@@ -126,7 +126,7 @@ image::cdc/openshift-console-topology-integration-logs.png[]
 The second integration we need is slightly more complex: we need to consume the change events from the *customer* table from the Kafka topic, determine whether the change event corresponds to a *create/read* or *update* change, transform the data and finally call a REST endpoint (POST for create, PUT for update) on the _Cashback_ service. +
 This time the integration logic is expressed in Groovy, a dynamic language for the Java virtual machine.
 
-* In a browser window, navigate to the browser tab pointing to the Dev Spaces workspace you opened earlier. If you don't have a browser tab open on the Dev Spaces workspace, refer to the instructions in the <<_deploy_the_debezium_connector>> section.
+* In a browser window, navigate to the browser tab pointing to the Dev Spaces workspace you opened earlier. If you don't have a browser tab open on the Dev Spaces workspace, refer to the instructions in the xref:./cdc/instructions.0.adoc[Deploy the Debezium Connector] section.
 
 * The Camel K integration for the customer change events is defined in the *workshop/module-cdc/customer-connector/cashback-customer-connector.groovy* file.
 +

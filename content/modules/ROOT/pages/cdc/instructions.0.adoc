@@ -136,7 +136,7 @@ image::cdc/amqconsole-anon-session.png[]
 
 * Navigate to *Topics* menu on the left hand side. 
 +
-Filter the topics by *Name*  by the term`globex.updates`. You will see the three topics that will receive the change events.
+Filter the topics by *Name*  by the term `globex.updates`. You will see the three topics that will receive the change events.
 +
 image::cdc/amqconsole-debezium-topics.png[]
 
@@ -145,7 +145,7 @@ Note: that Offsets start at _0_. An Offset of _199_ means that there are _200_ m
 +
 image::cdc/amqconsole-debezium-topic-customers.png[]
 
-* You can expand every message to inspect its content. In this case, the body of each message consists of a Debezium change event in JSON format.
+* You can expand every message to inspect its content. In this case, the body of each message consists of a Debezium change event in JSON format. Click on the topmost message to expand it.
 +
 image::cdc/amqconsole-debezium-topic-customers-200.png[]
 

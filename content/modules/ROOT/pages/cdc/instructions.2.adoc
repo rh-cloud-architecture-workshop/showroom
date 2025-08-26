@@ -1,4 +1,4 @@
-= Streaming processing
+= Event Streams processing
 :imagesdir: ../../assets/images
 :sectnums:
 
