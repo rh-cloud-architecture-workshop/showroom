@@ -35,12 +35,7 @@
 
 In this section we will connect the Knative Services (refer to previous section) to Kafka using *Knative Sink* and *SinkBinding*. 
 
-.[.underline]#*[Click to know]  What is Knative Sink and SinkBinding ?*#
-[%collapsible]
-====
-. A https://docs.openshift.com/serverless/1.30/eventing/event-sinks/serverless-kafka-developer-sink.html[Kafka Sink for Apache Kafka, window="others"] helps in persisting an incoming CloudEvents over HTTP Kafka message (CloudEvent) to a Kafka topic. Event producers (such as apps, devices) can send to the Kafka Sinks there by reducing the complexity of new protocols and message formats for app developers. The Kafka Sinks then send the CloudEvents they receive to the configured Apache Kafka topic. 
-. https://docs.openshift.com/serverless/1.30/eventing/event-sources/serverless-custom-event-sources.html[SinkBinding^] supports decoupling the source (service which produces events) from the actual sink. The SinkBinding object injects environment variables (such as sink URL) into the services there by decoupling the source from the sink.
-====
+TIP: https://docs.openshift.com/serverless/1.30/eventing/event-sources/serverless-custom-event-sources.html[SinkBinding^] supports decoupling the source (service which produces events) from the actual sink by injecting the sink URL into the services.
 
 
 == Create Sink and SinkBinding
@@ -65,13 +60,6 @@ image::serverless/console-add-yaml.png[]
 * Copy the following CRD into the *Import YAML* form, and click *Create* to create the KafkaSink `reviews-sink` which will send messages to `globex.reviews` Kafka Topic.
 
 +
-.[.underline]#*Click to see a visual*# 
-[%collapsible]
-====
-
-image::serverless/create-sink.png[width=60%]
-====
-+
 [source,bash,role=execute,subs="attributes"]
 ----
 apiVersion: eventing.knative.dev/v1alpha1
@@ -91,6 +79,8 @@ spec:
          name: kafka-secret
 
 ----
++
+image::serverless/create-sink.png[width=60%]
 
 * Use the *Import YAML* form to create a *Sink Binding* from the `product-reviews` Quarkus Service to the KafkaSink `reviews-sink` that you created in the previous step.
 +
@@ -117,11 +107,8 @@ spec:
 
 * Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Topology View, window="console", target="console"], to view the new Sink and SinkBinding you created
 +
-.[.underline]#*Click to see a visual*# 
-[%collapsible]
-====
 image::serverless/sink-sinkb-created.png[]
-====
+
 
 * Here is the list of all the Kafka Sinks used in this solution.
 +

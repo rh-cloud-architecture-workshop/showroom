@@ -87,13 +87,10 @@ image::serverless/sentiment-reviews-trigger.png[width=80%]
 * The review is then sent to the `reviews.sentiment` topic. Access this topic in the https://streams-console-{user_name}.{openshift_subdomain}[streams for Apache Kafka console, window="_amqstreams"]. Click on any of the kafka messages to view the sentiment score.
 +
 image::serverless/amqstreams-sentiment-score.png[]
-** As a next step, this sentiment score can be used to build a dashboard to visualise the sentiment of various categories of products. 
+** As a next step, this sentiment score can be used to build a dashboard to visualise the sentiment of various categories of products. This is out of the scope of this workshop, but here is a sample dashboard built using Grafana.
 +
-.[.underline]#*Click to see a sample visual*# 
-[%collapsible]
-====
 image::serverless/globex-dashboard-sample.png[]
-====
+
 
 == Congratulations
 

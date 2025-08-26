@@ -55,7 +55,7 @@ To integrate and manage the Mobile Gateway API in 3scale API Management Platform
 
 [NOTE]
 ====
-*Backends* are implementations of an API deployed in a host. One or more backends  are bundled as a *Product*. *3scale ActiveDoc* is based on the Open API Specification (OAS) of the REST APIs.
+*Backends* are implementations of an API deployed in a host. One or more backends  are bundled as a *Product*. The *3scale ActiveDoc* is based on the Open API Specification (OAS) of the REST APIs.
 ====
 
 
@@ -65,7 +65,12 @@ To integrate and manage the Mobile Gateway API in 3scale API Management Platform
 . From the  the top right corner of the OpenShift console, click on the *(+)* button and then *Import Yaml* dropdown option 
 +
 image::apim/import-yaml.png[] 
-. Paste the following YAML content in the *Import YAML* text area
+. Paste the following YAML content in the *Import YAML* text area. 
+
++
+TIP: This YAML creates a 3scale Backend for the Mobile Gateway service that is running on OpenShift. The *privateBaseURL* in this YAML is the Service endpoint of *Globex Mobile gateway*  service running on OpenShift. If interested, click to view the {openshift_cluster_console}/k8s/ns/globex-apim-{user_name}/services/globex-mobile-gateway[globex-mobile-gateway service URL^, window="_blank"]. The URL is diplayed under the Service routing section.
+
+
 +
 [source,bash,role=execute,subs="attributes"]
 ----
@@ -96,8 +101,6 @@ spec:
 +
 image::apim/import-mobile-backend.png[] 
 
-+
-TIP: The *privateBaseURL* in this YAML is the Service endpoint of *Globex Mobile gateway*  service running on OpenShift. If interested, click to view the {openshift_cluster_console}/k8s/ns/globex-apim-{user_name}/services/globex-mobile-gateway[globex-mobile-gateway service URL^, window="_blank"]. The URL is diplayed under the Service routing section.
 
 . Click on the *Create* button. +
 The Backend will be created, and the details page displays the the *Synced* condition  as `True`. 
@@ -108,7 +111,10 @@ image::apim/apim-mobile-backend-created.png[]
 === Create 3scale Product for MobileGateway API
 
 . From the OpenShift console, click on the *(+)* button and then *Import Yaml* dropdown option.
-. Paste the following YAML content in the *Import YAML* text area. Do *NOT* click on the *Create* button yet, since the `issuerEndpoint` value in the YAML needs to be replaced in the next step.
+
+. Paste the following YAML content in the *Import YAML* text area. 
++
+WARNING: Do *NOT* click on the *Create* button yet, since the `issuerEndpoint` value in the YAML needs to be replaced in the next step.
 +
 TIP: The issuer endpoint contains the Keycloak *OpenID Well-known Configuration* , and the client credentials of the `client-manager` client that you had created earlier
 +
@@ -151,9 +157,8 @@ spec:
     globex-mobile-gateway-backend:
       path: /
 ----
+
 . Replace the text `REPLACE_ME_WITH_CLIENT_CREDENTIALS` in the YAML you just pasted with the *Client Credentials* of the *client-manager* client you created in Keycloak in the previous section.
-+
-image::apim/create-mobile-product-yaml.png[]
 +
 [TIP]
 ====
@@ -162,6 +167,8 @@ Navigate to the {sso_tenant_console}/#/globex-{user_name}/clients[Keycloak Clien
 
 image::apim/client-manager-credentials.png[]
 ====
++
+image::apim/create-mobile-product-yaml.png[]
 
 
 . Click on the *Create* button now. +
@@ -235,7 +242,8 @@ image::apim/mobile-product-openid-settings.png[]
 image::apim/apim_3scale_mobile_activedoc.png[]
 . Navigate to *Integration -> Configuration* and click on the *Promote to v.x Staging APIcast* and then *Promote to v.x Production APIcast* to promote all the config changes
 //TBC find ways to overcome this step//
-.. APIcast is an NGINX based API gateway used to integrate internal and external API services with the 3scale. APIcast can be hosted or self-managed. In this workshop we use the default `self-managed` option.
++
+NOTE: APIcast is an NGINX based API gateway used to integrate internal and external API services with the 3scale. APIcast can be hosted or self-managed. In this workshop we use the default `self-managed` option.
 +
 .Promote Staging and Production APIcast
 image::apim/mobile-promote-apicast.png[]
@@ -246,7 +254,9 @@ image::apim/mobile-promote-apicast.png[]
 A good developer portal is a must have to assure adoption of your API. In this section we will setup the Dev Portal so that it is ready to be used by Mobile Developers.
 
 . Navigate to *3scale's Audience -> Developer Portal -> Settings* by clicking on {3scale_tenant}/site/dns[Settings -> Domains & Access section^, window="3scale"]
-. The *Developer Portal Access Code* hides the site from the world till you are ready.
++
+NOTE: The *Developer Portal Access Code* hides the site from the world till you are ready.
+
 . Remove the value in the textfield below the label *Developer Portal Access Code* as shown below. Click on the *Update Account* button. This opens up the Developer Portal to public access without the need for an Access Code.
 +
 .Remove Developer Portal Access Code

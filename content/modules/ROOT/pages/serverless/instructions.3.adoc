@@ -102,18 +102,13 @@ spec:
 ----
 * You will note the triggers have been created successfully
 +
-.[.underline]#*Click to see a visual*# 
-[%collapsible]
-====
 image::serverless/triggers-created.png[width=60%]
-====
+
 * Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Topology View, window="console"], to view the new triggers you created
 +
-.[.underline]#*Click to see a visual*# 
-[%collapsible]
-====
+
 image::serverless/triggers-create-topology.png[]
-====
+
 * Click on the Broker `globex-broker` to view how the three Knative services subscribe to the KnativeBroker using the Triggers; also note the various filters applied to the triggers. +
 These filters are the ones which help to match the CloudEvents header of each  message to the right service which will act on the message.
 

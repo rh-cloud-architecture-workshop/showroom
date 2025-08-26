@@ -139,39 +139,50 @@ image::apim/api-download-as-yaml.png[]
 
 == Manage the Mobile OpenAPI with Service Registry
 
-. Launch *Red Hat build of Service Registry* by accessing {service_registry_ui_url}[this link^, window="service_registry_url"]
+. Launch *Red Hat build of Service Registry* by accessing {service_registry_ui_url}[this link^, window="service_registry_url"] +
+Click on the *Create artifact* button as shown in the screenshot. 
 +
 .Service Registry: Landing Page
 image::apim/service-registry-landing.png[]
-. Click on the *Create artifact* button as shown in the above screenshot. You will be presented with a *Create Artifact* wizard 
-+
-.Service Registry: *Create Artifact* wizard 
-image::apim/sr-upload-artifact.png[]
+
+. You will be presented with a *Create Artifact* wizard.
 
 +
 // step 1
 . In the *Artifact Coordinates* step, enter the following details, and click on the *Next* button. 
-.. Use the exact same values as instructed below to avoid errors in the other sections of this labs.
 +
-[cols="20%,50%"]
-|====
-| *Group Id* | `globex`
-| *Artifact Id* | `mobileapi`
-|====
+TIP:  Use the exact same values as instructed below to avoid errors in the other sections of this labs.
++
+*Group Id*
++
+[source,bash,role=execute,subs="attributes"]
+----
+globex
+----
++
+*Artifact Id*
++
+[source,bash,role=execute,subs="attributes"]
+----
+mobileapi
+----
+
 +
 .Service Registry: Artifact Coordinates
-image::apim/sr-create-coord.png[]
+image::apim/sr-create-coord.png[width=80%]
 
 +
 // step 2
 . In the *Artifact Metadata* step, enter the following details, and click on the *Next* button. 
-.. Name
++ 
+*Name*
 +
 [source,bash,role=execute,subs="attributes"]
 ----
 Globex Mobile API Gateway
 ----
-.. Description (textarea)
++
+*Description (textarea)*
 +
 [source,bash,role=execute,subs="attributes"]
 ----
@@ -185,23 +196,20 @@ image::apim/sr-create-metadata.png[]
 . In the *Version Content (optional)* step
 .. Leave the Version Number empty (it defaults to 1.0.0)
 .. In the *Content* section, in  *From File* section choose the *Browse..* button to upload the Mobile OpenAPI downloaded in the previous step, or `Drag & drop` the file into the textarea. You also can copy and paste the content of the OpenAPI spec file from the API Designer into the textarea.
-.. click on the *Next* button. 
+.. Click on the *Next* button. 
 +
 .Service Registry: Version Content
 image::apim/sr-create-versioncontent.png[]
 
++
 // step 4
 . In the final *Version Metadata (optional)* step, for now you can leave the fields empty, and click on the *Create* button.
 
 +
 .Service Registry: Version Metadata
 image::apim/sr-create-versionmetadata.png[]
-. You will be redirected to the *Explore* page, which shows the the new   *Globex Mobile API Gateway* artifact that has been uploaded and stored within *Service Registry*. 
-+
-.Service Registry: *Globex Mobile API Gateway* artifact has been uploaded
-image::apim/sr-uploaded.png[]
 
-. Click on the *Globex Mobile API Gateway* artifact link as highlighted below to view its details.
+. You are directed to the overview page of the new mobileapi that you just imported.
 +
 .Service Registry: *Globex Mobile API Gateway* artifact has been uploaded
 image::apim/sr-uploaded-details.png[]

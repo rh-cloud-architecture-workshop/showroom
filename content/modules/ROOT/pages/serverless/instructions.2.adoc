@@ -36,12 +36,6 @@
 
 In this section you will set up the Knative components that can invoke the HTTP endpoint of the services (`aiml-moderate-reviews`, `aiml-sentiment-reviews` & `persist-reviews`) whenever a new event occurs due to a product review being submitted. This is performed by using the components Knative Source, Broker and Triggers. +
 
-[INFO]
-====
-* KafkaSource reads messages in existing Apache Kafka topics, and sends those messages (CloudEvents format) to a Knative Broker for Kafka.
-* Brokers provide a discoverable endpoint for incoming events, and use Triggers for event delivery. 
-* A Trigger subscribes to events from a specific broker, filters them based on CloudEvents headers, and delivers them to a Knative service's HTTP endpoint.
-====
 
 == Create Knative Broker
 
@@ -107,17 +101,11 @@ spec:
 
 * The kafka-source is created and the Conditions are all true denoting that the creation is a success.
 +
-.[.underline]#*Click to see a visual*# 
-[%collapsible]
-====
 image::serverless/kafkasource-created.png[]
-====
+
 * Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Topology View, window="console"], to view the new Source and Broker you created.
 +
-.[.underline]#*Click to see a visual*# 
-[%collapsible]
-====
 image::serverless/source-broker-topology.png[]
-====
+
 
 

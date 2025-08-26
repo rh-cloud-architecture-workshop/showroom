@@ -126,7 +126,7 @@ image::apim/client-manager-step1.png[]
 
 . In the *Step 2* of the *Create Client* wizard, choose the following details and click on the *Next* button.
 +
-This configuration allows only Services based access using Service Accounts, and will be used by 3scale API Management system in the next steps, when mobile users sign up for access. Service accounts provide a flexible way to control API access without sharing a regular user's credentials.
+TIP: This configuration allows only Services based access using Service Accounts, and will be used by 3scale API Management system in the next steps, when mobile users sign up for access. Service accounts provide a flexible way to control API access without sharing a regular user's credentials.
 +
 image::apim/client-manager-step2.png[] 
 
@@ -166,5 +166,5 @@ image::apim/sso-assign-roles-complete.png[]
 +
 .Keycloak: Client Credentials of client-manager
 image::apim/client-manager-credentials.png[]
-
++ 
 TIP: You can save this in the Scratchpad of DevSpaces for easier access while configuring the API management.
