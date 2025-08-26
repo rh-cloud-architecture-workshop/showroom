@@ -130,7 +130,7 @@ kafkaconnector.kafka.strimzi.io/globex created
 * One way to verify that the connector is working as expected is to check the Kafka topics that receive the change events.  +
 If you still have a browser tab pointing to streams for Apache Kafka Console, open the tab. If not, navigate to https://streams-console-{user_name}.{openshift_subdomain}[streams for Apache Kafka console, window="_amqstreams"]. 
 ** This redirects you to the *streams for Apache Kafka console* login page. 
-** For the purpose of this workshop, choose *Sign in with Anonymous Session* to access the console if you are not already signed in.
+** For the purpose of this workshop, choose *Click to login anonymously* to access the console if you are not already signed in.
 +
 image::cdc/amqconsole-anon-session.png[]
 

@@ -39,8 +39,8 @@ In this section you will set up the Knative components that can invoke the HTTP 
 
 == Create Knative Broker
 
-* Click on the *(+)* icon found on top of the OpenShift Console to access the *Import YAML* wizard.
-* Copy the following YAML (CRD)  and click *Create* to create a  Knative broker. +
+. From the  the top right corner of the OpenShift console, click on the *(+)* button and then *Import Yaml* dropdown option 
+. Copy the following YAML (CRD)  and click *Create* to create a  Knative broker. +
 Note: There is just one broker for the entire solution, which will use triggers to route them to the right services thereby building a realtime event mesh.
 
 +
@@ -54,8 +54,8 @@ metadata:
 ----
 
 == Create Knative source
-* Click on the *(+)* icon found on top of the OpenShift Console to access the *Import YAML* wizard.
-* Copy the following YAML to create a Knative KafkaSource. +
+. From the  the top right corner of the OpenShift console, click on the *(+)* button and then *Import Yaml* dropdown option 
+. Copy the following YAML to create a Knative KafkaSource. +
 Note that this KafkaSource reads from the specific three (3) topics that are defined in the YAML below, and refers to the `globex-broker` you created in the previous step.
 +
 [source,bash,role=execute,subs="attributes"]

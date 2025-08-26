@@ -92,8 +92,8 @@ image::serverless/serverless-namespace-initial-toplogy.png[]
 .  Red Hat Streams based on Apache Kafka has been setup for you already. The Kafka broker is installed in the globex-mw-{user_name} namespace.In the same namespace, streams for Apache Kafka console, a web UI for viewing Kafka topics and browsing consumer groups, is also installed. +
 . Click to navigate to https://streams-console-{user_name}.{openshift_subdomain}[streams for Apache Kafka console, window="_amqstreams"]. 
 .. This redirects you to the streams for Apache Kafka console login page. 
-.. For the purpose of this workshop, choose *Sign in with Anonymous Session* to access the console if you are not already signed in.
-. Navigate to the navigate to *Kafka Clusters -> kafka -> Topics*. Notice that there are 3 topics which are relevant to this module (you can filter with the word *reviews*). 
+.. For the purpose of this workshop, choose *Click to login anonymously* to access the console if you are not already signed in.
+. Navigate to the *Topics* menu on the left hand side. Notice that there are 3 topics which are relevant to this module (you can filter with the word *reviews*). 
 +
 image::serverless/amqstreams-console-3topics.png[]
 . Here is what each of these topics are meant for:

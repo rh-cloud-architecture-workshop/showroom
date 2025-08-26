@@ -38,8 +38,8 @@
 You will now create triggers which will invoke the HTTP endpoint of Knative services depending on the CloudEvents headers. +
 Each CloudEvents created will be tagged with specific values in the headers `ce-type` and `ce-source` which is then used by the Trigger to route them to the correct service HTTP endpoint
 
-* Click on the *(+)* icon found on top of the OpenShift Console to access the *Import YAML* wizard.
-* Copy and paste the following CRD to create the 3 Triggers matching the 3 Knative services
+. From the  the top right corner of the OpenShift console, click on the *(+)* button and then *Import Yaml* dropdown option 
+. Copy and paste the following CRD to create the 3 Triggers matching the 3 Knative services
 
 +
 [source,bash,role=execute,subs="attributes"]

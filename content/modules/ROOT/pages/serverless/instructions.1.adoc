@@ -53,11 +53,13 @@ image::serverless/reviews-keventing-kafka.png[]
 
 Now, go ahead and create the *Sink and SinkBinding*.
 
-* Click on the *(+)* icon found on top of the OpenShift Console to access the *Import YAML* wizard.
-
+. Navigate to OpenShift console {openshift_cluster_console}[OpenShift Console^, window="console"] and if needed login with *({user_name}/{user_password})*.
+. From the  the top right corner of the OpenShift console, click on the *(+)* button and then *Import Yaml* dropdown option 
++
 image::serverless/console-add-yaml.png[]
 
-* Copy the following CRD into the *Import YAML* form, and click *Create* to create the KafkaSink `reviews-sink` which will send messages to `globex.reviews` Kafka Topic.
+
+. Copy the following YAML into the *Import YAML* form, and click *Create* to create the KafkaSink `reviews-sink` which will send messages to `globex.reviews` Kafka Topic.
 
 +
 [source,bash,role=execute,subs="attributes"]
@@ -79,10 +81,9 @@ spec:
          name: kafka-secret
 
 ----
-+
-image::serverless/create-sink.png[width=60%]
 
-* Use the *Import YAML* form to create a *Sink Binding* from the `product-reviews` Quarkus Service to the KafkaSink `reviews-sink` that you created in the previous step.
+
+. Use the *Import YAML* form to create a *Sink Binding* from the `product-reviews` Quarkus Service to the KafkaSink `reviews-sink` that you created in the previous step.
 +
 [source,bash,role=execute,subs="attributes"]
 ----
@@ -105,12 +106,12 @@ spec:
     namespace: globex-serverless-{user_name}
 ----
 
-* Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Topology View, window="console", target="console"], to view the new Sink and SinkBinding you created
+. Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Topology View, window="console", target="console"], to view the new Sink and SinkBinding you created
 +
 image::serverless/sink-sinkb-created.png[]
 
 
-* Here is the list of all the Kafka Sinks used in this solution.
+. Here is the list of all the Kafka Sinks used in this solution.
 +
 [cols="25%,75"]
 |===

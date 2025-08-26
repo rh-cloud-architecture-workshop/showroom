@@ -40,9 +40,8 @@ As a first step, let us ensure all the services are created. A few of the servic
 
 Knative Services are used to deploy and manage the whole lifecycle of your workload. The Knative Serving component scale the Knative Services based on configuration, metrics and incoming requests.
 
-
 There are 3 Knative Services that are used in this solution
-+
+
 [cols="30%,80%"]
 |===
 |*Service name* | *Function*
@@ -53,7 +52,7 @@ There are 3 Knative Services that are used in this solution
 
 == Deploy Knative Services
 
-. Navigate to the OpenShift Console's Administrator view, and go to *Serverless > Serving* menu. You will see that two of the above mentioned services have been already deployed (`aiml-moderate-reviews` and `aiml-sentiment-reviews`). +
+. Navigate to the OpenShift Console's Administrator view, and go to  {openshift_cluster_console}/serving/ns/globex-serverless-{user_name}[Serverless > Serving^, window="console"] menu. You will see that two of the above mentioned services have been already deployed (`aiml-moderate-reviews` and `aiml-sentiment-reviews`). +
 In the next step, you will create the `persist-reviews` Knative service using a Custom Resource Definition (CRD).
 +
 image::serverless/serverless-2knative-services.png[]

@@ -98,15 +98,13 @@ spec:
 
 ----
 
-+
-image::apim/import-mobile-backend.png[] 
-
 
 . Click on the *Create* button. +
 The Backend will be created, and the details page displays the the *Synced* condition  as `True`. 
 +
 image::apim/apim-mobile-backend-created.png[]
 
+{empty}
 
 === Create 3scale Product for MobileGateway API
 
@@ -198,8 +196,7 @@ spec:
 ----
 +
 TIP: The `activeDocOpenAPIRef.url` is of the  OpenAPI spec that you setup on Service Registry.
-+
-image::apim/create-mobile-activedoc-yaml.png[]
+
 . Click on the *Create* button. +
 The ActiveDoc will be created, and the details page will diplay the the *Ready* condition  as `True`.
 
@@ -335,6 +332,19 @@ Now that you have the Client ID, you can update the Mobile App with the Client I
 +
 image::apim/apim_globex_mobile_deployment_env.png[]
 . Update the following environment variables in the *Environment* tab as directed below
+
+
+.. Update *GLOBEX_MOBILE_GATEWAY* with the below value 
++
+[source,bash,role=execute,subs="attributes"]
+----
+https://globex-mobile-gateway-product-3scale-{user_name}-apicast-production.{openshift_subdomain}:443
+----
++
+[TIP]
+====
+In real life, the *GLOBEX_MOBILE_GATEWAY*  is accessible from the Developer Portal - but it is provided above for the sake of convenience.
+
 .. Update *API_CLIENT_ID*  with the Client ID in the previous step from being displayed in the Developer Portal.
 +
 TIP: Access the Applications from  https://3scale-{user_name}.{openshift_subdomain}/admin/applications[Developer Portal^]. Choose the application you created for  `globex-mobile-gateway-product`. You can then access the *Client ID* from this page.
@@ -353,17 +363,6 @@ https://sso.{openshift_subdomain}/realms/globex-{user_name}
 https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}/home
 ----
 
-
-.. Update *GLOBEX_MOBILE_GATEWAY* with the below value 
-+
-[source,bash,role=execute,subs="attributes"]
-----
-https://globex-mobile-gateway-product-3scale-{user_name}-apicast-production.{openshift_subdomain}:443
-----
-+
-[TIP]
-====
-In real life, the *GLOBEX_MOBILE_GATEWAY*  is accessible from the Developer Portal - but it is provided above for the sake of convenience.
 
 * Access the Developer Portal https://3scale-{user_name}.{openshift_subdomain}/docs[DOCUMENTATION^] which displays all the available APIs including the default API as well as *globex-mobile-gateway-product*
 * The API URL you need displayed under "Service Endpoint" in *globex-mobile-gateway-product* box

@@ -71,7 +71,7 @@ curl -X POST -H "Content-type: application/json; artifactType=OPENAPI" -H "X-Reg
 ----
 {"name":"Globex Partners API Gateway","description":"Globex APIs made accessible to global partners to view Globex's catalog and products","createdBy":"","createdOn":"2023-05-05T22:51:01+0000","modifiedBy":"","modifiedOn":"2023-05-05T22:51:01+0000","id":"partnerapi","version":"1","type":"OPENAPI","globalId":2,"state":"ENABLED","groupId":"globex","contentId":2,"references":[]}workshop-devspaces (main)
 ----
-. You can view the newly created OpenAPI specification {service_registry_ui_url}/explore/globex/partnerapi/latest[here^, window="serviceregistry"]
+. You can view the newly created OpenAPI specification {service_registry_ui_url}/explore/globex/partnerapi[here^, window="serviceregistry"]
 .. You can close the Service Registry browser tab.
 
 == Create Backend, Products, ActiveDoc and Users for Partner Gateway
@@ -291,7 +291,7 @@ secret/globex-partner-web configured
 +
 [source,bash,role=execute,subs="attributes"]
 ----
-oc set env deployments/globex-partner-web --overwrite GLOBEX_PARTNER_GATEWAY=https://globex-partner-gateway-product-3scale-{user_name}-apicast-production.{openshift_subdomain}
+oc set env deployments/globex-partner-web --overwrite GLOBEX_PARTNER_GATEWAY=https://globex-partner-gateway-product-3scale-{user_name}-apicast-production.{openshift_subdomain}  -n globex-apim-{user_name}
 ----
 +
 [source,subs="attributes"]
