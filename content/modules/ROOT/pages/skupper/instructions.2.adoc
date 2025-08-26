@@ -162,7 +162,7 @@ image::skupper/openshift-console-service-skupper-proxy.png[]
 +
 The _Pod Selector_ indicates that this service is pointing to the Skupper router pod, which forwards the communication over the secure link to the real database service on the isolated namespace.
 
-* Finally, you can check the Service Interconnect console at {skupper_console_aws}. In the *Topology* section you'll see a graphical representation of the Service InterConnect network. +
+* Finally, you can check the {skupper_console_aws}[Service Interconnect console^]. In the *Topology* section you'll see a graphical representation of the Service InterConnect network. +
 The *Sites* tab shows the connected namespaces, `globex-skupper-db-{user_name}` and `globex-skupper-{user_name}`.
 +
 image::skupper/skupper-console-network-sites.png[]

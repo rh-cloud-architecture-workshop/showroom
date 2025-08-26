@@ -63,7 +63,7 @@ image::skupper/globex-catalog.png[]
 
 * The information on that page is retrieved from the database, demonstrating that the service network is working as expected. Feel free to navigate around the app to cause traffic between the application and the database.
 
-* You can also check the link between the two clusters in the Service Interconnect console at {skupper_console_aws}. 
+* You can also check the link between the two clusters in the {skupper_console_aws}[Service Interconnect console^]. 
 In the *Topology* section, select the *Components* tab, which  shows the connection between the `globex-store-app` deployment in the isolated namespace and the `globex-db` service which is proxied over the service network.
 +
 image::skupper/skupper-console-network-components.png[]

@@ -134,7 +134,7 @@ If you still have a browser tab pointing to streams for Apache Kafka Console, op
 +
 image::cdc/amqconsole-anon-session.png[]
 
-* Navigate to *Kafka Clusters -> kafka -> Topics*. 
+* Navigate to *Topics* menu on the left hand side. 
 +
 Filter the topics by *Name*  by the term`globex.updates`. You will see the three topics that will receive the change events.
 +
