@@ -45,9 +45,7 @@ image::intro/workshop-env.png[]
 
 * If you are interested to know more about this setup, click on the link below, or come to talk to the workshop instructors.
 
-.[underline]#Click for details on the OpenShift Gitops setup#
-[%collapsible]
-====
+== Details on the OpenShift Gitops setup
 
 As mentioned before, we use a hub and spoke model to manage the workshop assets. A cluster-wide ArgoCD instance (hub) manages a number of namespace scoped ArgoCD  (spoke) instances (1 per workshop user). These namespace scoped ArgoCD instances manage the workshop assets for a user.
 
@@ -70,7 +68,4 @@ image::intro/argocd-globex-application.png[]
 . The way ArgoCD works is that the desired state of an application is described in a manifest, which is hosted in a version control system. ArgoCD makes sure that the deployed state of the application matches the desired state as described in the manifest. Changes in the manifest (a new commit for example) are picked up by ArgoCD and applied. Hence the name *GitOps*, which itself is an evolution of *Infrastructure as code*. +
 
 NOTE: ArgoCD manifests can take many forms. For this workshop we opted for Helm charts. You can find the Helm charts for this workshop link:https://github.com/rh-cloud-architecture-workshop/helm[here^].
-
-====
-
 

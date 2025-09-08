@@ -1,5 +1,4 @@
 :imagesdir: ../../assets/images
-= Connect the Services with Red Hat Service Interconnect
 
 ++++
 <!-- Google tag (gtag.js) -->
@@ -32,24 +31,24 @@
 
 
 
-== Install Red Hat Service Interconnect: Globex application namespace
+== Setup Service Interconnect in `Globex` namespace
 
 The easiest way to install Red Hat Service Interconnect in a namespace on OpenShift is through the `skupper` CLI (_Skupper_ is the name of the open-source upstream project of Red Hat Service Interconnect). In this lab, the `skupper` cli is available through the OpenShift Command Line terminal, so that you don't have to install it locally on your workstation.
 
-* Open the browser window pointing to the OpenShift Console at {openshift_cluster_console}[OpenShift console, window="console"]. Click on the image:skupper/openshift-command-line-terminal-icon.png[] icon on the top menu to open a terminal window. +
+. Open the browser window pointing to the OpenShift Console at {openshift_cluster_console}[OpenShift console, window="console"]. Click on the image:skupper/openshift-command-line-terminal-icon.png[] icon on the top menu to open a terminal window. +
 Make sure to select the correct namespace from the drop-down box (*globex-skupper-{user_name}*)
 +
 image::skupper/openshift-command-line-terminal.png[]
 +
 Click *Start* to start and open the terminal.
 
-* After a couple of seconds, the terminal is up and running. Also note the terminal deployment in the topology view (make sure to select the *globex-skupper-{user_name}* namespace in the project dropdown box).
+. After a couple of seconds, the terminal is up and running. Also note the terminal deployment in the topology view (make sure to select the *globex-skupper-{user_name}* namespace in the project dropdown box).
 +
 image::skupper/openshift-command-line-terminal-2.png[]
 +
 If you prefer, you can maximize the terminal in a new browser tab by clicking on the image:skupper/openshift-command-line-terminal-icon-maximize.png[] icon.
 
-* In the terminal, check that you are logged in into the OpenShift cluster.
+. In the terminal, check that you are logged in into the OpenShift cluster.
 +
 [source,bash,role=execute]
 ----
@@ -62,7 +61,7 @@ oc whoami
 {user_name}
 ----
 
-* Check that the `skupper` CLI is available in the terminal:
+. Check that the `skupper` CLI is available in the terminal:
 +
 [source,bash,role=execute]
 ----
@@ -78,7 +77,7 @@ config-sync version            not-found
 flow-collector version         not-found'
 ----
 
-* Install the Red Hat Service Interconnect resources in the *globex-skupper-{user_name}* namespace:
+. Install the Red Hat Service Interconnect resources in the *globex-skupper-{user_name}* namespace:
 +
 [source,bash,role=execute, subs="attributes"]
 ----
@@ -92,11 +91,11 @@ Waiting for status...
 Skupper is now installed in namespace "globex-skupper-{user_name}".  Use 'skupper status' to get more information.
 ----
 
-* This installs 3 new components in the namespace: *skupper-service-controller*, *skupper-router* and *skupper-prometheus*, as you can see in the Topology view:
+. This installs 3 new components in the namespace: *skupper-service-controller*, *skupper-router* and *skupper-prometheus*, as you can see in the Topology view:
 +
 image::skupper/openshift-console-topology-skupper-2.png[]
 
-* Service Interconnect also comes with its own console, which you can access by opening a new browser tab and navigating to {skupper_console_aws}[Service Interconnect, window="skupper"]. At the moment there is not a lot to see as we have only installed one side of the service network.
+. Service Interconnect also comes with its own console, which you can access by opening a new browser tab and navigating to {skupper_console_aws}[Service Interconnect, window="skupper"]. At the moment there is not a lot to see as we have only installed one side of the service network.
 +
 image::skupper/skupper-console.png[]
 
