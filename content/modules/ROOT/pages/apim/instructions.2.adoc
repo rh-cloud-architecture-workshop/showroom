@@ -1,0 +1,422 @@
+:imagesdir: ../../assets/images
+
+= Configure 3scale API Management to secure and manage Mobile Gateway API
+
+// :toclevels: 2
+:icons: font 
+:sectanchors:
+:sectnums:
+// :toc: 
+
+++++
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-51D1EZEH8B"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-51D1EZEH8B');
+</script>
+<style>
+    .underline {
+    cursor: pointer;
+    }
+
+    .nav-container {
+    display: none !important;
+    }
+
+    .doc {    
+    max-width: 70rem !important;
+    }
+</style>
+++++
+
+
+
+The Mobile API has now been designed by API Designer, and is governed by Red Hat Service Registry. 
+
+Let us fast forward a bit in time, and the backend developers team has built the Mobile Gateway server-side https://github.com/rh-cloud-architecture-workshop/globex-mobile-gateway[code^, window="code-samples"] using Quarkus. This service has been pre-deployed under the `module-apim-{user_name}` namespace on OpenShift. 
+
+
+In this section you will manage and secure the Mobile Gateway API endpoints so that the Mobile App can access them securely. To create these API endpoints, and secure and manage them, we will need to configure them on 3scale API management. 
+
+== Section Goals 
+
+. Use Red Hat 3scale API Management to manage Mobile Gateway APIs
+. As a Mobile Developer, request API Access through the Developer Portal 
+
+
+== Create Mobile Gateway Backend, Product and ActiveDoc on 3scale
+
+
+To integrate and manage the Mobile Gateway API in 3scale API Management Platform, you will use the preinstalled *3scale Operator* to create and manage the 3scale resources - *_Backend, Products and ActiveDocs_* - on OpenShift with Custom Resource Definitions (CRDs).
+
+[NOTE]
+====
+*Backends* are implementations of an API deployed in a host. One or more backends  are bundled as a *Product*. The *3scale ActiveDoc* is based on the Open API Specification (OAS) of the REST APIs.
+====
+
+
+=== Create 3scale Backend for Mobile Gateway service
+
+. Navigate to OpenShift console {openshift_cluster_console}[OpenShift Console^, window="console"] and if needed login with *({user_name}/{user_password})*.
+. From the  the top right corner of the OpenShift console, click on the *(+)* button and then *Import Yaml* dropdown option 
++
+image::apim/import-yaml.png[] 
+. Paste the following YAML content in the *Import YAML* text area. 
+
++
+TIP: This YAML creates a 3scale Backend for the Mobile Gateway service that is running on OpenShift. The *privateBaseURL* in this YAML is the Service endpoint of *Globex Mobile gateway*  service running on OpenShift. If interested, click to view the {openshift_cluster_console}/k8s/ns/globex-apim-{user_name}/services/globex-mobile-gateway[globex-mobile-gateway service URL^, window="_blank"]. The URL is diplayed under the Service routing section.
+
+
++
+[source,bash,role=execute,subs="attributes"]
+----
+apiVersion: capabilities.3scale.net/v1beta1
+kind: Backend
+metadata:
+  name: globex-mobile-gateway-backend
+  namespace: globex-apim-{user_name}
+spec:
+  name: "Globex Mobile Gateway Backend"
+  systemName: "globex-mobile-gateway-backend"
+  privateBaseURL: "http://globex-mobile-gateway.globex-apim-{user_name}.svc.cluster.local:8080"
+  providerAccountRef:
+    name: 3scale-tenant-secret
+  metrics:
+    hits:
+      description: Number of API hits
+      friendlyName: Hits
+      unit: "hit"
+  mappingRules:
+    - httpMethod: GET
+      pattern: "/"
+      increment: 1
+      metricMethodRef: hits
+
+----
+
+
+. Click on the *Create* button. +
+The Backend will be created, and the details page displays the the *Synced* condition  as `True`. 
++
+image::apim/apim-mobile-backend-created.png[]
+
+{empty}
+
+=== Create 3scale Product for MobileGateway API
+
+. From the OpenShift console, click on the *(+)* button and then *Import Yaml* dropdown option.
+
+. Paste the following YAML content in the *Import YAML* text area. 
++
+WARNING: Do *NOT* click on the *Create* button yet, since the `issuerEndpoint` value in the YAML needs to be replaced in the next step.
++
+TIP: The issuer endpoint contains the Keycloak *OpenID Well-known Configuration* , and the client credentials of the `client-manager` client that you had created earlier
++
+[source,bash,role=execute,subs="attributes"]
+----
+apiVersion: capabilities.3scale.net/v1beta1
+kind: Product
+metadata:
+  name: globex-mobile-gateway-product
+  namespace: globex-apim-{user_name}
+spec:
+  name: "globex-mobile-gateway-product"
+  systemName: "globex-mobile-gateway-product"
+  providerAccountRef:
+    name: 3scale-tenant-secret
+  deployment:
+    apicastHosted:
+      authentication:
+        oidc:
+          issuerType: "keycloak"
+          issuerEndpoint: "https://client-manager:REPLACE_ME_WITH_CLIENT_CREDENTIALS@sso.{openshift_subdomain}/realms/globex-{user_name}"
+          authenticationFlow:
+            standardFlowEnabled: true
+            implicitFlowEnabled: true
+            serviceAccountsEnabled: true
+            directAccessGrantsEnabled: false
+          jwtClaimWithClientID: "azp"
+          jwtClaimWithClientIDType: "plain"
+          credentials: "headers"
+  applicationPlans:
+    basic:
+      name: "Globex Basic Mobile Plan"
+      setupFee: "0"
+      published: true
+    premium:
+      name: "Globex Basic Premium Plan"
+      setupFee: "100"
+      published: true
+  backendUsages:
+    globex-mobile-gateway-backend:
+      path: /
+----
+
+. Replace the text `REPLACE_ME_WITH_CLIENT_CREDENTIALS` in the YAML you just pasted with the *Client Credentials* of the *client-manager* client you created in Keycloak in the previous section.
++
+[TIP]
+====
+*Don't have it handy? No worries.* +
+Navigate to the {sso_tenant_console}/#/globex-{user_name}/clients[Keycloak Clients List^, window="sso"]. Login if needed with *({user_name}/{user_password})*. Click on the Client ID *client-manager*, and copy the credentials from the *Credentials tab*
+
+image::apim/client-manager-credentials.png[]
+====
++
+image::apim/create-mobile-product-yaml.png[]
+
+
+. Click on the *Create* button now. +
+The 3scale Product will be created, and the details page displays the the *Synced* condition  as `True`.
+
+
+=== Create Active Doc for Mobile Gateway
+
+. From the OpenShift console, click on the *(+)* button and then *Import Yaml* dropdown option.
+. Paste the following YAML content in the *Import YAML* text area.
++
+[source,bash,role=execute,subs="attributes"]
+----
+kind: ActiveDoc
+apiVersion: capabilities.3scale.net/v1beta1
+metadata:
+  name: mobile-gateway-activedoc
+  namespace: globex-apim-{user_name}
+spec:
+  activeDocOpenAPIRef:
+    url: "https://service-registry-app-{user_name}.{openshift_subdomain}/apis/registry/v2/groups/globex/artifacts/mobileapi"
+  published: true
+  name: mobile-gateway-activedoc
+  providerAccountRef:
+    name: 3scale-tenant-secret
+  productSystemName: globex-mobile-gateway-product
+----
++
+TIP: The `activeDocOpenAPIRef.url` is of the  OpenAPI spec that you setup on Service Registry.
+
+. Click on the *Create* button. +
+The ActiveDoc will be created, and the details page will diplay the the *Ready* condition  as `True`.
+
+
+== Setup Mobile users
+The Globex mobile application developers will need access to the Developer Portal to signup for the APIs exposed to them. Typically they would access the developer portal and signup for an account which may as needed go through an approval process. For the purpose of this workshop we will use the inbuilt developer user `John`.
+
+== View the newly created Backend, Product and ActiveDoc
+
+. Navigate to the {3scale_tenant}[3scale admin portal^, window="3scale"] and login as *{user_name}/{user_password}*.
++
+.Launch 3scale 
+image::apim/apim-mobile-3scale-login.png[]
+. You will notice that the Mobile Product and Backend have been created.
+. Click on *globex-mobile-gateway-product* under *APIs -> Products* section. 
+. You are presented with the Product overview page for the Mobile API Product you created. Note the following elements
+.. Published Application Plans 
++
+[NOTE]
+====
+Application Plans define the different sets of access rights you might want to allow for consumers of your API. These can determine anything from rate limits, which methods or resources are accessible and which features are enabled
+====
+
+.. Backend that has been attached to the Mobile Gateway Product
++
+.Mobile Gateway Product: Overview
+image::apim/mobile-product-overview.png[]
+
+. Navigate to *Integration -> Settings* page from the Product overview page. You will notice that the Product has been setup with 
+.. OpenID Connect as Authentication mechanism
+.. *client_manager* client details that you had created in the previous steps.
+.. OIDC Authorization Flow includes *Implicit Flow* because we would be authenticating the users single-sign-on as well access to the backend services
++
+.Mobile Gateway Product: Settings
+image::apim/mobile-product-openid-settings.png[]
+
+. The ActiveDoc is visible from the 3scale portal as well under Products. Click on the ActiveDoc to preview the OpenAPI specifications.
++
+.Mobile Gateway Product: ActiveDoc
+image::apim/apim_3scale_mobile_activedoc.png[]
+. Navigate to *Integration -> Configuration* and click on the *Promote to v.x Staging APIcast* and then *Promote to v.x Production APIcast* to promote all the config changes
+//TBC find ways to overcome this step//
++
+NOTE: APIcast is an NGINX based API gateway used to integrate internal and external API services with the 3scale. APIcast can be hosted or self-managed. In this workshop we use the default `self-managed` option.
++
+.Promote Staging and Production APIcast
+image::apim/mobile-promote-apicast.png[]
+
+
+
+== Setup Globex Developer Portal
+A good developer portal is a must have to assure adoption of your API. In this section we will setup the Dev Portal so that it is ready to be used by Mobile Developers.
+
+. Navigate to *3scale's Audience -> Developer Portal -> Settings* by clicking on {3scale_tenant}/site/dns[Settings -> Domains & Access section^, window="3scale"]
++
+NOTE: The *Developer Portal Access Code* hides the site from the world till you are ready.
+
+. Remove the value in the textfield below the label *Developer Portal Access Code* as shown below. Click on the *Update Account* button. This opens up the Developer Portal to public access without the need for an Access Code.
++
+.Remove Developer Portal Access Code
+image::apim/apim_domain_access.png[]
+
+. The next step is to allow a Developer to access *Multiple APIs (Services)* and signup for *Multiple Applications*
+. Navigate to {3scale_tenant}/p/admin/cms/switches[Developer Portal -> Feature Visibility section, window="3scale"]
+. Click on the *Show* button against the features *Multiple Services* and *Multiple Applications*. The changes are auto-saved.
++
+.Feature Visibility section
+image::apim/apim_feature_visbility_init.png[]
+. After updating the settings, this page should be seen as per the screenshot below. 
++
+.Feature Visibility settings altered
+image::apim/apim_feature_visibility.png[]
+
+. The Globex Developer Portal is fully setup now for Mobile developers to signup.
+
+
+== Sign up as a Mobile Developer
+In this section you will login as a Mobile Developer (with the built-in user as described earlier), and signup for API access
+
+. Launch the Globex Developer Portal by clicking on {globex_developer_portal}[Developer Portal^, window="devportal"]
++
+.Developer Portal
+image::apim/3scale_dev_portal.png[]
+
+. Click on the *SIGN IN* link found on top-right. 
+. Sign in as one of the user you created in the previous section with
+.. username: `john`
+.. password: `123456`
++
+.Developer Portal
+image::apim/3scale_dev_portal_signin.png[width=70%]
+. Navigate to Applications Listing by choosing the *APPLICATIONS* menu on the top of the page.
+
++
+.Developer Portal Landing Page
+image::apim/3scale_dev_portal_loggedin.png[width=80%]
+. In the Applications page you are invited to *Create Application*. Click on the *Create new application* button seen against `globex-mobile-gateway-product`
++
+.Developer Portal: Create new application
+image::apim/3scale_dev_portal_applications.png[width=70%]
+. Click on *Subscribe to globex-mobile-gateway-product* link
++
+.Subscribe to globex-mobile-gateway-product
+image::apim/apim-devportal-mobile-subscribe.png[]
+. You are successfully subscribed to the service
++
+.Successfully subscribed to the service
+image::apim/apim-devportal-mobile-subscribe-success.png[width=70%]
+
+. Navigate back to the *APPLICATIONS tab* found on the top menu and click *globex-mobile-gateway-product's* > *Create new application* link +
++
+.Developer Portal: Create new application (again)
+image::apim/3scale_dev_portal_applications.png[width=70%]
+
+
+. Give the plan a *Name* and a *Description* and click on *Create Application* 
++
+.Developer Portal: New application 
+image::apim/apim-devportal-mobile-create-new-app-2.png[width=70%]
+. An application is created successfully. Make a note of the *Client ID* and *Client Secret*. You will be using this in the Mobile App setup. Scratchpad can be used for this as well.
+. Enter the value asterisk (*) in the **REDIRECT URL** field and click on the **Submit** button. This is to setup the right Redirect URL for OAuth using Keycloak.
+.. In real-life you would never mark this as (*), but provide the correct .URL based on your application.
++
+.Update REDIRECT URL in the Application creates successfully for Mobile User
+image::apim/apim-devportal-mobile-app-success.png[width=90%]
+. Keep this window open since you will need the *Client ID* from this page to  setup Mobile App's access to the Mobile Gateway API in the next section..
+
+== Update the Mobile App with access details
+
+Now that you have the Client ID, you can update the Mobile App with the Client ID and other details needed to securely access the Mobile Gateway API that you have set up on 3scale.
+
+. Navigate to https://console-openshift-console.{openshift_subdomain}/k8s/ns/globex-apim-{user_name}/deployments/globex-mobile/environment[globex-mobile deployment, window="console"] to view the Environment variables of the deployment on OpenShift console.
++
+image::apim/apim_globex_mobile_deployment_env.png[]
+. Update the following environment variables in the *Environment* tab as directed below
+
+
+.. Update *GLOBEX_MOBILE_GATEWAY* with the below value 
++
+[source,bash,role=execute,subs="attributes"]
+----
+https://globex-mobile-gateway-product-3scale-{user_name}-apicast-production.{openshift_subdomain}:443
+----
++
+[TIP]
+====
+In real life, the *GLOBEX_MOBILE_GATEWAY*  is accessible from the Developer Portal - but it is provided above for the sake of convenience.
+
+.. Update *API_CLIENT_ID*  with the Client ID in the previous step from being displayed in the Developer Portal.
++
+TIP: Access the Applications from  https://3scale-{user_name}.{openshift_subdomain}/admin/applications[Developer Portal^]. Choose the application you created for  `globex-mobile-gateway-product`. You can then access the *Client ID* from this page.
+.. Update *SSO_AUTHORITY* with the below value (which is the Keycloak *OpenID Well-known Configuration* URL)
++
+[source,bash,role=execute,subs="attributes"]
+----
+https://sso.{openshift_subdomain}/realms/globex-{user_name}
+
+----
+
+.. Update *SSO_REDIRECT_LOGOUT_URI* with the below value (which is the Mobile App's home page URL)
++
+[source,bash,role=execute,subs="attributes"]
+----
+https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}/home
+----
+
+
+* Access the Developer Portal https://3scale-{user_name}.{openshift_subdomain}/docs[DOCUMENTATION^] which displays all the available APIs including the default API as well as *globex-mobile-gateway-product*
+* The API URL you need displayed under "Service Endpoint" in *globex-mobile-gateway-product* box
+
+.Developer Portal: Documentation Page
+image::apim/dev_portal_mobile_doc.png[width=80%]
+
+====
+
+. The *Environment* tab should look like below after the changes
++
+.globex-mobile deployment on OpenShift
+image::apim/apim_globex_mobile_deployment.png[]
+
+. Click on the *Save* button at the bottom of the page to save the changes. You will be shown a success message: `Successfully updated the environment variables.`
++
+image:apim/apim_mobile_env_success.png[] 
+
+== Update Keycloak's Web Origin to match Mobile App
+There is one last step that you need to do before trying out the Mobile App. You need to update the *Web Origin*
+
+. Navigate to click on {sso_tenant_console}/#/globex-{user_name}/clients[Keycloak Clients List^,window="sso"]. Login if needed with *({user_name}/{user_password})*.
++
+.Keycloak Clients List for Mobile client
+image::apim/rh-sso-mobile-client.png[]
+
+. Click on the new Client ID that was created when you signed up for Mobile Gateway Application
++
+.[.underline]#*Where do I find this Client ID?*#
+[%collapsible]
+====
+. Navigate to the {globex_developer_portal}/admin/applications[Globex Developer Portal Applications^, window="devportal"] 
+.. The client ID is displayed against the `globex-mobile-gateway-product` product.
++
+.globex-mobile deployment on OpenShift
+image::apim/mobile-dev-portal-clientid.png[]
+
+====
+
+. Close to the bottom of this page, you would see the *Web Origins* field. 
+. Update this field with the following value and click on *Save*
++
+[source,bash,role=execute, subs="attributes"]
+----
+https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}
+----
++
+.Keycloak: Update Web Origin value for the new Client ID, and click on Save.
+image::apim/apim_mobile_sso_weborigin.png[]
+
+== Section Outcome
+[%interactive]
+* [ ] 3scale Backend, Product, ActiveDocs and Users were created
+* [ ] Developer Portal was setup for public access without Access Code
+* [ ] Created an Application as a Mobile Developer
+* [ ] Patched Keycloak Web Origin so that the calls from Globex Mobile App will not cause errors
+

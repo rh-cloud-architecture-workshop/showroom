@@ -1,0 +1,101 @@
+= Deploy Knative Services
+:imagesdir: ../../assets/images
+
+++++
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y0GQBF9YFH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y0GQBF9YFH');
+</script>
+
+<style>
+  .underline {
+    cursor: pointer;
+  }
+
+  .nav-container {
+    display: none !important;
+  }
+
+  .doc {    
+    max-width: 70rem !important;
+  }
+</style>
+++++
+
+// :toclevels: 2
+:icons: font 
+:sectanchors:
+:sectnums:
+// :toc: 
+
+
+== Overview
+
+As a first step, let us ensure all the services are created. A few of the services are predeployed in your OpenShift cluster. These services are built using the Knative Serving framework.
+
+Knative Services are used to deploy and manage the whole lifecycle of your workload. The Knative Serving component scale the Knative Services based on configuration, metrics and incoming requests.
+
+There are 3 Knative Services that are used in this solution
+
+[cols="30%,80%"]
+|===
+|*Service name* | *Function*
+| aiml-moderate-reviews   | Checks if the product reviews are acceptable or abusive, and assigns a score (0 or 1) accordingly. The reviews with a score are sent to `reviews.moderated` topic,
+| aiml-sentiment-reviews  | Analyses the product reviews and creates a new message with a sentiment score; The reviews with a sentiment score are sent to `reviews.sentiment` topic. This service is predeployed.
+| persist-reviews         | Persists all moderated reviews to a Postgresql database. You will deploy this service in the next steps.
+|===
+
+== Deploy Knative Services
+
+. Navigate to the OpenShift Console's Administrator view, and go to  {openshift_cluster_console}/serving/ns/globex-serverless-{user_name}[Serverless > Serving^, window="console"] menu. You will see that two of the above mentioned services have been already deployed (`aiml-moderate-reviews` and `aiml-sentiment-reviews`). +
+In the next step, you will create the `persist-reviews` Knative service using a Custom Resource Definition (CRD).
++
+image::serverless/serverless-2knative-services.png[]
+
+. Create `persist-reviews`: Click on the *Create* button highlighted in the screenshot above. Choose *Create > Service* option. Replace all existing content with the following YAML file, and click on *Save*
++
+image::serverless/create-knative-service.png[]
+
++
+[source,bash,role=execute,subs="attributes",options=nowrap, width=50, height=10]
+----
+
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: persist-reviews
+  namespace: globex-serverless-user1
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/min-scale: "1"
+    spec:
+      containers:
+        - image: quay.io/globex-sentiment-analysis/persist-reviews:latest
+          volumeMounts:
+            - mountPath: /deployments/config
+              name: config
+              readOnly: true
+      volumes:
+        - name: config
+          secret:
+            secretName: persist-reviews
+
+----
++
+NOTE: Ignore any errors shown while creating the service. The service will be created successfully.
+. Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Developer > Topology, window="console", target="console"] view of the `globex-serverless-{user_name}` namespace and you will notice all the three Knative services
++
+image::serverless/3knative-service.png[]
+
+
+== A note on the newly created `persist-reviews` 
+
+. This service is shown with a dark blue colour because of the annotation `autoscaling.knative.dev/min-scale: "1"` added in the YAML while creation of this service. This means a minimum of one pod is running all the time, instead of it scaling down to zero (0) like the other two services.
+. With just providing the container image, Knative Serving creates all the other needed Kubernetes resources (Services, Routes, Configurations, and Revisions) - making it easier for developers to create such services quickly.

@@ -1,0 +1,78 @@
+= End-to-end Scenario
+:imagesdir: ../../assets/images
+:sectnums:
+
+:icons: font
+++++
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XWCST2G6FE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XWCST2G6FE');
+</script>
+
+<style>
+  .underline {
+    cursor: pointer;
+  }
+
+  .nav-container {
+    display: none !important;
+  }
+
+  .doc {    
+    max-width: 70rem !important;
+  }
+
+  .pagination .next {
+    display: none !important;
+  }
+</style>
+++++
+
+
+== Test the solition  
+
+With the Debezium connector and the two Camel K integrations deployed, you have all the pieces of the solution in place:
+
+* Data change events from the Globex web application are captured by Debezium and produced to Kafka topics.
+* A Kafka Streams application combines and aggregates the data change event streams for _orders_ and _line_item_ at real time to produce a new stream of aggregated order events.
+* Camel K integrations consume from Kafka topics and call REST endpoints on the Cashback service, to build a local view of customers and orders, and calculate the cashback amounts.
+
+The cashback service has a rudimentary UI that allows to verify the generated cashbacks.
+
+* In the browser window, open the tab pointing to the OpenShift console. If you don’t have a tab open to the console, click to navigate to {openshift_cluster_console}[OpenShift console, window="console"]. If needed login with your username and password ({user_name}/{user_password}). Select the *Topology* view in the Developer perspective and make sure you are on the *globex-cdc-{user_name}* namespace.
+
+* In the Topology view, locate the Cashback service deployment, and click on the *Open URL* symbol next to it.
++
+image::cdc/openshift-console-topology-cashback-service.png[]
+
+* This opens a browser window with the cashback UI, which shows the list of customers together with their earned cashbacks.
++
+image::cdc/cashback-service-ui.png[]
+
+* You should see some customers with a cashback greater than $0. You might need to advance through several pages if you don't see any customers with a cashback value grater than 0$. If you still don't see any, please simulate some orders as detailed earlier in this chapter. +
+Click on a cashback with value greater then $0. You should see the list of orders leading to the cashback.
++
+image::cdc/cashback-service-ui-2.png[]
+
+* At this point, you can demonstrate the end-to-end flow starting from creating an order in the Globex web application.
+** Create an order in the Globex application.
+** Verify in streams for Apache Kafka console that the order and line items are picked up by the Debezium connector.
+** Still in streams for Apache Kafka console, verify that an aggregated order event is created by the Kafka Streams application.
+** In the logs of the Camel K order connector, check that the aggregated order is sent to the Cashback service.
+** In the Cashback service UI, locate the customer you created the order for, and check that it appears in the Cashback list.  
+
+*Congratulations*
+
+Congratulations! With this you have completed the *Change Data Capture* module! You successfully leveraged Change Data Capture to create change event streams, and consume these streams to power new services and functionality. 
+
+[TIP]
+====
+Please close all but the *Workshop Deployer* browser tab to avoid proliferation of browser tabs which can make working on other modules difficult. 
+====
+
+Proceed to the https://workshop-deployer.{openshift_subdomain}[Workshop Deployer^, window="workshopdeployer"] to choose your next module.

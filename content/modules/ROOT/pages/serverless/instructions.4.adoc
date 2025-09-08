@@ -1,0 +1,79 @@
+= Test the Review Moderation and Sentiment Analysis
+:imagesdir: ../../assets/images
+
+++++
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y0GQBF9YFH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y0GQBF9YFH');
+</script>
+
+<style>
+  .underline {
+    cursor: pointer;
+  }
+
+  .nav-container {
+    display: none !important;
+  }
+
+  .doc {    
+    max-width: 70rem !important;
+  }
+</style>
+++++
+
+// :toclevels: 2
+:icons: font 
+:sectanchors:
+:sectnums:
+// :toc: 
+
+== Test the solution
+
+. You have now completed the setup of all the components needed. Navigate to  {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Topology View, window="console"] to view the final topology.
+
+image::serverless/serverless-namespace-final-toplogy.png[]
+
+. To open the Globex web application, click on the image:serverless/openshift-console-open-url.png[] symbol next to the *globex-web* deployment in the topology view. Or click here to launch the web application: https://globex-web-globex-serverless-{user_name}.{openshift_subdomain}[Globex Web Application, window="_globexweb"].
++
+image::serverless/serverless-launch-webapp-toplogy.png[width=20%]
+. Click on the *Login link* on the top-right corner of the home page
++
+image::serverless/webapp-login.png[]
+. You will be navigated to the Keycloak login page
++
+[WARNING]
+====
+If Keycloak login page doesn't show up, you might be already logged as a different user.  Please click on Logout, and login to this page again.
+====
+
+. Login using any of the following usernames. The password is `openshift` for all these users.
+..  `asilva` (or) `mmiller` (or) `asanders` (or) `cjones` (or) `pwong`
++
+image::serverless/webapp-login-keycloak.png[width=60%]
+. Click on the *Cool Stuff Store* link on the top-menu to view the list of products available
++
+image::serverless/webapp-products.png[width=70%]
+. Click on any product to view the details page. 
+. Type a review comment and click on *Submit*. 
++
+image::serverless/webapp-products-details.png[width=70%]
+. If the review comment is appropriate it will then appear in the same page after a few seconds.
++
+image::serverless/webapp-products-view-review.png[width=70%]
+. In the OpenShift *Developer> Topology* view, you will also notice that the Knative services have all turned fully blue because they have been triggered by the reviews submission and so have scaled up. +
+In a few seconds two of them (except `persist-reviews`) will go back to a white ring denoting that they have been scaled down to zero since they are not in use anymore.
++
+image::serverless/reviews-knative-services.png[]
+
+. Now, go ahead and leave review comments of as many products as you like. If you are feeling adventurous you can try a few inappropriate comments too to see how they are being moderated ;)
+.. Any inappropriate commment is replaced with a note from Globex and displayed on the websiite as shown below
++
+image::serverless/inapprop-review.png[]
+
+

@@ -1,12 +1,53 @@
 
-* xref:globex-intro.adoc[Introduction and Walk-through]
+* xref:globex-intro.adoc[Introduction to Cloud Architectures workshop]
+** xref:intro/intro.0.adoc[Technical environment]
+** xref:intro/intro.1.adoc[Walkthrough of the Globex web application]
+
 * xref:module-cdc-intro.adoc[Build new functionality with Change Data Capture - Intro]
-* xref:module-cdc-instructions.adoc[Build new functionality with Change Data Capture - Instructions]
+
+* xref:module-cdc-instructions.adoc[Build new functionality with Change Data Capture]
+** xref:cdc/instructions.0.adoc[Deploy the Debezium Connector]
+** xref:cdc/instructions.1.adoc[Create an Order]
+** xref:cdc/instructions.2.adoc[Events Streams processing]
+** xref:cdc/instructions.3.adoc[Integrations with Camel K]
+** xref:cdc/instructions.4.adoc[End-to-end Scenario]
+
+
 * xref:module-apim-intro.adoc[Launch new channels with Contract First Approach - Intro]
-* xref:module-apim-instructions.adoc[Launch new channels with Contract First Approach - Instructions]
+** xref:apim/intro.0.adoc[Technical Considerations]
+
+* xref:module-apim-instructions.adoc[Launch new channels using Contract-First approach]
+** xref:apim/instructions.0.adoc[Design and Govern Mobile OpenAPI Specification]
+** xref:apim/instructions.1.adoc[Red Hat build of Keycloak]
+** xref:apim/instructions.2.adoc[Configure 3scale API Management]
+** xref:apim/instructions.3.adoc[Test Mobile Application]
+** xref:apim/instructions.4.adoc[Setup Partner Application (Optional)]
+** xref:apim/instructions.5.adoc[Test Partner Application]
+
 * xref:module-serverless-intro.adoc[Event driven applications with Serverless Knative Eventing - Intro]
-* xref:module-serverless-instructions.adoc[Event driven applications with Serverless Knative Eventing - Instructions]
+
+* xref:module-serverless-instructions.adoc[Event driven applications with Serverless Knative Eventing]
+** xref:serverless/instructions.0.adoc[Setup Knative Services]
+** xref:serverless/instructions.1.adoc[Knatve Sink and SinkBinding]
+** xref:serverless/instructions.2.adoc[Knative Sources and Broker]
+** xref:serverless/instructions.3.adoc[Knative Triggers]
+** xref:serverless/instructions.4.adoc[Test the Review Moderation and Sentiment Analysis]
+** xref:serverless/instructions.5.adoc[Solution walkthrough]
+
 * xref:module-skupper-intro.adoc[Building a secure service network with Red Hat Service Interconnect - Intro]
-* xref:module-skupper-instructions.adoc[Building a secure service network with Red Hat Service Interconnect - Instructions]
-* xref:module-camel-intro.adoc[Building a multi-channel support service for Globex customers - Intro]
-* xref:module-camel-instructions.adoc[Building a multi-channel support service for Globex customers - Instructions]
+
+* xref:module-skupper-instructions.adoc[Build a service network to connect disparate services]
+** xref:skupper/instructions.0.adoc[Setup Service Interconnect in Globex namespace]
+** xref:skupper/instructions.1.adoc[Setup Service Interconnect in Globex DB namespace]
+** xref:skupper/instructions.2.adoc[Create a link between the two namespaces]
+** xref:skupper/instructions.3.adoc[Verify the Service Interconnect network]
+
+* xref:module-camel-intro.adoc[Business and Technical Context]
+** xref:camel/intro.0.adoc[Architecture overview]
+** xref:camel/intro.1.adoc[Technical Capabilities]
+
+* xref:module-camel-instructions.adoc[Build a multi-channel support service for Globex customers]
+** xref:camel/instructions.0.adoc[Enable the Rocket.Chat to Matrix interaction]
+** xref:camel/instructions.1.adoc[Enable the Matrix to Rocket.Chat interaction]
+** xref:camel/instructions.2.adoc[Plug in the Globex Web Chat]
+** xref:camel/instructions.3.adoc[Persist and Share a Session Transcript]

@@ -1,0 +1,111 @@
+= Create Knative Source and Broker
+:imagesdir: ../../assets/images
+
+++++
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y0GQBF9YFH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y0GQBF9YFH');
+</script>
+
+<style>
+  .underline {
+    cursor: pointer;
+  }
+
+  .nav-container {
+    display: none !important;
+  }
+
+  .doc {    
+    max-width: 70rem !important;
+  }
+</style>
+++++
+
+// :toclevels: 2
+:icons: font 
+:sectanchors:
+:sectnums:
+// :toc: 
+
+
+In this section you will set up the Knative components that can invoke the HTTP endpoint of the services (`aiml-moderate-reviews`, `aiml-sentiment-reviews` & `persist-reviews`) whenever a new event occurs due to a product review being submitted. This is performed by using the components Knative Source, Broker and Triggers. +
+
+
+== Create Knative Broker
+
+. From the  the top right corner of the OpenShift console, click on the *(+)* button and then *Import Yaml* dropdown option 
+. Copy the following YAML (CRD)  and click *Create* to create a  Knative broker. +
+Note: There is just one broker for the entire solution, which will use triggers to route them to the right services thereby building a realtime event mesh.
+
++
+[source,bash,role=execute,subs="attributes"]
+----
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: globex-broker
+  namespace: globex-serverless-{user_name}
+----
+
+== Create Knative source
+. From the  the top right corner of the OpenShift console, click on the *(+)* button and then *Import Yaml* dropdown option 
+. Copy the following YAML to create a Knative KafkaSource. +
+Note that this KafkaSource reads from the specific three (3) topics that are defined in the YAML below, and refers to the `globex-broker` you created in the previous step.
++
+[source,bash,role=execute,subs="attributes"]
+----
+apiVersion: sources.knative.dev/v1beta1
+kind: KafkaSource
+metadata:
+  name: kafka-source
+  namespace: globex-serverless-{user_name}
+spec:
+  bootstrapServers:
+    - 'kafka-kafka-bootstrap.globex-mw-{user_name}.svc.cluster.local:9092'
+  topics:
+    - globex.reviews
+    - reviews.moderated
+    - reviews.sentiment
+  net:
+    sasl:
+      enable: true
+      password:
+        secretKeyRef:
+          key: password
+          name: kafka-secret
+      type:
+        secretKeyRef:
+          key: sasl.mechanism
+          name: kafka-secret
+      user:
+        secretKeyRef:
+          key: user
+          name: kafka-secret
+    tls:
+      caCert: {}
+      cert: {}
+      key: {}
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: globex-broker
+      namespace: globex-serverless-{user_name}
+----
+
+* The kafka-source is created and the Conditions are all true denoting that the creation is a success.
++
+image::serverless/kafkasource-created.png[]
+
+* Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Topology View, window="console"], to view the new Source and Broker you created.
++
+image::serverless/source-broker-topology.png[]
+
+
+

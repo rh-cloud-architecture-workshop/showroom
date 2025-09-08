@@ -1,0 +1,532 @@
+= Plug in the Globex Web Chat
+
+:imagesdir: ../../assets/images
+
+
+++++
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z54F1ZPC4H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z54F1ZPC4H');
+</script>
+
+
+<style>
+.underline {
+  cursor: pointer;
+}
+
+.nav-container {
+  display: none !important;
+}
+
+.doc {    
+  max-width: 70rem !important;
+}
+</style>
+
+++++
+
+:icons: font 
+
+// :toc: 
+// :sectlinks:
+
+:sectnums:
+:experimental:
+
+:camelfolder: /projects/workshop-devspaces/workshop/module-camel/lab
+
+:topologyviewurl: {openshift_cluster_console}/topology/ns/globex-camel-{user_name}?view=graph
+
+:globexweburl: https://globex-web-globex-camel-{user_name}.{openshift_subdomain}/home
+
+:rocketchaturl: https://rocketchat.{openshift_subdomain}
+
+:elementurl: https://element.{openshift_subdomain}
+
+
+
+All the work done so far has enabled bi-directional communication between customers and agents between Rocket.Chat and Matrix. Our open architecture approach allows us to easily plug in new communication channels.
+
+Your next task will be to complete and deploy a Camel K integration that connects our Globex Web portal with the support service. The Globex Web portal has a chat widget from where customers can also contact support agents for assistance.
+
+++++
+<p align="center">
+	<img src="../_images/camel/overview-lab-2.png" style="width:90%;border-style: none;">
+</p>
+++++
+
+{empty} +
+
+One approach to be consistent with our event-driven approach, is to decouple both flow directions as follows:
+
+- Camel will expose an API to accept customer messages to agents
+- Globex web application will define a callback entrypoint to listen for agent response.
+
+Both processing flows should be fully decoupled, but will coexist in the Camel K definition and deployed together.
+
+{empty} +
+
+
+== Understand the decoupled architecture
+
+One fundamental architecture consideration is that if we want an easy to plugin platform where other communication systems or services need to plugin with ease, a standard data model as a common interface is needed.
+
+This implies that instead of applying platform specific data transformations (eg. Rocket.chat data model to Matrix data model), we apply the following data transformations:
+
+- System specific to standard data model (e.g. Rocket.Chat/Globex to AMQ Broker)
+
+- Standard data model to system specific (e.g. AMQ Broker to Rocket.Chat/Globex)
+
+The illustration below describes data exchanges via AMQ:
+
+++++
+<p align="center">
+	<img src="../_images/camel/common-data-model.png" style="width:90%;border-style: none;">
+</p>
+++++
+
+In the diagram above we can see how Rocket.Chat is already integrated, via AMQ, to Matrix. The common data model easily helps us integrate Globex with the platform.
+
+{empty} +
+
+== Implement the customer to agent flow
+
+Your first task in this section is to define the Camel route that will expose an API that Globex will use as an entrypoint to push messages from customers.
+
+The flow is relatively simple, all is required is listen for HTTP requests, process them, and push AMQP events the shared AMQ Broker, left to right in the diagram below:
+
+++++
+<p align="center">
+	<img src="../_images/camel/globex-request-flow.jpg" style="width:65%;border-style: none;">
+</p>
+++++
+
+{empty} +
+
+=== Code the Camel route
+
+IMPORTANT: If your terminal is busy showing logs from your previous exercise, or some other task, ensure you press `Ctrl`+`C` to stop it.
+
+IMPORTANT: Close in your editor all open files/tabs in Dev Spaces to ensure your IDE is clean.
+
+Start your implementation:
+
+. Run in your Dev Spaces terminal the snippet below to set the working directory for this task:
++
+[source,bash,role=execute,subs=attributes]
+----
+cd {camelfolder}/globex-support/
+----
++
+NOTE: The working folder contains a `code` folder to support you on this exercise, as well as a `deploy` script to help you run it in OpenShift.
++
+{empty} +
+
+. In your terminal, use the `kamel` (Camel K client) command below to create a new Camel source file where to define your Camel routes for the caching logic:
++
+[source,bash,role=execute,subs=]
+----
+kamel init routesglobex.java
+----
++
+NOTE: This time we're choosing the Java language to showcase how all DSLs follow the same structure when defining Camel routes.
++
+{empty} +
+
+. Open the `routesglobex.java` file in your editor.
++
+Select from your project tree:
++
+* workshop -> module-camel -> lab -> globex-support -> routesglobex.java
++
+{empty} +
++
+. Delete the sample Camel route in `routesglobex`.
++
+++++
+<img src="../_images/camel/code-delete-default-java.jpg" style="width:40%;border-style: none;">
+++++
++
+{empty} +
+
+. And replace with the following one:
++
+--
+[source,java,role=execute,subs=]
+----
+//
+      from("platform-http:/support/message")                      // <1>
+        .setProperty("clientid", simple("${env.NAMESPACE}"))      // <2>
+        .convertBodyTo(String.class)                              // <3>
+        .to("jslt:request.jslt?allowContextMapAll=true")          // <4>
+        .toD("amqp:topic:{{broker.amqp.topic.clients}}${env.NAMESPACE}?disableReplyTo=true&connectionFactory=#myFactory");  // <5>
+//
+----
+
+[NOTE]
+====
+Observe how the route above is defined with a Java based DSL using the fluent builder style. Except minor differences, the structure is almost identical to other DSLs (XML/YAML). 
+====
+
+.[.underline]#*Click here for details of the above route*#
+[%collapsible]
+======
+<1> The `from` element uses the _Camel_ component `platform-http`, which wires the runtime's HTTP listener to capture all the incoming requests to the given `support/message` path.
++
+[NOTE]
+====
+This is a simple code-first approach to define APIs. This type of definition is handy for rapid development and convenient for this workshop. For production systems a better approach is 'api-first' where an API contract (OpenApi) specifies the interface between client and server, and Camel provides its implementation. 
+====
+
+<2> Next, a property (processing variable) is set to define the client identifier integrating with the communication hub. As we have many distinct students in this workshop, we use the namespace that uniquely identifies your system from others.
+
+<3> In preparation for the transformation that follows we convert the incoming payload into a `String`.
++
+[NOTE]
+====
+The JSLT transformer (next step) requires a `String` input, however the `platform-http` component may encapsulate the payload in a different _Java_ object. 
+====
+
+<4> The JSON input is transformed using a JSLT stylesheet (`request.jslt`), to map its values to the Hub's common data model.
++
+[NOTE]
+====
+The JSLT transformer is a powerful JSON to JSON data mapping tool. JSLT is inspired in XSLT (XML transformer), the most powerful transformation tool for XML.
+====
+
+<5> Finally, the adapted JSON payload is sent using the `amqp` Camel component to the AMQ Broker. From the broker, the Matrix Camel K instance consumes the events and forwards them to the team of agents.
++
+[NOTE]
+====
+the call uses `toD` (Dynamic `to`) to evaluate at runtime the target AMQP address using the environment's `NAMESPACE` variable.
+====
+======
+--
+
+{empty} +
+
+The route definition above includes a `jslt` action. The section that follows will help you to define its transformation definition.
+
+{empty} +
+
+=== Define the flow's JSON data mapping
+
+As previously described, it is now the time to transform the JSON payload from Globex (source), to the platform's unified data model (target). We need to create the JSLT stylesheet that defines the data mapping.
+
+. From your terminal, execute the command below to create a new (empty) source file that will contain the JSLT definition:
++
+[source,bash,role=execute,subs=]
+----
+touch request.jslt
+----
+
+. Open the `request.jslt` file in your editor.
+
+. Copy and paste the following snippet:
++
+--
+[source,json,role=execute,subs=]
+----
+{
+  "user": .user,           // <1>
+  "text": .text,           // <1>
+  "source": {              // <2>
+  	"name" : "globex",     // <3>
+   	"uname": "globex."+$exchange.properties.clientid, // <4>
+   	"room" : .sessionid    // <5>
+    }
+}
+----
+
+NOTE: You'll notice the JSLT feels like natural JSON, except it includes expressions that assign a value to the fields. Expressions use a syntax similar to `jq`. 
+
+.[.underline]#*Click here for details of the JSLT definition*#
+[%collapsible]
+======
+<1> Directly maps the fields `user` and `text` (as is).
+<2> Defines a `source` node with:
+<3> the field `name` set to a static value `globex`.
+<4> the field `uname` (unique name) as a concatenation of the string `globex.` with the dynamic value obtained from the property `clientid`, previously evaluated in the Camel route.
+<5> the field `room` mapped with the incoming `sessionid` field.
+======
+--
++
+[NOTE]
+====
+Look at JSLT definition and notice how it fully describes a complete JSON to JSON data mapping. It is very visual, intuitive and easy to work with. You see the inputs in use, and the output data shape that will be generated. +
+Other transformation methods generally involve more complex code, very difficult to follow and maintain.
+====
+
+You have now the processing flow ready to move events (messages) from Globex (customers) to agents. Now you need to complete the reverse flow to bring agent responses to customers texting from Globex.
+
+{empty} +
+
+== Implement the agent to customer flow
+
+Again, the flow is very straightforward, it just needs to consume AMQP events from the shared AMQ Broker in the environment and push them via HTTP to our local Globex instance, right to left in the diagram below:
+
+++++
+<p align="center">
+	<img src="../_images/camel/globex-response-flow.jpg" style="width:65%;border-style: none;">
+</p>
+++++
+
+Because the AMQ Broker in this workshop, used to exchange events between customers/agents, is shared with other students, we just need to ensure isolation is preserved between all the AMQ consumers/producers (from all students). 
+
+[NOTE]
+====
+For simplicity, this exercise provides a Camel AMQ listener that dynamically subscribes to your dedicated address and directs all messages to the `support-response` route.
+====
+
+[NOTE]
+====
+If you feel curious on how this Camel AMQP consumer is implemented, open in your editor the `code/globexlistener.java` 
+====
+
+In the `routesglobex.java` Java file, copy and paste the snippet below:
+
+[source,java,role=execute,subs=]
+----
+//
+      from("direct:support-response")                      // <1>
+        .convertBodyTo(String.class)                       // <2>
+        .to("jslt:response.jslt?allowContextMapAll=true")  // <3>
+        .to("{{client.callback.url}}");                    // <4>
+//
+----
+
+.[.underline]#*Click here for details of the above route*#
+[%collapsible]
+======
+<1> The `from` element uses the _Camel_ component `direct` to allow the AMQP listener (provided) to handover events consumed from the AMQ broker.
+<2> In preparation for the transformation that follows we convert the incoming payload into a `String`.
++
+[NOTE]
+====
+The JSLT transformer (next step) requires a `String` input, however the `amqp` component may encapsulate the payload in a different _Java_ object.
+====
+
+<3> The JSON input is transformed using a JSLT stylesheet (`response.jslt`), to map its values from the common data model to Globex's specific model.
+
+<4> Finally, the mapped JSON payload is sent via HTTP to Globex's callback URL, configured in the properties file.
+======
+
+
+{empty} +
+
+The route definition above includes a `jslt` action. The section that follows will help you to define its transformation definition.
+
+{empty} +
+
+=== Define the flow's JSON data mapping
+
+Let's transform the JSON payload from the common data model (source) to Globex's (target). Create as described the JSLT stylesheet that defines the data mapping.
+
+. From your Dev Spaces terminal, execute the command below to create a new (empty) source file that will contain the JSLT definition:
++
+[source,bash,role=execute,subs=]
+----
+touch response.jslt
+----
+
+. Open the `response.jslt` file in your editor.
+
+. Copy and paste the following snippet:
++
+--
+[source,json,role=execute,subs=]
+----
+{
+    "agent": .agent,             // <1>
+    "text": .text,               // <1>
+    "sessionid" : .source.room,  // <2>
+    "pdf":  .pdf                 // <3>
+}
+----
+
+.[.underline]#*Click here for details of the above JSLT definition*#
+[%collapsible]
+======
+<1> Directly maps the fields `agent` and `text` (as is).
+<2> Sets the `sessionid` with the source `room`.
++
+[NOTE]
+====
+the `sessionid` is part of the context the caching system keeps during the lifetime of the customer/agent interaction.
+====
++
+[NOTE]
+====
+the `sessionid` represents the internal Globex customer session identifier. Globex needs to get the session back to push the agent's message over the right websocket open by the customer's chat session.
+====
+
+<3> Maps a `pdf` field (when available)
++
+[NOTE]
+====
+Later in the lab, you'll work to generate the value mapped in this definition.
+====
+======
+--
+
+{empty} +
+
+
+== Deploy and test your code
+
+With the Camel K client `kamel` you can deploy your integrations with one command. Camel K will take care of collecting all your sources, containerizing them and deploying an instance.
+
+Let's deploy your code .
+
+. From your terminal, execute the following command:
++
+[source,bash,role=execute,subs=]
+----
+./deploy.sh<br>
+----
++
+NOTE: The `deploy.sh` scripts executes a `kamel run` command that defines all the necessary support resources and parameters to run your integration.
++
+.Output
+----
+globex-support (main) $ ./deploy.sh
+No IntegrationPlatform resource in globex-camel-{user_name} namespace
+Integration "globex-support" created
+----
++
+{empty} +
+
+
+. You can inspect the logs by running the following command:
++
+[source,bash,role=execute,subs=]
+----
+kamel log globex-support
+----
+
++
+[WARNING]
+====
+If you encounter errors or unexpected results, you might have missed a step following the instructions or done some other human error. +
+If so, try again using the prebuilt code by running the following command. This code does the exact same logic that you implemented in the above steps.
+
+[source,bash,role=execute,subs=]
+----
+./safe-deploy.sh
+----
+====
+
+[start=3]
+. From Globex...
++
+NOTE: The Globex Web application has been pre-deployed in your user namespace so that you can easily open it and use it to test your exercise.
+
+.. Open the Chat window
++
+You can open the Globex Web application following link:{globexweburl}[*this direct link*, window="_blank"].
++
+Or, by finding it in your link:{topologyviewurl}[*_Topology_ view*, window="console"].
++
+++++
+<img src="../_images/camel/globex-open-portal.jpg" style="width:40%;border-style: none;">
+++++
+
+.. When the web application opens, click `Login` in the upper-right corner of the screen:
++
+++++
+<img src="../_images/camel/globex-login.jpg" style="width:100%;border-style: none;">
+++++
+
+.. Enter the following credentials:
++
+--
+* `asilva` / `openshift`
+--
++
+++++
+<img src="../_images/camel/globex-signin.jpg" style="width:40%;border-style: none;">
+++++
++
+{empty} +
+
+.. Once in, open a support chat session by clicking one of these two options:
++
+++++
+<img src="../_images/camel/globex-open-chat.jpg" style="width:100%;border-style: none;">
+++++
+
+.. From the chat window:
++
+--
+. Type in a test message.
+. Click the 'Send' button (or press Enter).
+--
++
+++++
+<img src="../_images/camel/globex-customer-question.jpg" style="width:100%;border-style: none;">
+++++
+
+[start=4]
+. From Matrix...
+.. You should see a new room `globex-{user_name}` created.
+
+.. Click on the newly created room `globex-{user_name}` and accept the invitation to join the room to display the messages.
+
+.. Type a message, for example:
++
+--
+* `My name is Bruno, how can I help you today?`
+--
++
+and send it.
+. Back from Globex...
++
+You should see the agent's message sent from Matrix appear in your chat session window.
+
+. Exchange a few more messages to simulate a conversation.
+
+. Then, from Matrix, to close the session, follow these steps, as per the illustration below:
++
+--
+. Right click on the room `globex-{user_name}`
++
+. Click `Leave`
+. Confirm your action to leave the room.
+--
++
+++++
+<img src="../_images/camel/globex-deploy-test-end-to-end.png" style="width:100%;border-style: none;">
+++++
+
+. In Globex, as above on the right hand side, you should see a notification informing the session has ended.
+
+{empty} +
+
+Well done, you have successfully integrated the Globex Web application into the _Multichannel Platform_.
+
+The `deploy.sh` command made the _Camel K_ operator fully deploy your code in an OpenShift pod named _globex-support_, which you can see running from the link:{topologyviewurl}[*_Topology_ view*, window="console"].
+
+You can also use the `kamel` client from your terminal to obtain information about your deployed Camel K instances:
+
+[source,bash,role=execute,subs=]
+----
+kamel get
+----
+.Output
+----
+No IntegrationPlatform resource in globex-camel-{user_name} namespace
+NAME            PHASE   KIT
+matrix          Running globex-camel-{user_name}/kit-chcc8ts5v3ov25mqg460
+globex-support  Running globex-camel-{user_name}/kit-chccj045v3ov25mqg470
+----
+
+{empty} +
+
+
+

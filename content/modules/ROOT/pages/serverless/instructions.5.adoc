@@ -1,0 +1,112 @@
+= Solution walkthrough
+:imagesdir: ../../assets/images
+
+++++
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y0GQBF9YFH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y0GQBF9YFH');
+</script>
+
+
+<style>
+  .underline {
+    cursor: pointer;
+  }
+
+  .nav-container {
+    display: none !important;
+  }
+
+  .doc {    
+    max-width: 70rem !important;
+  }
+
+  .pagination .next {
+    display: none !important;
+  }
+</style>
+++++
+
+// :toclevels: 2
+:icons: font 
+:sectanchors:
+:sectnums:
+// :toc: 
+
+
+== Under the hood: Step through Review moderation flow
+
+. Navigate to https://streams-console-{user_name}.{openshift_subdomain}[streams for Apache Kafka console, window="_amqstreams"].  Filter for the term *reviews* to view 3 related topics.
+
+. Click on the `globex.reviews` topic to see an Overview of the topic page
++
+image::serverless/amqstreams-globex-reviews-topic-overview.png[]
+. Click on any of the message to view the complete message payload
++
+image::serverless/amqstreams-globex-reviews-topic-detail.png[]
+
+. Click on the headers tab and take note of the headers of the message. This is what each of them mean:
++
+image::serverless/amqstreams-globex-reviews-headers.png[]
+.. *ce_id: 1* -  This is a unique id for each message. 
+.. *ce_source: submit-review* and *ce_type: submit-review-event* - These are the primary values which are used by the Knative triggers to route the message to the right Knative service.
+
+. Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Topology View, window="console"], to view the corresponding mapping in the Knative Broker and Triggers
+.. Click on the blue link (highlighted in blue below) pointing to `aiml-moderate-reviews` service. This link represents the `moderate-reviews-trigger`. 
+.. The right-hand panel shows the trigger's *source* = _submit-review_ and *type*	= _submit-review-event_. 
+.. You will note that this matches the CloudEvents headers in the Kafka message that you viewed in streams for Apache Kafka Console browser. 
+.. This is how the Knative Triggers match the messages to the right endpoint.
++
+image::serverless/moderate-reviews-trigger.png[]
+
+. Once the reviews are sent to the `aiml-moderate-reviews` (Python) service, it uses the https://huggingface.co/Hate-speech-CNERG/english-abusive-MuRIL[Hate-speech-CNERG/english-abusive-MuRIL AI/ML model^, window="others"] to identify if the product review is abusive or not.
+.. A score of `-1` is assigned if the review is acceptable or `0` if the comment is abusive. 
+.. This service then POSTs the review with the score to the `moderated-reviews-sink` (with the help of the ServiceBinding which binds the sink to the services). 
++
+image::serverless/moderated-reviews-sink.png[]
+
+.. This sink is configured to write to the `reviews.moderated` topic. Here is a sample message of how a moderated review (kafka message) looks like in the streams for Apache Kafka console.
++
+image::serverless/amqstreams-moderate-review-score.png[]
+
+. Next, the message is sent to the `persist-reviews` Quarkus service through the `persist-reviews-trigger` trigger. This service persists the review in a Postgresql DB if the score less than `0` (that is, the review is acceptable)
+.. Note that the trigger's filter's source and type matches the ce_type and ce_source headers of the message from the `reviews.moderated` topic shown in the screenshot above.
++
+image::serverless/persist-reviews-trigger.png[]
+
+== Under the hood:  Review sentiment analysis
+The Review sentiment analysis flow is quite similar to the Moderate Review flow. 
+
+image::serverless/review-sentiment-flow.png[]
+
+. The `sentiment-reviews-trigger` responds to the same CloudEvents filter headers as the `moderate-reviews-trigger`; this is because when a review is submitted, they need to be processed by both the moderate and analyse services.
++
+image::serverless/sentiment-reviews-trigger.png[width=80%]
+
+. The `aiml-sentiment-reviews` which is invoked, then uses the https://huggingface.co/nlptown/bert-base-multilingual-uncased-sentiment[nlptown/bert-base-multilingual-uncased-sentiment, window="others"] to identify a score (from -1 to 4) depending on the tone of the review.
+
+. The review is then sent to the `reviews.sentiment` topic. Access this topic in the https://streams-console-{user_name}.{openshift_subdomain}[streams for Apache Kafka console, window="_amqstreams"]. Click on any of the kafka messages to view the sentiment score.
++
+image::serverless/amqstreams-sentiment-score.png[]
+
+
+As a next step, this sentiment score can be used to build a dashboard to visualise the sentiment of various categories of products. This is out of the scope of this workshop, but here is a sample dashboard built using Grafana.
+
+image::serverless/globex-dashboard-sample.png[]
+
+
+== Congratulations
+
+Congratulations! With this you have completed the Event Driven Applications workshop module! 
+
+[TIP]
+====
+Please close all but the *Workshop Deployer* browser tab to avoid proliferation of browser tabs which can make working on other modules difficult. 
+====
+
+Proceed to the https://workshop-deployer.{openshift_subdomain}[Workshop Deployer, window="workshopdeployer"] to choose your next module.

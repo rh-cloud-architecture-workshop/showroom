@@ -1,0 +1,65 @@
+= Setup Service Interconnect in Globex DB namespace
+
+:imagesdir: ../../assets/images
+
+++++
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X0GBQ47NJJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X0GBQ47NJJ');
+</script>
+
+<style>
+    .underline {
+    cursor: pointer;
+    }
+
+    .nav-container {
+    display: none !important;
+    }
+
+    .doc {    
+    max-width: 70rem !important;
+    }
+</style>
+++++
+
+:icons: font 
+:sectnums:
+
+== Setup Service Interconnect
+
+The steps to install Service Interconnect on the isolated namespace are very similar to the ones you just performed.
+
+* From the OpenShift terminal window that you still have open from the previous step, install the Red Hat Service Interconnect resources (without the console this time) in the *globex-skupper-db-{user_name}* namespace.
++
+[source,bash,role=execute,subs="attributes"]
+----
+skupper -n globex-skupper-db-{user_name} init
+----
++
+.Output
+[source,textinfo,subs="attributes"]
+----
+Waiting for status...
+Skupper is now installed in namespace "globex-skupper-db-{user_name}".  Use 'skupper status' to get more information.
+----
+
+
+* To see the status of the skupper network:
++
+[source,bash,role=execute,subs="attributes"]
+----
+skupper -n globex-skupper-db-{user_name} status
+----
++
+.Output
+[source,textinfo,subs="attributes"]
+----
+Skupper is enabled for namespace "globex-skupper-db-{user_name}". It is not connected to any other sites. It has no exposed services.
+----
+

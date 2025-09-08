@@ -1,0 +1,50 @@
+= Architecture overview
+:imagesdir: ../../assets/images
+:icons: font 
+
+++++
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z54F1ZPC4H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z54F1ZPC4H');
+</script>
+
+<style>
+.underline {
+  cursor: pointer;
+}
+
+.nav-container {
+  display: none !important;
+}
+
+.doc {    
+  max-width: 70rem !important;
+}
+</style>
+
+++++
+
+
+
+The architecture diagram below illustrates all the technologies at play providing a pluggable and scalable platform.
+
+++++
+<p align="center">
+	<img src="../_images/camel/full-architecture.png" style="width:80%;border-style: none;">
+</p>
+++++
+
+The diagram above is divided in 2 blocks:
+
+- A shared namespace providing pre-built and pre-deployed elements.
+- A user namespace (your workspace in OpenShift), where you will work to complete all the Camel integrations (3 as described previously).
+
+The diagram also shows how the architecture was conceived to easily plugin new systems (represented with the question mark *?*). One such example (fictional) is the SpringBoot application (green hexagon in the diagram). You will indeed work to integrate the Globex portal to the platform.
+
+{empty} +
+

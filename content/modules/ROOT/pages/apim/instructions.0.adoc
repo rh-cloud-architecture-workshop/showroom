@@ -1,0 +1,232 @@
+:imagesdir: ../../assets/images
+
+= Design and Govern Mobile OpenAPI Specification
+
+// :toclevels: 2
+:icons: font 
+:sectanchors:
+:sectnums:
+// :toc: 
+
+++++
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-51D1EZEH8B"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-51D1EZEH8B');
+</script>
+<style>
+    .underline {
+    cursor: pointer;
+    }
+
+    .nav-container {
+    display: none !important;
+    }
+
+    .doc {    
+    max-width: 70rem !important;
+    }
+</style>
+++++
+
+
+
+//API design refers to the process of developing application programming interfaces (APIs) that expose data and application functionality for use by developers and users. Red Hat API Designer, based on https://www.apicur.io/[Apicurio^], is a lightweight tool that helps you to design APIs. 
+
+In this step you will import the draft OpenAPI specs for *Mobile App* and edit them to include *Security Schemes*. Once the API design phase is complete you will then manage that with Red Hat Service Registry. The API Designer sessions are stateless and you must save your API definition as a JSON file at the end of each session. 
+
+
+== Section Goals
+
+. Import a draft OpenAPI specification for Mobile App into an API Designer
+. Edit the draft OpenAPI specification to add *OpenID Security Schemes* and include Keycloak's OpenID Provider Configuration
+. Govern the Mobile OpenAPI with Red Hat Service Registry
+
+== Design Mobile OpenAPI
+To import the OpenAPI draft into API designer, you can import as text OR upload as file. To keep things simple in this workshop, you will import the content by simply pasting the draft spec as YAML based text into the API designer.
+
+[NOTE]
+====
+In a real-world scenario you would do the inverse: start with an empty API specification, and define the different elements of the spec document. You would then export the spec in JSON or YAML format (by copying the contents from the source editor) to your local file system and push it to version control.
+====
+
+
+. Launch API Designer by clicking on this link {api_designer_url}[API Designer^, window=api_designer]
+. Click on the *New API* button.
++
+.Red Hat API Designer - New API
+image::apim/api-designer.png[] 
+. Click on the *Source Tab* on the *New API* page, and delete the entire content in the window. 
+.. Note: Keep this tab open. You will be pasting the draft OpenAPI into this window.
++
+.API Designer - Open Source Tab
+image::apim/api-new-api.png[]
++
+.API Designer: Clear all content in Source Tab
+image::apim/api-desginer-clear.png[]
+
+. To get the Mobile OpenAPI draft, navigate to the browser tab with *Dev Spaces* that you have earlier opened. 
+.. If you don't have a browser tab open to Dev Spaces, click on {devspaces_dashboard}/dashboard/#/ide/devspaces-{user_name}/cloud-architecture-workshop[Dev Spaces IDE^, window="devspaces"]. If needed login with your username and password ({user_name}/{user_password}).
+. In Dev Spaces, navigate to the folder *workshop/module-apim/mobile/activedoc*, and open the file *mobile-activedoc-draft.yaml*
+.. Or type [Ctrl+P] and type the file name as *mobile-activedoc-draft.yaml*
+. Copy the entire contents from this file `(Ctrl+A and Ctrl+C)` 
++
+.Copy Mobile OpenAPI draft from Dev Spaces
+image::apim/mobile-draft-spec-devspace.png[]
+. Now paste the copied content (draft OpenAPI) from the above step into the API designer's *Source Tab* replacing all of the existing content. Click on *Save* button as highlighted in the screenshot below.
++
+.API Designer: Paste Mobile Draft OpenAPI
+image::apim/mobile-draft-imported.png[]
+. Navigate back to the *Design Tab*
++
+.API Designer: Design Tab
+image::apim/api-design-tab.png[]
+. You will now need to update the security scheme. Under the *SECURITY SCHEMES* section, click on *Add a security scheme* link
++
+.API Designer: Add a security scheme
+image::apim/api-designer-sec-scheme.png[]
+. You are presented with the *Define the Security Scheme* page. Provide the following values in the form, and click on *Save*
+
+.. Name (textbox)
++
+[source,bash,role=execute,subs="attributes"]
+----
+openid-connect
+----
+
+.. Description (textarea)
++
+[source,bash,role=execute,subs="attributes"]
+----
+OpenID Connect security scheme
+----
+
+.. Security Type (dropdown)
++
+[source,bash,role=execute,subs="attributes"]
+----
+OpenID Connect
+----
+
+
+.. OpenID Connect URL (textbox)
++
+[source,bash,role=execute,subs="attributes"]
+----
+https://sso.{openshift_subdomain}/realms/globex-{user_name}/.well-known/openid-configuration
+----
++
+.API Designer: Define the Security Scheme wizard
+image::apim/define-security-scheme.png[width=90%]
+
+
+. You are directed back to the homepage. Verify that you can see the *SECURITY SCHEMES* has been updated with your configuration
++
+.API Designer: Verify openid-connect Security Scheme added
+image::apim/security-scheme-complete.png[]
+. The OpenAPI specification is now ready to be downloaded. Click on the _down arrow_ button adjacent to *Save As..* and then choose *Save as YAML* button found on top-right of the page. The file gets saved automatically in the *Downloads folder* of your computer.
++
+.API Designer: Save API as YAML in your computer
+image::apim/api-download-as-yaml.png[]
+. You can now close this browser tab. 
+. The Mobile OpenAPI spec is ready to be governed with a Service Registry.
+
+{empty} +
+
+== Manage the Mobile OpenAPI with Service Registry
+
+. Launch *Red Hat build of Service Registry* by accessing {service_registry_ui_url}[this link^, window="service_registry_url"] +
+Click on the *Create artifact* button as shown in the screenshot. 
++
+.Service Registry: Landing Page
+image::apim/service-registry-landing.png[]
+
+. You will be presented with a *Create Artifact* wizard.
+
++
+// step 1
+. In the *Artifact Coordinates* step, enter the following details, and click on the *Next* button. 
++
+TIP:  Use the exact same values as instructed below to avoid errors in the other sections of this labs.
++
+*Group Id*
++
+[source,bash,role=execute,subs="attributes"]
+----
+globex
+----
++
+*Artifact Id*
++
+[source,bash,role=execute,subs="attributes"]
+----
+mobileapi
+----
+
++
+.Service Registry: Artifact Coordinates
+image::apim/sr-create-coord.png[width=80%]
+
++
+// step 2
+. In the *Artifact Metadata* step, enter the following details, and click on the *Next* button. 
++ 
+*Name*
++
+[source,bash,role=execute,subs="attributes"]
+----
+Globex Mobile API Gateway
+----
++
+*Description (textarea)*
++
+[source,bash,role=execute,subs="attributes"]
+----
+Globex APIs made accessible to view catalog and products
+----
++
+.Service Registry: Artifact Coordinates
+image::apim/sr-create-metadata.png[]
++
+// step 3
+. In the *Version Content (optional)* step
+.. Leave the Version Number empty (it defaults to 1.0.0)
+.. In the *Content* section, in  *From File* section choose the *Browse..* button to upload the Mobile OpenAPI downloaded in the previous step, or `Drag & drop` the file into the textarea. You also can copy and paste the content of the OpenAPI spec file from the API Designer into the textarea.
+.. Click on the *Next* button. 
++
+.Service Registry: Version Content
+image::apim/sr-create-versioncontent.png[]
+
++
+// step 4
+. In the final *Version Metadata (optional)* step, for now you can leave the fields empty, and click on the *Create* button.
+
++
+.Service Registry: Version Metadata
+image::apim/sr-create-versionmetadata.png[]
+
+. You are directed to the overview page of the new mobileapi that you just imported.
++
+.Service Registry: *Globex Mobile API Gateway* artifact has been uploaded
+image::apim/sr-uploaded-details.png[]
+
+. You can share this OpenAPI schema with others via this OpenAPI Schema's endpoint : link:{service_registry_app_url}/apis/registry/v2/groups/globex/artifacts/mobileapi[window="service_registry_url"] +
+This schema can be used for generating Quarkus code for both Clients and Server-side using maven plugins.
+
+
+
+== Section Outcome
+[%interactive]
+* [ ] Added Security Scheme to Mobile OpenAPI with API Designer
+* [ ] Imported the Mobile OpenAPI into Service Registry to govern the API spec.
+* [ ] A shareable link is available to the Mobile OpenAPI specification to be used by other teams and systems.
+
+== Cleanup
+Please close the API Designer and Service Registry browser tabs to avoid too many browser tabs
+
+{empty} +
+
