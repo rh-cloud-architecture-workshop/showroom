@@ -82,15 +82,14 @@ spec:
             - mountPath: /deployments/config
               name: config
               readOnly: true
-      securityContext:
-        seccompProfile:
-          type: RuntimeDefault            
       volumes:
         - name: config
           secret:
             secretName: persist-reviews
 
 ----
++
+NOTE: Ignore any errors shown while creating the service. The service will be created successfully.
 . Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Developer > Topology, window="console", target="console"] view of the `globex-serverless-{user_name}` namespace and you will notice all the three Knative services
 +
 image::serverless/3knative-service.png[]
