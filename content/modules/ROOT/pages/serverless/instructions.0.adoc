@@ -69,7 +69,7 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: persist-reviews
-  namespace: globex-serverless-{user_name}
+  namespace: globex-serverless-user1
 spec:
   template:
     metadata:
@@ -82,6 +82,9 @@ spec:
             - mountPath: /deployments/config
               name: config
               readOnly: true
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault            
       volumes:
         - name: config
           secret:
