@@ -1,4 +1,4 @@
- = Setup Service Interconnect in Globex DB namespace
+= Setup Service Interconnect in Globex DB namespace
 
 :imagesdir: ../../assets/images
 
