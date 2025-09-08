@@ -1,5 +1,6 @@
+ = Setup Service Interconnect in Globex DB namespace
+
 :imagesdir: ../../assets/images
-= Install Red Hat Service Interconnect
 
 ++++
 <!-- Google tag (gtag.js) -->
@@ -30,7 +31,7 @@
 :icons: font 
 :sectnums:
 
-== Install Red Hat Service Interconnect: Globex database namespace
+== Setup Service Interconnect
 
 The steps to install Service Interconnect on the isolated namespace are very similar to the ones you just performed.
 

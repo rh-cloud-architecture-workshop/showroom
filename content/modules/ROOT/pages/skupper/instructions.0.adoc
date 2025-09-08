@@ -1,3 +1,5 @@
+= Setup Service Interconnect in Globex App namespace
+
 :imagesdir: ../../assets/images
 
 ++++
@@ -31,7 +33,7 @@
 
 
 
-== Setup Service Interconnect in `Globex` namespace
+
 
 The easiest way to install Red Hat Service Interconnect in a namespace on OpenShift is through the `skupper` CLI (_Skupper_ is the name of the open-source upstream project of Red Hat Service Interconnect). In this lab, the `skupper` cli is available through the OpenShift Command Line terminal, so that you don't have to install it locally on your workstation.
 

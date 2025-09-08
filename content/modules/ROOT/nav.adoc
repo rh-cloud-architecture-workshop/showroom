@@ -8,7 +8,7 @@
 * xref:module-cdc-instructions.adoc[Build new functionality with Change Data Capture]
 ** xref:cdc/instructions.0.adoc[Deploy the Debezium Connector]
 ** xref:cdc/instructions.1.adoc[Create an Order]
-** xref:cdc/instructions.2.adoc[Evants Streams processing]
+** xref:cdc/instructions.2.adoc[Events Streams processing]
 ** xref:cdc/instructions.3.adoc[Integrations with Camel K]
 ** xref:cdc/instructions.4.adoc[End-to-end Scenario]
 
@@ -37,8 +37,8 @@
 * xref:module-skupper-intro.adoc[Building a secure service network with Red Hat Service Interconnect - Intro]
 
 * xref:module-skupper-instructions.adoc[Build a service network to connect disparate services]
-** xref:skupper/instructions.0.adoc[Connect the Services with Red Hat Service Interconnect]
-** xref:skupper/instructions.1.adoc[Install Red Hat Service Interconnect]
+** xref:skupper/instructions.0.adoc[Setup Service Interconnect in Globex namespace]
+** xref:skupper/instructions.1.adoc[Setup Service Interconnect in Globex DB namespace]
 ** xref:skupper/instructions.2.adoc[Create a link between the two namespaces]
 ** xref:skupper/instructions.3.adoc[Verify the Service Interconnect network]
 
