@@ -343,11 +343,24 @@ https://globex-mobile-gateway-product-3scale-{user_name}-apicast-production.{ope
 +
 [TIP]
 ====
-In real life, the *GLOBEX_MOBILE_GATEWAY*  is accessible from the Developer Portal - but it is provided above for the sake of convenience.
+In real life, the *GLOBEX_MOBILE_GATEWAY*  is accessible from the Developer Portal - but it is provided above for the sake of convenience. 
+
+.*Click to view how to access this*
+[%collapsible]
+======
+
+* Access the Developer Portal https://3scale-{user_name}.{openshift_subdomain}/docs[DOCUMENTATION^] which displays all the available APIs including the default API as well as *globex-mobile-gateway-product*
+* The API URL you need displayed under "Service Endpoint" in *globex-mobile-gateway-product* box
+
+.Developer Portal: Documentation Page
+image::apim/dev_portal_mobile_doc.png[width=80%]
+======
+====
+
 
 .. Update *API_CLIENT_ID*  with the Client ID in the previous step from being displayed in the Developer Portal.
 +
-TIP: Access the Applications from  https://3scale-{user_name}.{openshift_subdomain}/admin/applications[Developer Portal^]. Choose the application you created for  `globex-mobile-gateway-product`. You can then access the *Client ID* from this page.
+TIP: Access the *Applications* section from  https://3scale-{user_name}.{openshift_subdomain}/admin/applications[Developer Portal^]. Choose the application you created for  `globex-mobile-gateway-product`. You can then access the *Client ID* from this page.
 .. Update *SSO_AUTHORITY* with the below value (which is the Keycloak *OpenID Well-known Configuration* URL)
 +
 [source,bash,role=execute,subs="attributes"]
@@ -364,22 +377,15 @@ https://globex-mobile-globex-apim-{user_name}.{openshift_subdomain}/home
 ----
 
 
-* Access the Developer Portal https://3scale-{user_name}.{openshift_subdomain}/docs[DOCUMENTATION^] which displays all the available APIs including the default API as well as *globex-mobile-gateway-product*
-* The API URL you need displayed under "Service Endpoint" in *globex-mobile-gateway-product* box
-
-.Developer Portal: Documentation Page
-image::apim/dev_portal_mobile_doc.png[width=80%]
-
-====
-
 . The *Environment* tab should look like below after the changes
 +
 .globex-mobile deployment on OpenShift
 image::apim/apim_globex_mobile_deployment.png[]
 
 . Click on the *Save* button at the bottom of the page to save the changes. You will be shown a success message: `Successfully updated the environment variables.`
-+
-image:apim/apim_mobile_env_success.png[] 
+
+// +
+// image:apim/apim_mobile_env_success.png[] 
 
 == Update Keycloak's Web Origin to match Mobile App
 There is one last step that you need to do before trying out the Mobile App. You need to update the *Web Origin*
