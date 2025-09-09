@@ -400,8 +400,8 @@ image::apim/rh-sso-mobile-client.png[]
 .[.underline]#*Where do I find this Client ID?*#
 [%collapsible]
 ====
-. Navigate to the {globex_developer_portal}/admin/applications[Globex Developer Portal Applications^, window="devportal"] 
-.. The client ID is displayed against the `globex-mobile-gateway-product` product.
+* Navigate to the {globex_developer_portal}/admin/applications[Globex Developer Portal Applications^, window="devportal"] 
+* The client ID is displayed against the `globex-mobile-gateway-product` product.
 +
 .globex-mobile deployment on OpenShift
 image::apim/mobile-dev-portal-clientid.png[]
