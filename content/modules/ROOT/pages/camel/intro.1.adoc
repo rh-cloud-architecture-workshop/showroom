@@ -76,9 +76,9 @@ Data Grid is an in-memory, distributed, NoSQL datastore solution. Your applicati
 
 == What is Red Hat streams for Apache Kafka?
 
-NOTE: streams for Apache Kafka will be your core event stream platform where customer/agents sessions (the streams) will be stored (for later replays).
+NOTE: Red Hat streams for Apache Kafka will be your core event stream platform where customer/agents sessions (the streams) will be stored (for later replays).
 
-streams for Apache Kafka is an event streaming platform that aggregates events over time (streams). This allows applications to replay the streams for various purposes, for example, data analysis or to discover patterns, among others. 
+Red Hat streams for Apache Kafka is an event streaming platform that aggregates events over time (streams). This allows applications to replay the streams for various purposes, for example, data analysis or to discover patterns, among others. 
 
 {empty} +
 

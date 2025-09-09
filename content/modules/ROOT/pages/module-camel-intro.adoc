@@ -69,7 +69,7 @@ Because the traffic (flow of messages) is bidirectional, you'll need to
 - Send messages from customers (in Rocket.Chat) to agents (in Matrix)
 - Send messages from agents (in Matrix) to customers (in Rocket.Chat)
 
-. The second activity, that showcases the platform's open architecture, plugs in the Globex portal (Chat functionality), thus automatically enabling the Globex <-> Matrix message flow. 
+. The second activity, that showcases the platform's open architecture, plugs in the Globex portal (Chat functionality), thus automatically enabling the *Globex \<\-> Matrix message* flow. 
 
 . The third activity collects the conversation history (transcript), persists it in storage (S3 buckets) and shares access with customers as a file download.
 

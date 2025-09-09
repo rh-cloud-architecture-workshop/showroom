@@ -47,7 +47,7 @@ Here is an overview of some of the critical components which are brought togethe
 
 === Red Hat streams for Apache Kafka
 
-streams for Apache Kafka will be your core event stream platform where the review comments are stored and propagated to other systems and services to moderate and analyse them.
+Red Hat streams for Apache Kafka will be your core event stream platform where the review comments are stored and propagated to other systems and services to moderate and analyse them.
 
 
 === Red Hat OpenShift Serverless
