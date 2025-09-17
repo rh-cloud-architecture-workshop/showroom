@@ -30,69 +30,56 @@
 :icons: font 
 :sectnums:
 
-== Use token to link namespaces
+== Redeem Access Token from database namespace
 
-To create a link between the two namespace, you create a token on one of the namespaces, and then use the token to create the link on the other namespace.
 
-* Navigate to the browser tab pointing to the OpenShift Web terminal. +
-Issue the following command:
+*  In the terminal, run the following command to redeem the Access Token created  in the previous exercise.
 +
 [source,bash,role=execute,subs="attributes"]
 ----
-skupper -n globex-skupper-{user_name} token create /tmp/skupper.token
+skupper token redeem globex  -n globex-skupper-db-{user_name} 
 ----
 +
 .Output
 [source,textinfo,subs="attributes"]
 ----
-Token written to /tmp/skupper.token
+Waiting for token status ...
+Token "globex-skupper-user2-xxxx-xxx-xxx-xxx-xxxx" has been redeemed
 ----
 
 * If you want to have a look at the token that was created:
 +
 [source,bash,role=execute,subs="attributes"]
 ----
-cat /tmp/skupper.token 
+cat globex 
 ----
 +
 .Output
 [source,textinfo,subs="attributes"]
 ----
-apiVersion: v1
-data:
-  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURMVENDQWhXZ0F3SUJBZ0lSQUxuRSsrMmNiYmlUMFZESWdyb2dXdm93RFFZSktvWklodmNOQVFFTEJRQXcKR2pFWU1CWUdBMVVFQXhNUGMydDFjSEJsY2kxemFYUmxMV05oTUI0WERUSXpNRFF5TlRFME1ETTFObG9YRFRJNApNRFF5TXpFME1ETTFObG93R2pFWU1CWUdBMVVFQXhNUGMydDFjSEJsY2kxemFYUmxMV05oTUlJQklqQU5CZ2txCmhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBclRjOVNBOEtPRlh2RWpWN2JYWWVRUytKRXFZRU52ZmgKblA5NHV0SGxVZWwvWEpyeW1lK3V2YzhjK21yRjBhVEdLZ2licGVab1JFcXdVWW9CR3ZMTXhOMEJXenlVNWlseQovcFRYMmthSGtJbDlVUzdYbDRaQ09hNHB4bDE2WnhVNDYxbU9uMDJQUDEwVVdUVFg2Vk9NQ2VEZEdOYlRTZ3BuCkdTMlEzS0JMMXRBa201cDdRRGYrMTRIdEl1ZGUvdzBySnFJc1RPbkJnSHlGVy9ZTlZKdlUyZ2I5WjRzRWEyUWsKY2E3MEF6Mkw2bnJkV1BiMVFnem1QQXBrSWc5K0hQSDVqYkZSNzNVYUpNbDR3ZVhzdTdNQmFUNDRJeG1FVCtBTApxS3BkTjlMaFFSb21wQ3ZETWFsQTdQamU4cWcvNWlkSFd4cEtFdi84VS9yTC9mbEpyNlZycndJREFRQUJvMjR3CmJEQU9CZ05WSFE4QkFmOEVCQU1DQXFRd0hRWURWUjBsQkJZd0ZBWUlLd1lCQlFVSEF3RUdDQ3NHQVFVRkJ3TUMKTUE4R0ExVWRFd0VCL3dRRk1BTUJBZjh3SFFZRFZSME9CQllFRkhITTdoS0JwSVFKK3FtZ2lmNUVld2NLZVE3dgpNQXNHQTFVZEVRUUVNQUtDQURBTkJna3Foa2lHOXcwQkFRc0ZBQU9DQVFFQVdhaEtnVER0N3h3WnJjYTJaQXFYCk1ZZFV4RFk2NzI1anNLZTh0Ym1RbmVnZ21vcURDKzBXM2pGc0tYUnVEMXJJMmZTNFhRZHYxYUhzZnhuenkyOFMKVXdZQVFaRi9oTFFZRTNqYXhybkV0TmlJaE1KWGkyQ3BDN3ZvL2V6MDBWYzVxNmlKbms4eHBOelEyNlZzVk9ELwpBY2x4MG1sMDgyajRUc0tWZzVxemt0Z2xEK1FQRTNRcDViNzl5ZVg3UG80dW13Vm9jK3RlaHduNDY1Qy8remZqCks3ckZqZW1XZE9McFhIZHpPc3E4LzZWR1IzTUJCcnZBTjZ6MC95STdxZ3VJNGdCSDFxUzZ4Sm1rbW9PQXAxWU4Ka21HZXQvbk9ZVldzQW1nQTd4UGlVWTNxRUkrQWdCUGloeS9NR3FOaGpvYkRCS1J0OGVSdU9ESmJDdVNvRjhpcAo0UT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
-  password: Sko2akMzaDdIZDFyUDlCY0dzSlNSbkUx
-kind: Secret
+apiVersion: skupper.io/v2alpha1
+kind: AccessToken
 metadata:
-  annotations:
-    skupper.io/generated-by: eecb731d-3457-4a05-b5dc-7982bbf91a6b
-    skupper.io/site-version: 1.5.2
-    skupper.io/url: https://claims-globex-skupper-{user_name}.{openshift_subdomain}:443/9698eead-1a96-11ee-9dad-0a580a83003b
-  creationTimestamp: null
-  labels:
-    skupper.io/type: token-claim
-  name: 9698eead-1a96-11ee-9dad-0a580a83003b
+  name: globex-skupper-user-xxx-xxx-xxx-xxx-xxx
+spec:
+  ca: |
+    -----BEGIN CERTIFICATE-----
+    MIIDNjCCAh6gAwIBAgIQQQirq37EFa4gtXHFbEOboDANBgkqhkiG9w0BAQsFADAf
+    MR0wGwYDVQQDExRTa3VwcGVyR3JhbnRTZXJ2ZXJDQTAeFw0yNTA5MTcxNDQ1NDha
+    ...
+    5rvogsGrm2go1/z21Updj8S/hR08IIZDBjIo7Rl62aPLvfz7x+phLBE3qj6I5MGs
+    y2+Bscmh6cP83A==
+    -----END CERTIFICATE-----
+  code: xxxxxxxxxxxxxxxxxx
+  linkCost: 1
+  url: https://skupper-grant-server-https-openshift-operators.apps.cluster-xxx.xxx.sandboxxxx.opentlc.com:443/xxx-xxx-xxx-8f2b-xxx
 ----
+
 +
 This is actually an OpenShift secret which contains a certificate. This certificate will be used to setup a mTLS (mutual TLS) secured link between the two namespaces.
 
-* The next step is creating the link on the other namespace with the token. In a real life situation that probably requires to physically transfer the token to the other site. In this lab, you will create the link from the same terminal, but specifying the isolated namespace.
 
-* On the same terminal, create a link using the token:
-+
-[source,bash,role=execute,subs="attributes"]
-----
-skupper -n globex-skupper-db-{user_name} link create /tmp/skupper.token
-----
-+
-.Output
-[source,textinfo,subs="attributes"]
-----
-Site configured to link to https://claims-globex-skupper-{user_name}.{openshift_subdomain}:443/9698eead-1a96-11ee-9dad-0a580a83003b (name=link1)
-Check the status of the link using 'skupper link status'.
-----
-
-* To check the status of the link:
+. Since the token is now redeemed, let us check the status of the link. The Status should show *Ready*.
 +
 [source,bash,role=execute,subs="attributes"]
 ----
@@ -102,13 +89,8 @@ skupper -n globex-skupper-db-{user_name} link status
 .Output
 [source,textinfo,subs="attributes"]
 ----
-Links created from this site:
-
-         Link link1 is connected
-
-Current links from other sites that are connected:
-
-         There are no connected links
+NAME                                          STATUS  COST    MESSAGE
+globex-skupper-user-xxx-xxx-xxx-xxx-xxx       Ready   1       OK
 
 ----
 
@@ -125,6 +107,8 @@ skupper -n globex-skupper-db-{user_name} expose deployment/globex-db --port 5432
 deployment globex-db exposed as globex-db
 ----
 
+== Verify the link setup
+
 You have established a secure link between the two namespaces, and exposed the `globex-db` service in the isolated namespace as a proxy service in the `globex-skupper-{user_name}` namespace.
 
 There a couple of ways to verify this:
@@ -139,14 +123,14 @@ oc get service -n globex-skupper-{user_name}
 .Output
 [source,textinfo,subs="attributes"]
 ----
-NAME                                TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
-globex-db                           ClusterIP   172.30.187.88    <none>        5432/TCP                     114s
-globex-store-app                    ClusterIP   172.30.94.78     <none>        8080/TCP                     6h37m
-globex-web                          ClusterIP   172.30.172.136   <none>        8080/TCP                     6h37m
-skupper                             ClusterIP   172.30.250.157   <none>        8010/TCP,8080/TCP,8081/TCP   81m
-skupper-router                      ClusterIP   172.30.252.101   <none>        55671/TCP,45671/TCP          81m
-skupper-router-local                ClusterIP   172.30.49.91     <none>        5671/TCP                     81m
-workspace207858d3e7d2450b-service   ClusterIP   172.30.2.112     <none>        4444/TCP                     93m
+NAME                                TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)               AGE
+globex-db                           ClusterIP   172.30.7.201     <none>        5432/TCP              7m59s
+globex-store-app                    ClusterIP   172.30.7.222     <none>        8080/TCP              139m
+globex-web                          ClusterIP   172.30.211.175   <none>        8080/TCP              139m
+skupper-network-observer            ClusterIP   172.30.221.175   <none>        443/TCP               82m
+skupper-router                      ClusterIP   172.30.194.178   <none>        55671/TCP,45671/TCP   14m
+skupper-router-local                ClusterIP   172.30.113.170   <none>        5671/TCP              14m
+workspaceab32f4ac6d734ae6-service   ClusterIP   172.30.18.191    <none>        4444/TCP              133m
 ----
 +
 The `globex-db` service is the proxy service created by exposing the `globex-db` deployment in the isolated namespace over the service network.
@@ -162,7 +146,7 @@ image::skupper/openshift-console-service-skupper-proxy.png[]
 +
 The _Pod Selector_ indicates that this service is pointing to the Skupper router pod, which forwards the communication over the secure link to the real database service on the isolated namespace.
 
-* Finally, you can check the {skupper_console_aws}[Service Interconnect console^]. In the *Topology* section you'll see a graphical representation of the Service InterConnect network. +
+* Finally, you can check the https://skupper-network-observer-globex-skupper-{user_name}.{openshift_subdomain}/[Service Interconnect Network Console, window="network-console"]. In the *Topology* section you'll see a graphical representation of the Service InterConnect network. +
 The *Sites* tab shows the connected namespaces, `globex-skupper-db-{user_name}` and `globex-skupper-{user_name}`.
 +
 image::skupper/skupper-console-network-sites.png[]

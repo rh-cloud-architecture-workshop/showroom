@@ -35,7 +35,11 @@
 :sectnums:
 
 
-In this lab, you will use two OpenShift namespaces. In one namespace the Globex application is deployed. The other namespace is isolated from the rest of the cluster through a network policy (only egress allowed, no ingress) and that is where the Globex retail database is deployed. In the lab, you will create a service network between these two clusters, so that the Globex application can connect and use the database in the isolated namespace. *Note that the database is not exposed to the outside world. It cannot be reached from other namespaces in the OpenShift cluster*
+In this lab, you will use two OpenShift namespaces. In one namespace the Globex application is deployed. The other namespace is isolated from the rest of the cluster through a network policy (only egress allowed, no ingress) and that is where the Globex retail database is deployed. In the lab, you will create a service network between these two clusters, so that the Globex application can connect and use the database in the isolated namespace. 
+
+image::skupper/isolated-env.png[]
+
+NOTE: The database is not exposed to the outside world. It cannot be reached from other namespaces in the OpenShift cluster.
 
 
 == Prepare your Development environment
@@ -52,28 +56,28 @@ Before your proceed it is critical that your lab environment is completely ready
 image::skupper/skupper-workshop-deployer.png[width=40%]
 
 
-== Deployment overview: Globex application namespace
+== Deployment overview: Globex Web App namespace
 
-* In a browser tab navigate to {openshift_cluster_console}[OpenShift console, window="console"]. If needed, login with your username and password ({user_name}/{user_password}). +
+. In a browser tab navigate to {openshift_cluster_console}[OpenShift console, window="console"]. If needed, login with your username and password *({user_name}/{user_password})*. +
 If this is the first time you open the console, you will be directed to the Developer Perspective of the console, which shows you the different namespaces you have access to. 
 +
 image::skupper/openshift-console-namespaces.png[]
-+
-Click on the `globex-skupper-{user_name}` link to select the namespace you are going to use in this lab, and select `Topology` from the left menu.
+
+. Click on the `globex-skupper-{user_name}` link to select the namespace you are going to use in this lab, and select `Topology` from the left menu.
 +
 image::skupper/openshift-console-topology-skupper.png[]
 
-* Expect to see two deployments: The Globex retail application frontend (called *globex-web*, and running on Node.js) and the Globex retail application itself, called *globex-store-app*. Note that the Globex retail application is scaled down to zero pods. As the database is missing, the application would not start up correctly if scaled up. You will scale it up once the connection with the database running in the isolated namespace is established.
+. Expect to see two deployments: The Globex retail application frontend (called *globex-web*, and running on Node.js) and the Globex retail application itself, called *globex-store-app*. Note that the Globex retail application is scaled down to zero pods. As the database is missing, the application would not start up correctly if scaled up. You will scale it up once the connection with the database running in the isolated namespace is established.
 
-* You can check the state of the application by clicking on the image:openshift-console-open-url.png[] icon next to the Node.js deployment.
+. You can check the state of the application by clicking on the image:openshift-console-open-url.png[] icon next to the Node.js deployment.
 +
 image::skupper/openshift-console-open-url-5.png[]
-+
-This opens a new browser tab pointing to the home page of the Globex retail application.
+
+. This opens a new browser tab pointing to the home page of the Globex retail application.
 +
 image::skupper/globex-home-page-skupper.png[]
 
-* Click on the *Cool Stuff Store* link in the top menu. This opens a view of the Globex store catalog. If the application would run as expected, you should see a paginated listing of products. However in this case, you will see an empty list:
+. Click on the *Cool Stuff Store* link in the top menu. This opens a view of the Globex store catalog. If the application would run as expected, you should see a paginated listing of products. However in this case, you will see an empty list:
 +
 image::skupper/globex-catalog-empty.png[]
 
@@ -98,7 +102,8 @@ image::skupper/network-policy-ingress-rules.png[]
 
 Building a Service network between the two namespaces of the OpenShift cluster takes several steps:
 
-* Install Service Interconnect in both namespaces.
-* Create a connection token on one of the namespaces. In our scenario it is important that the token is created in the namespace where the globex application is running.
-* Use the token on the other namespace to create a link between the namespaces. In our scenario the link needs to be initiated in the isolated namespace. Egress from that namespace is allowed, so pods in the namespace can create a connection to other services running in (or outside) the cluster.
-* Expose services of one namespace on the other namespace. In this case, you will expose the Globex database on the isolated namespace, so that the Globex retail app can connect to it as if it were a local service.
+* Set up the Service Interconnect *routers* on both OpenShift and RHEL
+* Exchange an *Access Token* created on the Web App namespace where the Globex app is running to the isolated database namespace.
+* This Access Token exchange establish a *secure link* between the two between the namespaces. Egress from database namespace is allowed, so pods in the namespace can create a connection to other services running in (or outside) the cluster.
+* *Expose services* of the Globex database on the isolated namespace, so that the Globex retail app can connect to it as if it were a local service.
+* *Validate* that the microservices can use the virtual endpoint service created by the Service Interconnect to access the remote database.

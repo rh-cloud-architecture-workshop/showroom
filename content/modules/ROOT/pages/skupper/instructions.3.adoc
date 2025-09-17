@@ -63,12 +63,12 @@ image::skupper/globex-catalog.png[]
 
 * The information on that page is retrieved from the database, demonstrating that the service network is working as expected. Feel free to navigate around the app to cause traffic between the application and the database.
 
-* You can also check the link between the two clusters in the {skupper_console_aws}[Service Interconnect console^]. 
+* You can also check the link between the two clusters in the https://skupper-network-observer-globex-skupper-{user_name}.{openshift_subdomain}/[Service Interconnect Network Console, window="network-console"]. 
 In the *Topology* section, select the *Components* tab, which  shows the connection between the `globex-store-app` deployment in the isolated namespace and the `globex-db` service which is proxied over the service network.
 +
 image::skupper/skupper-console-network-components.png[]
 +
-If you click on one of the two components in the component graph, you are redirected to the *Components* view which shows details about the connection:
+If you click on the `globex-db` component in the component graph, you are redirected to the *Components* view which shows details about the connection:
 +
 image::skupper/skupper-console-network-components-2.png[]
 
@@ -80,6 +80,5 @@ Congratulations! You successfully used *Red Hat Service Interconnect* to build a
 ====
 Please close all but the *Workshop Deployer* browser tab to avoid proliferation of browser tabs which can make working on other modules difficult. 
 ====
-
 
 Proceed to the https://workshop-deployer.{openshift_subdomain}[Workshop Deployer^, window="workshopdeployer"] to choose your next module.
