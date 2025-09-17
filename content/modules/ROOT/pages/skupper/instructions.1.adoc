@@ -59,7 +59,7 @@ Site "globex-skupper-db-user1" is ready.
 A connector links a local workload to listeners in remote sites using routing keys. The routing key is a string identifier that binds the connector to matching listeners in remote sites.
 ****
 
-image:skupper/listener-connector.png[width=70%] 
+image:skupper/listener-connector.png[width=50%] 
 
 . In terminal, run the following command to create a connector for the database.
 +
@@ -82,7 +82,16 @@ Connector "globex-db" is configured.
 ----
 skupper connector -n globex-skupper-db-{user_name} status
 ----
-. The Status shows as *Pending* and the message states that *No matching listeners*. This because the  connector is still in *Pending* state since the access token is not yet redeemed.
++
+.Output
+[source,textinfo,subs="attributes"]
+----
+... STATUS     MATCHING LISTENER   MESSAGE
+... Pending    False               No matching listeners
+----
+
++
+NOTE: The Status from the Output shows as *Pending* and the message states that *No matching listeners*. This because the  connector is still in *Pending* state since the access token is not yet redeemed.
 
 
 == Visualise set up on Red Hat Service Interconnect Network Console

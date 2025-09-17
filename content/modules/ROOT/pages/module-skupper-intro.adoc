@@ -37,7 +37,7 @@ However, for a number of technical and regulatory reasons, the database of the G
 
 The challenge for Globex is now to enable the retail application to connect to the database. For obvious reasons, Globex doesn't want to expose the database over the public internet, so a private, secure link needs to be setup between the OpenShift instance on the public cloud and the Globex data center. 
 
-image:skupper/skupper-intro.png[] 
+image:skupper/skupper-intro.png[width=70%] 
 
 This can be accomplished with a VPN between the public cloud and the Globex data center. However a VPN can be hard to set up, and requires deep networking expertise. Developers also need to request the network admins and go through a time taking approval process for the VPNs to be setup. 
 
@@ -59,7 +59,7 @@ In the next chapter, you will be guided through setting up a service network bet
 ====
 The concept of an on-premise deployment is challenging to simulate in a lab environment. This is why we opted to have the database running on OpenShift in an isolated namespace. Pods deployed in that namespace can communicate with other pods in the same namespace, and they create connections with the outside world (egress), both inside as outside of the cluster. On the other hand they cannot be reached by pods in other namespaces in the cluster, or by external services. This effectively mimics a situation of an on-prem deployment where egress is allowed, but ingress not. 
 
-image:skupper/isolated-env.png[] 
+image:skupper/isolated-env.png[width=65%] 
 
 However, Red Hat Service Interconnect is not limited to service networks between (instances of) OpenShift, but can equally well be leveraged to connect deployments running on premise (deployed on OpenShift or Kubernetes, on virtual machines or on bare metal) with services running in the cloud.
 

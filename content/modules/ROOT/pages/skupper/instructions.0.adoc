@@ -102,7 +102,9 @@ skupper site create globex-skupper-{user_name} -n globex-skupper-{user_name} --e
 +
 NOTE: The `--enable-link-access` option allows the site to issue access tokens and allow other sites to link to it.
 
-. In a few seconds, you should see the following output.
++
+
+.Output
 +
 [source,sh,subs=attributes+]
 ----
@@ -122,7 +124,7 @@ image::skupper/openshift-console-topology-skupper-2.png[]
 A listener binds a local connection point to connectors in remote sites using routing keys. The listener exposes a host/port for local clients while using the routing key to connect with remote sites.
 ****
 
-image:skupper/listener-connector.png[width=60%] 
+image:skupper/listener-connector.png[width=50%] 
 
 . In the terminal, run the following command to create a *listener*.
 +
@@ -130,7 +132,8 @@ image:skupper/listener-connector.png[width=60%]
 ----
 skupper listener create globex-db 5432 -n globex-skupper-{user_name}
 ----
-. You should see the following output confirming that the listener is configured.
++
+.Output
 +
 [source,sh,subs=attributes+]
 ----
@@ -138,14 +141,21 @@ Waiting for create to complete...
 Listener "globex-db" is configured.
 ----
 
-. Tun the following command to check the status of the *listener*.
+. Run the following command to check the status of the *listener*.
 +
+[source,sh,role="execute",subs=attributes+]
+----
+skupper listener status -n globex-skupper-{user_name}
+----
++
+.Output
 [source,sh,subs=attributes+]
 ----
 NAME            STATUS  ROUTING-KEY     HOST            PORT    MATCHING-CONNECTOR      MESSAGE
 globex-db       Pending globex-db       globex-db       5432    false                   No matching connectors
 ----
-. The listener is in *Pending* state because there are no connectors yet. You will create a connector in the other side of the service network in the next exercise.
++
+NOTE: The listener is in *Pending* state because there are no connectors yet. You will create a connector in the other side of the service network in the next exercise.
 
 
 == Create a Red Hat Service Interconnect Access Token
@@ -165,7 +175,8 @@ image:skupper/access-token-grant.png[]
 ----
 skupper token issue globex --expiration-window 60m -n globex-skupper-{user_name} 
 ----
-. You should see the following output confirming that a Token file has been created. 
++
+.Output
 +
 [source,sh,subs=attributes+]
 ----
@@ -176,8 +187,9 @@ Token file globex created
 ...
 ----
 
-. From the terminal, run the following command to deploy the Red Hat Service Interconnect Network Console.
+== Deploy the Red Hat Service Interconnect Network Console
 
+. From the terminal, run the following command to deploy the Red Hat Service Interconnect Network Console.
 +
 [source,sh,role="execute",subs=attributes+]
 ----

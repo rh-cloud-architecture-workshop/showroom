@@ -33,7 +33,7 @@
 == Redeem Access Token from database namespace
 
 
-*  In the terminal, run the following command to redeem the Access Token created  in the previous exercise.
+.  In the terminal, run the following command to redeem the Access Token created  in the previous exercise.
 +
 [source,bash,role=execute,subs="attributes"]
 ----
@@ -47,7 +47,7 @@ Waiting for token status ...
 Token "globex-skupper-user2-xxxx-xxx-xxx-xxx-xxxx" has been redeemed
 ----
 
-* If you want to have a look at the token that was created:
+. If you want to have a look at the token that was created:
 +
 [source,bash,role=execute,subs="attributes"]
 ----
@@ -94,18 +94,6 @@ globex-skupper-user-xxx-xxx-xxx-xxx-xxx       Ready   1       OK
 
 ----
 
-* Finally, you need to expose the database service over the link. This will allow the Globex application to connect to the database as if it was a local service, while in reality the service is a proxy for the real service running in the isolated namespace. +
-+
-[source,bash,role=execute,subs="attributes"]
-----
-skupper -n globex-skupper-db-{user_name} expose deployment/globex-db --port 5432
-----
-+
-.Output
-[source,textinfo,subs="attributes"]
-----
-deployment globex-db exposed as globex-db
-----
 
 == Verify the link setup
 
