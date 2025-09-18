@@ -35,21 +35,28 @@ As mentioned in the xref:./globex-intro.adoc[introduction module] of the worksho
 
 However, for a number of technical and regulatory reasons, the database of the Globex retail application is still running on-premise in one of Globex's data centers.
 
+image:skupper/skupper-intro.png[width=60%] 
+
 The challenge for Globex is now to enable the retail application to connect to the database. For obvious reasons, Globex doesn't want to expose the database over the public internet, so a private, secure link needs to be setup between the OpenShift instance on the public cloud and the Globex data center. 
 
-image:skupper/skupper-intro.png[width=70%] 
 
-This can be accomplished with a VPN between the public cloud and the Globex data center. However a VPN can be hard to set up, and requires deep networking expertise. Developers also need to request the network admins and go through a time taking approval process for the VPNs to be setup. 
+While this can be accomplished with a VPN between the public cloud and the Globex data center, setting up a VPN can be hard and requires deep networking expertise. Developers also need to request the network admins and go through a time taking approval process for the VPNs to be setup. 
 
-Red Hat Service Interconnect on the other hand creates a dedicated layer 7 service network and is a lot easier to set up. It allows application developers to establish secure interconnection with other services and applications in different environments without relying on network specialists. With Service Interconnect developers can now create secure virtual application networks without the cumbersome overhead, complexity and delays of traditional connectivity solutions.
+image:skupper/skupper-rhsi-intro.png[width=60%] 
+
+The team chooses Red Hat Service Interconnect to create a secure Virtual Application Network (VAN) between these environments instead of implementing traditional VPNs which would require complex planning and management.
 
 == What is Red Hat Service Interconnect?
 
-Red Hat Service Interconnect enables application and service connectivity across different environments through layer 7 addressing and routing. 
-
-image:skupper/skupper-rhsi-intro.png[] 
+Red Hat Service Interconnect enables connectivity through a dedicated Layer 7 service network in the Open Systems Interconnection (OSI) model, by creating Virtual Application Networks (VANs) between distributed services and securing all interconnections with mutual TLS (mTLS).
 
 Using a simple command line interface, interconnections are created in a matter of minutes, avoiding extensive networking planning, and overhead. All interconnections between environments use mutual TLS to keep the organization's infrastructure and data protected.
+
+*Advantages of Layer 7 VAN over Traditional VPNs:*
+
+* VAN exposes only services, not entire network layers, requiring fewer firewall rules whereas traditional VPNs connect entire clusters, requiring extensive and time consuming per-app firewall rules to achieve the same level of isolation as a VAN.
+* In a VAN, each site has its own Certificate Authority(CA), limiting security compromises
+* Only exposed services can be accessed in a VAN, preventing unauthorized lateral movement in case of a breach.
 
 == Setting up Red Hat Service Interconnect
 

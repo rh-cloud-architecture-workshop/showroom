@@ -81,6 +81,8 @@ This is actually an OpenShift secret which contains a certificate. This certific
 
 . Since the token is now redeemed, let us check the status of the link. The Status should show *Ready*.
 +
+NOTE: It may take a few seconds for the link to be established and show as *Ready*.
++
 [source,bash,role=execute,subs="attributes"]
 ----
 skupper -n globex-skupper-db-{user_name} link status

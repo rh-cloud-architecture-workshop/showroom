@@ -47,7 +47,7 @@ NOTE: The database is not exposed to the outside world. It cannot be reached fro
 
 [IMPORTANT]
 =====
-Before your proceed it is critical that your lab environment is completely ready before executing the lab instructions.
+Before you proceed it is critical that your lab environment is completely ready before executing the lab instructions.
 =====
 
 * Access the *Workshop Deployer* browser tab and check if the *Launch new channels using Contract-First approach* has turned green. This indicates that the module has been fully deployed and is ready to use. 
@@ -58,7 +58,7 @@ image::skupper/skupper-workshop-deployer.png[width=40%]
 
 == Deployment overview: Globex Web App namespace
 
-. In a browser tab navigate to {openshift_cluster_console}[OpenShift console, window="console"]. If needed, login with your username and password *({user_name}/{user_password})*. +
+. Navigate to the {openshift_cluster_console}[OpenShift console, window="console"],and if needed, login with your username and password *({user_name}/{user_password})*. +
 If this is the first time you open the console, you will be directed to the Developer Perspective of the console, which shows you the different namespaces you have access to. 
 +
 image::skupper/openshift-console-namespaces.png[]
@@ -102,8 +102,7 @@ image::skupper/network-policy-ingress-rules.png[]
 
 Building a Service network between the two namespaces of the OpenShift cluster takes several steps:
 
-* Set up the Service Interconnect *routers* on both OpenShift and RHEL
-* Exchange an *Access Token* created on the Web App namespace where the Globex app is running to the isolated database namespace.
-* This Access Token exchange establish a *secure link* between the two between the namespaces. Egress from database namespace is allowed, so pods in the namespace can create a connection to other services running in (or outside) the cluster.
-* *Expose services* of the Globex database on the isolated namespace, so that the Globex retail app can connect to it as if it were a local service.
+* Set up the Service Interconnect *routers* on both the Web App and Database OpenShift namespaces.
+* Exchange an *Access Token* created on the Web App namespace where the Globex app is running with the isolated Database namespace.
+* This Access Token exchange establishes a *secure link* between the two namespaces. Egress from the Database namespace is allowed, so pods in the namespace can create a connection to other services running in (or outside) the cluster.
 * *Validate* that the microservices can use the virtual endpoint service created by the Service Interconnect to access the remote database.

@@ -61,7 +61,7 @@ A connector links a local workload to listeners in remote sites using routing ke
 
 image:skupper/listener-connector.png[width=50%] 
 
-. In terminal, run the following command to create a connector for the database.
+. In the terminal, run the following command to create a connector for the database.
 +
 [source,sh,role="execute",subs=attributes+]
 ----
@@ -91,7 +91,7 @@ skupper connector -n globex-skupper-db-{user_name} status
 ----
 
 +
-NOTE: The Status from the Output shows as *Pending* and the message states that *No matching listeners*. This because the  connector is still in *Pending* state since the access token is not yet redeemed.
+NOTE: The Status is shown as *Pending* and the Message states that there are *No matching listeners*. This is because the Connector you created is in *Pending* state since the Access Token is not yet redeemed.
 
 
 == Visualise set up on Red Hat Service Interconnect Network Console
@@ -105,7 +105,7 @@ Before proceeding to the final step of creating the Virtual Application Network,
 +
 image::skupper/allow_permission.png[]
 
-. You will only be able to see the OpenShift cluster (globex-skupper-{user_name} namespace) for the moment. This is because the database namespace is not yet part of the Virtual Application Network.
+. You will only be able to see the *globex-skupper-{user_name} namespace* for the moment. This is because the database namespace is not yet part of the Virtual Application Network.
 +
 image::skupper/network-console-initial.png[]
 

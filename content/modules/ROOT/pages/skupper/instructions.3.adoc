@@ -37,15 +37,21 @@
 
 == Test the solution
 
-At this point you can verify that the service network is actually working as expected. When scaling up the `globex-store-app` application to 1 pod, it should be able to connect to the database running on the isolated namespace through the service network.
+At this point you can verify that the service network is actually working as expected. 
 
-. In the browser tab pointing to the OpenShift console, select the *Topology* View on the *globex-skupper-{user_name}* namespace. Click in the center of the deployment of the *globex-store-app* application. This opens a side window with details about the deployment. Click on the *Details* tab.
+
+image:skupper/skupper-final-solution.png[] 
+
+
+When scaling up the `globex-store-app` application to 1 pod, it should be able to connect to the database running on the isolated namespace through the service network.
+
+. In the browser tab pointing to the {openshift_cluster_console}[OpenShift Console^, window="console"] , select the *Topology* View on the *globex-skupper-{user_name}* namespace. Click in the center of the deployment of the *globex-store-app* application. This opens a side window with details about the deployment. Click on the *Details* tab.
 +
 image::skupper/openshift-console-deployment.png[]
 
 . To scale the deployment to 1 pod, click on the image:skupper/openshift-console-scale-up-icon.png[] icon next to the empty circle representing the deployment.
 
-. After a while, the circle becomes dark blue, indicating a successful deployment. The `globex-store-app` application has 1 pod which successfully connected to the database over the service network.
+. After a while, the circle becomes dark blue, indicating a successful deployment. The `globex-store-app` application has 1 pod which has successfully connected to the database over the service network.
 +
 image::skupper/openshift-console-deployment-2.png[]
 
@@ -74,7 +80,7 @@ image::skupper/skupper-console-network-components-2.png[]
 
 == Congratulations
 
-Congratulations! You successfully used *Red Hat Service Interconnect* to build a secure service network between two services and allow application to connect and communicate over the secure network.
+Congratulations! You successfully used *Red Hat Service Interconnect* to build a secure service network between two services and allow applications to connect and communicate over the secure network.
 
 [TIP]
 ====

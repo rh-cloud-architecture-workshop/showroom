@@ -32,7 +32,7 @@
 :sectnums:
 
 
-You can set up Virtual Application Networks with Red Hat Service Interconnect by either using the command line interface or the OpenShift operator. In this exercise, you will the command line interface (CLI) to setup the secure connection. You could also use automation tools such as Ansible to automate the creation of the Virtual Application Network on both sides.
+You can set up Virtual Application Networks with Red Hat Service Interconnect by either using the command line interface or the OpenShift operator. In this exercise, you will use the command line interface (CLI) to setup the secure connection. You could also use automation tools such as Ansible to automate the creation of the Virtual Application Network on both sides.
 
 NOTE: The `skupper` cli is available through the OpenShift Command Line terminal, so that you don't have to install it locally on your workstation.
 
@@ -45,9 +45,9 @@ IMPORTANT: Make sure to select the correct namespace from the drop-down box (*gl
 +
 image::skupper/openshift-command-line-terminal.png[]
 
-. Click *Start* to start and open the terminal.
+. Click *Start* to start and open the terminal. (make sure to select the *globex-skupper-{user_name}* namespace in the project dropdown box).
 
-. After a couple of seconds, the terminal is up and running. Also note the terminal deployment in the topology view (make sure to select the *globex-skupper-{user_name}* namespace in the project dropdown box).
+. After a couple of seconds, the terminal is up and running. Also note the terminal deployment in the topology view 
 +
 image::skupper/openshift-command-line-terminal-2.png[]
 +
@@ -89,7 +89,7 @@ origin-oauth-proxy      4.14.0
 [.concept]
 .What is a site?
 ****
-A site represents a place where where application workloads are running. Each site contains an application service router which helps its workloads connect with workloads in remote sites. In this case, the *globex-skupper-{user_name}* namespace is a site.
+A site represents a place where application workloads are running. Each site contains an application service router which helps its workloads connect with workloads in remote sites. In this case, the *globex-skupper-{user_name}* namespace is a site.
 ****
 
 
@@ -155,7 +155,7 @@ NAME            STATUS  ROUTING-KEY     HOST            PORT    MATCHING-CONNECT
 globex-db       Pending globex-db       globex-db       5432    false                   No matching connectors
 ----
 +
-NOTE: The listener is in *Pending* state because there are no connectors yet. You will create a connector in the other side of the service network in the next exercise.
+NOTE: The listener is in *Pending* state because there are no connectors yet. You will create a connector on the other side of the service network in the next exercise.
 
 
 == Create a Red Hat Service Interconnect Access Token
@@ -163,11 +163,11 @@ NOTE: The listener is in *Pending* state because there are no connectors yet. Yo
 
 NOTE: An access token is a short-lived credential for creating a link between sites.
 
-NOTE: A site (Site 1) wishing to accept a link creates an access grant. It uses the access grant to issue an *access token* which is transferred to a remote site (site 2). Site 2 submits the access token back to Site 1 for redemption. If the token is valid, Site 1 sends the the links details. Site 2 then creates a link to Site 1 - thereby linking the two sites.
+NOTE: A site (Site 1) wishing to accept a link creates an access grant. It uses the access grant to issue an *access token* which is transferred to a remote site (site 2). Site 2 submits the access token back to Site 1 for redemption. If the token is valid, Site 1 sends the links details. Site 2 then creates a link to Site 1 - thereby linking the two sites.
 
 This image explains this concept in more detail.
 
-image:skupper/access-token-grant.png[] 
+image:skupper/access-token-grant.png[width=50%] 
 
 . In the terminal, run the following command to issue a *token*.
 +

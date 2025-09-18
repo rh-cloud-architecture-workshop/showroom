@@ -37,7 +37,7 @@
 * xref:module-skupper-intro.adoc[Building a secure service network with Red Hat Service Interconnect - Intro]
 
 * xref:module-skupper-instructions.adoc[Build a service network to connect disparate services]
-** xref:skupper/instructions.0.adoc[Setup Service Interconnect in Globex namespace]
+** xref:skupper/instructions.0.adoc[Setup Service Interconnect in Globex App namespace]
 ** xref:skupper/instructions.1.adoc[Setup Service Interconnect in Globex DB namespace]
 ** xref:skupper/instructions.2.adoc[Create a link between the two namespaces]
 ** xref:skupper/instructions.3.adoc[Verify the Service Interconnect network]
