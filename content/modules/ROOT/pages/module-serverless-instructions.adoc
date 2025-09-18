@@ -51,7 +51,7 @@ Here is an outline of the activities you will achieve as part of this module.
 
 [IMPORTANT]
 =====
-Before your proceed it is critical that your lab environment is completely ready before executing the lab instructions.
+Before you proceed it is critical that your lab environment is completely ready before executing the lab instructions.
 =====
 
 * Access the *Workshop Deployer* browser tab and check if the *Event driven applications with Serverless Knative Eventing* has turned green. This indicates that the module has been fully deployed and is ready to use. 

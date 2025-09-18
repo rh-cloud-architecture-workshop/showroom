@@ -37,19 +37,25 @@
 
 == Test the solution
 
-At this point you can verify that the service network is actually working as expected. When scaling up the `globex-store-app` application to 1 pod, it should be able to connect to the database running on the isolated namespace through the service network.
+At this point you can verify that the service network is actually working as expected. 
 
-* In the browser tab pointing to the OpenShift console, select the *Topology* View on the *globex-skupper-{user_name}* namespace. Click in the center of the deployment of the *globex-store-app* application. This opens a side window with details about the deployment. Click on the *Details* tab.
+
+image:skupper/skupper-final-solution.png[] 
+
+
+When scaling up the `globex-store-app` application to 1 pod, it should be able to connect to the database running on the isolated namespace through the service network.
+
+. In the browser tab pointing to the {openshift_cluster_console}[OpenShift Console^, window="console"] , select the *Topology* View on the *globex-skupper-{user_name}* namespace. Click in the center of the deployment of the *globex-store-app* application. This opens a side window with details about the deployment. Click on the *Details* tab.
 +
 image::skupper/openshift-console-deployment.png[]
 
-* To scale the deployment to 1 pod, click on the image:skupper/openshift-console-scale-up-icon.png[] icon next to the empty circle representing the deployment.
+. To scale the deployment to 1 pod, click on the image:skupper/openshift-console-scale-up-icon.png[] icon next to the empty circle representing the deployment.
 
-* After a while, the circle becomes dark blue, indicating a successful deployment. The `globex-store-app` application has 1 pod which successfully connected to the database over the service network.
+. After a while, the circle becomes dark blue, indicating a successful deployment. The `globex-store-app` application has 1 pod which has successfully connected to the database over the service network.
 +
 image::skupper/openshift-console-deployment-2.png[]
 
-* Click on the image:openshift-console-open-url.png[] icon next to the Node.js deployment.
+. Click on the image:openshift-console-open-url.png[] icon next to the Node.js deployment.
 +
 image::skupper/openshift-console-open-url-5.png[]
 +
@@ -57,29 +63,28 @@ This opens a new browser tab pointing to the home page of the Globex retail appl
 +
 image::skupper/globex-home-page-skupper.png[]
 
-* Click on the *Cool Stuff Store* link in the top menu. This opens a view of the Globex store catalog. Expect to see a paginated listing of products from the Globex catalog.
+. Click on the *Cool Stuff Store* link in the top menu. This opens a view of the Globex store catalog. Expect to see a paginated listing of products from the Globex catalog.
 +
 image::skupper/globex-catalog.png[]
 
-* The information on that page is retrieved from the database, demonstrating that the service network is working as expected. Feel free to navigate around the app to cause traffic between the application and the database.
+. The information on that page is retrieved from the database, demonstrating that the service network is working as expected. Feel free to navigate around the app to cause traffic between the application and the database.
 
-* You can also check the link between the two clusters in the {skupper_console_aws}[Service Interconnect console^]. 
+. You can also check the link between the two clusters in the https://skupper-network-observer-globex-skupper-{user_name}.{openshift_subdomain}/[Service Interconnect Network Console, window="network-console"]. 
 In the *Topology* section, select the *Components* tab, which  shows the connection between the `globex-store-app` deployment in the isolated namespace and the `globex-db` service which is proxied over the service network.
 +
 image::skupper/skupper-console-network-components.png[]
 +
-If you click on one of the two components in the component graph, you are redirected to the *Components* view which shows details about the connection:
+If you click on the `globex-db` component in the component graph, you are redirected to the *Components* view which shows details about the connection:
 +
 image::skupper/skupper-console-network-components-2.png[]
 
 == Congratulations
 
-Congratulations! You successfully used *Red Hat Service Interconnect* to build a secure service network between two services and allow application to connect and communicate over the secure network.
+Congratulations! You successfully used *Red Hat Service Interconnect* to build a secure service network between two services and allow applications to connect and communicate over the secure network.
 
 [TIP]
 ====
 Please close all but the *Workshop Deployer* browser tab to avoid proliferation of browser tabs which can make working on other modules difficult. 
 ====
-
 
 Proceed to the https://workshop-deployer.{openshift_subdomain}[Workshop Deployer^, window="workshopdeployer"] to choose your next module.

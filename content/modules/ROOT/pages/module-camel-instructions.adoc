@@ -81,7 +81,7 @@ You'll notice the architecture above contains 4 Camel applications.
 
 [IMPORTANT]
 =====
-Before your proceed it is critical that your lab environment is completely ready before executing the lab instructions.
+Before you proceed it is critical that your lab environment is completely ready before executing the lab instructions.
 =====
 
 * Access the *Workshop Deployer* browser tab and check if the *Launch new channels using Contract-First approach* has turned green. This indicates that the module has been fully deployed and is ready to use. 

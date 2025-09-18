@@ -1,4 +1,4 @@
-= Setup Service Interconnect in Globex App namespace
+= Setup Service Interconnect on Globex Web App namespace
 
 :imagesdir: ../../assets/images
 
@@ -32,19 +32,22 @@
 :sectnums:
 
 
+You can set up Virtual Application Networks with Red Hat Service Interconnect by either using the command line interface or the OpenShift operator. In this exercise, you will use the command line interface (CLI) to setup the secure connection. You could also use automation tools such as Ansible to automate the creation of the Virtual Application Network on both sides.
+
+NOTE: The `skupper` cli is available through the OpenShift Command Line terminal, so that you don't have to install it locally on your workstation.
 
 
+== Explore the workshop environment
 
-The easiest way to install Red Hat Service Interconnect in a namespace on OpenShift is through the `skupper` CLI (_Skupper_ is the name of the open-source upstream project of Red Hat Service Interconnect). In this lab, the `skupper` cli is available through the OpenShift Command Line terminal, so that you don't have to install it locally on your workstation.
-
-. Open the browser window pointing to the OpenShift Console at {openshift_cluster_console}[OpenShift console, window="console"]. Click on the image:skupper/openshift-command-line-terminal-icon.png[] icon on the top menu to open a terminal window. +
-Make sure to select the correct namespace from the drop-down box (*globex-skupper-{user_name}*)
+. Navigate to the OpenShift Console at {openshift_cluster_console}[OpenShift console, window="console"]. Click on the image:skupper/openshift-command-line-terminal-icon.png[] icon on the top menu to open a terminal window. 
++
+IMPORTANT: Make sure to select the correct namespace from the drop-down box (*globex-skupper-{user_name}*)
 +
 image::skupper/openshift-command-line-terminal.png[]
-+
-Click *Start* to start and open the terminal.
 
-. After a couple of seconds, the terminal is up and running. Also note the terminal deployment in the topology view (make sure to select the *globex-skupper-{user_name}* namespace in the project dropdown box).
+. Click *Start* to start and open the terminal. (make sure to select the *globex-skupper-{user_name}* namespace in the project dropdown box).
+
+. After a couple of seconds, the terminal is up and running. Also note the terminal deployment in the topology view 
 +
 image::skupper/openshift-command-line-terminal-2.png[]
 +
@@ -72,32 +75,125 @@ skupper version
 +
 .Output
 ----
-client version                 1.5.3-rh-5
-transport version              not-found
-controller version             not-found
-config-sync version            not-found
-flow-collector version         not-found'
+COMPONENT               VERSION
+router                  3.4.0
+controller              2.1.1
+network-observer        2.1.1
+cli                     2.1.1
+prometheus              v2.42.0
+origin-oauth-proxy      4.14.0
 ----
 
-. Install the Red Hat Service Interconnect resources in the *globex-skupper-{user_name}* namespace:
+== Set up a Red Hat Service Interconnect Site
+
+[.concept]
+.What is a site?
+****
+A site represents a place where application workloads are running. Each site contains an application service router which helps its workloads connect with workloads in remote sites. In this case, the *globex-skupper-{user_name}* namespace is a site.
+****
+
+
+. In the terminal, run the following command to create a site. This will create a new Service Interconnect site in the *globex-skupper-{user_name}* namespace.
 +
-[source,bash,role=execute, subs="attributes"]
+[source,sh,role="execute",subs=attributes+]
 ----
-skupper init -n globex-skupper-{user_name} --enable-console --enable-flow-collector --console-auth unsecured
+skupper site create globex-skupper-{user_name} -n globex-skupper-{user_name} --enable-link-access
 ----
 +
+NOTE: The `--enable-link-access` option allows the site to issue access tokens and allow other sites to link to it.
+
++
+
 .Output
-[source,textinfo,subs="attributes"]
++
+[source,sh,subs=attributes+]
 ----
 Waiting for status...
-Skupper is now installed in namespace "globex-skupper-{user_name}".  Use 'skupper status' to get more information.
+Site "globex-skupper-{user_name}" is ready.
 ----
 
-. This installs 3 new components in the namespace: *skupper-service-controller*, *skupper-router* and *skupper-prometheus*, as you can see in the Topology view:
+
+. This installs a *skupper-router* in the namespace, as you can see in the Topology view:
 +
 image::skupper/openshift-console-topology-skupper-2.png[]
 
-. Service Interconnect also comes with its own console, which you can access by opening a new browser tab and navigating to {skupper_console_aws}[Service Interconnect, window="skupper"]. At the moment there is not a lot to see as we have only installed one side of the service network.
+== Set up a Red Hat Service Interconnect Listener
+[.concept]
+.What is a Listener?
+****
+A listener binds a local connection point to connectors in remote sites using routing keys. The listener exposes a host/port for local clients while using the routing key to connect with remote sites.
+****
+
+image:skupper/listener-connector.png[width=50%] 
+
+. In the terminal, run the following command to create a *listener*.
 +
-image::skupper/skupper-console.png[]
+[source,sh,role="execute",subs=attributes+]
+----
+skupper listener create globex-db 5432 -n globex-skupper-{user_name}
+----
++
+.Output
++
+[source,sh,subs=attributes+]
+----
+Waiting for create to complete...
+Listener "globex-db" is configured.
+----
+
+. Run the following command to check the status of the *listener*.
++
+[source,sh,role="execute",subs=attributes+]
+----
+skupper listener status -n globex-skupper-{user_name}
+----
++
+.Output
+[source,sh,subs=attributes+]
+----
+NAME            STATUS  ROUTING-KEY     HOST            PORT    MATCHING-CONNECTOR      MESSAGE
+globex-db       Pending globex-db       globex-db       5432    false                   No matching connectors
+----
++
+NOTE: The listener is in *Pending* state because there are no connectors yet. You will create a connector on the other side of the service network in the next exercise.
+
+
+== Create a Red Hat Service Interconnect Access Token
+
+
+NOTE: An access token is a short-lived credential for creating a link between sites.
+
+NOTE: A site (Site 1) wishing to accept a link creates an access grant. It uses the access grant to issue an *access token* which is transferred to a remote site (site 2). Site 2 submits the access token back to Site 1 for redemption. If the token is valid, Site 1 sends the links details. Site 2 then creates a link to Site 1 - thereby linking the two sites.
+
+This image explains this concept in more detail.
+
+image:skupper/access-token-grant.png[width=50%] 
+
+. In the terminal, run the following command to issue a *token*.
++
+[source,sh,role="execute",subs=attributes+]
+----
+skupper token issue globex --expiration-window 60m -n globex-skupper-{user_name} 
+----
++
+.Output
++
+[source,sh,subs=attributes+]
+----
+Waiting for token status ...
+
+Grant "globex-skupper-user2-d39eeacb-c480-4cdd-ba47-7b1fd40c97c9" is ready
+Token file globex created
+...
+----
+
+== Deploy the Red Hat Service Interconnect Network Console
+
+. From the terminal, run the following command to deploy the Red Hat Service Interconnect Network Console.
++
+[source,sh,role="execute",subs=attributes+]
+----
+oc apply -f https://raw.githubusercontent.com/rh-cloud-architecture-workshop/skupper-network-observer/refs/heads/main/network_console_deploy.yaml -n globex-skupper-{user_name}
+----
+.. You will use this console to visualize the network later. Since it takes a few seconds to initialize, go ahead and deploy it now. While it is getting deployed, proceed to the next steps to save time.
 

@@ -31,35 +31,81 @@
 :icons: font 
 :sectnums:
 
-== Setup Service Interconnect
+Similar to the Web App site, you will set up the site and routers on DB Namespace using the Red Hat Service Interconnect command line interface.
 
-The steps to install Service Interconnect on the isolated namespace are very similar to the ones you just performed.
 
-* From the OpenShift terminal window that you still have open from the previous step, install the Red Hat Service Interconnect resources (without the console this time) in the *globex-skupper-db-{user_name}* namespace.
+== Create Red Hat Service Interconnect Site
+
+. In the terminal, run the following command to create a site to set up the VAN routers.
 +
-[source,bash,role=execute,subs="attributes"]
+[source,sh,role="execute",subs=attributes+]
 ----
-skupper -n globex-skupper-db-{user_name} init
+skupper site create globex-skupper-db-user1 -n globex-skupper-db-{user_name}
 ----
 +
 .Output
 [source,textinfo,subs="attributes"]
 ----
 Waiting for status...
-Skupper is now installed in namespace "globex-skupper-db-{user_name}".  Use 'skupper status' to get more information.
+Site "globex-skupper-db-user1" is ready.
 ----
 
 
-* To see the status of the skupper network:
+== Create a connector
+
+[.concept]
+.What is a connector?
+****
+A connector links a local workload to listeners in remote sites using routing keys. The routing key is a string identifier that binds the connector to matching listeners in remote sites.
+****
+
+image:skupper/listener-connector.png[width=50%] 
+
+. In the terminal, run the following command to create a connector for the database.
 +
-[source,bash,role=execute,subs="attributes"]
+[source,sh,role="execute",subs=attributes+]
 ----
-skupper -n globex-skupper-db-{user_name} status
+skupper connector create globex-db 5432 --workload deployment/globex-db -n globex-skupper-db-{user_name}
+
 ----
 +
 .Output
 [source,textinfo,subs="attributes"]
 ----
-Skupper is enabled for namespace "globex-skupper-db-{user_name}". It is not connected to any other sites. It has no exposed services.
+Waiting for create to complete...
+Connector "globex-db" is configured.
 ----
+
+. To see the status of the skupper network
++
+[source,bash,role=execute,subs="attributes"]
+----
+skupper connector -n globex-skupper-db-{user_name} status
+----
++
+.Output
+[source,textinfo,subs="attributes"]
+----
+... STATUS     MATCHING LISTENER   MESSAGE
+... Pending    False               No matching listeners
+----
+
++
+NOTE: The Status is shown as *Pending* and the Message states that there are *No matching listeners*. This is because the Connector you created is in *Pending* state since the Access Token is not yet redeemed.
+
+
+== Visualise set up on Red Hat Service Interconnect Network Console
+
+Before proceeding to the final step of creating the Virtual Application Network, navigate to the https://skupper-network-observer-globex-skupper-{user_name}.{openshift_subdomain}/[Service Interconnect Network Console, window="network-console"] to visualize the Virtual Application Network based on the configuration you've set up so far.
+
+
+. Click on *Log in with OpenShift*, and login as *({user_name}/{user_password})*. 
+
+. Click *Allow selected permissions*.
++
+image::skupper/allow_permission.png[]
+
+. You will only be able to see the *globex-skupper-{user_name} namespace* for the moment. This is because the database namespace is not yet part of the Virtual Application Network.
++
+image::skupper/network-console-initial.png[]
 

@@ -37,7 +37,7 @@
 
 [IMPORTANT]
 =====
-Before your proceed it is critical that your lab environment is completely ready before executing the lab instructions.
+Before you proceed it is critical that your lab environment is completely ready before executing the lab instructions.
 =====
 
 
