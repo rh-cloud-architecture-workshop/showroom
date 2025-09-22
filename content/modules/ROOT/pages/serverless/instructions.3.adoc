@@ -35,7 +35,13 @@
 
 
 == Create Knative triggers
-You will now create triggers which will invoke the HTTP endpoint of Knative services depending on the CloudEvents headers. +
+
+You will now create triggers which will invoke the HTTP endpoint of Knative services depending on the CloudEvents headers. 
+
+The red box in the diagram below highlights the *Knative triggers with filter* and its bindings that you will be creating with in this section.
+
+image::serverless/arch-highlight-trigger-filter.png[]
+
 Each CloudEvents created will be tagged with specific values in the headers `ce-type` and `ce-source` which is then used by the Trigger to route them to the correct service HTTP endpoint
 
 . From the  the top right corner of the OpenShift console, click on the *(+)* button and then *Import Yaml* dropdown option 
@@ -100,18 +106,21 @@ spec:
     uri: /analyze
 
 ----
-* You will note the triggers have been created successfully
++
+NOTE: You might notice that both the `moderate-reviews-trigger` and `sentiment-reviews-trigger` have the same filter attributes. This is because both the corresponding services need to act on the same event (i.e when a review is submitted).
+
+. You will note the triggers have been created successfully
 +
 image::serverless/triggers-created.png[width=60%]
 
-* Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Topology View, window="console"], to view the new triggers you created
+. Navigate back to the {openshift_cluster_console}/topology/ns/globex-serverless-{user_name}?view=graph[Topology View, window="console"], to view the new triggers you created
 +
 
 image::serverless/triggers-create-topology.png[]
 
-* Click on the Broker `globex-broker` to view how the three Knative services subscribe to the KnativeBroker using the Triggers; also note the various filters applied to the triggers. +
+. Click on the Broker `globex-broker` to view how the three Knative services subscribe to the KnativeBroker using the Triggers; also note the various filters applied to the triggers. +
 These filters are the ones which help to match the CloudEvents header of each  message to the right service which will act on the message.
-
++
 image::serverless/broker-service-filters.png[]
 
 

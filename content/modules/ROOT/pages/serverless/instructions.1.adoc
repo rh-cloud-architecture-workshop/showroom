@@ -37,6 +37,9 @@ In this section we will connect the Knative Services (refer to previous section)
 
 TIP: https://docs.openshift.com/serverless/1.30/eventing/event-sources/serverless-custom-event-sources.html[SinkBinding^] supports decoupling the source (service which produces events) from the actual sink by injecting the sink URL into the services.
 
+The red box in the diagram below highlights the *Knative Sinks and Sink binding* that you will be creating with in this section.
+
+image::serverless/arch-highlight-sink-binding.png[]
 
 == Create Sink and SinkBinding
 

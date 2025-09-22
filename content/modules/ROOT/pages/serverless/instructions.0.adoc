@@ -50,6 +50,10 @@ There are 3 Knative Services that are used in this solution
 | persist-reviews         | Persists all moderated reviews to a Postgresql database. You will deploy this service in the next steps.
 |===
 
+The red box in the diagram below highlights the *Knative Services* that you will be creating with in this section.
+
+image::serverless/arch-highlight-create-services.png[]
+
 == Deploy Knative Services
 
 . Click to navigate to the OpenShift Console's Administrator view, and access the  {openshift_cluster_console}/serving/ns/globex-serverless-{user_name}[ Serverless > Serving^, window="console"] menu. You will see that two of the above mentioned services have been already deployed (`aiml-moderate-reviews` and `aiml-sentiment-reviews`). 
