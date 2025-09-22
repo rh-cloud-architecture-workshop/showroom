@@ -39,13 +39,13 @@ image::intro/workshop-env.png[]
 * Depending on the workshop modules you will be guided through, there are helper components such as *Streams for Apache Kafka Console*, an integrated development environment (IDE) called *OpenShift Dev Spaces*, based on Eclipse Che and some more.
 * All of these (including the IDE) are hosted on OpenShift as shown in Figure 1 above. These additional components will be introduced in the following chapters and workshop modules, where applicable.
 
-* We leverage *OpenShift Gitops* (aka ArgoCD) to manage the deployment of the workshop assets, in a hub and spoke model: a central ArgoCD (show as *hub*) instance which manages common assets and namespace-scoped ArgoCD (shown as *spoke*) instances which manage the per-user assets. 
+* We leverage *OpenShift GitOps* (aka ArgoCD) to manage the deployment of the workshop assets, in a hub and spoke model: a central ArgoCD (show as *hub*) instance which manages common assets and namespace-scoped ArgoCD (shown as *spoke*) instances which manage the per-user assets. 
 
 * In total ArgoCD manages 350 applications per cluster, which represent more than 2500 pods and numerous secrets, configmaps and so on. 
 
 * If you are interested to know more about this setup, click on the link below, or come to talk to the workshop instructors.
 
-== Details on the OpenShift Gitops setup
+== Details on the OpenShift GitOps setup
 
 As mentioned before, we use a hub and spoke model to manage the workshop assets. A cluster-wide ArgoCD instance (hub) manages a number of namespace scoped ArgoCD  (spoke) instances (1 per workshop user). These namespace scoped ArgoCD instances manage the workshop assets for a user.
 

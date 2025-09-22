@@ -319,7 +319,7 @@ Reminder: each customer/agent session owns 2 cache entries. One uses the source 
 the call uses `toD` (Dynamic `to`) to evaluate at runtime the target AMQP address using the `source` property.
 ====
 <4> It deletes the cache entry with source identifier (Rocket.Chat).
-<5> It deletes the cache entry with target identifier (Natrix).
+<5> It deletes the cache entry with target identifier (Matrix).
 +
 <6> Finally, it prepares body and headers to send two closure Kafka events [7] & [8].
 <7> The first event to Kafka contains the context information, sent to the conversation topic.

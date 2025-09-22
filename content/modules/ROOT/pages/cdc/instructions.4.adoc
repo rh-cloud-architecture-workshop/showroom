@@ -34,7 +34,7 @@
 ++++
 
 
-== Test the solition  
+== Test the solution  
 
 With the Debezium connector and the two Camel K integrations deployed, you have all the pieces of the solution in place:
 
