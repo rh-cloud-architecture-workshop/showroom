@@ -40,14 +40,14 @@ Similar to the Web App site, you will set up the site and routers on DB Namespac
 +
 [source,sh,role="execute",subs=attributes+]
 ----
-skupper site create globex-skupper-db-user1 -n globex-skupper-db-{user_name}
+skupper site create globex-skupper-db-{user_name} -n globex-skupper-db-{user_name}
 ----
 +
 .Output
 [source,textinfo,subs="attributes"]
 ----
 Waiting for status...
-Site "globex-skupper-db-user1" is ready.
+Site "globex-skupper-db-{user_name}" is ready.
 ----
 
 

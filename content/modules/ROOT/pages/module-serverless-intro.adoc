@@ -52,7 +52,7 @@ Red Hat streams for Apache Kafka will be your core event stream platform where t
 
 === Red Hat OpenShift Serverless
 
-Red Hat OpenShift Serverless, built on Knative, makes it easy to build serverless and event-driven appslications on Kubernetes. It has two main components:
+Red Hat OpenShift Serverless, built on Knative, makes it easy to build serverless and event-driven applications on Kubernetes. It has two main components:
 
 * *Serving* supports autoscaling, including scaling pods down to zero. 
 * *Eventing* enables event-driven architecture which can route events from event producers (known as sources) to event consumers (known as sinks) that receive events. These events conform to the https://cloudevents.io/[Cloud Events^] specification.

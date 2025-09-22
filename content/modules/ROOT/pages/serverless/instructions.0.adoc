@@ -52,8 +52,11 @@ There are 3 Knative Services that are used in this solution
 
 == Deploy Knative Services
 
-. Navigate to the OpenShift Console's Administrator view, and go to  {openshift_cluster_console}/serving/ns/globex-serverless-{user_name}[Serverless > Serving^, window="console"] menu. You will see that two of the above mentioned services have been already deployed (`aiml-moderate-reviews` and `aiml-sentiment-reviews`). +
-In the next step, you will create the `persist-reviews` Knative service using a Custom Resource Definition (CRD).
+. Click to navigate to the OpenShift Console's Administrator view, and access the  {openshift_cluster_console}/serving/ns/globex-serverless-{user_name}[ Serverless > Serving^, window="console"] menu. You will see that two of the above mentioned services have been already deployed (`aiml-moderate-reviews` and `aiml-sentiment-reviews`). 
++
+NOTE: In the next step, you will create the `persist-reviews` Knative service using a Custom Resource Definition (CRD).
++
+WARNING: If you instead see an error (_services.serving.knative.dev is forbidden_), make sure you have selected the project `globex-serverless-{user_name}` 
 +
 image::serverless/serverless-2knative-services.png[]
 
@@ -69,7 +72,7 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: persist-reviews
-  namespace: globex-serverless-user1
+  namespace: globex-serverless-{user-name}
 spec:
   template:
     metadata:
