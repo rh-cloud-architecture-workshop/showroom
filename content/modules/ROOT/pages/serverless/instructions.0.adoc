@@ -65,14 +65,14 @@ image::serverless/serverless-2knative-services.png[]
 image::serverless/create-knative-service.png[]
 
 +
-[source,bash,role=execute,subs="attributes",options=nowrap, width=50, height=10]
+[source,bash,role=execute,subs="attributes"]
 ----
 
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: persist-reviews
-  namespace: globex-serverless-{user-name}
+  namespace: globex-serverless-{user_name}
 spec:
   template:
     metadata:
