@@ -54,7 +54,7 @@ Here is an outline of the activities you will achieve as part of this module.
 Before you proceed it is critical that your lab environment is completely ready before executing the lab instructions.
 =====
 
-* Access the *Workshop Deployer* browser tab and check if the *Event driven applications with Serverless Knative Eventing* has turned green. This indicates that the module has been fully deployed and is ready to use. 
+* Access the *Workshop Deployer* browser tab and check if the *Event driven applications with Serverless Knative Eventing* card has turned green. This indicates that the module has been fully deployed and is ready to use. 
 
 .Module Readiness on Workshop Deployer
 image::serverless/serverless-workshop-deployer.png[width=40%]
@@ -80,9 +80,9 @@ image::serverless/serverless-namespace-initial-toplogy.png[]
 [cols="20%,80%"]
 |===
 |*Component* | *Function*
-| globex-web        | This is a _NodeJS + Angular_ web application which serves as the front end website. This app relies on the core services deployed in the globex-{user_name} namespace and the `product-reviews` services described below
-| product-reviews   | This Quarkus based service is a backend for the `globex-web` web application. 
-| reviews-db        | Postgresql DB to store the reviews once they are moderated. 
+| globex-web        | This is a _NodeJS + Angular_ web application which serves as the front end website. This app relies on the core services deployed in the globex-{user_name} namespace and the `product-reviews` services described below. [https://github.com/rh-cloud-architecture-workshop/product-reviews-db[View Source^, window="others"]]
+| product-reviews   | This Quarkus based service is a backend for the `globex-web` web application.  [https://github.com/rh-cloud-architecture-workshop/product-reviews[View Source^, window="others"]]
+| reviews-db        | Postgresql DB to store the reviews once they are moderated. [https://github.com/rh-cloud-architecture-workshop/product-reviews-db[View Source^, window="others"]]
 | serverless-kafka-secret | For the purpose of this workshop, this job copies the Kafka credentials (`kafka-secret` Secret) into the current globex-serverless-{user_name} namespace.
 |===
 

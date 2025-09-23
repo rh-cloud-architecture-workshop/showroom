@@ -38,7 +38,7 @@
 
 You will now create triggers which will invoke the HTTP endpoint of Knative services depending on the CloudEvents headers. 
 
-The red box in the diagram below highlights the *Knative triggers with filter* and its bindings that you will be creating with in this section.
+The red box in the diagram below highlights the *Knative triggers with filter* and its bindings that you will be creating within this section.
 
 image::serverless/arch-highlight-trigger-filter.png[]
 

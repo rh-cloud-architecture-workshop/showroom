@@ -88,7 +88,7 @@ image::serverless/serverless-architecture-diagram.png[]
 The architecture uses Kafka for messaging, Knative for event driven architecture, and AI based Knative Services for processing the reviews.
 
 [start=0]
-. User submits a review via the Globex product page. 
+. The user submits a review via the Globex product page. 
 . The `Reviews Service API` receives the review, and emits a CloudEvent to the Kafka Event Sink via HTTP POST.
 . The *KafkaSink* persists this incoming CloudEvent to a suitable Apache Kafka Topic.
 +
@@ -106,8 +106,8 @@ TIP: Brokers provide a discoverable endpoint for incoming events/messages, and u
 TIP: Triggers subscribes a specific broker, filters messages based on CloudEvents headers, and delivers them to Knative services'
 
 . Events of `type: submit-review` are routed to the appropriate AI based *Knative Services*.
-. After processing the messages, the AI Services send new Cloud Events back to the Kakfa Sink with details of review rating and moderation results. 
-. The Kafka Sink writes the new messages back to appropriate Kakfa topics.
+. After processing the messages, the AI Services send new Cloud Events back to the Kafka Sink with details of review rating and moderation results. 
+. The Kafka Sink writes the new messages back to appropriate Kafka topics.
 . KafkaSource reads these new services generated messages from Kafka.
 . The new messages are then routed to the Knative Broker again.
 . The Trigger with filter `type: persist-review` gets activated. 

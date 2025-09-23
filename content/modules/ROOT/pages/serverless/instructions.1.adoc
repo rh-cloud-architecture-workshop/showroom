@@ -37,13 +37,13 @@ In this section we will connect the Knative Services (refer to previous section)
 
 TIP: https://docs.openshift.com/serverless/1.30/eventing/event-sources/serverless-custom-event-sources.html[SinkBinding^] supports decoupling the source (service which produces events) from the actual sink by injecting the sink URL into the services.
 
-The red box in the diagram below highlights the *Knative Sinks and Sink binding* that you will be creating with in this section.
+The red box in the diagram below highlights the *Knative Sinks and Sink binding* that you will be creating within this section.
 
 image::serverless/arch-highlight-sink-binding.png[]
 
 == Create Sink and SinkBinding
 
-This solution needs a number of Sinks and SinkBinding for the various Kafka topics described in an earlier section. You will create one of them here, while the others have been preconfigured for you.
+This solution needs a number of Sinks and SinkBinding for the various Kafka topics described in an earlier section. You will create one of them here, while the others have been pre-configured for you.
 
 Here is a visual of how the reviews flows from the User to Kafka with Knative eventing. 
 
@@ -87,6 +87,7 @@ spec:
 
 
 . Use the *Import YAML* form to create a *Sink Binding* from the `product-reviews` Quarkus Service to the KafkaSink `reviews-sink` that you created in the previous step.
+
 +
 [source,bash,role=execute,subs="attributes"]
 ----
@@ -124,3 +125,15 @@ image::serverless/sink-sinkb-created.png[]
 | reviews-sentiment-sink  | Sends sentiment score of reviews by the `aiml-sentiment-reviews` service to topic `reviews.sentiment`
 |===
 
+== A note on KafkaSink and SinkBinding objects
+
+* A *Kafka Sink* persists incoming CloudEvents to a configurable Apache Kafka Topic.
+* A *SinkBinding* object supports decoupling event production (the producer of the CloudEvent) from delivery addressing (knowing the actual Kafka Sink's URL).
+
+In this case 
+
+* The reviews submitted by the user is will be sent by the `product-reviews`  service to the `reviews-sink` KafkaSink via HTTP Post as a CloudEvent. 
+* This KafkaSink persists this CloudEvent in the `globex.reviews` Kafka topic. 
+* The `product-reviews-to-reviews-sink` SinkBinding that you created updated the `product-reviews` service's environment variable `K_SINK` with the the Kafka Sink's URL  on runtime. Because of this, the application code does not need to interact directly with the Kubernetes API to locate the event destination.
++
+NOTE: {openshift_cluster_console}/k8s/ns/globex-serverless-{user-name}/deployments/product-reviews/environment[Click to view^] the environment variables in the `product-reviews` service's deployment configuration. You will see that the `K_SINK` value matches the `status.address.url` of the `reviews-sink` {openshift_cluster_console}/k8s/ns/globex-serverless-{user-name}/eventing.knative.dev%7Ev1alpha1%7EKafkaSink/reviews-sink/yaml[Kafka Sink CR^].

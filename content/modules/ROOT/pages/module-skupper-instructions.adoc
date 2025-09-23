@@ -50,7 +50,7 @@ NOTE: The database is not exposed to the outside world. It cannot be reached fro
 Before you proceed it is critical that your lab environment is completely ready before executing the lab instructions.
 =====
 
-* Access the *Workshop Deployer* browser tab and check if the *Launch new channels using Contract-First approach* has turned green. This indicates that the module has been fully deployed and is ready to use. 
+* Access the *Workshop Deployer* browser tab and check if the *Launch new channels using Contract-First approach* card has turned green. This indicates that the module has been fully deployed and is ready to use. 
 
 .Module Readiness on Workshop Deployer
 image::skupper/skupper-workshop-deployer.png[width=40%]
