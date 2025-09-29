@@ -1,0 +1,67 @@
+= Cloud Native Architectures Workshop in a Single Page
+:doctype: book
+:imagesdir: assets/images
+
+++++
+    <style>
+.nav-container { display: none }
+</style>
+++++
+
+include::style.adoc[]
+:imagesdir: ../assets/images
+
+
+//Globex Intro
+
+include::globex-intro.adoc[] 
+include::intro.0.adoc[] 
+include::intro.1.adoc[] 
+
+// module APIM
+include::module-apim-intro.adoc[] 
+include::apim/intro.0.adoc[] 
+include::module-apim-instructions.adoc[] 
+include::apim/instructions.0.adoc[]
+include::apim/instructions.1.adoc[]
+include::apim/instructions.2.adoc[]
+include::apim/instructions.3.adoc[]
+include::apim/instructions.4.adoc[]
+include::apim/instructions.5.adoc[]
+
+// module Camel
+include::module-camel-intro.adoc[] 
+include::camel/intro.0.adoc[] 
+include::camel/intro.1.adoc[] 
+include::module-camel-instructions.adoc[] 
+include::camel/instructions.0.adoc[]
+include::camel/instructions.1.adoc[]
+include::camel/instructions.2.adoc[]
+include::camel/instructions.3.adoc[]
+
+// module CDC
+include::module-cdc-intro.adoc[] 
+include::module-cdc-instructions.adoc[] 
+include::cdc/instructions.0.adoc[]
+include::cdc/instructions.1.adoc[]
+include::cdc/instructions.2.adoc[]
+include::cdc/instructions.3.adoc[]
+include::cdc/instructions.4.adoc[]
+
+// module Serverless
+include::module-serverless-intro.adoc[] 
+include::module-serverless-instructions.adoc[] 
+include::serverless/instructions.0.adoc[]
+include::serverless/instructions.1.adoc[]
+include::serverless/instructions.2.adoc[]
+include::serverless/instructions.3.adoc[]
+include::serverless/instructions.4.adoc[]
+include::serverless/instructions.5.adoc[]
+
+// module RHSI
+include::module-skupper-intro.adoc[] 
+include::module-skupper-instructions.adoc[] 
+include::skupper/instructions.0.adoc[]
+include::skupper/instructions.1.adoc[]
+include::skupper/instructions.2.adoc[]
+include::skupper/instructions.3.adoc[]
