@@ -112,7 +112,7 @@ image::apim/apim-mobile-backend-created.png[]
 
 . Paste the following YAML content in the *Import YAML* text area. 
 +
-WARNING: Do *NOT* click on the *Create* button yet, since the `issuerEndpoint` value in the YAML needs to be replaced in the next step.
+IMPORTANT: Do *NOT* click on the *Create* button yet, since the `issuerEndpoint` value in the YAML needs to be replaced in the next step.
 +
 TIP: The issuer endpoint contains the Keycloak *OpenID Well-known Configuration* , and the client credentials of the `client-manager` client that you had created earlier
 +

@@ -139,8 +139,32 @@ image::apim/api-download-as-yaml.png[]
 
 == Manage the Mobile OpenAPI with Service Registry
 
+TIP:  Use the exact same values as instructed below to avoid errors in the other sections of this labs.
+
+
 . Launch *Red Hat build of Service Registry* by accessing {service_registry_ui_url}[this link^, window="service_registry_url"] +
-Click on the *Create artifact* button as shown in the screenshot. 
++
+.Service Registry: Home Page
+image::apim/service-registry-home.png[]
+
+. Click on the *Create group* button as shown in the screenshot. 
++
+.Service Registry: Landing Page
+image::apim/service-registry-create-grp.png[]
+
+. Enter the `globex` as the Group ID in  the *Create Group* wizard, and click on the *Create* button.
++
+.Service Registry: Landing Page
+image::apim/service-registry-create-grp-wizard.png[]
++
+*Group Id*
++
+[source,bash,role=execute,subs="attributes"]
+----
+globex
+----
+
+. Navigate to the `globex` group, and click on the *Create artifact* button as shown in the screenshot. 
 +
 .Service Registry: Landing Page
 image::apim/service-registry-landing.png[]
@@ -151,21 +175,16 @@ image::apim/service-registry-landing.png[]
 // step 1
 . In the *Artifact Coordinates* step, enter the following details, and click on the *Next* button. 
 +
-TIP:  Use the exact same values as instructed below to avoid errors in the other sections of this labs.
-+
-*Group Id*
-+
-[source,bash,role=execute,subs="attributes"]
-----
-globex
-----
-+
 *Artifact Id*
 +
 [source,bash,role=execute,subs="attributes"]
 ----
 mobileapi
 ----
++
+*Type*: 
++
+Choose the types as *OpenAPI* from the dropdown.
 
 +
 .Service Registry: Artifact Coordinates
