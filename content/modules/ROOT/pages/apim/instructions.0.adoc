@@ -139,7 +139,7 @@ image::apim/api-download-as-yaml.png[]
 
 == Manage the Mobile OpenAPI with Service Registry
 
-TIP:  Use the exact same values as instructed below to avoid errors in the other sections of this labs.
+TIP: Use the exact same values as instructed below to avoid errors in the other sections of this labs.
 
 
 . Launch *Red Hat build of Service Registry* by accessing {service_registry_ui_url}[this link^, window="service_registry_url"] +
@@ -152,7 +152,7 @@ image::apim/service-registry-home.png[]
 .Service Registry: Landing Page
 image::apim/service-registry-create-grp.png[]
 
-. Enter the `globex` as the Group ID in  the *Create Group* wizard, and click on the *Create* button.
+. Enter `globex` as the Group ID in the *Create Group* wizard, and click on the *Create* button.
 +
 .Service Registry: Landing Page
 image::apim/service-registry-create-grp-wizard.png[]
@@ -214,7 +214,7 @@ image::apim/sr-create-metadata.png[]
 // step 3
 . In the *Version Content (optional)* step
 .. Leave the Version Number empty (it defaults to 1.0.0)
-.. In the *Content* section, in  *From File* section choose the *Browse..* button to upload the Mobile OpenAPI downloaded in the previous step, or `Drag & drop` the file into the textarea. You also can copy and paste the content of the OpenAPI spec file from the API Designer into the textarea.
+.. In the *Content* section, in *From File* section choose the *Browse..* button to upload the Mobile OpenAPI downloaded in the previous step, or `Drag & drop` the file into the textarea. You also can copy and paste the content of the OpenAPI spec file from the API Designer into the textarea.
 .. Click on the *Next* button. 
 +
 .Service Registry: Version Content
